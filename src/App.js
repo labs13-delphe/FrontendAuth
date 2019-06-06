@@ -22,7 +22,7 @@ class App extends Component {
       //if user has auth can enter secret page
       case "secret":
       //if auth display secret page if not display not found page
-      mainComponent = this.props.auth.isAuthenticated() ? <Secret {...this.props} /> : <NotFound />
+      mainComponent = this.props.auth.isAuthenticated() ? <Secret {...this.props} /> : <NotFound {...this.props}/>
       break;
       //if goes to unknown route display NotFound page
       default: 
