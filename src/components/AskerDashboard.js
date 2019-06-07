@@ -41,7 +41,7 @@ class AskerDashboard extends React.Component {
 
   componentDidMount() {
     const id = localStorage.getItem("user_id");
-    const endpoint = `http://localhost:5000/api/users/${id}/questions`;
+    const endpoint = `https://delphe-backend.herokuapp.com/api/users/${id}/questions`;
     axios
       .get(endpoint)
       .then(res => {
@@ -57,7 +57,7 @@ class AskerDashboard extends React.Component {
       });
 
     // get all users
-    const allUsers = "http://localhost:5000/api/users/";
+    const allUsers = "https://delphe-backend.herokuapp.com/api/users/";
     axios
       .get(allUsers)
       .then(res => {
