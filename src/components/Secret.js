@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import UserForm from "./UserForm.js";
 import ExpertDashboard from "./ExpertDashboard";
-//import AskerDashboard from "./AskerDashboard";
+import AskerDashboard from "./AskerDashboard";
 
 //rendering all protected components and keeping state here
 
