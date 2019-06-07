@@ -1,19 +1,60 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
+import axios from "axios";
+import UserForm from "./UserForm.js";
+import ExpertDashboard from "./ExpertDashboard";
+//import AskerDashboard from "./AskerDashboard";
 
+//rendering all protected components and keeping state here
 
+class Secret extends Component {
+  state = {
+    questions: []
+  };
 
-export default class Secret extends Component {
-    render() {
-        return (
-            <div>
-                You hold the token 
-                <br/> 
-                THIS WOULD BE THE USER DASHBOARD
-               <br/>
-               Jump back to <a href='/'>Main Page</a>
-               <br/>
-               <button onClick={this.props.auth.logout}>LOGOUT</button>
-            </div>
-        )
-    }
+  postUserInfo = () => {
+    axios
+      .post("https://delphe-backend.herokuapp.com/api/users")
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  componentDidMount = () => {
+    axios
+      .get("https://delphe-backend.herokuapp.com/api/questions")
+      .then(res => {
+        this.setState({ questions: res.data }, () => {
+          console.log(this.state);
+        });
+        // console.log(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+  render() {
+    console.log("secret props", this.props);
+    console.log("secret state", this.state);
+    return (
+      <div>
+        You hold the token
+        <br />
+        THIS WOULD BE THE USER DASHBOARD
+        <br />
+        Jump back to <a href="/">Main Page</a>
+        <br />
+        {this.state.questions.length ? (
+          <ExpertDashboard questions={this.state.questions} />
+        ) : (
+          <h4>nope.</h4>
+        )}
+        <UserForm postUserInfo={this.props.postUserInfo} />
+        <button onClick={this.props.auth.logout}>LOGOUT</button>
+      </div>
+    );
+  }
 }
+export default Secret;
