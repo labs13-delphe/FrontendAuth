@@ -28,13 +28,13 @@ class QuestionForm extends React.Component {
       question: this.state.question
     };
     axios
-      .post(questionURL, questionBody)
+      .post(questionURL, questionBody) // posting question to questions table
       .then(res => {
         console.log("Question Res:", res.data);
         const q_id = res.data.id;
         alert("Your question has been submitted!");
         axios
-          .post(topicURL, this.state)
+          .post(topicURL, this.state) // finding topic in topics table
           .then(res => {
             console.log("Topic Res:", res.data);
             const t_id = res.data.id;
@@ -43,7 +43,7 @@ class QuestionForm extends React.Component {
               topic_id: t_id
             };
             axios
-              .post(qtURL, questionTopicIds)
+              .post(qtURL, questionTopicIds) // posting question_id and topic_id to question_topics table
               .then(res => {
                 console.log("QT Res:", res.data);
                 console.log(q_id, t_id, res.data.id);
