@@ -5,6 +5,8 @@ import Main from "./components/Main";
 import Secret from "./components/Secret";
 import NotFound from "./components/NotFound";
 import Callback from "./components/Callback";
+import QuestionForm from "./components/QuestionForm";
+import AskerDashboard from "./components/AskerDashboard";
 
 class App extends Component {
   state = {};
@@ -29,6 +31,9 @@ class App extends Component {
         ) : (
           <NotFound {...this.props} />
         );
+        break;
+      case "dashboard/asker":
+          mainComponent = <AskerDashboard/>;
         break;
 
       //if goes to unknown route display NotFound page
