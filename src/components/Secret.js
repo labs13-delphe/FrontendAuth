@@ -36,7 +36,7 @@ class Secret extends Component {
       });
   };
 
-  // Set and remove user_id and user_type on localstorage
+  // Set user_id and user_type for user 1 on localstorage
   viewAskerDashboard() {
     localStorage.setItem("user_id", 1);
     localStorage.setItem("user_type", "asker");
