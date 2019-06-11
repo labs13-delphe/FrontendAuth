@@ -85,7 +85,7 @@ class AskerDashboard extends React.Component {
           <div>
             {this.state.questions.map(question => (
               <div key={question.id}>
-                <p style={questionStyle}>{question.question}</p>
+                <p style={questionStyle}><strong>{question.title}: </strong>{question.question}</p>
               </div>
             ))}
           </div>
@@ -97,7 +97,7 @@ class AskerDashboard extends React.Component {
             {this.state.questions.map(question => ( 
               // if (answers.question_id.includes(question.id) 
               <div key={question.id}>
-                <p style={questionStyle}>{question.question}</p>
+                <p style={questionStyle}><strong>{question.title}: </strong>{question.question}</p>
                 {this.state.answers.map(answer => { // map through answers to return answers with question_id that matches question.id
                   if (answer.question_id === question.id) {
                     return ( 
