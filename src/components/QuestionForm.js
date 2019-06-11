@@ -1,5 +1,3 @@
-////// =========== CHANGE LOCAL ENDPOINTS TO HEROKU LINKS
-
 import React from "react";
 import axios from "axios";
 
@@ -18,9 +16,9 @@ class QuestionForm extends React.Component {
 
   submitForm = e => {
     e.preventDefault();
-    const questionURL = "http://localhost:5000/api/questions";
-    const topicURL = "http://localhost:5000/api/topics";
-    const qtURL = "http://localhost:5000/api/topics/question";
+    const questionURL = "https://delphe-backend.herokuapp.com/api/questions";
+    const topicURL = "https://delphe-backend.herokuapp.com/api/topics";
+    const qtURL = "https://delphe-backend.herokuapp.com/api/topics/question";
 
     const questionBody = {
       user_id: this.state.user_id,
@@ -32,7 +30,6 @@ class QuestionForm extends React.Component {
       .then(res => {
         console.log("Question Res:", res.data);
         const q_id = res.data.id;
-        alert("Your question has been submitted!");
         axios
           .post(topicURL, this.state) // finding topic in topics table
           .then(res => {
@@ -47,6 +44,12 @@ class QuestionForm extends React.Component {
               .then(res => {
                 console.log("QT Res:", res.data);
                 console.log(q_id, t_id, res.data.id);
+                alert("Your question has been submitted!");
+                this.setState({
+                  title: "",
+                  question: "",
+                  topic: ""
+              });
               })
               .catch(err => {
                 console.log("Post QuestionTopic Error", err);

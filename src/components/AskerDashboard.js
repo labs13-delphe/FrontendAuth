@@ -90,26 +90,7 @@ class AskerDashboard extends React.Component {
             ))}
           </div>
         </section>
-        {/* <section>
-          <h3>Your Answers</h3>
-          <div>
-            {this.state.answers.map(answer => (
-              <div key={answer.id}>
-                <p>
-                  <strong>
-                    {this.state.users.map(user => {
-                      if (user.id === answer.user_id) {
-                        return user.username;
-                      }
-                    })}
-                    :{" "}
-                  </strong>
-                  {answer.answer}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section> */}
+
         <section>
           <h3>Your Answers</h3>
           <div>
