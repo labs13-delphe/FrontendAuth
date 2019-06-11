@@ -1,56 +1,52 @@
 import React, { Component } from "react";
+import firebase from "firebase";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 import "./App.css";
-import Main from "./components/Main";
+
 import Secret from "./components/Secret";
-import NotFound from "./components/NotFound";
-import Callback from "./components/Callback";
-import QuestionForm from "./components/QuestionForm";
-import AskerDashboard from "./components/AskerDashboard";
+
+firebase.initializeApp({
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_DOMAIN
+});
 
 class App extends Component {
-  state = {};
+  state = { isSignedIn: false };
+
+  uiConfig = {
+    signInFlow: "popup",
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID
+    ],
+    callbacks: {
+      signInSuccess: () => false
+    }
+  };
+
+  componentDidMount = () => {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ isSignedIn: !!user });
+    });
+  };
 
   render() {
-    let mainComponent = "";
-    switch (this.props.location) {
-      //if nothing display <Main/>
-      case "":
-        mainComponent = <Main {...this.props} />;
-        break;
-      case "callback":
-        mainComponent = <Callback />;
-        break;
-      //protected by authorization
-      //if user has auth can enter secret page
-      case "secret":
-
-        //if auth display secret page if not display not found page
-        mainComponent = this.props.auth.isAuthenticated() ? (
-          <Secret {...this.props} />
-        ) : (
-          <NotFound {...this.props} />
-        );
-        break;
-      case "dashboard/asker":
-          mainComponent = <AskerDashboard/>;
-        break;
-
-      //if goes to unknown route display NotFound page
-      default:
-        mainComponent = <NotFound {...this.props} />;
-    }
-
     return (
       <div className="App">
-        <p> Welcome, {this.props.name}</p>
+        {this.state.isSignedIn ? (
+          <div>
+            <h2>Signed In</h2>
+            <Secret />
 
-        {/* add Main component */}
-        {/* <Main /> instead of displaying Main use mainComponent
-      so based on location it will define mainComponent and what 
-      is displayed on page
-      */}
-        {mainComponent}
+            <button onClick={() => firebase.auth().signOut()}>Sign Out!</button>
+          </div>
+        ) : (
+          <StyledFirebaseAuth
+            uiConfig={this.uiConfig}
+            firebaseAuth={firebase.auth()}
+          />
+        )}
       </div>
     );
   }

@@ -46,7 +46,7 @@ class Secret extends Component {
   render() {
     console.log("secret props", this.props);
     console.log("secret state", this.state);
-    
+
     return (
       <div>
         You hold the token
@@ -55,16 +55,16 @@ class Secret extends Component {
         <br />
         Jump back to <a href="/">Main Page</a>
         <br />
-        <button onClick={this.viewAskerDashboard}><a href="/dashboard/asker">View Asker Dashboard</a></button>
+        <button onClick={this.viewAskerDashboard}>
+          <a href="/dashboard/asker">View Asker Dashboard</a>
+        </button>
         <br />
         {this.state.questions.length ? (
           <ExpertDashboard questions={this.state.questions} />
         ) : (
           <h4>nope.</h4>
         )}
-        
         <UserForm postUserInfo={this.props.postUserInfo} />
-        <button onClick={this.props.auth.logout}>LOGOUT</button>
       </div>
     );
   }
