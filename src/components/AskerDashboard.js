@@ -85,38 +85,19 @@ class AskerDashboard extends React.Component {
           <div>
             {this.state.questions.map(question => (
               <div key={question.id}>
-                <p style={questionStyle}>{question.question}</p>
+                <p style={questionStyle}><strong>{question.title}: </strong>{question.question}</p>
               </div>
             ))}
           </div>
         </section>
-        {/* <section>
-          <h3>Your Answers</h3>
-          <div>
-            {this.state.answers.map(answer => (
-              <div key={answer.id}>
-                <p>
-                  <strong>
-                    {this.state.users.map(user => {
-                      if (user.id === answer.user_id) {
-                        return user.username;
-                      }
-                    })}
-                    :{" "}
-                  </strong>
-                  {answer.answer}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section> */}
+
         <section>
           <h3>Your Answers</h3>
           <div>
             {this.state.questions.map(question => ( 
               // if (answers.question_id.includes(question.id) 
               <div key={question.id}>
-                <p style={questionStyle}>{question.question}</p>
+                <p style={questionStyle}><strong>{question.title}: </strong>{question.question}</p>
                 {this.state.answers.map(answer => { // map through answers to return answers with question_id that matches question.id
                   if (answer.question_id === question.id) {
                     return ( 
