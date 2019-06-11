@@ -7,8 +7,8 @@ import "./App.css";
 import Secret from "./components/Secret";
 
 firebase.initializeApp({
-  apiKey: "AIzaSyB1KeJbVPoyu2pqB712EKi6oKdF0dieX0c",
-  authDomain: "delphe-f772c.firebaseapp.com"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_DOMAIN
 });
 
 class App extends Component {
