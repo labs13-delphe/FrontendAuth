@@ -1,45 +1,29 @@
+// Packages
 import React from "react";
 import axios from "axios";
+import { Route, Link, withRouter } from "react-router-dom";
 
 // Components
 import QuestionForm from "./QuestionForm";
-
-// Notes for next week
-// issues with Auth0 and react-router-dom
-// Tried the following (now deleted)
-// on App, I did <Provider><Secret {...this.props} /></Provider>
-// on Secret.js I did export default withRouter(Secret);
-// Then rendered AskerDashboard on Secret.js like <Route path="/dashboard/asker" component={AskerDashboard} />
-// Added a button on Secret that sets user_id 1 and user_type asker to local storage to be able to pull in asker data on askerdashboard and takes user to /dashboard/asker
-// When I click the button, the url changes, but I'm asked to login again and then taken back to the secret page not askerdashboard
-
-const questionStyle = {
-  "text-align": "left",
-"padding-left": "20px",
-color: '#021636'
-
-};
-
-const answerStyle = {
-"text-align": "left",
-"padding-left": "50px",
-};
-
-const expertName = {
-  color: '#058562',
-};
+import AskerQuestionsList from "./AskerQuestionsList";
+import AskerAnswersList from "./AskerAnswersList";
 
 class AskerDashboard extends React.Component {
-  state = {
-    userInfo: {},
-    questions: [],
-    answers: [],
-    questionCount: "",
-    answerCount: "",
-    users: []
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      userInfo: {},
+      questions: [],
+      answers: [],
+      questionCount: "",
+      answerCount: "",
+      users: []
+    };
+  }
 
   componentDidMount() {
+    // GET User's Questions data
     const id = localStorage.getItem("user_id");
     const endpoint = `https://delphe-backend.herokuapp.com/api/users/${id}/questions`;
     axios
@@ -56,7 +40,7 @@ class AskerDashboard extends React.Component {
         console.log("Can't retrieve asker info", err);
       });
 
-    // get all users
+    // GET Users (askers + experts) data
     const allUsers = "https://delphe-backend.herokuapp.com/api/users/";
     axios
       .get(allUsers)
@@ -69,55 +53,46 @@ class AskerDashboard extends React.Component {
       });
   }
 
-  
+  // DELETE Question
+  deleteQuestion = id => {
+    axios
+      .delete(`https://delphe-backend.herokuapp.com/api/questions/${id}`)
+      .then(res => {
+        console.log(res.data);
+        window.location.reload();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  // PUT Question function on App.js (Update form is also imported/rendered on App.js)
 
   render() {
     return (
       <>
         <h2>AskerDashboard</h2>
-        <QuestionForm/>
+        <QuestionForm />
         <p>
           {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
           {this.state.answerCount} Answers Received
         </p>
         <section>
           <h3>Your Questions</h3>
-          <div>
-            {this.state.questions.map(question => (
-              <div key={question.id}>
-                <p style={questionStyle}><strong>{question.title}: </strong>{question.question}</p>
-              </div>
-            ))}
-          </div>
+          <AskerQuestionsList
+            questions={this.state.questions}
+            deleteQuestion={this.deleteQuestion}
+            setActiveQuestion={this.setActiveQuestion}
+            activeQuestion={this.state.activeQuestion}
+          />
         </section>
-
         <section>
           <h3>Your Answers</h3>
-          <div>
-            {this.state.questions.map(question => ( 
-              // if (answers.question_id.includes(question.id) 
-              <div key={question.id}>
-                <p style={questionStyle}><strong>{question.title}: </strong>{question.question}</p>
-                {this.state.answers.map(answer => { // map through answers to return answers with question_id that matches question.id
-                  if (answer.question_id === question.id) {
-                    return ( 
-                      <p style={answerStyle}>
-                        <strong style={expertName}>
-                          {this.state.users.map(user => { // map through users to match the user.id to the answer.user_id to get expert's username and return expert username with the answer.answer
-                            if (user.id === answer.user_id) {
-                              return user.username;
-                            }
-                          })}
-                          :{" "}
-                        </strong>
-                        {answer.answer}
-                      </p>
-                    );
-                  }
-                })}
-              </div>
-            ))}
-          </div>
+          <AskerAnswersList
+            questions={this.state.questions}
+            answers={this.state.answers}
+            users={this.state.users}
+          />
         </section>
       </>
     );
