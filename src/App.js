@@ -1,12 +1,14 @@
 // Packages
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
+import axios from "axios";
 import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 // Components
 import Secret from "./components/Secret.js";
 import Dashboard from "./components/Dashboard.js";
+import QuestionUpdateForm from "./components/AskerDashboard/QuestionUpdateForm.js";
 
 import "./App.css";
 firebase.initializeApp({
@@ -35,6 +37,20 @@ class App extends Component {
     });
   };
 
+  // UPDATE Question Function
+  updateQuestion = question => {
+    axios
+      .put(`https://delphe-backend.herokuapp.com/api/questions/${question.id}`, question)
+      .then(res => {
+        console.log(res.data);
+        // redirect to dashboard:
+        this.props.history.push("/dashboard");
+      })
+      .catch(err => {
+        console.log("Can't update!", err);
+      });
+  };
+
   render() {
     console.log("app state", this.state);
     return (
@@ -52,6 +68,15 @@ class App extends Component {
             <Route
               path="/dashboard"
               render={props => <Dashboard {...props} />}
+            />
+            <Route
+              path="/questions/:id/update"
+              render={props => (
+                <QuestionUpdateForm
+                  {...props}
+                  updateQuestion={this.updateQuestion}
+                />
+              )}
             />
           </div>
         ) : (
