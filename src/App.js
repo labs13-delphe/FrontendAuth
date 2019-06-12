@@ -15,7 +15,7 @@ firebase.initializeApp({
 });
 
 class App extends Component {
-  state = { isSignedIn: false };
+  state = { isSignedIn: false, uniqueIdentifier: "" };
 
   uiConfig = {
     signInFlow: "popup",
@@ -24,17 +24,19 @@ class App extends Component {
       firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
     callbacks: {
-      signInSuccess: () => false
+      signInSuccessWithAuthResult: () => false
     }
   };
 
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
-      this.setState({ isSignedIn: !!user });
+      this.setState({ isSignedIn: !!user, uniqueIdentifier: user.email });
+      console.log("user", user);
     });
   };
 
   render() {
+    console.log("app state", this.state);
     return (
       <div className="App">
         {this.state.isSignedIn ? (
