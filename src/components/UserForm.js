@@ -6,6 +6,7 @@ class UserForm extends React.Component {
     last_name: "",
     email: "",
     username: "",
+    password: "",
     bio: "",
     user_type: "",
     image_url: "",
@@ -26,18 +27,22 @@ class UserForm extends React.Component {
       last_name: this.state.last_name,
       email: this.state.email,
       username: this.state.username,
+      password: this.state.password,
       bio: this.state.bio,
       user_type: this.state.user_type,
       image_url: this.state.image_url,
       hourly_rate: this.state.hourly_rate
     });
+    this.props.postUserInfo();
   };
 
   render() {
+    console.log("user form props", this.props);
+    console.log("user form state", this.state);
     return (
       <div>
         <h2>User Form</h2>
-        <form onSubmit={this.props.submitUser} className="user-form">
+        <form onSubmit={this.submitUser} className="user-form">
           <input
             label="First Name"
             type="text"
@@ -120,7 +125,7 @@ class UserForm extends React.Component {
             onChange={this.handleChange}
             className="user-input"
           />
-          <button onClick={this.props.submitUser}>Submit</button>
+          <button onClick={this.submitUser}>Submit</button>
         </form>
       </div>
     );
