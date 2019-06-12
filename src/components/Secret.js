@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { Route, Link } from "react-router-dom";
 import axios from "axios";
 import UserForm from "./UserForm.js";
+import Dashboard from "./Dashboard.js";
 import ExpertDashboard from "./ExpertDashboard";
-import AskerDashboard from "./AskerDashboard";
+import AskerDashboard from "./AskerDashboard/AskerDashboard";
 
 //rendering all protected components and keeping state here
 
@@ -36,10 +38,22 @@ class Secret extends Component {
       });
   };
 
-  // Set user_id and user_type for user 1 on localstorage
+  // Sets user_ids and user_types for asker, expert, and clear items on storage
   viewAskerDashboard() {
     localStorage.setItem("user_id", 1);
     localStorage.setItem("user_type", "asker");
+    window.location.reload();
+  }
+
+  viewExpertDashboard() {
+    localStorage.setItem("user_id", 5);
+    localStorage.setItem("user_type", "expert");
+    window.location.reload();
+  }
+
+  clearStorage() {
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_type");
     window.location.reload();
   }
 
@@ -49,22 +63,28 @@ class Secret extends Component {
 
     return (
       <div>
-        You hold the token
-        <br />
-        THIS WOULD BE THE USER DASHBOARD
-        <br />
-        Jump back to <a href="/">Main Page</a>
-        <br />
+        {/* Can use until when we get our registration/login totally functioning  */}
         <button onClick={this.viewAskerDashboard}>
-          <a href="/dashboard/asker">View Asker Dashboard</a>
+          {" "}
+          Pretend an Asker is Signed In{" "}
         </button>
-        <br />
-        {this.state.questions.length ? (
-          <ExpertDashboard questions={this.state.questions} />
+        <button onClick={this.viewExpertDashboard}>
+          {" "}
+          Pretend an Expert is Signed In{" "}
+        </button>
+
+        {//this.state.questions.length
+        localStorage.getItem("user_id") ? (
+          <div>
+            <button onClick={this.clearStorage}>Erase User on Storage</button>
+            <Dashboard />
+          </div>
         ) : (
-          <h4>nope.</h4>
+          <div>
+            <h4>Please Register To Access Secret</h4>
+            <UserForm postUserInfo={this.props.postUserInfo} />
+          </div>
         )}
-        <UserForm postUserInfo={this.props.postUserInfo} />
       </div>
     );
   }
