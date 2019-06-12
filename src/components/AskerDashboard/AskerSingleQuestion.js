@@ -1,15 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// Font Awesome
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   faEdit,
-//   faPen,
-//   faMinusCircle,
-//   faTrash
-// } from "@fortawesome/free-solid-svg-icons";
-
 const questionStyle = {
   "text-align": "left",
   "padding-left": "20px",
@@ -34,16 +25,13 @@ const AskerSingleQuestion = props => {
   return (
     <div key={props.question.id}>
       <p style={questionStyle}>
+        <Link to={`/questions/${props.question.id}/update`}>
+          <i class="fas fa-pen" />
+        </Link>
+        <i onClick={deleteButton} class="fas fa-trash" />
         <strong>{props.question.title}: </strong>
         {props.question.question}
-        <Link to={`/questions/${props.question.id}/update`}>
-        Edit
-      </Link> 
-        
-        {/* <FontAwesomeIcon icon={faTrash}  /> */}
-        <button onClick={deleteButton}>Delete</button>
       </p>
-
     </div>
   );
 };
