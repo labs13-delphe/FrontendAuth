@@ -16,11 +16,11 @@ const AskerSingleQuestion = props => {
     }
   };
 
-  // Edit Question Button
-  const selectUpdateQuestion = event => {
-    event.preventDefault();
-    props.history.push(`/questions/${props.question.id}/update`);
-  };
+  // Edit Question Button // PUSHING NOT WORKING // using Link instead
+//   const selectUpdateQuestion = event => {
+//     event.preventDefault();
+//     props.history.push(`/questions/${props.question.id}/update`);
+//   };
 
   return (
     <div key={props.question.id}>
@@ -28,7 +28,8 @@ const AskerSingleQuestion = props => {
         <Link to={`/questions/${props.question.id}/update`}>
           <i class="fas fa-pen" />
         </Link>
-        <i onClick={deleteButton} class="fas fa-trash" />
+        <i onClick={deleteButton} class="fas fa-trash" /> 
+        &nbsp;|&nbsp;
         <strong>{props.question.title}: </strong>
         {props.question.question}
       </p>
