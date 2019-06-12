@@ -82,8 +82,6 @@ class AskerDashboard extends React.Component {
           <AskerQuestionsList
             questions={this.state.questions}
             deleteQuestion={this.deleteQuestion}
-            setActiveQuestion={this.setActiveQuestion}
-            activeQuestion={this.state.activeQuestion}
           />
         </section>
         <section>

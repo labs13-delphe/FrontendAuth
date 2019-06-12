@@ -11,8 +11,6 @@ const AskerQuestionsList = props => {
         <AskerSingleQuestion
           question={question}
           deleteQuestion={props.deleteQuestion}
-          setActiveQuestion={props.setActiveQuestion}
-          activeQuestion={props.activeQuestion}
         />
       ))}
     </div>
