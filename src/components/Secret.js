@@ -1,10 +1,12 @@
+// Packages
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
 import axios from "axios";
+
+// Components
 import UserForm from "./UserForm.js";
 import Dashboard from "./Dashboard.js";
-import ExpertDashboard from "./ExpertDashboard";
-import AskerDashboard from "./AskerDashboard/AskerDashboard";
+
 
 //rendering all protected components and keeping state here
 
@@ -38,6 +40,7 @@ class Secret extends Component {
       });
   };
 
+  // BUTTONS TO DELETE ONCE LOGIN/REGISTER SETS USER_TYPE ON local storage
   // Sets user_ids and user_types for asker, expert, and clear items on storage
   viewAskerDashboard() {
     localStorage.setItem("user_id", 1);
