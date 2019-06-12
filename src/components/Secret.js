@@ -18,7 +18,7 @@ class Secret extends Component {
     axios
       .post("https://delphe-backend.herokuapp.com/api/users", userInfo)
       .then(res => {
-        console.log(res.data);
+        console.log({ message: "Success!!" });
       })
       .catch(error => {
         console.log(error);

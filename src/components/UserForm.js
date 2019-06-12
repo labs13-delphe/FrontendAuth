@@ -22,7 +22,7 @@ class UserForm extends React.Component {
 
   submitUser = e => {
     e.preventDefault();
-    this.setState({
+    let userInfo = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       email: this.state.email,
@@ -32,8 +32,8 @@ class UserForm extends React.Component {
       user_type: this.state.user_type,
       image_url: this.state.image_url,
       hourly_rate: this.state.hourly_rate
-    });
-    this.props.postUserInfo();
+    };
+    this.props.postUserInfo(userInfo);
   };
 
   render() {
