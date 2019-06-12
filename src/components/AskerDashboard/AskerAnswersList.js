@@ -25,22 +25,23 @@ const AskerAnswersList = props => {
       {props.questions.map(question => (
         // if (answers.question_id.includes(question.id)
         <div key={question.id}>
-          <p style={questionStyle}>{question.question}</p>
+          <p style={questionStyle}> <strong>{question.title}: </strong>{question.question}</p>
           {props.answers.map(answer => {
             // map through answers to return answers with question_id that matches question.id
             if (answer.question_id === question.id) {
               return (
                 <p style={answerStyle}>
-                  <strong style={expertName}>
+                  
+                    "{answer.answer}" - <strong style={expertName}> 
                     {props.users.map(user => {
                       // map through users to match the user.id to the answer.user_id to get expert's username and return expert username with the answer.answer
                       if (user.id === answer.user_id) {
-                        return user.username;
+                        return  user.username;
                       }
                     })}
-                    :{" "}
+                    
                   </strong>
-                  {answer.answer}
+                  
                 </p>
               );
             }
