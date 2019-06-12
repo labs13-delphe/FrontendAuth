@@ -7,7 +7,6 @@ import axios from "axios";
 import UserForm from "./UserForm.js";
 import Dashboard from "./Dashboard.js";
 
-
 //rendering all protected components and keeping state here
 
 class Secret extends Component {
@@ -15,16 +14,34 @@ class Secret extends Component {
     questions: []
   };
 
-  postUserInfo = () => {
+  postUserInfo = userInfo => {
     axios
-      .post("https://delphe-backend.herokuapp.com/api/users")
+      .post("https://delphe-backend.herokuapp.com/api/users", userInfo)
       .then(res => {
-        console.log(res.data);
+        console.log({ message: "Success!!" });
       })
       .catch(error => {
         console.log(error);
       });
   };
+
+  //getting all users info in order to compare the incoming information from auth object.
+  getUserInfo = () => {
+    axios
+      .get("https://delphe-backend.herokuapp.com/api/users")
+      .then(res => {
+        console.log("users data", res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+  //create a variable with the user email from the auth object
+
+  //compare that variable to the same variable in user data table
+
+  //
 
   componentDidMount = () => {
     axios
@@ -66,6 +83,9 @@ class Secret extends Component {
 
     return (
       <div>
+        {/* added this to have a visual of the user data we can post to and compare to out unique id */}
+        {this.getUserInfo()}
+
         {/* Can use until when we get our registration/login totally functioning  */}
         <button onClick={this.viewAskerDashboard}>
           {" "}
@@ -85,7 +105,7 @@ class Secret extends Component {
         ) : (
           <div>
             <h4>Please Register To Access Secret</h4>
-            <UserForm postUserInfo={this.props.postUserInfo} />
+            <UserForm postUserInfo={this.postUserInfo} />
           </div>
         )}
       </div>
