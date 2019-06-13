@@ -36,7 +36,7 @@ class EachQuestion extends React.Component {
 
   componentDidMount() {
     const id = this.props.question.id;
-    const endpoint = `http://localhost:5000/api/questions/${id}`;
+    const endpoint = `https://delphe-backend.herokuapp.com/api/questions/${id}`;
 
     axios
       .get(endpoint)
