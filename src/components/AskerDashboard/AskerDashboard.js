@@ -6,6 +6,7 @@ import { Route, Link, withRouter } from "react-router-dom";
 // Components
 import QuestionForm from "./QuestionForm";
 import AskerQuestionsList from "./AskerQuestionsList";
+import StripeBtn from "../stripe/StripeBtn"
 
 class AskerDashboard extends React.Component {
   constructor(props) {
@@ -82,6 +83,7 @@ class AskerDashboard extends React.Component {
             questions={this.state.questions}
             deleteQuestion={this.deleteQuestion}
           />
+          <StripeBtn />
         </section>
       </>
     );
