@@ -10,6 +10,7 @@ import Secret from "./components/Secret.js";
 import Dashboard from "./components/Dashboard.js";
 import QuestionUpdateForm from "./components/AskerDashboard/QuestionUpdateForm.js";
 import UserProfile from "./components/Users/UserProfile";
+import Community from "./components/Community/Community";
 
 import "./App.css";
 firebase.initializeApp({
@@ -63,6 +64,9 @@ class App extends Component {
             <Link to="/secret">
               <button>Go To Secret</button>{" "}
             </Link>
+            <Link to="/community">
+              <button>Community</button>{" "}
+            </Link>
 
             <Route path="/secret" component={Secret} />
 
@@ -83,6 +87,15 @@ class App extends Component {
               path="/users/:id"
               render={props => (
                 <UserProfile
+                  {...props}
+                
+                />
+              )}
+            />
+            <Route
+              path="/community"
+              render={props => (
+                <Community
                   {...props}
                 
                 />
