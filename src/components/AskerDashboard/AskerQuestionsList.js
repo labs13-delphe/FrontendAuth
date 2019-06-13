@@ -2,7 +2,6 @@
 import React from "react";
 
 // Components
-import AskerSingleQuestion from "./AskerSingleQuestion.js";
 import AskerEachQuestion from "./AskerEachQuestion.js";
 
 const AskerQuestionsList = props => {
@@ -10,14 +9,10 @@ const AskerQuestionsList = props => {
     <div>
       {props.questions.map(question => (
         <AskerEachQuestion
-        question={question}
-        users={props.users}
-        deleteQuestion={props.deleteQuestion}
-      />
-        // <AskerSingleQuestion
-        //   question={question}
-        //   deleteQuestion={props.deleteQuestion}
-        // />
+          question={question}
+          users={props.users}
+          deleteQuestion={props.deleteQuestion}
+        />
       ))}
     </div>
   );

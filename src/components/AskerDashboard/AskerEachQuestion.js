@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-// Temp Styles
+// Temp Styles -- Delete When Styling For Real
 const bordered = {
   border: "1px solid black",
   background: "#EEFBFC",

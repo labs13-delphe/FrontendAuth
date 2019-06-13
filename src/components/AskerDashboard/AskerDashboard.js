@@ -6,7 +6,6 @@ import { Route, Link, withRouter } from "react-router-dom";
 // Components
 import QuestionForm from "./QuestionForm";
 import AskerQuestionsList from "./AskerQuestionsList";
-import AskerAnswersList from "./AskerAnswersList";
 
 class AskerDashboard extends React.Component {
   constructor(props) {
