@@ -1,30 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // Components
 import AskerDashboard from "./AskerDashboard/AskerDashboard";
-import ExpertDashboard from "./ExpertDashboard";
+import ExpertDashboard from "./ExpertDashboard/ExpertDashboard";
 
-function Dashboard(props) {
-    
+const Dashboard = props => {
+  const postAnswer = answer => {
+    axios
+      .post("https://delphe-backend.herokuapp.com/api/answers", answer)
+      .then(res => {
+        console.log("success");
+      })
+      .catch(error => {
+        console.log("There was a problem posting your answer");
+      });
+  };
+
   const Component = localStorage.getItem("user_type") ? (
     localStorage.getItem("user_type") === "asker" ? (
       <AskerDashboard />
     ) : (
-      <ExpertDashboard />
+      <ExpertDashboard questions={props.questions} postAnswer={postAnswer} />
     )
   ) : (
     <h2>Whoops. No User ID on Local Storage.</h2>
   );
 
-
-
-  return (
-    <div>
-      {" "}
-      {Component}
-    </div>
-  );
-}
+  return <div> {Component}</div>;
+};
 
 export default Dashboard;

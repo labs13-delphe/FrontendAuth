@@ -10,7 +10,14 @@ const QuestionsList = props => {
 
       <h4>
         {props.questions.map(question => {
-          return <Question question={question} />;
+          return (
+            <Question
+              question={question}
+              answers={props.answers}
+              id={question.id}
+              postAnswer={props.postAnswer}
+            />
+          );
         })}
       </h4>
     </>
