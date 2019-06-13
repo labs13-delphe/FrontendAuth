@@ -84,14 +84,6 @@ class AskerDashboard extends React.Component {
             deleteQuestion={this.deleteQuestion}
           />
         </section>
-        <section>
-          <h3>Your Answers</h3>
-          <AskerAnswersList
-            questions={this.state.questions}
-            answers={this.state.answers}
-            users={this.state.users}
-          />
-        </section>
       </>
     );
   }

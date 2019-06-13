@@ -52,7 +52,7 @@ class EachQuestion extends React.Component {
       });
 
     // GET ALL USERS
-    const usersEndpoint = "http://localhost:5000/api/users/";
+    const usersEndpoint = "https://delphe-backend.herokuapp.com/api/users/";
     axios
       .get(usersEndpoint)
       .then(res => {
