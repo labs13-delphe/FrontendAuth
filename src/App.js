@@ -9,6 +9,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import Secret from "./components/Secret.js";
 import Dashboard from "./components/Dashboard.js";
 import QuestionUpdateForm from "./components/AskerDashboard/QuestionUpdateForm.js";
+import UserProfile from "./components/Users/UserProfile";
 
 import "./App.css";
 firebase.initializeApp({
@@ -75,6 +76,15 @@ class App extends Component {
                 <QuestionUpdateForm
                   {...props}
                   updateQuestion={this.updateQuestion}
+                />
+              )}
+            />
+            <Route
+              path="/users/:id"
+              render={props => (
+                <UserProfile
+                  {...props}
+                
                 />
               )}
             />

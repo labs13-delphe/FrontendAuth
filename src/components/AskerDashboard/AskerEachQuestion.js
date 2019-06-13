@@ -86,7 +86,8 @@ class EachQuestion extends React.Component {
                 <strong style={expertName}>
                   {this.state.users.map(user => {
                     if (user.id === answer.user_id) {
-                      return user.username;
+                      return (
+                        <Link to={`/users/${user.id}`} >{user.username}</Link>);
                     }
                   })}
                 </strong>
