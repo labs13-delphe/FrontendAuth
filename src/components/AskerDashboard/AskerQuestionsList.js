@@ -2,14 +2,15 @@
 import React from "react";
 
 // Components
-import AskerSingleQuestion from "./AskerSingleQuestion.js";
+import AskerEachQuestion from "./AskerEachQuestion.js";
 
 const AskerQuestionsList = props => {
   return (
     <div>
       {props.questions.map(question => (
-        <AskerSingleQuestion
+        <AskerEachQuestion
           question={question}
+          users={props.users}
           deleteQuestion={props.deleteQuestion}
         />
       ))}
