@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-// Temp Styles -- Delete When Styling For Real
+// Temp Styles
 const bordered = {
   border: "1px solid black",
   background: "#EEFBFC",
@@ -22,7 +22,7 @@ const expertName = {
   color: "#058562"
 };
 
-class EachQuestion extends React.Component {
+class CommunityEachQuestion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,13 +63,6 @@ class EachQuestion extends React.Component {
       });
   }
 
-  // Delete Question Button
-  deleteButton = event => {
-    event.preventDefault();
-    if (window.confirm("Are you sure you want to delete this question?")) {
-      this.props.deleteQuestion(this.state.question.id);
-    }
-  };
 
   render() {
     // condition: Render Answers Div if question has answers (answerCount > 0)
@@ -98,19 +91,28 @@ class EachQuestion extends React.Component {
       ) : (
         <p>No answers yet</p>
       );
+
+      const answerText = this.state.answerCount === 1 ? <span> answer </span> : <span> answers </span>;
     return (
       <div style={bordered}>
         <div className="question-div">
-          <p style={generalAlign}>
-            <Link to={`/questions/${this.state.question.id}/update`}>
-              <i class="fas fa-pen" />
-            </Link>
-            <i onClick={this.deleteButton} class="fas fa-trash" />
-            &nbsp;|&nbsp;
-            <strong>{this.state.question.title}: </strong>
-            {this.state.question.question} <br /> {this.state.answerCount}{" "}
-            answers
+          <p>
+            {this.state.users.map(user => {
+              if (user.id === this.state.question.user_id) {
+                return (
+                  <div className="user-info-div" style={generalAlign}>
+                    <p>{user.first_name} {user.last_name} @{user.username}  
+                    <Link to={`/users/${user.id}`}>View Profile</Link></p>
+                    
+                  </div>
+                );
+              }
+            })}
           </p>
+          <p style={generalAlign}>
+            <strong>{this.state.question.title}: </strong>
+            {this.state.question.question} <br /> {this.state.answerCount}{" "} {answerText}</p>
+
         </div>
 
         <div className="topics-div">
@@ -127,4 +129,4 @@ class EachQuestion extends React.Component {
   }
 }
 
-export default EachQuestion;
+export default CommunityEachQuestion;
