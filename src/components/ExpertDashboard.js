@@ -6,7 +6,8 @@ import axios from 'axios'
 class ExpertDashboard extends React.Component {
 
   state = {
-    answers: []
+    answers: [],
+    questions: []
   }
 
 
@@ -14,6 +15,7 @@ class ExpertDashboard extends React.Component {
 
     const id = 5
     const user = {id: 5}
+    const topic_id = 2
 
     axios.get(`http://localhost:5000/api/answers/${id}`, user)
           .then(res => {
@@ -25,13 +27,26 @@ class ExpertDashboard extends React.Component {
           .catch(err => {
             console.log(err)
           })
+
+          axios.get(`http://localhost:5000/api/questions/topic/${topic_id}`)
+          .then(res => {
+            console.log(res)
+            this.setState ({
+              questions: res.data
+            })
+          })
+          .catch(err => {
+            console.log(err)
+          })
   }
 
   render() {
-    const { answers } = this.state
+    const { answers, questions } = this.state
     return (
       <div>
         <h2>Expert dash</h2>
+
+        <h1>Your Answers</h1>
         {answers.map(({ answer, question }) =>
           <div>
           <h2>{question}</h2>
@@ -39,6 +54,13 @@ class ExpertDashboard extends React.Component {
           </div>
           )}
         {/* <QuestionsList questions={props.questions} /> */}
+
+        <h1>Unanswered Questions</h1>
+        {questions.map(({ question }) =>
+          <div>
+          <h5>{question}</h5>
+          </div>
+          )}
       </div>
     );
   }
