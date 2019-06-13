@@ -79,7 +79,8 @@ class CommunityEachQuestion extends React.Component {
                 <strong style={expertName}>
                   {this.state.users.map(user => {
                     if (user.id === answer.user_id) {
-                      return user.username;
+                      return (
+                        <Link to={`/users/${user.id}`} >{user.username}</Link>);
                     }
                   })}
                 </strong>
@@ -111,10 +112,7 @@ class CommunityEachQuestion extends React.Component {
           <p style={generalAlign}>
             <strong>{this.state.question.title}: </strong>
             {this.state.question.question} <br /> {this.state.answerCount}{" "} {answerText}</p>
-            <p>
-            {/* {{this.state.answerCount} === 1 ? <span> {this.state.answerCount} answer</span> : <span>{this.state.answerCount} answers</span>}
-            answers} */}
-          </p>
+
         </div>
 
         <div className="topics-div">
