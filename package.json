@@ -3,17 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.1.1",
     "auth0-js": "^9.10.4",
     "axios": "^0.19.0",
+    "boostrap": "^2.0.0",
+    "bootstrap": "^4.3.1",
     "dotenv": "^8.0.0",
     "firebase": "^6.1.1",
     "jwt-decode": "^2.2.0",
     "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.9",
     "react-dom": "^16.8.6",
     "react-firebaseui": "^3.1.2",
+    "react-inputs-validation": "^3.1.3",
+    "react-ripples": "^2.1.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "react-stripe-checkout": "^2.6.3"
+    "react-stripe-checkout": "^2.6.3",
+    "reactstrap": "^8.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

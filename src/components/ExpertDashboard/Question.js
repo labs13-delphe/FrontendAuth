@@ -208,6 +208,7 @@ class Question extends React.Component {
           </p>
         </div>
         {answersDiv}
+
         <div>
           {this.state.isEditing ? (
             <form onSubmit={this.submitEdit}>
