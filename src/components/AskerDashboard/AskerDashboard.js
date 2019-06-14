@@ -70,8 +70,9 @@ class AskerDashboard extends React.Component {
 
   render() {
     return (
-      <>
+      <div class='container'>
         <h2>AskerDashboard</h2>
+        
         <QuestionForm />
         <p>
           {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
@@ -83,9 +84,9 @@ class AskerDashboard extends React.Component {
             questions={this.state.questions}
             deleteQuestion={this.deleteQuestion}
           />
-          <StripeBtn />
+          {/* <StripeBtn /> */}
         </section>
-      </>
+      </div>
     );
   }
 }

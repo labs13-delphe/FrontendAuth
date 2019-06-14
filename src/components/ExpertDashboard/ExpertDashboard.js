@@ -26,6 +26,7 @@ class ExpertDashboard extends React.Component {
     //const { answers } = this.state;
     console.log("expert dash", this.props);
     return (
+      
       <div>
         <h2>Expert dash</h2>
         {/* {answers.map(({ answer, question }) => (
