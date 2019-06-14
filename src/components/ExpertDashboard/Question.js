@@ -22,6 +22,7 @@ const expertName = {
   color: "#058562"
 };
 
+
 class Question extends React.Component {
   constructor(props) {
     super(props);
@@ -129,58 +130,37 @@ class Question extends React.Component {
         <p>No answers yet</p>
       );
     return (
-      <div style={bordered}>
-        <div className="question-div">
-          <p style={generalAlign}>
-            <Link to={`/questions/${this.state.question.id}/update`}>
-              <i class="fas fa-pen" />
-            </Link>
-            <i onClick={this.deleteButton} class="fas fa-trash" />
-            &nbsp;|&nbsp;
-            <strong>{this.state.question.title}: </strong>
-            {this.state.question.question} <br /> {this.state.answerCount}{" "}
-            answers
-          </p>
-        </div>
 
-        <div className="topics-div">
-          <p style={generalAlign}>
-            <strong>Topic: </strong>
-            {this.state.topics.map(topic => (
-              <span>{topic.topic}, </span>
-            ))}
-          </p>
-        </div>
-        {answersDiv}
-        <div>
-          {this.state.isEditing ? (
-            <form onSubmit={this.submitAnswer}>
-              <input
-                label="answer"
-                type="text"
-                name="answer"
-                value={this.state.answer}
-                placeholder="answer"
-                onChange={this.handleChange}
-                className="answer-input"
-              />
-              <button onClick={this.submitAnswer}>Edit</button>
-            </form>
-          ) : (
-            <form onSubmit={this.submitAnswer}>
-              <input
-                label="answer"
-                type="text"
-                name="answer"
-                value={this.state.answer}
-                placeholder="answer"
-                onChange={this.handleChange}
-                className="answer-input"
-              />
-              <button onClick={this.submitAnswer}>Submit</button>
-            </form>
-          )}
-        </div>
+      <div class="form-group shadow-textarea">
+        <h4>{this.props.question.question}</h4>
+        <div class="accordion" id="myAccordion">
+
+<div class="card">
+<div class="card-header" id="item1Header">
+     <h5 class="mb-0">
+       <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#expandable1" aria-expanded="false" aria-controls="expandable1">
+         Provide Answer
+       </button>
+     </h5>
+   </div>
+   <div id="expandable1" class="collapse" aria-labelledby="item1Header" data-parent="#myAccordion">
+     <div class="card-body"></div>
+        <form onSubmit={this.submitAnswer}>
+          <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3"
+            label="answer"
+            type="text"
+            name="answer"
+            value={this.state.answer}
+            placeholder="answer"
+            onChange={this.handleChange}
+            className="answer-input"
+          />
+          <button onClick={this.submitAnswer}>Submit</button>
+        </form>
+
+      </div>
+      </div>
+      </div>
       </div>
     );
   }
