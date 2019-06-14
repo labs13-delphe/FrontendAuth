@@ -25,9 +25,7 @@ class ExpertDashboard extends React.Component {
   editAnswer = answer => {
     axios
       .put(
-        `https://delphe-backend.herokuapp.com/api/answers/${
-          this.state.answers.id
-        }`,
+        `https://delphe-backend.herokuapp.com/api/answers/${answer.id}`,
         answer
       )
       .then(res => {

@@ -34,7 +34,13 @@ class Question extends React.Component {
       question_id: this.props.id,
       user_id: localStorage.getItem("user_id"),
       answer: "",
-      isEditing: false
+      isEditing: false,
+      singleAnswer: {
+        id: null,
+        user_id: null,
+        question_id: null,
+        answer: ""
+      }
     };
   }
 
@@ -46,10 +52,12 @@ class Question extends React.Component {
       .get(endpoint)
       .then(res => {
         // console.log(res.data);
-        this.setState({ question: res.data });
-        this.setState({ topics: res.data.topics });
-        this.setState({ answers: res.data.answers });
-        this.setState({ answerCount: res.data.answers.length });
+        this.setState({
+          question: res.data,
+          topics: res.data.topics,
+          answers: res.data.answers,
+          answerCount: res.data.answers.length
+        });
       })
       .catch(err => {
         console.log(err);
@@ -67,18 +75,28 @@ class Question extends React.Component {
       });
   }
 
-  // Delete Answers Button
-  deleteButton = event => {
-    event.preventDefault();
-    if (window.confirm("Are you sure you want to delete this answer?")) {
-      this.props.deleteQuestion(this.state.answers.id);
-    }
-  };
+  // // Delete Answers Button
+  // deleteButton = event => {
+  //   event.preventDefault();
+  //   if (window.confirm("Are you sure you want to delete this answer?")) {
+  //     this.props.deleteQuestion(this.state.answers.id);
+  //   }
+  // };
 
   handleChange = e => {
     this.setState({
       ...this.state,
       [e.target.name]: e.target.value
+    });
+  };
+
+  handleEditChange = e => {
+    this.setState({
+      ...this.state,
+      singleAnswer: {
+        ...this.state.singleAnswer,
+        [e.target.name]: e.target.value
+      }
     });
   };
 
@@ -92,9 +110,41 @@ class Question extends React.Component {
     this.props.postAnswer(answer);
   };
 
-  handleEdit = e => {
+  submitEdit = e => {
+    e.preventDefault();
+    let answer = {
+      question_id: this.state.singleAnswer.question_id,
+      user_id: localStorage.getItem("user_id"),
+      answer: this.state.singleAnswer.answer,
+      id: this.state.singleAnswer.id
+    };
+    this.props.editAnswer(this.state.singleAnswer);
+  };
+
+  getUsersAnswer = answer_id => {
+    axios
+      .get(`https://delphe-backend.herokuapp.com/api/answers/${answer_id}`)
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          singleAnswer: {
+            question_id: res.data.question_id,
+            user_id: res.data.user_id,
+            answer: res.data.answer,
+            id: res.data.id
+          }
+        });
+      })
+      .catch(err => {
+        console.log("couldn't get an answer based on that id");
+      });
+  };
+
+  handleEdit = (e, answer_id) => {
     e.preventDefault();
     this.setState({ isEditing: true });
+
+    this.getUsersAnswer(answer_id);
   };
 
   render() {
@@ -110,8 +160,14 @@ class Question extends React.Component {
           {this.state.answers.map(answer => {
             return (
               <p style={answerStyle}>
-                <button onClick={this.handleEdit}>Edit</button>"{answer.answer}"
-                -{" "}
+                <button
+                  onClick={e => {
+                    this.handleEdit(e, answer.id);
+                  }}
+                >
+                  Edit
+                </button>
+                "{answer.answer}" -{" "}
                 <strong style={expertName}>
                   {this.state.users.map(user => {
                     if (user.id === answer.user_id) {
@@ -154,17 +210,17 @@ class Question extends React.Component {
         {answersDiv}
         <div>
           {this.state.isEditing ? (
-            <form onSubmit={this.submitAnswer}>
+            <form onSubmit={this.submitEdit}>
               <input
-                label="answer"
+                label="singleAnswer"
                 type="text"
                 name="answer"
-                value={this.state.answer}
+                value={this.state.singleAnswer.answer}
                 placeholder="answer"
-                onChange={this.handleChange}
+                onChange={this.handleEditChange}
                 className="answer-input"
               />
-              <button onClick={this.submitAnswer}>Edit</button>
+              <button onClick={this.submitEdit}>Edit</button>
             </form>
           ) : (
             <form onSubmit={this.submitAnswer}>
