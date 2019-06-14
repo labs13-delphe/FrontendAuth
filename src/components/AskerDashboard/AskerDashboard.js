@@ -6,7 +6,7 @@ import { Route, Link, withRouter } from "react-router-dom";
 // Components
 import QuestionForm from "./QuestionForm";
 import AskerQuestionsList from "./AskerQuestionsList";
-import AskerAnswersList from "./AskerAnswersList";
+import StripeBtn from "../stripe/StripeBtn"
 
 class AskerDashboard extends React.Component {
   constructor(props) {
@@ -83,14 +83,7 @@ class AskerDashboard extends React.Component {
             questions={this.state.questions}
             deleteQuestion={this.deleteQuestion}
           />
-        </section>
-        <section>
-          <h3>Your Answers</h3>
-          <AskerAnswersList
-            questions={this.state.questions}
-            answers={this.state.answers}
-            users={this.state.users}
-          />
+          <StripeBtn />
         </section>
       </>
     );
