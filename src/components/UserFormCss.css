@@ -795,3 +795,11 @@
   .tabs-update-content input:focus {
     outline: 0;
   } */
+
+  /* expert answer textarea */
+.shadow-textarea textarea.form-control::placeholder {
+  font-weight: 300;
+}
+.shadow-textarea textarea.form-control {
+  padding-left: 0.8rem;
+}

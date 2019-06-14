@@ -75,6 +75,18 @@ class EachQuestion extends React.Component {
     // condition: Render Answers Div if question has answers (answerCount > 0)
     const answersDiv =
       this.state.answerCount > 0 ? (
+ <div class="accordion" id="myAccordion">
+
+<div class="card">
+<div class="card-header" id="item1Header">
+     <h5 class="mb-0">
+       <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#expandable1" aria-expanded="false" aria-controls="expandable1">
+         View Answers
+       </button>
+     </h5>
+   </div>
+   <div id="expandable1" class="collapse" aria-labelledby="item1Header" data-parent="#myAccordion">
+     <div class="card-body"></div>
         <div className="answers-div">
           <p style={generalAlign}>
             <strong>Answers: </strong>
@@ -92,8 +104,12 @@ class EachQuestion extends React.Component {
                   })}
                 </strong>
               </p>
+              
             );
           })}
+        </div>
+        </div>
+        </div>
         </div>
       ) : (
         <p>No answers yet</p>
@@ -123,6 +139,7 @@ class EachQuestion extends React.Component {
         </div>
         {answersDiv}
       </div>
+      
     );
   }
 }
