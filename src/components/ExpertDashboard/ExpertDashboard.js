@@ -22,6 +22,22 @@ class ExpertDashboard extends React.Component {
       });
   }
 
+  editAnswer = answer => {
+    axios
+      .put(
+        `https://delphe-backend.herokuapp.com/api/answers/${
+          this.state.answers.id
+        }`,
+        answer
+      )
+      .then(res => {
+        console.log("successfully edited");
+      })
+      .catch(error => {
+        console.log("there was a problem editing your answer");
+      });
+  };
+
   render() {
     //const { answers } = this.state;
     console.log("expert dash", this.props);
@@ -38,6 +54,8 @@ class ExpertDashboard extends React.Component {
           questions={this.props.questions}
           answers={this.state.answers}
           postAnswer={this.props.postAnswer}
+          QA={this.props.QA}
+          editAnswer={this.editAnswer}
         />
       </div>
     );

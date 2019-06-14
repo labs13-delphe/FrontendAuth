@@ -11,7 +11,8 @@ import Dashboard from "./Dashboard.js";
 
 class Secret extends Component {
   state = {
-    questions: []
+    questions: [],
+    QA: []
   };
 
   postUserInfo = userInfo => {
@@ -44,6 +45,20 @@ class Secret extends Component {
   //
 
   componentDidMount = () => {
+    axios
+      .get(
+        `https://delphe-backend.herokuapp.com/api/questions/${localStorage.getItem(
+          "user_id"
+        )}`
+      )
+      .then(res => {
+        this.setState({ QA: res.data });
+        //console.log("Q & A data", res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
     axios
       .get("https://delphe-backend.herokuapp.com/api/questions")
       .then(res => {
@@ -84,7 +99,7 @@ class Secret extends Component {
     return (
       <div>
         {/* added this to have a visual of the user data we can post to and compare to out unique id */}
-        {this.getUserInfo()}
+        {/* {this.getUserInfo()} */}
 
         {/* Can use until when we get our registration/login totally functioning  */}
         <button onClick={this.viewAskerDashboard}>
@@ -100,7 +115,7 @@ class Secret extends Component {
         localStorage.getItem("user_id") ? (
           <div>
             <button onClick={this.clearStorage}>Erase User on Storage</button>
-            <Dashboard questions={this.state.questions} />
+            <Dashboard questions={this.state.questions} QA={this.state.QA} />
           </div>
         ) : (
           <div>

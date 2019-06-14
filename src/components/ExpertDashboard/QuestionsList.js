@@ -16,6 +16,8 @@ const QuestionsList = props => {
               answers={props.answers}
               id={question.id}
               postAnswer={props.postAnswer}
+              QA={props.QA}
+              editAnswer={props.editAnswer}
             />
           );
         })}
