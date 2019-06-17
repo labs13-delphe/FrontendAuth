@@ -30,6 +30,8 @@ class ExpertDashboard extends React.Component {
       )
       .then(res => {
         console.log("successfully edited");
+        window.location.reload();
+
       })
       .catch(error => {
         console.log("there was a problem editing your answer");

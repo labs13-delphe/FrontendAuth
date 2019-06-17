@@ -63,7 +63,6 @@ class CommunityEachQuestion extends React.Component {
       });
   }
 
-
   render() {
     // condition: Render Answers Div if question has answers (answerCount > 0)
     const answersDiv =
@@ -80,9 +79,10 @@ class CommunityEachQuestion extends React.Component {
                   {this.state.users.map(user => {
                     if (user.id === answer.user_id) {
                       return (
-                        <Link to={`/users/${user.id}`} >{user.username}</Link>);
+                        <Link to={`/users/${user.id}`}>{user.username}</Link>
+                      );
                     } else {
-
+                      return null;
                     }
                   })}
                 </strong>
@@ -94,7 +94,12 @@ class CommunityEachQuestion extends React.Component {
         <p>No answers yet</p>
       );
 
-      const answerText = this.state.answerCount === 1 ? <span> answer </span> : <span> answers </span>;
+    const answerText =
+      this.state.answerCount === 1 ? (
+        <span> answer </span>
+      ) : (
+        <span> answers </span>
+      );
     return (
       <div style={bordered}>
         <div className="question-div">
@@ -103,20 +108,22 @@ class CommunityEachQuestion extends React.Component {
               if (user.id === this.state.question.user_id) {
                 return (
                   <div className="user-info-div" style={generalAlign}>
-                    <p>{user.first_name} {user.last_name} @{user.username}  
-                    <Link to={`/users/${user.id}`}>View Profile</Link></p>
-                    
+                    <p>
+                      {user.first_name} {user.last_name} @{user.username}
+                      <Link to={`/users/${user.id}`}>View Profile</Link>
+                    </p>
                   </div>
-                )}
-                else {
-                      
-                }
+                );
+              } else {
+                return null;
+              }
             })}
           </p>
           <p style={generalAlign}>
             <strong>{this.state.question.title}: </strong>
-            {this.state.question.question} <br /> {this.state.answerCount}{" "} {answerText}</p>
-
+            {this.state.question.question} <br /> {this.state.answerCount}{" "}
+            {answerText}
+          </p>
         </div>
 
         <div className="topics-div">

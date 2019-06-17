@@ -112,12 +112,12 @@ class Question extends React.Component {
 
   submitEdit = e => {
     e.preventDefault();
-    let answer = {
-      question_id: this.state.singleAnswer.question_id,
-      user_id: localStorage.getItem("user_id"),
-      answer: this.state.singleAnswer.answer,
-      id: this.state.singleAnswer.id
-    };
+    // let answer = {
+    //   question_id: this.state.singleAnswer.question_id,
+    //   user_id: localStorage.getItem("user_id"),
+    //   answer: this.state.singleAnswer.answer,
+    //   id: this.state.singleAnswer.id
+    // };
     this.props.editAnswer(this.state.singleAnswer);
   };
 
@@ -175,7 +175,7 @@ class Question extends React.Component {
                         <Link to={`/users/${user.id}`}>{user.username}</Link>
                       );
                     } else {
-
+                      return null;
                     }
                   })}
                 </strong>
