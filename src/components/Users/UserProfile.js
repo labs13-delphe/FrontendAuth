@@ -106,7 +106,7 @@ class UserProfile extends React.Component {
 
   // Toggle Edit Button
   toggleEdit = e => {
-    this.setState({ isEditing: true })
+    this.setState({ isEditing: !this.state.isEditing })
   }
 
   // Go Back To Previous Page Button
@@ -138,7 +138,7 @@ class UserProfile extends React.Component {
             </div>
           </div>
         ) : (
-          <UpdateProfile />
+          <UpdateProfile toggleEdit={this.toggleEdit}/>
         )}
       </>
     );

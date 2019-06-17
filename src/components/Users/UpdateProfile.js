@@ -35,7 +35,7 @@ class UserProfile extends React.Component {
     axios
       .put(`/users/${user.id}`, user).then(res => {
           console.log("successfully updated user profile");
-          // window.location.reload();
+          window.location.reload();
       }).catch(error => {
         console.log("there was a problem editing your profile");
       })
@@ -60,7 +60,8 @@ class UserProfile extends React.Component {
     e.preventDefault();
     this.updateUser(this.state.user);
     this.setState({ isEditing: false });
-    // window.location.reload();
+    // window.history.go(-1);
+
 
   };
 
@@ -91,6 +92,14 @@ class UserProfile extends React.Component {
             value={this.state.user.bio}
             onChange={this.handleChanges}
             placeholder="Short Bio"
+          />
+          <p>Hourly Rate</p>
+          <input
+            id="hourly_rate"
+            type="text"
+            value={this.state.user.hourly_rate}
+            onChange={this.handleChanges}
+            placeholder="Hourly Rate"
           />
           
           <button>Save Edit</button>
