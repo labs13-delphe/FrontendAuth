@@ -18,6 +18,7 @@ const QuestionsList = props => {
               postAnswer={props.postAnswer}
               QA={props.QA}
               editAnswer={props.editAnswer}
+              deleteAnswer={props.deleteAnswer}
             />
           );
         })}
