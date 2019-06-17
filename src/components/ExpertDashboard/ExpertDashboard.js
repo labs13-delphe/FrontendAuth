@@ -22,6 +22,7 @@ class ExpertDashboard extends React.Component {
       });
   }
 
+  // Edit Answer Axios Call
   editAnswer = answer => {
     axios
       .put(
@@ -31,10 +32,22 @@ class ExpertDashboard extends React.Component {
       .then(res => {
         console.log("successfully edited");
         window.location.reload();
-
       })
       .catch(error => {
         console.log("there was a problem editing your answer");
+      });
+  };
+
+  // Delete Answer Axios Call
+  deleteAnswer = id => {
+    axios
+      .delete(`https://delphe-backend.herokuapp.com/api/answers/${id}`)
+      .then(res => {
+        console.log("successfully deleted");
+        window.location.reload();
+      })
+      .catch(err => {
+        console.log("there was a problem deleting your answer");
       });
   };
 
@@ -42,21 +55,15 @@ class ExpertDashboard extends React.Component {
     //const { answers } = this.state;
     console.log("expert dash", this.props);
     return (
-      
       <div>
         <h2>Expert dash</h2>
-        {/* {answers.map(({ answer, question }) => (
-          <div>
-            <h2>{question}</h2>
-            {answer}
-          </div>
-        ))} */}
         <QuestionsList
           questions={this.props.questions}
           answers={this.state.answers}
           postAnswer={this.props.postAnswer}
           QA={this.props.QA}
           editAnswer={this.editAnswer}
+          deleteAnswer={this.deleteAnswer}
         />
       </div>
     );
