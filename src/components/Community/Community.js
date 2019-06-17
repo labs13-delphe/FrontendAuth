@@ -1,6 +1,7 @@
 // Packages
 import React from "react";
-//import { Route, Link, withRouter } from "react-router-dom";
+//**** took care of netlify bugs */
+// import { Route, Link, withRouter } from "react-router-dom";
 import axios from "axios";
 
 // Components

@@ -3,7 +3,8 @@
 // Packages
 import React from "react";
 import axios from "axios";
-import { Route, Link } from "react-router-dom";
+//**** took care of netlify bugs */
+// import { Route, Link } from "react-router-dom";
 
 class QuestionUpdateForm extends React.Component {
   constructor(props) {

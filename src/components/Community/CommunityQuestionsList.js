@@ -1,7 +1,8 @@
 // Packages
 import React from "react";
-import axios from "axios";
-import { Route, Link } from "react-router-dom";
+//**** took care of netlify bugs */
+// import axios from "axios";
+// import { Route, Link } from "react-router-dom";
 
 // Components
 import CommunityEachQuestion from "./CommunityEachQuestion";
