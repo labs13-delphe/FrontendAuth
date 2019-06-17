@@ -122,6 +122,7 @@ class UserProfile extends React.Component {
                 {" "}
                 <button>Go to Community</button>
               </Link>
+              <button>Send Message</button>
             </div>
           )}
         </div>
