@@ -5,37 +5,35 @@ import React from "react";
 import axios from "axios";
 
 // Components
-import CommunityQuestionList from "./CommunityQuestionsList"
+import CommunityQuestionList from "./CommunityQuestionsList";
 
-class Community extends React.Component{
-state = {
+class Community extends React.Component {
+  state = {
     questions: []
+  };
 
-}
+  componentDidMount() {
+    // GET ALL Questions data
+    const endpoint = `https://delphe-backend.herokuapp.com/api/questions`;
+    axios
+      .get(endpoint)
+      .then(res => {
+        console.log("Questions data:", res.data);
+        this.setState({ questions: res.data });
+      })
+      .catch(err => {
+        console.log("Can't retrieve asker info", err);
+      });
+  }
 
-componentDidMount() {
-        // GET ALL Questions data
-        const endpoint = `https://delphe-backend.herokuapp.com/api/questions`;
-        axios
-          .get(endpoint)
-          .then(res => {
-            console.log("Questions data:", res.data);
-            this.setState({ questions: res.data });
-
-          })
-          .catch(err => {
-            console.log("Can't retrieve asker info", err);
-          });
-}
-
-render() {
+  render() {
     return (
-        <div>
-            Community Thread
-            <CommunityQuestionList questions={this.state.questions}/>
-        </div>
-    )
-}
+      <div>
+        Community Thread
+        <CommunityQuestionList questions={this.state.questions} />
+      </div>
+    );
+  }
 }
 
 export default Community;

@@ -5,11 +5,10 @@ import React, { Component } from "react";
 import axios from "axios";
 
 // Components
-import UserForm from "./UserForm.js";
+import UserFormTwo from "./UserFormTwo.js";
 import Dashboard from "./Dashboard.js";
 
 //material ui
-
 
 //rendering all protected components and keeping state here
 
@@ -124,7 +123,10 @@ class Secret extends Component {
         ) : (
           <div>
             <h4>Please Register To Access Secret</h4>
-            <UserForm postUserInfo={this.postUserInfo} />
+            <UserFormTwo
+              postUserInfo={this.postUserInfo}
+              uniqueIdentifier={this.props.uniqueIdentifier}
+            />
           </div>
         )}
       </div>
