@@ -45,6 +45,7 @@ class QuestionForm extends React.Component {
                 console.log("QT Res:", res.data);
                 console.log(q_id, t_id, res.data.id);
                 alert("Your question has been submitted!");
+                window.location.reload();
                 this.setState({
                   title: "",
                   question: "",
