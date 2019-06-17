@@ -33,16 +33,17 @@ class UserProfile extends React.Component {
   // Update User Axios Call
   updateUser = user => {
     axios
-      .put(`/users/${user.id}`, user).then(res => {
-          console.log("successfully updated user profile");
-          window.location.reload();
-      }).catch(error => {
-        console.log("there was a problem editing your profile");
+      .put(`/users/${user.id}`, user)
+      .then(res => {
+        console.log("successfully updated user profile");
+        window.location.reload();
       })
-
+      .catch(error => {
+        console.log("there was a problem editing your profile");
+      });
   };
 
-// Input Change Handler
+  // Input Change Handler
   handleChanges = e => {
     e.persist();
     const { id, value } = e.target;
@@ -60,17 +61,14 @@ class UserProfile extends React.Component {
     e.preventDefault();
     this.updateUser(this.state.user);
     this.setState({ isEditing: false });
-    // window.history.go(-1);
-
-
   };
 
   render() {
     return (
       <>
         <form onSubmit={this.submitForm}>
-            <p>First Name</p>
-        <input
+          <p>First Name</p>
+          <input
             id="first_name"
             type="text"
             value={this.state.user.first_name}
@@ -86,7 +84,7 @@ class UserProfile extends React.Component {
             placeholder="First Name"
           />
           <p>Short Bio</p>
-        <input
+          <input
             id="bio"
             type="text"
             value={this.state.user.bio}
@@ -101,7 +99,7 @@ class UserProfile extends React.Component {
             onChange={this.handleChanges}
             placeholder="Hourly Rate"
           />
-          
+
           <button>Save Edit</button>
         </form>
       </>

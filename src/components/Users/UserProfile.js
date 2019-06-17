@@ -56,54 +56,6 @@ class UserProfile extends React.Component {
     }
   };
 
-  // ======== Edit User Functionality -- NEEDS TO BE WORKED OUT
-
-  // Update User Axios Call
-  updateUser = updatedUser => {
-    console.log("HEY this is UPDATEUSER", updatedUser);
-    const user_id = localStorage.getItem("user_id");
-    axios
-      .get(`/users/${user_id}`)
-      .then(res => {
-        console.log("HEY RES", res);
-        this.setState({
-          user: res.data
-            .find
-            // user => `${user.user_id}` === localStorage.getItem("user_id")
-            ()
-        });
-        console.log("UPDATE successful!");
-
-        // redirect
-        this.props.history.push(`/users/${user_id}`);
-      })
-      .catch(err => {
-        // this.getUser()
-        console.log("UPDATE NOT WORKING", err);
-      });
-  };
-
-  // Update User Input Field Change Handler
-  handleChange = e => {
-    e.preventDefault();
-    this.setState({
-      user: {
-        ...this.state.user,
-        [e.target.name]: e.target.value
-      }
-    });
-  };
-
-  // Update User Submit Form
-  onSubmitEditedUser = e => {
-    e.preventDefault();
-    this.updateUser(this.state.user);
-    alert("YOU DID IT!!!!");
-    this.setState({
-      state: ""
-    });
-  };
-
   // Toggle Edit Button
   toggleEdit = e => {
     this.setState({ isEditing: !this.state.isEditing })
@@ -138,7 +90,7 @@ class UserProfile extends React.Component {
             </div>
           </div>
         ) : (
-          <UpdateProfile toggleEdit={this.toggleEdit}/>
+          <UpdateProfile/>
         )}
       </>
     );
