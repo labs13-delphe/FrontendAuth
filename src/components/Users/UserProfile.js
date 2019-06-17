@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 import SingleUser from "./SingleUser";
 
@@ -101,6 +100,11 @@ class UserProfile extends React.Component {
     });
   };
 
+  // Go Back To Previous Page Button
+  goBack = e => {
+    e.preventDefault();
+    window.history.go(-1);
+  };
 
   render() {
     return (
@@ -111,18 +115,12 @@ class UserProfile extends React.Component {
             <div>
               <button onClick={this.deleteButton}> Delete Account</button>{" "}
               <button>Edit Account</button>
-              <Link to="/community">
-                {" "}
-                <button>Go to Community</button>
-              </Link>
+              <button onClick={this.goBack}>Go Back</button>
             </div>
           ) : (
             <div>
-              <Link to="/community">
-                {" "}
-                <button>Go to Community</button>
-              </Link>
               <button>Send Message</button>
+              <button onClick={this.goBack}>Go Back</button>
             </div>
           )}
         </div>
