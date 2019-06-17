@@ -91,14 +91,18 @@ class UserProfile extends React.Component {
             onChange={this.handleChanges}
             placeholder="Short Bio"
           />
-          <p>Hourly Rate</p>
-          <input
-            id="hourly_rate"
-            type="text"
-            value={this.state.user.hourly_rate}
-            onChange={this.handleChanges}
-            placeholder="Hourly Rate"
-          />
+          {this.state.user.user_type === "expert" ? (
+            <>
+              <p>Hourly Rate</p>
+              <input
+                id="hourly_rate"
+                type="text"
+                value={this.state.user.hourly_rate}
+                onChange={this.handleChanges}
+                placeholder="Hourly Rate"
+              />{" "}
+            </>
+          ) : null}
 
           <button>Save Edit</button>
         </form>
