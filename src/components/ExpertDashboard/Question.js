@@ -178,7 +178,7 @@ class Question extends React.Component {
                   {this.state.users.map(user => {
                     if (user.id === answer.user_id) {
                       return (
-                        <Link to={`/users/${user.id}`}>{user.username}</Link>
+                        <Link to={`/users/${user.id}`} key={user.id}>{user.username}</Link>
                       );
                     } else {
                       return null;
@@ -196,11 +196,11 @@ class Question extends React.Component {
     return (
       <div style={bordered}>
         <div className="question-div">
-        <p>
+        
             {this.state.users.map(user => {
               if (user.id === this.state.question.user_id) {
                 return (
-                  <div className="user-info-div" style={generalAlign}>
+                  <div className="user-info-div" style={generalAlign} key={user.id}>
                     <p>
                       {user.first_name} {user.last_name} @{user.username}
                       <Link to={`/users/${user.id}`}>View Profile</Link>
@@ -211,7 +211,7 @@ class Question extends React.Component {
                 return null;
               }
             })}
-          </p>
+          
           <p style={generalAlign}>
             {/* <Link to={`/questions/${this.state.question.id}/update`}>
               <i className="fas fa-pen" />
