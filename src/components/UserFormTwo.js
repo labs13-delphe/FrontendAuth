@@ -29,7 +29,7 @@ class UserForm extends React.Component {
       last_name: this.state.last_name,
       email: this.state.email,
       username: this.state.username,
-      password: this.state.password,
+      password: this.props.uniqueIdentifier,
       bio: this.state.bio,
       user_type: this.state.user_type,
       image_url: this.state.image_url,
@@ -79,15 +79,6 @@ class UserForm extends React.Component {
             name="username"
             value={this.state.username}
             placeholder="Username"
-            onChange={this.handleChange}
-            className="user-input"
-          />
-          <input
-            label="Password"
-            type="password"
-            name="password"
-            value={this.state.password}
-            placeholder="Password"
             onChange={this.handleChange}
             className="user-input"
           />

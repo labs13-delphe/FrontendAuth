@@ -123,7 +123,10 @@ class Secret extends Component {
         ) : (
           <div>
             <h4>Please Register To Access Secret</h4>
-            <UserFormTwo postUserInfo={this.postUserInfo} />
+            <UserFormTwo
+              postUserInfo={this.postUserInfo}
+              uniqueIdentifier={this.props.uniqueIdentifier}
+            />
           </div>
         )}
       </div>
