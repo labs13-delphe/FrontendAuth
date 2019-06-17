@@ -9,6 +9,7 @@ const AskerQuestionsList = props => {
     <div>
       {props.questions.map(question => (
         <AskerEachQuestion
+          key={question.id}
           question={question}
           users={props.users}
           deleteQuestion={props.deleteQuestion}
