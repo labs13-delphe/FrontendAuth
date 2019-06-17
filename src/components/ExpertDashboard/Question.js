@@ -196,6 +196,22 @@ class Question extends React.Component {
     return (
       <div style={bordered}>
         <div className="question-div">
+        <p>
+            {this.state.users.map(user => {
+              if (user.id === this.state.question.user_id) {
+                return (
+                  <div className="user-info-div" style={generalAlign}>
+                    <p>
+                      {user.first_name} {user.last_name} @{user.username}
+                      <Link to={`/users/${user.id}`}>View Profile</Link>
+                    </p>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
+          </p>
           <p style={generalAlign}>
             {/* <Link to={`/questions/${this.state.question.id}/update`}>
               <i className="fas fa-pen" />
