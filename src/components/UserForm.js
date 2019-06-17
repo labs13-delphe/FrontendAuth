@@ -1,9 +1,10 @@
 import React from "react";
 // import UserFormDetails from "./UserFormDetails";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+//**** took care of netlify bugs */
+import {  Form, FormGroup } from "reactstrap";
 import Ripples from 'react-ripples'
 import { Textbox } from 'react-inputs-validation';
-import { Radiobox } from 'react-inputs-validation';
+// import { Radiobox } from 'react-inputs-validation';
 
 // import '../App.css'
 import "./UserFormCss.css"
@@ -36,19 +37,19 @@ class UserForm extends React.Component {
 //     step: step - 1
 //   });
 // }
-  // handleChange = input => e => {
-  //   e.preventDefault();
-  //   this.setState({[input]: e.target.value})
-  // }
+  handleChange = input => e => {
+    e.preventDefault();
+    this.setState({[input]: e.target.value})
+  }
 
 
     // original handleChange
-    handleChange = e => {
-      this.setState({
-        ...this.state,
-        [e.target.name]: e.target.value
-      });
-    };
+    // handleChange = e => {
+    //   this.setState({
+    //     ...this.state,
+    //     [e.target.name]: e.target.value
+    //   });
+    // };
   
     submitUser = e => {
       e.preventDefault();
@@ -151,7 +152,16 @@ class UserForm extends React.Component {
             onChange={this.handleChange}
             className="user-input"
           />
-          <Radiobox
+           <Textbox
+            label="user_type"
+            type="text"
+            name='user_type'
+            value={this.state.user_type}
+            placeholder="User Type"
+            onChange={this.handleChange}
+            className="user-input"
+          />
+          {/* <Radiobox
             // id="user_id"
             label="user_type"
             type="text"
@@ -180,7 +190,7 @@ class UserForm extends React.Component {
               check: true, // Optional.[Bool].Default: true. To determin if you need to validate.
               required: true // Optional.[Bool].Default: true. To determin if it is a required field.
             }}
-          />
+          /> */}
           </div>
       </FormGroup>  
               
