@@ -56,10 +56,12 @@ class UserProfile extends React.Component {
     }
   };
 
+  // ======== Update User
+
   // Toggle Edit Button
   toggleEdit = e => {
-    this.setState({ isEditing: !this.state.isEditing })
-  }
+    this.setState({ isEditing: !this.state.isEditing });
+  };
 
   // Go Back To Previous Page Button
   goBack = e => {
@@ -90,7 +92,7 @@ class UserProfile extends React.Component {
             </div>
           </div>
         ) : (
-          <UpdateProfile/>
+          <UpdateProfile />
         )}
       </>
     );
