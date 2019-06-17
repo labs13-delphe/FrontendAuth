@@ -81,6 +81,8 @@ class CommunityEachQuestion extends React.Component {
                     if (user.id === answer.user_id) {
                       return (
                         <Link to={`/users/${user.id}`} >{user.username}</Link>);
+                    } else {
+
                     }
                   })}
                 </strong>
@@ -105,8 +107,10 @@ class CommunityEachQuestion extends React.Component {
                     <Link to={`/users/${user.id}`}>View Profile</Link></p>
                     
                   </div>
-                );
-              }
+                )}
+                else {
+                      
+                }
             })}
           </p>
           <p style={generalAlign}>

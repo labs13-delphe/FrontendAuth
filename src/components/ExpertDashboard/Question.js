@@ -175,6 +175,7 @@ class Question extends React.Component {
                         <Link to={`/users/${user.id}`}>{user.username}</Link>
                       );
                     } else {
+
                     }
                   })}
                 </strong>

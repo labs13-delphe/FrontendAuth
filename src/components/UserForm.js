@@ -1,9 +1,12 @@
 import React from "react";
 // import UserFormDetails from "./UserFormDetails";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
-import Ripples from "react-ripples";
-import { Textbox } from "react-inputs-validation";
-import { Radiobox } from "react-inputs-validation";
+
+//**** took care of netlify bugs */
+import {  Form, FormGroup } from "reactstrap";
+import Ripples from 'react-ripples'
+import { Textbox } from 'react-inputs-validation';
+// import { Radiobox } from 'react-inputs-validation';
+
 
 // import '../App.css'
 import "./UserFormCss.css";
@@ -28,17 +31,26 @@ class UserForm extends React.Component {
   //   });
   // }
 
-  // //go back
-  // prevStep = () => {
-  //   const {step} = this.state;
-  //   this.setState({
-  //     step: step - 1
-  //   });
-  // }
+
+// nextStep = () => {
+//   const {step} = this.state;
+//   this.setState({
+//     step: step + 1
+//   });
+// }
+
+// //go back
+// prevStep = () => {
+//   const {step} = this.state;
+//   this.setState({
+//     step: step - 1
+//   });
+// }
   handleChange = input => e => {
     e.preventDefault();
-    this.setState({ [input]: e.target.value });
-  };
+    this.setState({[input]: e.target.value})
+  }
+
 
   // // original handleChange
   // handleChange = e => {
@@ -47,6 +59,7 @@ class UserForm extends React.Component {
   //     [e.target.name]: e.target.value
   //   });
   // };
+
 
   submitUser = e => {
     e.preventDefault();
@@ -60,6 +73,7 @@ class UserForm extends React.Component {
       user_type: this.state.user_type,
       image_url: this.state.image_url,
       hourly_rate: this.state.hourly_rate
+
     };
     this.props.postUserInfo(userInfo);
   };
@@ -157,6 +171,7 @@ class UserForm extends React.Component {
                   className="user-input"
                 />
 
+
                 {/* <Radiobox
                   // id="user_id"
                   label="user_type"
@@ -191,6 +206,7 @@ class UserForm extends React.Component {
                 /> */}
               </div>
             </FormGroup>
+
 
             {/* Ripple Button */}
             <Ripples color="#fff" during={1200}>

@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+//**** took care of netlify bugs */
 import axios from "axios";
 
 // Components
