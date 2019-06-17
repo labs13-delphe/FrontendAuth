@@ -1,6 +1,7 @@
 import React from "react";
 // import UserFormDetails from "./UserFormDetails";
-import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
+//**** took care of netlify bugs */
+import {  Form, FormGroup } from "reactstrap";
 import Ripples from 'react-ripples'
 import { Textbox } from 'react-inputs-validation';
 import { Radiobox } from 'react-inputs-validation';
