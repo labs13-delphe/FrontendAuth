@@ -9,13 +9,13 @@ const bordered = {
   margin: "15px"
 };
 const generalAlign = {
-  "text-align": "left",
-  "padding-left": "20px"
+  textAlign: "left",
+  paddingLeft: "20px"
 };
 
 const answerStyle = {
-  "text-align": "left",
-  "padding-left": "50px"
+  textAlign: "left",
+  paddingLeft: "50px"
 };
 
 const expertName = {
@@ -147,8 +147,8 @@ class Question extends React.Component {
   };
 
   render() {
-    console.log("question props", this.props);
-    console.log("question state", this.state);
+    // console.log("question props", this.props);
+    // console.log("question state", this.state);
     // condition: Render Answers Div if question has answers (answerCount > 0)
     const answersDiv =
       this.state.answerCount > 0 ? (
@@ -158,7 +158,7 @@ class Question extends React.Component {
           </p>
           {this.state.answers.map(answer => {
             return (
-              <p style={answerStyle}>
+              <p style={answerStyle} key={answer.id}>
                 <button
                   onClick={e => {
                     this.handleEdit(e, answer.id);
@@ -196,11 +196,11 @@ class Question extends React.Component {
       <div style={bordered}>
         <div className="question-div">
           <p style={generalAlign}>
-            <Link to={`/questions/${this.state.question.id}/update`}>
-              <i class="fas fa-pen" />
+            {/* <Link to={`/questions/${this.state.question.id}/update`}>
+              <i className="fas fa-pen" />
             </Link>
-            <i onClick={this.deleteButton} class="fas fa-trash" />
-            &nbsp;|&nbsp;
+            <i onClick={this.deleteButton} className="fas fa-trash" />
+            &nbsp;|&nbsp; */}
             <strong>{this.state.question.title}: </strong>
             {this.state.question.question} <br /> {this.state.answerCount}{" "}
             answers
@@ -211,7 +211,7 @@ class Question extends React.Component {
           <p style={generalAlign}>
             <strong>Topic: </strong>
             {this.state.topics.map(topic => (
-              <span>{topic.topic}, </span>
+              <span key={topic.id}>{topic.topic}, </span>
             ))}
           </p>
         </div>

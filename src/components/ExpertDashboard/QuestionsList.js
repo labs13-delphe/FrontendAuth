@@ -11,7 +11,7 @@ const QuestionsList = props => {
       <h4>
         {props.questions.map(question => {
           return (
-            <Question
+            <Question key={question.id}
               question={question}
               answers={props.answers}
               id={question.id}
