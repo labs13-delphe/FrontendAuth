@@ -6,8 +6,6 @@ const QuestionsList = props => {
   console.log(props);
   return (
     <>
-      <h2>Questions List</h2>
-
       <h4>
         {props.questions.map(question => {
           return (
@@ -16,6 +14,7 @@ const QuestionsList = props => {
               answers={props.answers}
               id={question.id}
               postAnswer={props.postAnswer}
+              userInfo={props.userInfo}
             />
           );
         })}

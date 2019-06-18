@@ -40,6 +40,8 @@ class Secret extends Component {
       });
   };
 
+  
+
   //create a variable with the user email from the auth object
 
   //compare that variable to the same variable in user data table
@@ -50,6 +52,7 @@ class Secret extends Component {
     axios
       .get("https://delphe-backend.herokuapp.com/api/questions")
       .then(res => {
+        console.log(res.data)
         this.setState({ questions: res.data }, () => {
           console.log(this.state);
         });
@@ -90,20 +93,21 @@ class Secret extends Component {
         {this.getUserInfo()}
 
         {/* Can use until when we get our registration/login totally functioning  */}
-        <button onClick={this.viewAskerDashboard}>
-          {" "}
-          Pretend an Asker is Signed In{" "}
-        </button>
-        <button onClick={this.viewExpertDashboard}>
-          {" "}
-          Pretend an Expert is Signed In{" "}
-        </button>
+       
 
         {//this.state.questions.length
         localStorage.getItem("user_id") ? (
           <div>
             <button onClick={this.clearStorage}>Erase User on Storage</button>
             <Dashboard questions={this.state.questions} />
+            <button onClick={this.viewAskerDashboard}>
+              {" "}
+              Pretend an Asker is Signed In{" "}
+            </button>
+            <button onClick={this.viewExpertDashboard}>
+              {" "}
+              Pretend an Expert is Signed In{" "}
+            </button>
           </div>
         ) : (
           <div>
