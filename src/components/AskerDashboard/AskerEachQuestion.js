@@ -105,6 +105,8 @@ class EachQuestion extends React.Component {
       ) : (
         <p>No answers yet</p>
       );
+
+      const answersText = this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
     return (
       <div style={bordered}>
         <div className="question-div">
@@ -116,7 +118,7 @@ class EachQuestion extends React.Component {
             &nbsp;|&nbsp;
             <strong>{this.state.question.title}: </strong>
             {this.state.question.question} <br /> {this.state.answerCount}{" "}
-            answers
+            {answersText}
           </p>
         </div>
 

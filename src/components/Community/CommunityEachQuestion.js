@@ -1,3 +1,4 @@
+// Packages
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -9,13 +10,13 @@ const bordered = {
   margin: "15px"
 };
 const generalAlign = {
-  "text-align": "left",
-  "padding-left": "20px"
+  textAlign: "left",
+  paddingLeft: "20px"
 };
 
 const answerStyle = {
-  "text-align": "left",
-  "padding-left": "50px"
+  textAlign: "left",
+  paddingLeft: "50px"
 };
 
 const expertName = {
@@ -73,13 +74,15 @@ class CommunityEachQuestion extends React.Component {
           </p>
           {this.state.answers.map(answer => {
             return (
-              <p style={answerStyle}>
+              <p style={answerStyle} key={answer.id}>
                 "{answer.answer}" -{" "}
                 <strong style={expertName}>
                   {this.state.users.map(user => {
                     if (user.id === answer.user_id) {
                       return (
-                        <Link to={`/users/${user.id}`}>{user.username}</Link>
+                        <Link to={`/users/${user.id}`} key={user.id}>
+                          {user.username}
+                        </Link>
                       );
                     } else {
                       return null;
@@ -103,22 +106,25 @@ class CommunityEachQuestion extends React.Component {
     return (
       <div style={bordered}>
         <div className="question-div">
-          <p>
-            {this.state.users.map(user => {
-              if (user.id === this.state.question.user_id) {
-                return (
-                  <div className="user-info-div" style={generalAlign}>
-                    <p>
-                      {user.first_name} {user.last_name} @{user.username}
-                      <Link to={`/users/${user.id}`}>View Profile</Link>
-                    </p>
-                  </div>
-                );
-              } else {
-                return null;
-              }
-            })}
-          </p>
+          {this.state.users.map(user => {
+            if (user.id === this.state.question.user_id) {
+              return (
+                <div
+                  className="user-info-div"
+                  style={generalAlign}
+                  key={user.id}
+                >
+                  <p>
+                    {user.first_name} {user.last_name} @{user.username}
+                    <Link to={`/users/${user.id}`}>View Profile</Link>
+                  </p>
+                </div>
+              );
+            } else {
+              return null;
+            }
+          })}
+
           <p style={generalAlign}>
             <strong>{this.state.question.title}: </strong>
             {this.state.question.question} <br /> {this.state.answerCount}{" "}
@@ -130,7 +136,7 @@ class CommunityEachQuestion extends React.Component {
           <p style={generalAlign}>
             <strong>Topic: </strong>
             {this.state.topics.map(topic => (
-              <span>{topic.topic}, </span>
+              <span key={topic.id}>{topic.topic}, </span>
             ))}
           </p>
         </div>

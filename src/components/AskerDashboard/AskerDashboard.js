@@ -30,11 +30,13 @@ class AskerDashboard extends React.Component {
       .get(endpoint)
       .then(res => {
         console.log("Askers data:", res.data);
-        this.setState({ userInfo: res.data });
-        this.setState({ questions: res.data.questions });
-        this.setState({ answers: res.data.answers });
-        this.setState({ questionCount: res.data.questions.length });
-        this.setState({ answerCount: res.data.answers.length });
+        this.setState({
+          userInfo: res.data,
+          questions: res.data.questions,
+          answers: res.data.answers,
+          questionCount: res.data.questions.length,
+          answerCount: res.data.answers.length
+        });
       })
       .catch(err => {
         console.log("Can't retrieve asker info", err);

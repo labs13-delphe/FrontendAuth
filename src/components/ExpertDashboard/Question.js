@@ -178,7 +178,7 @@ class Question extends React.Component {
                   {this.state.users.map(user => {
                     if (user.id === answer.user_id) {
                       return (
-                        <Link to={`/users/${user.id}`}>{user.username}</Link>
+                        <Link to={`/users/${user.id}`} key={user.id}>{user.username}</Link>
                       );
                     } else {
                       return null;
@@ -192,9 +192,26 @@ class Question extends React.Component {
       ) : (
         <p>No answers yet</p>
       );
+      const answersText = this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
     return (
       <div style={bordered}>
         <div className="question-div">
+        
+            {this.state.users.map(user => {
+              if (user.id === this.state.question.user_id) {
+                return (
+                  <div className="user-info-div" style={generalAlign} key={user.id}>
+                    <p>
+                      {user.first_name} {user.last_name} @{user.username}
+                      <Link to={`/users/${user.id}`}>View Profile</Link>
+                    </p>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
+          
           <p style={generalAlign}>
             {/* <Link to={`/questions/${this.state.question.id}/update`}>
               <i className="fas fa-pen" />
@@ -203,7 +220,7 @@ class Question extends React.Component {
             &nbsp;|&nbsp; */}
             <strong>{this.state.question.title}: </strong>
             {this.state.question.question} <br /> {this.state.answerCount}{" "}
-            answers
+            {answersText}
           </p>
         </div>
 
