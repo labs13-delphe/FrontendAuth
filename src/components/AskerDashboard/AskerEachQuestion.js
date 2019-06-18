@@ -289,10 +289,10 @@ class AskerEachQuestion extends React.Component {
           >
             {question.title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="h5" color="textSecondary" component="p">
             {question.question}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="h6" color="textSecondary" component="p">
             {answerCount} {answersText}
           </Typography>
           <div className="topics-div">
