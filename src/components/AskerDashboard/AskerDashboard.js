@@ -65,7 +65,7 @@ const styles = theme => ({
   column: {
     flexGrow: 1,
     padding: theme.spacing(1),
-    width: "100%",
+    width: 680,
     display: "flex",
     justifyContent: "center",
     overflowY: "scroll",

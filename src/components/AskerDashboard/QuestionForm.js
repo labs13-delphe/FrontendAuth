@@ -27,7 +27,7 @@ const styles = theme => ({
   form: {
     display: "flex",
     flexDirection: "column",
-    width: 680,
+    width: 680, // maybe use viewport measure?
     padding: 10
   },
   questionTextFields: {
