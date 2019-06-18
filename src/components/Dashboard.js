@@ -2,6 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+//Material UI
+import {
+  AppBar, CssBaseline, Divider, Drawer, Hidden, IconButton, List, Button, Paper, ListItem, ListItemIcon, ListItemText, Toolbar, Typography
+} from '@material-ui/core'
+import { withStyles, useTheme } from '@material-ui/core/styles';
+import { MailIcon, MenuIcon, InboxIcon } from '@material-ui/icons'
+
 // Components
 import AskerDashboard from "./AskerDashboard/AskerDashboard";
 import ExpertDashboard from "./ExpertDashboard/ExpertDashboard";
@@ -20,7 +27,7 @@ const Dashboard = props => {
 
   const Component = localStorage.getItem("user_type") ? (
     localStorage.getItem("user_type") === "asker" ? (
-      <AskerDashboard />
+      <AskerDashboard data={props.data} addQuestion={props.addQuestion}/>
     ) : (
       <ExpertDashboard
         questions={props.questions}

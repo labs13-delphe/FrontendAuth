@@ -78,14 +78,7 @@ class App extends Component {
       
         {this.state.isSignedIn ? (
           <div>
-            <h1>Welcome to Delphe</h1>
-            <button onClick={() => firebase.auth().signOut()}>Sign Out!</button>
-            <Link to="/secret">
-              <button>Go To Secret</button>{" "}
-            </Link>
-            <Link to="/community">
-              <button>Community</button>{" "}
-            </Link>
+            
 
             <Route path="/secret" component={Secret} />
 
@@ -127,6 +120,15 @@ class App extends Component {
             firebaseAuth={firebase.auth()}
           />
         )}
+
+          <h1>Welcome to Delphe</h1>
+            <button onClick={() => firebase.auth().signOut()}>Sign Out!</button>
+            <Link to="/secret">
+              <button>Go To Secret</button>{" "}
+            </Link>
+            <Link to="/community">
+              <button>Community</button>{" "}
+            </Link>
       </div>
     );
   }

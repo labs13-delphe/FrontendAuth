@@ -4,18 +4,29 @@ import React from "react";
 // Components
 import AskerEachQuestion from "./AskerEachQuestion.js";
 
-const AskerQuestionsList = props => {
-  return (
-    <div>
-      {props.questions.map(question => (
-        <AskerEachQuestion
-          question={question}
-          users={props.users}
-          deleteQuestion={props.deleteQuestion}
-        />
-      ))}
-    </div>
-  );
+class AskerQuestionsList extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+    }
+}
+
+
+
+render() {
+    const { questions, userInfo } = this.props.data
+
+    return(
+        <div>
+
+        {questions.map( ({ title, question, id}) =>
+            <AskerEachQuestion id={id} title={title} question={question} userInfo={userInfo} />
+        )}
+        
+        </div>
+    )
+}
 };
 
 export default AskerQuestionsList;

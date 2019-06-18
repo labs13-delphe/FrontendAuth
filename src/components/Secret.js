@@ -3,20 +3,34 @@ import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
 import axios from "axios";
 
+//Material Components
+
 // Components
 import UserForm from "./UserForm.js";
 import Dashboard from "./Dashboard.js";
 
-//material ui
-
+//Material UI
+import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core'
+import { styled } from '@material-ui/styles';
 
 //rendering all protected components and keeping state here
 
+const styles = {
+  card: {
+    minWidth: 275,
+  },
+  title: {
+    fontSize: 14,
+  },
+}
+
 class Secret extends Component {
+
   state = {
+    answers: [],
     questions: [],
-    QA: []
-  };
+    userInfo: [],
+  }
 
   postUserInfo = userInfo => {
     axios
@@ -48,32 +62,59 @@ class Secret extends Component {
   //
 
   componentDidMount = () => {
+
+    //Get questions by user id
+    const id = localStorage.getItem("user_id")
     axios
       .get(
-        `https://delphe-backend.herokuapp.com/api/questions/${localStorage.getItem(
-          "user_id"
-        )}`
+        `https://delphe-backend.herokuapp.com/api/users/${id}/questions`
       )
       .then(res => {
-        this.setState({ QA: res.data });
-        //console.log("Q & A data", res.data);
+        console.log("Askers data:", res.data);
+        this.setState({ 
+          userInfo: res.data ,
+          questions: res.data.questions,
+          answers: res.data.answers,
+        });
       })
       .catch(error => {
         console.log(error);
       });
+  }
+
+    //API call for adding a question from QuestionForm.js
+  addQuestion = question => {
+    const questionObject = {
+      ...question
+    }
+
+    const userId = localStorage.getItem("user_id")
+    questionObject.user_id = userId
 
     axios
-      .get("https://delphe-backend.herokuapp.com/api/questions")
+      .post('https://delphe-backend.herokuapp.com/api/questions', questionObject)
       .then(res => {
-        this.setState({ questions: res.data }, () => {
-          console.log(this.state);
-        });
-        // console.log(res.data);
+        console.log("Updated questions:", res.data);
+        // this.setState({ questions: res.data });
       })
-      .catch(error => {
-        console.log(error);
+      .catch(err => {
+        console.log("Can't retrieve all users", err);
       });
-  };
+  }
+
+    //Get Users
+    // axios
+    //   .get("https://delphe-backend.herokuapp.com/api/questions")
+    //   .then(res => {
+    //     this.setState({ questions: res.data }, () => {
+    //       console.log(this.state);
+    //     });
+    //     // console.log(res.data);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+
 
   // BUTTONS TO DELETE ONCE LOGIN/REGISTER SETS USER_TYPE ON local storage
   // Sets user_ids and user_types for asker, expert, and clear items on storage
@@ -105,20 +146,20 @@ class Secret extends Component {
         {/* {this.getUserInfo()} */}
 
         {/* Can use until when we get our registration/login totally functioning  */}
-        <button onClick={this.viewAskerDashboard}>
+        {/* <button onClick={this.viewAskerDashboard}>
           {" "}
           Pretend an Asker is Signed In{" "}
         </button>
         <button onClick={this.viewExpertDashboard}>
           {" "}
           Pretend an Expert is Signed In{" "}
-        </button>
+        </button> */}
 
         {//this.state.questions.length
         localStorage.getItem("user_id") ? (
           <div>
             <button onClick={this.clearStorage}>Erase User on Storage</button>
-            <Dashboard questions={this.state.questions} QA={this.state.QA} />
+            <Dashboard data={this.state} addQuestion={this.addQuestion} />
           </div>
         ) : (
           <div>
