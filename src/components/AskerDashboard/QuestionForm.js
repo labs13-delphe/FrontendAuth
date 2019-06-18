@@ -16,59 +16,60 @@ import {
 
 // Custom Styles
 const styles = theme => ({
-  button: {
-    margin: theme.spacing(1)
-  },
-  input: {
-    display: "none"
-  },
-  root: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
-  },
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 400,
-    [theme.breakpoints.down("md")]: {
-      width: 300
-    }
-  },
-  dense: {
-    marginTop: 19
-  },
-  menu: {
-    width: 200
-  },
   paper: {
-    maxWidth: 680,
+    maxWidth: "100%",
     [theme.breakpoints.down("md")]: {
       width: "100%"
     }
   },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    width: 680,
+    padding: 10
+  },
+  questionTextFields: {
+    display: "flex",
+    flexWrap: "wrap",
+    width: "100%",
+    justifyContent: "space-between"
+  },
+  titleInput: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+    width: "35%",
+    [theme.breakpoints.down("md")]: {
+      width: 300
+    }
+  },
+  questionInput: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+    width: "60%",
+    [theme.breakpoints.down("md")]: {
+      width: 300
+    }
+  },
+
   bottomRow: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    width: "100%"
+    // add theme.spacing for both elements then match justifyContent to above
   },
-  form: {
-    display: "flex",
-    flexDirection: "column"
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+    width: "30%",
   },
   select: {
-    width: 200
-  }
+    width: "100%"
+  },
+  button: {
+    margin: theme.spacing(1),
+
+  },
 });
 
 class QuestionForm extends React.Component {
@@ -94,10 +95,6 @@ class QuestionForm extends React.Component {
       });
   }
 
-  // handleChange = e => 
-  // this.setState({
-  //   [e.target.name]: e.target.value
-  // })
 
   handleChanges = e => {
     const { name, value } = e.target;
@@ -160,58 +157,73 @@ class QuestionForm extends React.Component {
     const { title, question, topic, topicsList } = this.state;
     return (
       <div>
-
-<Paper className={classes.paper}>
-            <form className={classes.form}>
-            <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-simple">Choose a topic</InputLabel>
-                <Select
-                value={topic}
-                onChange={this.handleChanges}
-                className={classes.select}
-                inputProps={{
-                    name: 'topic',
-                }}
-                >
-                {topicsList.map(topic => 
-                    <MenuItem value={topic.topic} key={topic.id}>{topic.topic}</MenuItem>
-                  )}
-                </Select>
-            </FormControl>
+        <Paper className={classes.paper}>
+          <form className={classes.form}>
+            <div className={classes.questionTextFields}>
             <TextField
               value={title}
-              name='title'
+              name="title"
               label="Question Title"
               placeholder="Question Title"
               multiline
-              className={classes.textField}
+              className={classes.titleInput}
               onChange={this.handleChanges}
               margin="normal"
               variant="outlined"
-              />
-            <div className={classes.bottomRow}>
-              <TextField
+            />
+            <TextField
               value={question}
-              name='question'
+              name="question"
               label="I want to know..."
               placeholder="I want to know..."
               multiline
-              className={classes.textField}
+              className={classes.questionInput}
               onChange={this.handleChanges}
               margin="normal"
               variant="outlined"
-              />
-              {question && topic ? 
-              <Button variant="contained" color="primary" className={classes.button} onClick={this.submitForm}>
-                  Submit
-              </Button> :
-              <Button variant="contained" color="primary" disabled className={classes.button}>
-                Submit
-              </Button>
-            }
-              
+            />
             </div>
-            </form>
+            
+            <div className={classes.bottomRow}>
+              <FormControl className={classes.formControl}>
+                <InputLabel htmlFor="age-simple">Choose a topic</InputLabel>
+                <Select
+                  value={topic}
+                  onChange={this.handleChanges}
+                  className={classes.select}
+                  inputProps={{
+                    name: "topic"
+                  }}
+                >
+                  {topicsList.map(topic => (
+                    <MenuItem value={topic.topic} key={topic.id}>
+                      {topic.topic}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              {/* Is there  a title, question and topic on state? (Did the user complete the form? If yes, enable the submit button.) */}
+              {title && question && topic ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  onClick={this.submitForm}
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled
+                  className={classes.button}
+                >
+                  Submit
+                </Button>
+              )}
+            </div>
+          </form>
         </Paper>
 
         {/* <h3>Ask A Question</h3>
