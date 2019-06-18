@@ -55,7 +55,7 @@ class App extends Component {
         uniqueIdentifier: user.email,
         gUser: user
       });
-      console.log("user", user);
+      this.props.history.push("/secret/dashboard");
     });
   };
 
@@ -78,6 +78,7 @@ class App extends Component {
 
   render() {
     console.log("app state", this.state);
+
     return (
       <div className="App">
         {this.state.isSignedIn ? (
@@ -99,11 +100,11 @@ class App extends Component {
                 <Secret uniqueIdentifier={this.state.uniqueIdentifier} />
               )}
             />
-
+            {/* 
             <Route
               path="/dashboard"
               render={props => <Dashboard {...props} />}
-            />
+            /> */}
             <Route
               path="/questions/:id/update"
               render={props => (
