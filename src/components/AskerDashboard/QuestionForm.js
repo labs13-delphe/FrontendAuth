@@ -17,6 +17,8 @@ import {
 // Custom Styles
 const styles = theme => ({
   paper: {
+    margin: theme.spacing(1),
+
     maxWidth: "100%",
     [theme.breakpoints.down("md")]: {
       width: "100%"

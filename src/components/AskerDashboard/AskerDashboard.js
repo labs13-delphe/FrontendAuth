@@ -1,7 +1,6 @@
 // Packages
 import React from "react";
 import axios from "axios";
-import { Route, Link, withRouter } from "react-router-dom";
 
 // Components
 import QuestionForm from "./QuestionForm";
@@ -186,12 +185,13 @@ class AskerDashboard extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
-            <QuestionForm />
+            
             <h1>My Questions</h1>
             <p>
               {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
               {this.state.answerCount} Answers Received
             </p>
+            <QuestionForm />
             <Paper className={classes.column}>
               <AskerQuestionsList
                 questions={this.state.questions}
