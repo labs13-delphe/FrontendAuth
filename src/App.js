@@ -13,7 +13,6 @@ import QuestionUpdateForm from "./components/AskerDashboard/QuestionUpdateForm.j
 import UserProfile from "./components/Users/UserProfile";
 import Community from "./components/Community/Community";
 
-
 //material ui
 // import Button from '@material-ui/core/Button';
 // import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -36,7 +35,7 @@ firebase.initializeApp({
 });
 
 class App extends Component {
-  state = { isSignedIn: false, uniqueIdentifier: "" };
+  state = { isSignedIn: false, uniqueIdentifier: "", gUser: {} };
 
   uiConfig = {
     signInFlow: "popup",
@@ -51,15 +50,22 @@ class App extends Component {
 
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
-      this.setState({ isSignedIn: !!user, uniqueIdentifier: user.email });
-      console.log("user", user);
+      this.setState({
+        isSignedIn: !!user,
+        uniqueIdentifier: user.email,
+        gUser: user
+      });
+      this.props.history.push("/secret/dashboard");
     });
   };
 
   // UPDATE Question Function
   updateQuestion = question => {
     axios
-      .put(`https://delphe-backend.herokuapp.com/api/questions/${question.id}`, question)
+      .put(
+        `https://delphe-backend.herokuapp.com/api/questions/${question.id}`,
+        question
+      )
       .then(res => {
         console.log(res.data);
         // redirect to dashboard:
@@ -72,10 +78,9 @@ class App extends Component {
 
   render() {
     console.log("app state", this.state);
+
     return (
-      
       <div className="App">
-      
         {this.state.isSignedIn ? (
           <div>
             <h1>Welcome to Delphe</h1>
@@ -87,12 +92,19 @@ class App extends Component {
               <button>Community</button>{" "}
             </Link>
 
-            <Route path="/secret" component={Secret} />
+            {/* <Route path="/secret" component={Secret} /> */}
 
+            <Route
+              path="/secret"
+              render={props => (
+                <Secret uniqueIdentifier={this.state.uniqueIdentifier} />
+              )}
+            />
+            {/* 
             <Route
               path="/dashboard"
               render={props => <Dashboard {...props} />}
-            />
+            /> */}
             <Route
               path="/questions/:id/update"
               render={props => (
@@ -104,21 +116,11 @@ class App extends Component {
             />
             <Route
               path="/users/:id"
-              render={props => (
-                <UserProfile
-                  {...props}
-                
-                />
-              )}
+              render={props => <UserProfile {...props} />}
             />
             <Route
               path="/community"
-              render={props => (
-                <Community
-                  {...props}
-                
-                />
-              )}
+              render={props => <Community {...props} />}
             />
           </div>
         ) : (

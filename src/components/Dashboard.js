@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+//**** took care of netlify bugs */
 import axios from "axios";
 
 // Components
@@ -22,7 +23,11 @@ const Dashboard = props => {
     localStorage.getItem("user_type") === "asker" ? (
       <AskerDashboard />
     ) : (
-      <ExpertDashboard questions={props.questions} postAnswer={postAnswer} />
+      <ExpertDashboard
+        questions={props.questions}
+        postAnswer={postAnswer}
+        QA={props.QA}
+      />
     )
   ) : (
     <h2>Whoops. No User ID on Local Storage.</h2>

@@ -1,12 +1,12 @@
 // Packages
 import React from "react";
 import axios from "axios";
-import { Route, Link, withRouter } from "react-router-dom";
+// import { Route, Link, withRouter } from "react-router-dom";
 
 // Components
 import QuestionForm from "./QuestionForm";
 import AskerQuestionsList from "./AskerQuestionsList";
-import StripeBtn from "../stripe/StripeBtn"
+// import StripeBtn from "../stripe/StripeBtn"; // giving an error for some reason
 
 class AskerDashboard extends React.Component {
   constructor(props) {
@@ -30,11 +30,13 @@ class AskerDashboard extends React.Component {
       .get(endpoint)
       .then(res => {
         console.log("Askers data:", res.data);
-        this.setState({ userInfo: res.data });
-        this.setState({ questions: res.data.questions });
-        this.setState({ answers: res.data.answers });
-        this.setState({ questionCount: res.data.questions.length });
-        this.setState({ answerCount: res.data.answers.length });
+        this.setState({
+          userInfo: res.data,
+          questions: res.data.questions,
+          answers: res.data.answers,
+          questionCount: res.data.questions.length,
+          answerCount: res.data.answers.length
+        });
       })
       .catch(err => {
         console.log("Can't retrieve asker info", err);
@@ -70,9 +72,9 @@ class AskerDashboard extends React.Component {
 
   render() {
     return (
-      <div class='container'>
+      <div>
         <h2>AskerDashboard</h2>
-        
+
         <QuestionForm />
         <p>
           {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}

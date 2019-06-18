@@ -115,13 +115,41 @@ class ExpertDashboard extends React.Component {
       });
   }
 
+  // Edit Answer Axios Call
+  editAnswer = answer => {
+    axios
+      .put(
+        `https://delphe-backend.herokuapp.com/api/answers/${answer.id}`,
+        answer
+      )
+      .then(res => {
+        console.log("successfully edited");
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log("there was a problem editing your answer");
+      });
+  };
+
+  // Delete Answer Axios Call
+  deleteAnswer = id => {
+    axios
+      .delete(`https://delphe-backend.herokuapp.com/api/answers/${id}`)
+      .then(res => {
+        console.log("successfully deleted");
+        window.location.reload();
+      })
+      .catch(err => {
+        console.log("there was a problem deleting your answer");
+      });
+  };
+
   render() {
 
     const { classes, postAnswer } = this.props,
           { userInfo } = this.state
 
     return (
-
       <div 
         className={classes.root}
         >

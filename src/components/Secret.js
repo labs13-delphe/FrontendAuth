@@ -1,27 +1,32 @@
 // Packages
 import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
+//**** took care of netlify bugs */
+// import { Route, Link } from "react-router-dom";
 import axios from "axios";
 
 // Components
-import UserForm from "./UserForm.js";
+import UserFormTwo from "./UserFormTwo.js";
 import Dashboard from "./Dashboard.js";
 
 //material ui
-
 
 //rendering all protected components and keeping state here
 
 class Secret extends Component {
   state = {
-    questions: []
+    questions: [],
+    QA: []
   };
 
   postUserInfo = userInfo => {
     axios
       .post("https://delphe-backend.herokuapp.com/api/users", userInfo)
       .then(res => {
-        console.log({ message: "Success!!" });
+        if (userInfo.user_type === "asker") {
+          this.viewAskerDashboard();
+        } else {
+          this.viewExpertDashboard();
+        }
       })
       .catch(error => {
         console.log(error);
@@ -49,6 +54,20 @@ class Secret extends Component {
   //
 
   componentDidMount = () => {
+    axios
+      .get(
+        `https://delphe-backend.herokuapp.com/api/questions/${localStorage.getItem(
+          "user_id"
+        )}`
+      )
+      .then(res => {
+        this.setState({ QA: res.data });
+        //console.log("Q & A data", res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
     axios
       .get("https://delphe-backend.herokuapp.com/api/questions")
       .then(res => {
@@ -90,7 +109,7 @@ class Secret extends Component {
     return (
       <div>
         {/* added this to have a visual of the user data we can post to and compare to out unique id */}
-        {this.getUserInfo()}
+        {/* {this.getUserInfo()} */}
 
         {/* Can use until when we get our registration/login totally functioning  */}
        
@@ -108,11 +127,15 @@ class Secret extends Component {
               {" "}
               Pretend an Expert is Signed In{" "}
             </button>
+
           </div>
         ) : (
           <div>
             <h4>Please Register To Access Secret</h4>
-            <UserForm postUserInfo={this.postUserInfo} />
+            <UserFormTwo
+              postUserInfo={this.postUserInfo}
+              uniqueIdentifier={this.props.uniqueIdentifier}
+            />
           </div>
         )}
       </div>

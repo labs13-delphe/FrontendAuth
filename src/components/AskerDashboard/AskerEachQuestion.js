@@ -9,13 +9,13 @@ const bordered = {
   margin: "15px"
 };
 const generalAlign = {
-  "text-align": "left",
-  "padding-left": "20px"
+  textAlign: "left",
+  paddingLeft: "20px"
 };
 
 const answerStyle = {
-  "text-align": "left",
-  "padding-left": "50px"
+  textAlign: "left",
+  paddingLeft: "50px"
 };
 
 const expertName = {
@@ -42,10 +42,12 @@ class EachQuestion extends React.Component {
       .get(endpoint)
       .then(res => {
         // console.log(res.data);
-        this.setState({ question: res.data });
-        this.setState({ topics: res.data.topics });
-        this.setState({ answers: res.data.answers });
-        this.setState({ answerCount: res.data.answers.length });
+        this.setState({
+          question: res.data,
+          topics: res.data.topics,
+          answers: res.data.answers,
+          answerCount: res.data.answers.length
+        });
       })
       .catch(err => {
         console.log(err);
@@ -75,57 +77,48 @@ class EachQuestion extends React.Component {
     // condition: Render Answers Div if question has answers (answerCount > 0)
     const answersDiv =
       this.state.answerCount > 0 ? (
- <div class="accordion" id="myAccordion">
-
-<div class="card">
-<div class="card-header" id="item1Header">
-     <h5 class="mb-0">
-       <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#expandable1" aria-expanded="false" aria-controls="expandable1">
-         View Answers
-       </button>
-     </h5>
-   </div>
-   <div id="expandable1" class="collapse" aria-labelledby="item1Header" data-parent="#myAccordion">
-     <div class="card-body"></div>
         <div className="answers-div">
           <p style={generalAlign}>
             <strong>Answers: </strong>
           </p>
           {this.state.answers.map(answer => {
             return (
-              <p style={answerStyle}>
+              <p style={answerStyle} key={answer.id}>
                 "{answer.answer}" -{" "}
                 <strong style={expertName}>
                   {this.state.users.map(user => {
                     if (user.id === answer.user_id) {
                       return (
-                        <Link to={`/users/${user.id}`} >{user.username}</Link>);
+                        <Link to={`/users/${user.id}`} key={user.id}>
+                          {user.username}
+                        </Link>
+                      );
+                    } else {
+                      return null;
                     }
                   })}
                 </strong>
               </p>
-              
             );
           })}
-        </div>
-        </div>
-        </div>
         </div>
       ) : (
         <p>No answers yet</p>
       );
+
+      const answersText = this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
     return (
       <div style={bordered}>
         <div className="question-div">
           <p style={generalAlign}>
             <Link to={`/questions/${this.state.question.id}/update`}>
-              <i class="fas fa-pen" />
+              <i className="fas fa-pen" />
             </Link>
-            <i onClick={this.deleteButton} class="fas fa-trash" />
+            <i onClick={this.deleteButton} className="fas fa-trash" />
             &nbsp;|&nbsp;
             <strong>{this.state.question.title}: </strong>
             {this.state.question.question} <br /> {this.state.answerCount}{" "}
-            answers
+            {answersText}
           </p>
         </div>
 
@@ -133,13 +126,12 @@ class EachQuestion extends React.Component {
           <p style={generalAlign}>
             <strong>Topic: </strong>
             {this.state.topics.map(topic => (
-              <span>{topic.topic}, </span>
+              <span key={topic.id}>{topic.topic}, </span>
             ))}
           </p>
         </div>
         {answersDiv}
       </div>
-      
     );
   }
 }
