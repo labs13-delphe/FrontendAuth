@@ -22,7 +22,11 @@ class Secret extends Component {
     axios
       .post("https://delphe-backend.herokuapp.com/api/users", userInfo)
       .then(res => {
-        console.log({ message: "Success!!" });
+        if (userInfo.user_type === "asker") {
+          this.viewAskerDashboard();
+        } else {
+          this.viewExpertDashboard();
+        }
       })
       .catch(error => {
         console.log(error);
