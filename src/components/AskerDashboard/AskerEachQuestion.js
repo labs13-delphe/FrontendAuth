@@ -21,6 +21,10 @@ import {
   DialogTitle,
   TextField,
   Button,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
   InputLabel,
   FormControl,
   Select,
@@ -39,7 +43,7 @@ const styles = theme => ({
     padding: theme.spacing(1)
   },
   topicButton: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(1)
   },
   media: {
     height: 0,
@@ -168,38 +172,81 @@ class AskerEachQuestion extends React.Component {
     }
   };
 
+  // Material UI Methods
+
+  handleExpandClick = () => {
+    this.setState({
+      expanded: !this.state.expanded
+    });
+  };
+
+  handlePopoverOpen = event =>
+    this.setState({
+      anchorEl: event.currentTarget
+    });
+
+  handlePopoverClose = () =>
+    this.setState({
+      anchorEl: null
+    });
+
+  // Handlers for dialogue
+  handleClickOpen = () =>
+    this.setState({
+      dialogOpen: true
+    });
+
+  handleClose = () =>
+    this.setState({
+      dialogOpen: false
+    });
+
   render() {
     const open = Boolean(this.state.anchorEl);
     const { classes } = this.props,
-      { expanded, anchorEl, dialogOpen, thisUser, question, answerCount, topics } = this.state;
+      {
+        expanded,
+        anchorEl,
+        dialogOpen,
+        thisUser,
+        question,
+        answerCount,
+        topics,
+        answers
+      } = this.state;
 
     // condition: Render Answers Div if question has answers (answerCount > 0)
     const answersDiv =
       this.state.answerCount > 0 ? (
         <div className="answers-div">
-          <p>
-            <strong>Answers: </strong>
-          </p>
-          {this.state.answers.map(answer => {
-            return (
-              <p key={answer.id}>
-                "{answer.answer}" -{" "}
-                <strong>
-                  {this.state.users.map(user => {
-                    if (user.id === answer.user_id) {
-                      return (
-                        <Link to={`/users/${user.id}`} key={user.id}>
-                          {user.username}
-                        </Link>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-                </strong>
-              </p>
-            );
-          })}
+          {/* <Typography>
+            <strong>Expert Answers </strong>
+          </Typography> */}
+          <List>
+            {this.state.answers.map(answer => {
+              return (
+                <>
+                  <Divider />
+                  <ListItem key={answer.id}>
+                    "{answer.answer}" -{" "}
+                    <strong>
+                      {this.state.users.map(user => {
+                        if (user.id === answer.user_id) {
+                          return (
+                            <Link to={`/users/${user.id}`} key={user.id}>
+                              {user.username}
+                            </Link>
+                          );
+                        } else {
+                          return null;
+                        }
+                      })}
+                    </strong>
+                  </ListItem>
+                </>
+              );
+            })}
+          </List>
         </div>
       ) : (
         <p>No answers yet</p>
@@ -229,49 +276,56 @@ class AskerEachQuestion extends React.Component {
                 <Delete />
               </IconButton>
             </>
-          } 
+          }
           title={thisUser.username}
           subheader={thisUser.user_type}
-
         />
         <CardContent>
-          <Typography variant="h4" color="textSecondary" component="p" gutterBottom>
-          {question.title}
+          <Typography
+            variant="h4"
+            color="textSecondary"
+            component="p"
+            gutterBottom
+          >
+            {question.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          {question.question}
+            {question.question}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-          {answerCount} {answersText}
+            {answerCount} {answersText}
           </Typography>
           <div className="topics-div">
             {topics.map(topic => (
-              <Button variant="contained" size="small" color="pink" className={classes.topicButton} key={topic.id}>{topic.topic}</Button>
+              <Button
+                variant="contained"
+                size="small"
+                color="primary"
+                className={classes.topicButton}
+                key={topic.id}
+              >
+                {topic.topic}
+              </Button>
             ))}
           </div>
-      </CardContent>
-
-        <div className="question-div">
-          <p>
-            <Link to={`/questions/${this.state.question.id}/update`}>
-              <i className="fas fa-pen" />
-            </Link>
-            <i onClick={this.deleteButton} className="fas fa-trash" />
-            &nbsp;|&nbsp;
-            <strong>{this.state.question.title}: </strong>
-            {this.state.question.question} <br /> {this.state.answerCount}{" "}
-            {answersText}
-          </p>
-        </div>
-        <div className="topics-div">
-          <p>
-            <strong>Topic: </strong>
-            {this.state.topics.map(topic => (
-              <span key={topic.id}>{topic.topic}, </span>
-            ))}
-          </p>
-        </div>
-        {answersDiv}
+        </CardContent>
+        <Divider />
+        <CardActions>
+          <Typography>View Answers: ({answerCount}) </Typography>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded
+            })}
+            onClick={this.handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="Show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Typography paragraph>{answersDiv}</Typography>
+        </Collapse>
       </Card>
     );
   }
