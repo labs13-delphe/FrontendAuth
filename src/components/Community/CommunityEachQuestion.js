@@ -3,25 +3,83 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-// Temp Styles
-const bordered = {
-  border: "1px solid black",
-  background: "#EEFBFC",
-  margin: "15px"
-};
-const generalAlign = {
-  textAlign: "left",
-  paddingLeft: "20px"
-};
+// Material UI
+import {
+  withStyles,
+  Card,
+  CardHeader,
+  CardContent,
+  CardActions,
+  Collapse,
+  Avatar,
+  IconButton,
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  Button,
+  List,
+  ListItem,
+  Divider
+} from "@material-ui/core";
+import { Edit, Delete } from "@material-ui/icons";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { red } from "@material-ui/core/colors";
+import clsx from "clsx";
 
-const answerStyle = {
-  textAlign: "left",
-  paddingLeft: "50px"
-};
 
-const expertName = {
-  color: "#058562"
-};
+// Custom Styles
+const styles = theme => ({
+  card: {
+    width: "100%",
+    marginBottom: 5,
+    padding: theme.spacing(1)
+  },
+  topicButton: {
+    margin: theme.spacing(1)
+  },
+
+  expand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest
+    })
+  },
+  expandOpen: {
+    transform: "rotate(180deg)"
+  },
+  avatar: {
+    backgroundColor: red[500]
+  },
+  dialog: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    background: "orange"
+  },
+  textField: {
+    width: "90%",
+    margin: theme.spacing(1)
+  },
+  formButtons: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-evenly"
+  },
+  button: {
+    margin: theme.spacing(1)
+  }
+});
 
 class CommunityEachQuestion extends React.Component {
   constructor(props) {
@@ -31,7 +89,8 @@ class CommunityEachQuestion extends React.Component {
       topics: [],
       answers: [],
       answerCount: null,
-      users: []
+      users: [],
+      expanded: false
     };
   }
 
@@ -64,54 +123,73 @@ class CommunityEachQuestion extends React.Component {
       });
   }
 
+  // Material UI Methods
+
+  handleExpandClick = () => {
+    this.setState({
+      expanded: !this.state.expanded
+    });
+  };
+
+
+
   render() {
+    const { classes } = this.props,
+    {
+      expanded,
+      question,
+      answerCount,
+      topics,
+      answers,
+      users
+    } = this.state;
     // condition: Render Answers Div if question has answers (answerCount > 0)
     const answersDiv =
       this.state.answerCount > 0 ? (
         <div className="answers-div">
-          <p style={generalAlign}>
-            <strong>Answers: </strong>
-          </p>
-          {this.state.answers.map(answer => {
-            return (
-              <p style={answerStyle} key={answer.id}>
-                "{answer.answer}" -{" "}
-                <strong style={expertName}>
-                  {this.state.users.map(user => {
-                    if (user.id === answer.user_id) {
-                      return (
-                        <Link to={`/users/${user.id}`} key={user.id}>
-                          {user.username}
-                        </Link>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-                </strong>
-              </p>
-            );
-          })}
+          {/* <Typography>
+            <strong>Expert Answers </strong>
+          </Typography> */}
+          <List>
+            {answers.map(answer => {
+              return (
+                <div key={answer.id}>
+                  <Divider />
+                  <ListItem >
+                    "{answer.answer}" -{" "}
+                    <strong>
+                      {users.map(user => {
+                        if (user.id === answer.user_id) {
+                          return (
+                            <Link to={`/users/${user.id}`} key={user.id}>
+                              {user.username}
+                            </Link>
+                          );
+                        } else {
+                          return null;
+                        }
+                      })}
+                    </strong>
+                  </ListItem>
+                </div>
+              );
+            })}
+          </List>
         </div>
       ) : (
         <p>No answers yet</p>
       );
 
-    const answerText =
-      this.state.answerCount === 1 ? (
-        <span> answer </span>
-      ) : (
-        <span> answers </span>
-      );
+    const answersText =
+      this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
     return (
-      <div style={bordered}>
+      <div>
         <div className="question-div">
           {this.state.users.map(user => {
             if (user.id === this.state.question.user_id) {
               return (
                 <div
                   className="user-info-div"
-                  style={generalAlign}
                   key={user.id}
                 >
                   <p>
@@ -125,15 +203,15 @@ class CommunityEachQuestion extends React.Component {
             }
           })}
 
-          <p style={generalAlign}>
+          <p>
             <strong>{this.state.question.title}: </strong>
             {this.state.question.question} <br /> {this.state.answerCount}{" "}
-            {answerText}
+            {answersText}
           </p>
         </div>
 
         <div className="topics-div">
-          <p style={generalAlign}>
+          <p>
             <strong>Topic: </strong>
             {this.state.topics.map(topic => (
               <span key={topic.id}>{topic.topic}, </span>
@@ -146,4 +224,4 @@ class CommunityEachQuestion extends React.Component {
   }
 }
 
-export default CommunityEachQuestion;
+export default withStyles(styles)(CommunityEachQuestion);
