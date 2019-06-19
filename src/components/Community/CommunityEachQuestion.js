@@ -24,7 +24,6 @@ import {
   ListItem,
   Divider
 } from "@material-ui/core";
-import { Edit, Delete } from "@material-ui/icons";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { red } from "@material-ui/core/colors";
 import clsx from "clsx";
@@ -33,13 +32,13 @@ import clsx from "clsx";
 const styles = theme => ({
   card: {
     width: "100%",
-    marginBottom: 5,
+    marginBottom: theme.spacing(2),
     padding: theme.spacing(1)
   },
   cardTitle: {
     display: "flex",
     flexDirection: "row",
-    width: "35%",
+    width: "38%",
     justifyContent: "space-between"
   },
   topicButton: {
@@ -196,7 +195,7 @@ class CommunityEachQuestion extends React.Component {
       }
     });
     return (
-      <Card>
+      <Card className={classes.card}>
         <CardHeader
           avatar={
             <Avatar aria-label="Recipe" className={classes.avatar}>
@@ -218,39 +217,6 @@ class CommunityEachQuestion extends React.Component {
           title={cardAsker}
           subheader="asker"
         />
-
-        {/* <div className="question-div">
-          {this.state.users.map(user => {
-            if (user.id === this.state.question.user_id) {
-              return (
-                <div className="user-info-div" key={user.id}>
-                  <p>
-                    {user.first_name} {user.last_name} @{user.username}
-                    <Link to={`/users/${user.id}`}>View Profile</Link>
-                  </p>
-                </div>
-              );
-            } else {
-              return null;
-            }
-          })}
-
-          <p>
-            <strong>{this.state.question.title}: </strong>
-            {this.state.question.question} <br /> {this.state.answerCount}{" "}
-            {answersText}
-          </p>
-        </div>
-
-        <div className="topics-div">
-          <p>
-            <strong>Topic: </strong>
-            {this.state.topics.map(topic => (
-              <span key={topic.id}>{topic.topic}, </span>
-            ))}
-          </p>
-        </div>
-        {answersDiv} */}
         <CardContent>
           <Typography
             variant="h4"

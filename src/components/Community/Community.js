@@ -62,7 +62,8 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "center",
     overflowY: "scroll",
-    maxHeight: 860
+    maxHeight: 860,
+    background: "#EBEBEA"
   }
 });
 
