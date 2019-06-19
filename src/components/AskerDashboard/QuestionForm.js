@@ -35,15 +35,14 @@ const styles = theme => ({
     padding: 10
   },
   formTitle: {
-    marginLeft: theme.spacing(1),
-
+    marginLeft: theme.spacing(1)
   },
   questionTextFields: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-      [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("md")]: {
       flexDirection: "column"
     }
   },
@@ -73,7 +72,6 @@ const styles = theme => ({
       flexDirection: "column",
       alignItems: "center"
     }
-   
   },
   formControl: {
     margin: theme.spacing(1),
@@ -87,9 +85,8 @@ const styles = theme => ({
     width: "100%"
   },
   button: {
-    margin: theme.spacing(1),
-
-  },
+    margin: theme.spacing(1)
+  }
 });
 
 class QuestionForm extends React.Component {
@@ -114,7 +111,6 @@ class QuestionForm extends React.Component {
         console.log("there was a problem getting list of topics");
       });
   }
-
 
   handleChanges = e => {
     const { name, value } = e.target;
@@ -176,40 +172,43 @@ class QuestionForm extends React.Component {
     const { classes } = this.props;
     const { title, question, topic, topicsList } = this.state;
 
-    
     return (
       <div>
         <Paper className={classes.paper}>
           <form className={classes.form}>
-            <Typography variant="h6" className={classes.formTitle}>Ask a question</Typography>
+            <Typography variant="h6" className={classes.formTitle}>
+              Ask a question
+            </Typography>
             <div className={classes.questionTextFields}>
-            <TextField
-              value={title}
-              name="title"
-              label="Title"
-              placeholder="Question Title"
-              multiline
-              className={classes.titleInput}
-              onChange={this.handleChanges}
-              margin="normal"
-              variant="outlined"
-            />
-            <TextField
-              value={question}
-              name="question"
-              label="Question"
-              placeholder="I want to know..."
-              multiline
-              className={classes.questionInput}
-              onChange={this.handleChanges}
-              margin="normal"
-              variant="outlined"
-            />
+              <TextField
+                value={title}
+                name="title"
+                label="Title"
+                placeholder="Question Title"
+                multiline
+                className={classes.titleInput}
+                onChange={this.handleChanges}
+                margin="normal"
+                variant="outlined"
+              />
+              <TextField
+                value={question}
+                name="question"
+                label="Question"
+                placeholder="I want to know..."
+                multiline
+                className={classes.questionInput}
+                onChange={this.handleChanges}
+                margin="normal"
+                variant="outlined"
+              />
             </div>
-            
+
             <div className={classes.bottomRow}>
               <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel htmlFor="outlined-age-simple">Choose a topic</InputLabel>
+                <InputLabel htmlFor="outlined-age-simple">
+                  Choose a topic
+                </InputLabel>
                 <Select
                   value={topic}
                   onChange={this.handleChanges}
@@ -217,7 +216,9 @@ class QuestionForm extends React.Component {
                   inputProps={{
                     name: "topic"
                   }}
-                  input={<OutlinedInput name="topic" id="outlined-age-simple" />}
+                  input={
+                    <OutlinedInput name="topic" id="outlined-age-simple" />
+                  }
                 >
                   {topicsList.map(topic => (
                     <MenuItem value={topic.topic} key={topic.id}>
@@ -226,7 +227,7 @@ class QuestionForm extends React.Component {
                   ))}
                 </Select>
               </FormControl>
-              
+
               {/* Is there  a title, question and topic on state? (Did the user complete the form? If yes, enable the submit button.) */}
               {title && question && topic ? (
                 <Button
