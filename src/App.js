@@ -69,14 +69,14 @@ class App extends Component {
         {this.state.isSignedIn ? (
           <div>
             <NavBar/>
-            <h1>Welcome to Delphe</h1>
+            {/* <h1>Welcome to Delphe</h1>
             <button onClick={() => firebase.auth().signOut()}>Sign Out!</button>
             <Link to="/secret">
               <button>Go To Secret</button>{" "}
             </Link>
             <Link to="/community">
               <button>Community</button>{" "}
-            </Link>
+            </Link> */}
 
             {/* <Route path="/secret" component={Secret} /> */}
 

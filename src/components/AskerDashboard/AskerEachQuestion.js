@@ -37,7 +37,10 @@ const styles = theme => ({
     padding: theme.spacing(1)
   },
   topicButton: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    '&:hover': {
+      cursor: 'default',
+    }
   },
 
   expand: {

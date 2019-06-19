@@ -14,27 +14,23 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
-import MenuIcon from "@material-ui/icons/Menu";
-import IconButton from "@material-ui/core/IconButton";
 
 // Custom Styles
 const styles = theme => ({
-  root: {
-    display: "flex"
-  },
+
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
       display: "none"
     }
   },
-  toolbar: theme.mixins.toolbar,
-
   spaceBetween: {
     display: "flex",
     justifyContent: "space-between",
     width: "100%"
-  }
+  },
+  appBarSpacer: theme.mixins.toolbar,
+
 });
 
 class NavBar extends React.Component {
@@ -64,17 +60,8 @@ class NavBar extends React.Component {
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              edge="start"
-              onClick={this.handleDrawerToggle}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
             <div className={classes.spaceBetween}>
-              <Typography variant="h6" noWrap>
+              <Typography variant="h5" noWrap>
                 {user.username}'s Dashboard NavBar
               </Typography>
               <Button color="inherit" href="/secret/dashboard">Your Questions</Button>
@@ -84,14 +71,14 @@ class NavBar extends React.Component {
                 <Button color="inherit" href={`/users/${user.id}`}>
                   Profile
                 </Button>
-              
-
               <Button color="inherit" onClick={() => firebase.auth().signOut()}>
                 Logout
               </Button>
             </div>
           </Toolbar>
         </AppBar>
+        <div className={classes.appBarSpacer} />
+
       </div>
     );
   }

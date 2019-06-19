@@ -42,7 +42,10 @@ const styles = theme => ({
     justifyContent: "space-between"
   },
   topicButton: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    '&:hover': {
+      cursor: 'default',
+    }
   },
 
   expand: {
