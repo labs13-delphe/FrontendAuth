@@ -11,15 +11,8 @@ import AskerQuestionsList from "./AskerQuestionsList";
 import {
   AppBar,
   CssBaseline,
-  Divider,
-  Drawer,
-  Hidden,
-  List,
   Button,
   Paper,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Toolbar,
   Typography
 } from "@material-ui/core";
@@ -58,7 +51,7 @@ const styles = theme => ({
     alignItems: "center",
     flexDirection: "column",
     maxWidth: 680,
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
   },
@@ -70,19 +63,6 @@ const styles = theme => ({
     justifyContent: "center",
     overflowY: "scroll",
     maxHeight: 860
-  },
-  shortColumn: {
-    flexGrow: 1,
-    padding: theme.spacing(1),
-    display: "flex",
-    justifyContent: "center",
-    [theme.breakpoints.down("md")]: {
-      width: "100%"
-    }
-  },
-  flex: {
-    display: "flex",
-    flexDirection: "column"
   }
 });
 
@@ -147,7 +127,7 @@ class AskerDashboard extends React.Component {
       });
   };
 
-  // PUT Question 
+  // PUT Question
   updateQuestion = question => {
     axios
       .put(
@@ -200,7 +180,6 @@ class AskerDashboard extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
-            
             <Typography variant="h4">Your Questions</Typography>
             <Typography variant="h5">
               {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
