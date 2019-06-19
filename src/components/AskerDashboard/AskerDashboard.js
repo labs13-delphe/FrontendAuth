@@ -28,7 +28,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 // Custom Styles
 const styles = theme => ({
   root: {
-    display: "flex",
+    display: "flex"
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -190,11 +190,7 @@ class AskerDashboard extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
-<<<<<<< HEAD
-            <Typography variant="h4">My Questions</Typography>
-=======
             <Typography variant="h4">Your Questions</Typography>
->>>>>>> 3a840cc63b8870f3b7d891a7e88d320447eecdf2
             <Typography variant="h5">
               {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
               {this.state.answerCount} Answers Received
