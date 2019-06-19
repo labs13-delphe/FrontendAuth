@@ -25,7 +25,7 @@ const Dashboard = props => {
       <AskerDashboard />
     ) : (
       <ExpertDashboard
-        questions={props.questions}
+        // questions={props.questions}
         postAnswer={postAnswer}
         QA={props.QA}
       />

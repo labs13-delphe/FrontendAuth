@@ -13,10 +13,10 @@ const QuestionsList = props => {
           return (
             <Question key={question.id}
               question={question}
-              answers={props.answers}
+              // answers={props.answers}
               id={question.id}
               postAnswer={props.postAnswer}
-              QA={props.QA}
+              // QA={props.QA}
               editAnswer={props.editAnswer}
               deleteAnswer={props.deleteAnswer}
             />

@@ -23,7 +23,7 @@ class ExpertDashboard extends React.Component {
         console.log(err);
       });
   
-  
+  //Make API call to get an array of topics the user is expert in and set it to state.userTopics
   axios
   .get(`https://delphe-backend.herokuapp.com/api/topics/expertTopics/${localStorage.getItem(
     "user_id"
@@ -34,7 +34,31 @@ class ExpertDashboard extends React.Component {
     this.setState({
       userTopics: user_topics
     });
-    
+
+    //Make API call passing in array of expert's topics to retrieve questions in those topic areas"
+    const getQsByTopics = {
+      topicIds: user_topics
+    }
+    console.log(this.state.userTopics)
+    console.log(getQsByTopics)
+    axios
+    .get(`http://localhost:5000/api/questions/questionTopics`, 
+      {
+      params: {
+        ...getQsByTopics
+      }
+    })
+    //
+    .then(res => {
+      console.log("expert return data", res);
+      this.setState({
+        questions: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
   })
   .catch(err => {
     console.log(err);
@@ -77,10 +101,10 @@ class ExpertDashboard extends React.Component {
       <div>
         <h2>Expert dash</h2>
         <QuestionsList
-          questions={this.props.questions}
-          answers={this.state.answers}
+          questions={this.state.questions}
+          // answers={this.state.answers}
           postAnswer={this.props.postAnswer}
-          QA={this.props.QA}
+          // QA={this.props.QA}
           editAnswer={this.editAnswer}
           deleteAnswer={this.deleteAnswer}
         />

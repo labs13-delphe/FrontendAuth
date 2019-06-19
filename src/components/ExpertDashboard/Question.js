@@ -218,8 +218,8 @@ class Question extends React.Component {
             </Link>
             <i onClick={this.deleteButton} className="fas fa-trash" />
             &nbsp;|&nbsp; */}
-            <strong>{this.state.question.title}: </strong>
-            {this.state.question.question} <br /> {this.state.answerCount}{" "}
+            <strong>{this.props.question.title}: </strong>
+            {this.props.question.question} <br /> {this.state.answerCount}{" "}
             {answersText}
           </p>
         </div>
@@ -227,9 +227,13 @@ class Question extends React.Component {
         <div className="topics-div">
           <p style={generalAlign}>
             <strong>Topic: </strong>
+            {this.props.question.topic}
+{/* 
             {this.state.topics.map(topic => (
               <span key={topic.id}>{topic.topic}, </span>
-            ))}
+            ))} */}
+
+
           </p>
         </div>
         {answersDiv}
