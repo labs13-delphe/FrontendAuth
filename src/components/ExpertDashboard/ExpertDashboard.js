@@ -5,7 +5,9 @@ import axios from "axios";
 
 class ExpertDashboard extends React.Component {
   state = {
-    answers: []
+    answers: [],
+    userTopics: [],
+    questions: []
   };
 
   componentDidMount() {
@@ -20,7 +22,24 @@ class ExpertDashboard extends React.Component {
       .catch(err => {
         console.log(err);
       });
-  }
+  
+  
+  axios
+  .get(`https://delphe-backend.herokuapp.com/api/topics/expertTopics/${localStorage.getItem(
+    "user_id"
+  )}`)
+  .then(res => {
+    console.log("expert return data", res);
+    const user_topics = res.data.rows.map(topic=>topic.id)
+    this.setState({
+      userTopics: user_topics
+    });
+    
+  })
+  .catch(err => {
+    console.log(err);
+  });
+}
 
   // Edit Answer Axios Call
   editAnswer = answer => {
