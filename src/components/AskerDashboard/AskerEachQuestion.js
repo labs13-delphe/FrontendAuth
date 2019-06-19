@@ -3,6 +3,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+// Components
+import QuestionUpdateForm from "./QuestionUpdateForm";
+
 // Material UI
 import {
   withStyles,
@@ -18,6 +21,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
+  DialogContentText,
   DialogTitle,
   TextField,
   Button,
@@ -96,6 +100,9 @@ const styles = theme => ({
   },
   dialogue: {
     width: 580
+  },
+  button: {
+    margin: theme.spacing(1)
   }
 });
 
@@ -108,7 +115,12 @@ class AskerEachQuestion extends React.Component {
         first_name: "",
         last_name: ""
       },
-      question: {},
+      question: {
+        user_id: "",
+        question: "",
+        title: "",
+        id: null
+      },
       topics: [],
       answers: [],
       answerCount: null,
@@ -129,7 +141,12 @@ class AskerEachQuestion extends React.Component {
       .then(res => {
         // console.log(res.data);
         this.setState({
-          question: res.data,
+          question: {
+            user_id: res.data.user_id,
+            question: res.data.question,
+            title: res.data.title,
+            id: res.data.id
+          },
           topics: res.data.topics,
           answers: res.data.answers,
           answerCount: res.data.answers.length
@@ -170,6 +187,24 @@ class AskerEachQuestion extends React.Component {
     if (window.confirm("Are you sure you want to delete this question?")) {
       this.props.deleteQuestion(this.state.question.id);
     }
+  };
+
+  // Edit Question Button
+  handleChanges = e => {
+    e.persist();
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      question: {
+        ...prevState.question,
+        [name]: value
+      }
+    }));
+  };
+
+  submitForm = e => {
+    e.preventDefault();
+    // invoke updateQuestion from App.js
+    this.props.updateQuestion(this.state.question);
   };
 
   // Material UI Methods
@@ -225,7 +260,7 @@ class AskerEachQuestion extends React.Component {
           <List>
             {this.state.answers.map(answer => {
               return (
-                <>
+                <div>
                   <Divider />
                   <ListItem key={answer.id}>
                     "{answer.answer}" -{" "}
@@ -243,7 +278,7 @@ class AskerEachQuestion extends React.Component {
                       })}
                     </strong>
                   </ListItem>
-                </>
+                </div>
               );
             })}
           </List>
@@ -266,15 +301,71 @@ class AskerEachQuestion extends React.Component {
           }
           action={
             <>
-              <IconButton
+              {/* <IconButton
                 aria-label="Settings"
                 href={`/questions/${this.state.question.id}/update`}
               >
                 <Edit />
+              </IconButton> */}
+
+              <IconButton aria-label="Settings">
+                <Edit onClick={this.handleClickOpen} />
               </IconButton>
               <IconButton aria-label="Settings" onClick={this.deleteButton}>
                 <Delete />
               </IconButton>
+              {/* FOR UPDATE POPOVER */}
+              <Dialog
+                open={dialogOpen}
+                onClose={this.handleClose}
+                className={classes.dialog}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                <form>
+                  <TextField
+                    value={question.title}
+                    name="title"
+                    label="Title"
+                    placeholder="Question title..."
+                    multiline
+                    // className={classes.questionInput}
+                    onChange={this.handleChanges}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                  <TextField
+                    value={question.question}
+                    name="question"
+                    label="Question"
+                    placeholder="I want to know..."
+                    multiline
+                    // className={classes.questionInput}
+                    onChange={this.handleChanges}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                  {question.title && question.question ? (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      onClick={this.submitForm}
+                    >
+                      Submit
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disabled
+                      className={classes.button}
+                    >
+                      Submit
+                    </Button>
+                  )}
+                </form>
+              </Dialog>
             </>
           }
           title={thisUser.username}

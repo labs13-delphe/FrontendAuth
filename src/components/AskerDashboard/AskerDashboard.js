@@ -147,7 +147,22 @@ class AskerDashboard extends React.Component {
       });
   };
 
-  // PUT Question function on App.js (Update form is also imported/rendered on App.js)
+  // PUT Question 
+  updateQuestion = question => {
+    axios
+      .put(
+        `https://delphe-backend.herokuapp.com/api/questions/${question.id}`,
+        question
+      )
+      .then(res => {
+        console.log(res.data);
+        // reload window
+        window.location.reload();
+      })
+      .catch(err => {
+        console.log("Can't update!", err);
+      });
+  };
 
   render() {
     const { container, classes } = this.props,
@@ -196,6 +211,7 @@ class AskerDashboard extends React.Component {
               <AskerQuestionsList
                 questions={this.state.questions}
                 deleteQuestion={this.deleteQuestion}
+                updateQuestion={this.updateQuestion}
               />
             </Paper>
           </div>
