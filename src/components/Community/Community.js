@@ -6,19 +6,14 @@ import axios from "axios";
 import CommunityQuestionList from "./CommunityQuestionsList";
 
 // Material UI
-import {
-  CssBaseline,
-  Paper,
-  Typography
-} from "@material-ui/core";
+import { CssBaseline, Paper, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Custom Styles
 const styles = theme => ({
   root: {
     display: "flex",
-    width: "100%",
-    background: "pink"
+    width: "100%"
   },
   title: theme.mixins.toolbar,
 
