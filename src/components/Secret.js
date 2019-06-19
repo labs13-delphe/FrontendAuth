@@ -122,7 +122,11 @@ class Secret extends Component {
         localStorage.getItem("user_id") ? (
           <div>
             <button onClick={this.clearStorage}>Erase User on Storage</button>
-            <Dashboard questions={this.state.questions} QA={this.state.QA} />
+            <Dashboard
+              questions={this.state.questions}
+              QA={this.state.QA}
+              gUser={this.props.gUser}
+            />
           </div>
         ) : (
           <div>

@@ -1,6 +1,19 @@
 // Packages
 import React from "react";
 import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
+
+import {
+  TextField,
+  Button,
+  withStyles,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  Paper,
+  Avatar
+} from "@material-ui/core";
 
 // Components
 import SingleUser from "./SingleUser";
