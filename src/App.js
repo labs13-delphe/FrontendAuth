@@ -81,6 +81,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        {/* {this.props.history.push("/secret/dashboard")} */}
         {this.state.isSignedIn ? (
           <div>
             <h1>Welcome to Delphe</h1>
@@ -97,7 +98,10 @@ class App extends Component {
             <Route
               path="/secret"
               render={props => (
-                <Secret uniqueIdentifier={this.state.uniqueIdentifier} />
+                <Secret
+                  uniqueIdentifier={this.state.uniqueIdentifier}
+                  gUser={this.state.gUser}
+                />
               )}
             />
             {/* 

@@ -2,6 +2,7 @@
 import React from "react";
 import axios from "axios";
 import firebase from "firebase";
+import { Link } from "react-router-dom";
 
 // Components
 import QuestionForm from "./QuestionForm";
@@ -171,12 +172,16 @@ class AskerDashboard extends React.Component {
               <Typography variant="h6" noWrap>
                 {userInfo.username}'s Dashboard
               </Typography>
-              <Button color="inherit" href="/community">
-                Community
-              </Button>
-              <Button color="inherit" href={`/users/${userInfo.id}`}>
-                Profile
-              </Button>
+              <Link to="/community">
+                <Button color="inherit" href="/community">
+                  Community
+                </Button>
+              </Link>
+              <Link to={`/users/${userInfo.id}`}>
+                <Button color="inherit" href={`/users/${userInfo.id}`}>
+                  Profile
+                </Button>
+              </Link>
 
               <Button color="inherit" onClick={() => firebase.auth().signOut()}>
                 Logout
