@@ -14,7 +14,6 @@ import {
   Avatar,
   IconButton,
   Typography,
-  Popover,
   Dialog,
   DialogActions,
   DialogContent,
@@ -23,14 +22,9 @@ import {
   Button,
   List,
   ListItem,
-  ListItemText,
-  Divider,
-  InputLabel,
-  FormControl,
-  Select,
-  MenuItem
+  Divider
 } from "@material-ui/core";
-import { AccountCircle, Edit, Delete } from "@material-ui/icons";
+import { Edit, Delete } from "@material-ui/icons";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { red } from "@material-ui/core/colors";
 import clsx from "clsx";
@@ -45,10 +39,7 @@ const styles = theme => ({
   topicButton: {
     margin: theme.spacing(1)
   },
-  media: {
-    height: 0,
-    paddingTop: "56.25%" // 16:9
-  },
+
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
@@ -62,40 +53,30 @@ const styles = theme => ({
   avatar: {
     backgroundColor: red[500]
   },
-  cardheader: {
-    fontSize: 20
-  },
-  answerCard: {
-    padding: 40
-  },
-  popover: {
-    pointerEvents: "none"
-  },
-  paper: {
-    padding: theme.spacing(1)
-  },
-  bottomRow: {
+  dialog: {
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: 500
+    flexDirection: "column",
+    alignItems: "center"
   },
   form: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    background: "orange"
   },
   textField: {
-    width: 500
+    width: "90%",
+    margin: theme.spacing(1)
   },
-  select: {
-    width: 200
+  formButtons: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-evenly"
   },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120
-  },
-  dialogue: {
-    width: 580
+  button: {
+    margin: theme.spacing(1)
   }
 });
 
@@ -108,13 +89,17 @@ class AskerEachQuestion extends React.Component {
         first_name: "",
         last_name: ""
       },
-      question: {},
+      question: {
+        user_id: "",
+        question: "",
+        title: "",
+        id: null
+      },
       topics: [],
       answers: [],
       answerCount: null,
       users: [],
       expanded: false,
-      anchorEl: null,
       dialogOpen: false
     };
   }
@@ -129,7 +114,12 @@ class AskerEachQuestion extends React.Component {
       .then(res => {
         // console.log(res.data);
         this.setState({
-          question: res.data,
+          question: {
+            user_id: res.data.user_id,
+            question: res.data.question,
+            title: res.data.title,
+            id: res.data.id
+          },
           topics: res.data.topics,
           answers: res.data.answers,
           answerCount: res.data.answers.length
@@ -172,6 +162,24 @@ class AskerEachQuestion extends React.Component {
     }
   };
 
+  // Edit Question Button
+  handleChanges = e => {
+    e.persist();
+    const { name, value } = e.target;
+    this.setState(prevState => ({
+      question: {
+        ...prevState.question,
+        [name]: value
+      }
+    }));
+  };
+
+  submitForm = e => {
+    e.preventDefault();
+    // invoke updateQuestion from AskerDashboard.js
+    this.props.updateQuestion(this.state.question);
+  };
+
   // Material UI Methods
 
   handleExpandClick = () => {
@@ -180,17 +188,6 @@ class AskerEachQuestion extends React.Component {
     });
   };
 
-  handlePopoverOpen = event =>
-    this.setState({
-      anchorEl: event.currentTarget
-    });
-
-  handlePopoverClose = () =>
-    this.setState({
-      anchorEl: null
-    });
-
-  // Handlers for dialogue
   handleClickOpen = () =>
     this.setState({
       dialogOpen: true
@@ -202,17 +199,16 @@ class AskerEachQuestion extends React.Component {
     });
 
   render() {
-    const open = Boolean(this.state.anchorEl);
     const { classes } = this.props,
       {
         expanded,
-        anchorEl,
         dialogOpen,
         thisUser,
         question,
         answerCount,
         topics,
-        answers
+        answers,
+        users
       } = this.state;
 
     // condition: Render Answers Div if question has answers (answerCount > 0)
@@ -223,14 +219,14 @@ class AskerEachQuestion extends React.Component {
             <strong>Expert Answers </strong>
           </Typography> */}
           <List>
-            {this.state.answers.map(answer => {
+            {answers.map(answer => {
               return (
-                <>
+                <div key={answer.id}>
                   <Divider />
-                  <ListItem key={answer.id}>
+                  <ListItem >
                     "{answer.answer}" -{" "}
                     <strong>
-                      {this.state.users.map(user => {
+                      {users.map(user => {
                         if (user.id === answer.user_id) {
                           return (
                             <Link to={`/users/${user.id}`} key={user.id}>
@@ -243,7 +239,7 @@ class AskerEachQuestion extends React.Component {
                       })}
                     </strong>
                   </ListItem>
-                </>
+                </div>
               );
             })}
           </List>
@@ -266,15 +262,76 @@ class AskerEachQuestion extends React.Component {
           }
           action={
             <>
-              <IconButton
-                aria-label="Settings"
-                href={`/questions/${this.state.question.id}/update`}
-              >
-                <Edit />
+              <IconButton aria-label="Settings" onClick={this.handleClickOpen}>
+                <Edit  />
               </IconButton>
               <IconButton aria-label="Settings" onClick={this.deleteButton}>
                 <Delete />
               </IconButton>
+              {/* FOR UPDATE POP UP */}
+              <Dialog
+                open={dialogOpen}
+                onClose={this.handleClose}
+                className={classes.dialog}
+                aria-labelledby="form-dialog-title"
+              >
+                <DialogTitle id="form-dialog-title">
+                  Edit Your Question
+                </DialogTitle>
+                <DialogContent className="form">
+                  <TextField
+                    value={question.title}
+                    name="title"
+                    label="Title"
+                    placeholder="Question title..."
+                    multiline
+                    className={classes.textField}
+                    onChange={this.handleChanges}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                  <TextField
+                    value={question.question}
+                    name="question"
+                    label="Question"
+                    placeholder="I want to know..."
+                    multiline
+                    className={classes.textField}
+                    onChange={this.handleChanges}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                </DialogContent>
+                <DialogActions className="formButtons">
+                  <Button
+                    onClick={this.handleClose}
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                  >
+                    Cancel
+                  </Button>
+                  {question.title && question.question ? (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      onClick={this.submitForm}
+                    >
+                      Submit
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disabled
+                      className={classes.button}
+                    >
+                      Submit
+                    </Button>
+                  )}
+                </DialogActions>
+              </Dialog>
             </>
           }
           title={thisUser.username}

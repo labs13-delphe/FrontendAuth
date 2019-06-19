@@ -11,15 +11,8 @@ import AskerQuestionsList from "./AskerQuestionsList";
 import {
   AppBar,
   CssBaseline,
-  Divider,
-  Drawer,
-  Hidden,
-  List,
   Button,
   Paper,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Toolbar,
   Typography
 } from "@material-ui/core";
@@ -33,7 +26,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 // Custom Styles
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "flex",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -45,7 +38,9 @@ const styles = theme => ({
 
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
+    display: "flex",
+    justifyContent: "center"
   },
   spaceBetween: {
     display: "flex",
@@ -58,7 +53,7 @@ const styles = theme => ({
     alignItems: "center",
     flexDirection: "column",
     maxWidth: 680,
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
   },
@@ -70,19 +65,6 @@ const styles = theme => ({
     justifyContent: "center",
     overflowY: "scroll",
     maxHeight: 860
-  },
-  shortColumn: {
-    flexGrow: 1,
-    padding: theme.spacing(1),
-    display: "flex",
-    justifyContent: "center",
-    [theme.breakpoints.down("md")]: {
-      width: "100%"
-    }
-  },
-  flex: {
-    display: "flex",
-    flexDirection: "column"
   }
 });
 
@@ -147,7 +129,22 @@ class AskerDashboard extends React.Component {
       });
   };
 
-  // PUT Question function on App.js (Update form is also imported/rendered on App.js)
+  // PUT Question
+  updateQuestion = question => {
+    axios
+      .put(
+        `https://delphe-backend.herokuapp.com/api/questions/${question.id}`,
+        question
+      )
+      .then(res => {
+        console.log(res.data);
+        // reload window
+        window.location.reload();
+      })
+      .catch(err => {
+        console.log("Can't update!", err);
+      });
+  };
 
   render() {
     const { container, classes } = this.props,
@@ -185,8 +182,7 @@ class AskerDashboard extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
-            
-            <Typography variant="h4">My Questions</Typography>
+            <Typography variant="h4">Your Questions</Typography>
             <Typography variant="h5">
               {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
               {this.state.answerCount} Answers Received
@@ -196,6 +192,7 @@ class AskerDashboard extends React.Component {
               <AskerQuestionsList
                 questions={this.state.questions}
                 deleteQuestion={this.deleteQuestion}
+                updateQuestion={this.updateQuestion}
               />
             </Paper>
           </div>

@@ -13,6 +13,7 @@ const AskerQuestionsList = props => {
           question={question}
           users={props.users}
           deleteQuestion={props.deleteQuestion}
+          updateQuestion={props.updateQuestion}
         />
       ))}
     </div>
