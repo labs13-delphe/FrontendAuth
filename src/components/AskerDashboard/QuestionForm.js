@@ -186,7 +186,7 @@ class QuestionForm extends React.Component {
             <TextField
               value={title}
               name="title"
-              label="Question Title"
+              label="Title"
               placeholder="Question Title"
               multiline
               className={classes.titleInput}
@@ -197,7 +197,7 @@ class QuestionForm extends React.Component {
             <TextField
               value={question}
               name="question"
-              label="I want to know..."
+              label="Question"
               placeholder="I want to know..."
               multiline
               className={classes.questionInput}

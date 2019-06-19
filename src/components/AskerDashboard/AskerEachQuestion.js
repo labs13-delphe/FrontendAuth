@@ -3,9 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-// Components
-import QuestionUpdateForm from "./QuestionUpdateForm";
-
 // Material UI
 import {
   withStyles,
@@ -84,12 +81,38 @@ const styles = theme => ({
     alignItems: "center",
     width: 500
   },
+  dialog: {
+    // width: 580,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    // background: "orange"
+
+  },
   form: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    background: "orange"
   },
+  // formInput: {
+  //   display: "flex",
+  //   justifyContent: "center",
+  // },
   textField: {
-    width: 500
+    width: "90%",
+    margin: theme.spacing(1)
+
+  },
+  formButtons: {
+    display: "flex",
+    width: "100%",
+    justifyContent: "space-evenly",
+  },
+  button: {
+    margin: theme.spacing(1)
   },
   select: {
     width: 200
@@ -98,12 +121,8 @@ const styles = theme => ({
     margin: theme.spacing(1),
     minWidth: 120
   },
-  dialogue: {
-    width: 580
-  },
-  button: {
-    margin: theme.spacing(1)
-  }
+  
+  
 });
 
 class AskerEachQuestion extends React.Component {
@@ -225,7 +244,7 @@ class AskerEachQuestion extends React.Component {
       anchorEl: null
     });
 
-  // Handlers for dialogue
+  // Handlers for Dialogue Edit Question Pop-Up
   handleClickOpen = () =>
     this.setState({
       dialogOpen: true
@@ -247,7 +266,8 @@ class AskerEachQuestion extends React.Component {
         question,
         answerCount,
         topics,
-        answers
+        answers,
+        users
       } = this.state;
 
     // condition: Render Answers Div if question has answers (answerCount > 0)
@@ -258,14 +278,14 @@ class AskerEachQuestion extends React.Component {
             <strong>Expert Answers </strong>
           </Typography> */}
           <List>
-            {this.state.answers.map(answer => {
+            {answers.map(answer => {
               return (
                 <div>
                   <Divider />
                   <ListItem key={answer.id}>
                     "{answer.answer}" -{" "}
                     <strong>
-                      {this.state.users.map(user => {
+                      {users.map(user => {
                         if (user.id === answer.user_id) {
                           return (
                             <Link to={`/users/${user.id}`} key={user.id}>
@@ -301,13 +321,6 @@ class AskerEachQuestion extends React.Component {
           }
           action={
             <>
-              {/* <IconButton
-                aria-label="Settings"
-                href={`/questions/${this.state.question.id}/update`}
-              >
-                <Edit />
-              </IconButton> */}
-
               <IconButton aria-label="Settings">
                 <Edit onClick={this.handleClickOpen} />
               </IconButton>
@@ -321,50 +334,60 @@ class AskerEachQuestion extends React.Component {
                 className={classes.dialog}
                 aria-labelledby="form-dialog-title"
               >
-                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-                <form>
-                  <TextField
-                    value={question.title}
-                    name="title"
-                    label="Title"
-                    placeholder="Question title..."
-                    multiline
-                    // className={classes.questionInput}
-                    onChange={this.handleChanges}
-                    margin="normal"
-                    variant="outlined"
-                  />
-                  <TextField
-                    value={question.question}
-                    name="question"
-                    label="Question"
-                    placeholder="I want to know..."
-                    multiline
-                    // className={classes.questionInput}
-                    onChange={this.handleChanges}
-                    margin="normal"
-                    variant="outlined"
-                  />
-                  {question.title && question.question ? (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      className={classes.button}
-                      onClick={this.submitForm}
-                    >
-                      Submit
+                <DialogTitle id="form-dialog-title">
+                  Edit Your Question
+                </DialogTitle>
+                <DialogContent className="form">
+                    <TextField
+                      value={question.title}
+                      name="title"
+                      label="Title"
+                      placeholder="Question title..."
+                      multiline
+                      className={classes.textField}
+                      onChange={this.handleChanges}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      value={question.question}
+                      name="question"
+                      label="Question"
+                      placeholder="I want to know..."
+                      multiline
+                      className={classes.textField}
+                      onChange={this.handleChanges}
+                      margin="normal"
+                      variant="outlined"
+                    />
+                </DialogContent>
+                  <DialogActions className="formButtons">
+                    <Button onClick={this.handleClose} 
+                    variant="contained" color="primary" className={classes.button}>
+                      Cancel
                     </Button>
-                  ) : (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      disabled
-                      className={classes.button}
-                    >
-                      Submit
-                    </Button>
-                  )}
-                </form>
+                    {question.title && question.question ? (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={this.submitForm}
+                      >
+                        Submit
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        disabled
+                        className={classes.button}
+                      >
+                        Submit
+                      </Button>
+                    )}
+                  </DialogActions>
+                
+                
               </Dialog>
             </>
           }
