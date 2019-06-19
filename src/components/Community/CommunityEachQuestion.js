@@ -29,13 +29,18 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { red } from "@material-ui/core/colors";
 import clsx from "clsx";
 
-
 // Custom Styles
 const styles = theme => ({
   card: {
     width: "100%",
     marginBottom: 5,
     padding: theme.spacing(1)
+  },
+  cardTitle: {
+    display: "flex",
+    flexDirection: "row",
+    width: "35%",
+    justifyContent: "space-between"
   },
   topicButton: {
     margin: theme.spacing(1)
@@ -131,31 +136,19 @@ class CommunityEachQuestion extends React.Component {
     });
   };
 
-
-
   render() {
     const { classes } = this.props,
-    {
-      expanded,
-      question,
-      answerCount,
-      topics,
-      answers,
-      users
-    } = this.state;
+      { expanded, question, answerCount, topics, answers, users } = this.state;
     // condition: Render Answers Div if question has answers (answerCount > 0)
     const answersDiv =
       this.state.answerCount > 0 ? (
         <div className="answers-div">
-          {/* <Typography>
-            <strong>Expert Answers </strong>
-          </Typography> */}
           <List>
             {answers.map(answer => {
               return (
                 <div key={answer.id}>
                   <Divider />
-                  <ListItem >
+                  <ListItem>
                     "{answer.answer}" -{" "}
                     <strong>
                       {users.map(user => {
@@ -182,16 +175,55 @@ class CommunityEachQuestion extends React.Component {
 
     const answersText =
       this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
+
+    const cardAsker = this.state.users.map(user => {
+      // Get Asker's First, Last, and username
+      if (user.id === this.state.question.user_id) {
+        return (
+          <div className={classes.cardTitle} key={user.id}>
+            <Typography variant="h5">
+              {" "}
+              {user.first_name} {user.last_name}
+            </Typography>{" "}
+            <Typography variant="h6">@{user.username}</Typography>
+            <Typography variant="h6">
+              <Link to={`/users/${user.id}`}> View Profile</Link>
+            </Typography>
+          </div>
+        );
+      } else {
+        return null;
+      }
+    });
     return (
-      <div>
+      <Card>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="Recipe" className={classes.avatar}>
+              {/* Getting Asker's Initials for Avatar */}
+              {this.state.users.map(user => {
+                if (user.id === this.state.question.user_id) {
+                  return (
+                    <div className="user-info-div" key={user.id}>
+                      {user.first_name.substring(0, 1)}{" "}
+                      {user.last_name.substring(0, 1)}
+                    </div>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+            </Avatar>
+          }
+          title={cardAsker}
+          subheader="asker"
+        />
+
         <div className="question-div">
           {this.state.users.map(user => {
             if (user.id === this.state.question.user_id) {
               return (
-                <div
-                  className="user-info-div"
-                  key={user.id}
-                >
+                <div className="user-info-div" key={user.id}>
                   <p>
                     {user.first_name} {user.last_name} @{user.username}
                     <Link to={`/users/${user.id}`}>View Profile</Link>
@@ -219,7 +251,7 @@ class CommunityEachQuestion extends React.Component {
           </p>
         </div>
         {answersDiv}
-      </div>
+      </Card>
     );
   }
 }
