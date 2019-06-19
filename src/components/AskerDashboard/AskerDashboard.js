@@ -1,6 +1,8 @@
 // Packages
 import React from "react";
 import axios from "axios";
+import firebase from "firebase";
+import { Link } from "react-router-dom";
 
 // Components
 import QuestionForm from "./QuestionForm";
@@ -26,7 +28,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 // Custom Styles
 const styles = theme => ({
   root: {
-    display: "flex",
+    display: "flex"
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -167,14 +169,20 @@ class AskerDashboard extends React.Component {
               <Typography variant="h6" noWrap>
                 {userInfo.username}'s Dashboard
               </Typography>
-              <Button color="inherit" href="/community">
-                Community
-              </Button>
-              <Button color="inherit" href={`/users/${userInfo.id}`}>
-                Profile
-              </Button>
+              <Link to="/community">
+                <Button color="inherit" href="/community">
+                  Community
+                </Button>
+              </Link>
+              <Link to={`/users/${userInfo.id}`}>
+                <Button color="inherit" href={`/users/${userInfo.id}`}>
+                  Profile
+                </Button>
+              </Link>
 
-              <Button color="inherit">Logout</Button>
+              <Button color="inherit" onClick={() => firebase.auth().signOut()}>
+                Logout
+              </Button>
             </div>
           </Toolbar>
         </AppBar>
@@ -183,6 +191,7 @@ class AskerDashboard extends React.Component {
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
             <Typography variant="h4">Your Questions</Typography>
+
             <Typography variant="h5">
               {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
               {this.state.answerCount} Answers Received
