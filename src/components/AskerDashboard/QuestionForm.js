@@ -23,9 +23,6 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "center",
     maxWidth: "100%",
-    [theme.breakpoints.down("md")]: {
-      width: "100%"
-    }
   },
   form: {
     display: "flex",
@@ -42,7 +39,7 @@ const styles = theme => ({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       flexDirection: "column"
     }
   },
@@ -50,7 +47,7 @@ const styles = theme => ({
     margin: theme.spacing(1),
     minWidth: 200,
     width: "35%",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
   },
@@ -58,7 +55,7 @@ const styles = theme => ({
     margin: theme.spacing(1),
     minWidth: 200,
     width: "60%",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
   },
@@ -68,7 +65,7 @@ const styles = theme => ({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       alignItems: "center"
     }
@@ -77,7 +74,7 @@ const styles = theme => ({
     margin: theme.spacing(1),
     minWidth: 200,
     width: "35%",
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "60%"
     }
   },
