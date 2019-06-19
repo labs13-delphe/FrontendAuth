@@ -55,7 +55,7 @@ class App extends Component {
         uniqueIdentifier: user.email,
         gUser: user
       });
-      this.props.history.push("/secret/dashboard");
+      //this.props.history.push("/secret/dashboard");
     });
   };
 
