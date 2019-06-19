@@ -221,9 +221,9 @@ class AskerEachQuestion extends React.Component {
           <List>
             {answers.map(answer => {
               return (
-                <div>
+                <div key={answer.id}>
                   <Divider />
-                  <ListItem key={answer.id}>
+                  <ListItem >
                     "{answer.answer}" -{" "}
                     <strong>
                       {users.map(user => {
@@ -262,8 +262,8 @@ class AskerEachQuestion extends React.Component {
           }
           action={
             <>
-              <IconButton aria-label="Settings">
-                <Edit onClick={this.handleClickOpen} />
+              <IconButton aria-label="Settings" onClick={this.handleClickOpen}>
+                <Edit  />
               </IconButton>
               <IconButton aria-label="Settings" onClick={this.deleteButton}>
                 <Delete />
