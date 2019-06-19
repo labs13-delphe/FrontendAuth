@@ -219,7 +219,7 @@ class CommunityEachQuestion extends React.Component {
           subheader="asker"
         />
 
-        <div className="question-div">
+        {/* <div className="question-div">
           {this.state.users.map(user => {
             if (user.id === this.state.question.user_id) {
               return (
@@ -250,7 +250,53 @@ class CommunityEachQuestion extends React.Component {
             ))}
           </p>
         </div>
-        {answersDiv}
+        {answersDiv} */}
+        <CardContent>
+          <Typography
+            variant="h4"
+            color="textSecondary"
+            component="p"
+            gutterBottom
+          >
+            {question.title}
+          </Typography>
+          <Typography variant="h5" color="textSecondary" component="p">
+            {question.question}
+          </Typography>
+          <Typography variant="h6" color="textSecondary" component="p">
+            {answerCount} {answersText}
+          </Typography>
+          <div className="topics-div">
+            {topics.map(topic => (
+              <Button
+                variant="contained"
+                size="small"
+                color="primary"
+                className={classes.topicButton}
+                key={topic.id}
+              >
+                {topic.topic}
+              </Button>
+            ))}
+          </div>
+        </CardContent>
+        <Divider />
+        <CardActions>
+          <Typography>View Answers: ({answerCount}) </Typography>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded
+            })}
+            onClick={this.handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="Show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Typography paragraph>{answersDiv}</Typography>
+        </Collapse>
       </Card>
     );
   }
