@@ -124,7 +124,6 @@ class Community extends React.Component {
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
             <Typography variant="h4">Community Thread</Typography>
-
             <Paper className={classes.column}>
               <CommunityQuestionList questions={this.state.questions} />
             </Paper>
