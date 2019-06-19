@@ -1,6 +1,7 @@
 // Packages
 import React from "react";
 import axios from "axios";
+import firebase from "firebase";
 
 // Components
 import QuestionForm from "./QuestionForm";
@@ -177,7 +178,9 @@ class AskerDashboard extends React.Component {
                 Profile
               </Button>
 
-              <Button color="inherit">Logout</Button>
+              <Button color="inherit" onClick={() => firebase.auth().signOut()}>
+                Logout
+              </Button>
             </div>
           </Toolbar>
         </AppBar>
@@ -185,7 +188,6 @@ class AskerDashboard extends React.Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
-            
             <Typography variant="h4">My Questions</Typography>
             <Typography variant="h5">
               {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}

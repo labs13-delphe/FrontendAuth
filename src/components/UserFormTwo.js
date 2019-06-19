@@ -1,18 +1,26 @@
 import React from "react";
+import firebase from "firebase";
 
 import "./UserFormCss.css";
 
-import { TextField, Button, withStyles } from "@material-ui/core";
-
-// Paper,
-// MenuItem,
-// InputLabel,
-// FormControl,
-// Select,
+import {
+  TextField,
+  Button,
+  withStyles,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  Paper
+} from "@material-ui/core";
 
 const styles = theme => ({
   button: {
     margin: theme.spacing(1)
+  },
+  buttons: {
+    display: "flex",
+    JustifyContent: "flex-end"
   },
   input: {
     display: "none"
@@ -63,6 +71,14 @@ const styles = theme => ({
   },
   select: {
     width: 200
+  },
+  spaceBetween: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%"
+  },
+  center: {
+    margin: "0 auto"
   }
 });
 
@@ -107,100 +123,115 @@ class UserForm extends React.Component {
     console.log("user form props", this.props);
     console.log("user form state", this.state);
     return (
-      <div>
-        <h2>User Form</h2>
-        <form onSubmit={this.submitUser} className="user-form">
-          <TextField
-            label="First Name"
-            type="text"
-            name="first_name"
-            value={this.state.first_name}
-            placeholder="First Name"
-            onChange={this.handleChange}
-            className={classes.textField}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            label="Last Name"
-            type="text"
-            name="last_name"
-            value={this.state.last_name}
-            placeholder="Last Name"
-            onChange={this.handleChange}
-            className={classes.textField}
-            margin="normal"
-            variant="outlined"
-          />
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <div className={classes.spaceBetween}>
+              <Typography variant="h6" noWrap>
+                Welcome! Create your Profile!
+              </Typography>
 
-          <TextField
-            label="Email"
-            type="email"
-            name="email"
-            value={this.state.email}
-            placeholder="Email"
-            onChange={this.handleChange}
-            className={classes.textField}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            label="Username"
-            type="text"
-            name="username"
-            value={this.state.username}
-            placeholder="Username"
-            onChange={this.handleChange}
-            className={classes.textField}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            label="Bio"
-            type="text"
-            name="bio"
-            value={this.state.bio}
-            placeholder="bio"
-            onChange={this.handleChange}
-            className={classes.textField}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            label="user_type"
-            type="text"
-            name="user_type"
-            value={this.state.user_type}
-            placeholder="user_type"
-            onChange={this.handleChange}
-            className={classes.textField}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            label="image_url"
-            type="text"
-            name="image_url"
-            value={this.state.image_url}
-            placeholder="image_url"
-            onChange={this.handleChange}
-            className={classes.textField}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            label="hourly_rate"
-            type="int"
-            name="hourly_rate"
-            value={this.state.hourly_rate}
-            placeholder="hourly_rate"
-            onChange={this.handleChange}
-            className={classes.textField}
-            margin="normal"
-            variant="outlined"
-          />
-          <Button onClick={this.submitUser}>Submit</Button>
-        </form>
+              <Button color="inherit" onClick={() => firebase.auth().signOut()}>
+                Logout
+              </Button>
+            </div>
+          </Toolbar>
+        </AppBar>
+        <Paper className={classes.center}>
+          <form onSubmit={this.submitUser} className="user-form">
+            <TextField
+              label="First Name"
+              type="text"
+              name="first_name"
+              value={this.state.first_name}
+              placeholder="First Name"
+              onChange={this.handleChange}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              label="Last Name"
+              type="text"
+              name="last_name"
+              value={this.state.last_name}
+              placeholder="Last Name"
+              onChange={this.handleChange}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+
+            <TextField
+              label="Email"
+              type="email"
+              name="email"
+              value={this.state.email}
+              placeholder="Email"
+              onChange={this.handleChange}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              label="Username"
+              type="text"
+              name="username"
+              value={this.state.username}
+              placeholder="Username"
+              onChange={this.handleChange}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              label="Bio"
+              type="text"
+              name="bio"
+              value={this.state.bio}
+              placeholder="bio"
+              onChange={this.handleChange}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              label="user_type"
+              type="text"
+              name="user_type"
+              value={this.state.user_type}
+              placeholder="user_type"
+              onChange={this.handleChange}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              label="image_url"
+              type="text"
+              name="image_url"
+              value={this.state.image_url}
+              placeholder="image_url"
+              onChange={this.handleChange}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              label="hourly_rate"
+              type="int"
+              name="hourly_rate"
+              value={this.state.hourly_rate}
+              placeholder="hourly_rate"
+              onChange={this.handleChange}
+              className={classes.textField}
+              margin="normal"
+              variant="outlined"
+            />
+            <Button onClick={this.submitUser}>Submit</Button>
+          </form>
+        </Paper>
       </div>
     );
   }

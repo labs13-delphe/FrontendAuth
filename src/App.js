@@ -52,7 +52,7 @@ class App extends Component {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({
         isSignedIn: !!user,
-        uniqueIdentifier: user.email,
+        //uniqueIdentifier: user.email,
         gUser: user
       });
       this.props.history.push("/secret/dashboard");
