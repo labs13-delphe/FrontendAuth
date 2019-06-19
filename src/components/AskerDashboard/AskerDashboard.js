@@ -26,7 +26,9 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 // Custom Styles
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "flex",
+    justifyContent: "center",
+    //background: "pink"
   },
   menuButton: {
     marginRight: theme.spacing(2),
