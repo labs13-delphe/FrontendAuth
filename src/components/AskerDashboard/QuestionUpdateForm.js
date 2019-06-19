@@ -85,9 +85,10 @@ class QuestionUpdateForm extends React.Component {
             onChange={this.handleChanges}
             placeholder="What's your question?"
           />
-          <input type="submit" value="submit" />
+          {/* <input type="submit" value="Save Edit" /> */}
         </form>
         <button onClick={this.cancelButton}>Cancel</button>
+        <button onClick={this.submitForm}>Save Edit</button>
       </div>
     );
   }
