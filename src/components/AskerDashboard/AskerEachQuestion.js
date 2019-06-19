@@ -14,24 +14,17 @@ import {
   Avatar,
   IconButton,
   Typography,
-  Popover,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField,
   Button,
   List,
   ListItem,
-  ListItemText,
-  Divider,
-  InputLabel,
-  FormControl,
-  Select,
-  MenuItem
+  Divider
 } from "@material-ui/core";
-import { AccountCircle, Edit, Delete } from "@material-ui/icons";
+import { Edit, Delete } from "@material-ui/icons";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { red } from "@material-ui/core/colors";
 import clsx from "clsx";
@@ -46,10 +39,7 @@ const styles = theme => ({
   topicButton: {
     margin: theme.spacing(1)
   },
-  media: {
-    height: 0,
-    paddingTop: "56.25%" // 16:9
-  },
+
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
@@ -63,31 +53,10 @@ const styles = theme => ({
   avatar: {
     backgroundColor: red[500]
   },
-  cardheader: {
-    fontSize: 20
-  },
-  answerCard: {
-    padding: 40
-  },
-  popover: {
-    pointerEvents: "none"
-  },
-  paper: {
-    padding: theme.spacing(1)
-  },
-  bottomRow: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: 500
-  },
   dialog: {
-    // width: 580,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
-    // background: "orange"
-
+    alignItems: "center"
   },
   form: {
     display: "flex",
@@ -97,32 +66,18 @@ const styles = theme => ({
     width: "100%",
     background: "orange"
   },
-  // formInput: {
-  //   display: "flex",
-  //   justifyContent: "center",
-  // },
   textField: {
     width: "90%",
     margin: theme.spacing(1)
-
   },
   formButtons: {
     display: "flex",
     width: "100%",
-    justifyContent: "space-evenly",
+    justifyContent: "space-evenly"
   },
   button: {
     margin: theme.spacing(1)
-  },
-  select: {
-    width: 200
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120
-  },
-  
-  
+  }
 });
 
 class AskerEachQuestion extends React.Component {
@@ -145,7 +100,6 @@ class AskerEachQuestion extends React.Component {
       answerCount: null,
       users: [],
       expanded: false,
-      anchorEl: null,
       dialogOpen: false
     };
   }
@@ -222,7 +176,7 @@ class AskerEachQuestion extends React.Component {
 
   submitForm = e => {
     e.preventDefault();
-    // invoke updateQuestion from App.js
+    // invoke updateQuestion from AskerDashboard.js
     this.props.updateQuestion(this.state.question);
   };
 
@@ -234,17 +188,6 @@ class AskerEachQuestion extends React.Component {
     });
   };
 
-  handlePopoverOpen = event =>
-    this.setState({
-      anchorEl: event.currentTarget
-    });
-
-  handlePopoverClose = () =>
-    this.setState({
-      anchorEl: null
-    });
-
-  // Handlers for Dialogue Edit Question Pop-Up
   handleClickOpen = () =>
     this.setState({
       dialogOpen: true
@@ -256,11 +199,9 @@ class AskerEachQuestion extends React.Component {
     });
 
   render() {
-    const open = Boolean(this.state.anchorEl);
     const { classes } = this.props,
       {
         expanded,
-        anchorEl,
         dialogOpen,
         thisUser,
         question,
@@ -327,7 +268,7 @@ class AskerEachQuestion extends React.Component {
               <IconButton aria-label="Settings" onClick={this.deleteButton}>
                 <Delete />
               </IconButton>
-              {/* FOR UPDATE POPOVER */}
+              {/* FOR UPDATE POP UP */}
               <Dialog
                 open={dialogOpen}
                 onClose={this.handleClose}
@@ -338,56 +279,58 @@ class AskerEachQuestion extends React.Component {
                   Edit Your Question
                 </DialogTitle>
                 <DialogContent className="form">
-                    <TextField
-                      value={question.title}
-                      name="title"
-                      label="Title"
-                      placeholder="Question title..."
-                      multiline
-                      className={classes.textField}
-                      onChange={this.handleChanges}
-                      margin="normal"
-                      variant="outlined"
-                    />
-                    <TextField
-                      value={question.question}
-                      name="question"
-                      label="Question"
-                      placeholder="I want to know..."
-                      multiline
-                      className={classes.textField}
-                      onChange={this.handleChanges}
-                      margin="normal"
-                      variant="outlined"
-                    />
+                  <TextField
+                    value={question.title}
+                    name="title"
+                    label="Title"
+                    placeholder="Question title..."
+                    multiline
+                    className={classes.textField}
+                    onChange={this.handleChanges}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                  <TextField
+                    value={question.question}
+                    name="question"
+                    label="Question"
+                    placeholder="I want to know..."
+                    multiline
+                    className={classes.textField}
+                    onChange={this.handleChanges}
+                    margin="normal"
+                    variant="outlined"
+                  />
                 </DialogContent>
-                  <DialogActions className="formButtons">
-                    <Button onClick={this.handleClose} 
-                    variant="contained" color="primary" className={classes.button}>
-                      Cancel
+                <DialogActions className="formButtons">
+                  <Button
+                    onClick={this.handleClose}
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                  >
+                    Cancel
+                  </Button>
+                  {question.title && question.question ? (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      onClick={this.submitForm}
+                    >
+                      Submit
                     </Button>
-                    {question.title && question.question ? (
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                        onClick={this.submitForm}
-                      >
-                        Submit
-                      </Button>
-                    ) : (
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        disabled
-                        className={classes.button}
-                      >
-                        Submit
-                      </Button>
-                    )}
-                  </DialogActions>
-                
-                
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      disabled
+                      className={classes.button}
+                    >
+                      Submit
+                    </Button>
+                  )}
+                </DialogActions>
               </Dialog>
             </>
           }
