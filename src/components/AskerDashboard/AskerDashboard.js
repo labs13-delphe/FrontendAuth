@@ -59,14 +59,15 @@ const styles = theme => ({
       width: "100%"
     }
   },
-  column: {
+  Paper: {
     flexGrow: 1,
     padding: theme.spacing(1),
     width: 680,
     display: "flex",
     justifyContent: "center",
     overflowY: "scroll",
-    maxHeight: 860
+    maxHeight: 860,
+    background: "#EBEBEA"
   }
 });
 
@@ -154,7 +155,7 @@ class AskerDashboard extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
+        {/* <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             <IconButton
               color="inherit"
@@ -185,7 +186,7 @@ class AskerDashboard extends React.Component {
               </Button>
             </div>
           </Toolbar>
-        </AppBar>
+        </AppBar> */}
 
         <main className={classes.content}>
           <div className={classes.toolbar} />
@@ -197,7 +198,7 @@ class AskerDashboard extends React.Component {
               {this.state.answerCount} Answers Received
             </Typography>
             <QuestionForm />
-            <Paper className={classes.column}>
+            <Paper className={classes.Paper}>
               <AskerQuestionsList
                 questions={this.state.questions}
                 deleteQuestion={this.deleteQuestion}

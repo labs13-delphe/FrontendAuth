@@ -55,7 +55,7 @@ const styles = theme => ({
       width: "100%"
     }
   },
-  column: {
+  paper: {
     flexGrow: 1,
     padding: theme.spacing(1),
     width: 680,
@@ -74,7 +74,7 @@ class Community extends React.Component {
 
   componentDidMount() {
     // GET ALL Questions data
-    const endpoint = `https://delphe-backend.herokuapp.com/api/questions`;
+    const endpoint = "https://delphe-backend.herokuapp.com/api/questions";
     axios
       .get(endpoint)
       .then(res => {
@@ -92,7 +92,7 @@ class Community extends React.Component {
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
+        {/* <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             <IconButton
               color="inherit"
@@ -118,13 +118,13 @@ class Community extends React.Component {
               <Button color="inherit">Logout</Button>
             </div>
           </Toolbar>
-        </AppBar>
+        </AppBar> */}
 
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
             <Typography variant="h4">Community Thread</Typography>
-            <Paper className={classes.column}>
+            <Paper className={classes.paper}>
               <CommunityQuestionList questions={this.state.questions} />
             </Paper>
           </div>

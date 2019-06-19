@@ -7,9 +7,9 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 // import NavBar from './components/NavBar'
 
 // Components
+import NavBar from "./components/NavBar.js";
 import Secret from "./components/Secret.js";
 import Dashboard from "./components/Dashboard.js";
-import QuestionUpdateForm from "./components/AskerDashboard/QuestionUpdateForm.js";
 import UserProfile from "./components/Users/UserProfile";
 import Community from "./components/Community/Community";
 
@@ -55,26 +55,10 @@ class App extends Component {
         //uniqueIdentifier: user.email,
         gUser: user
       });
-      this.props.history.push("/secret/dashboard");
+      //this.props.history.push("/secret/dashboard");
     });
   };
 
-  // UPDATE Question Function
-  updateQuestion = question => {
-    axios
-      .put(
-        `https://delphe-backend.herokuapp.com/api/questions/${question.id}`,
-        question
-      )
-      .then(res => {
-        console.log(res.data);
-        // redirect to dashboard:
-        this.props.history.push("/dashboard");
-      })
-      .catch(err => {
-        console.log("Can't update!", err);
-      });
-  };
 
   render() {
     console.log("app state", this.state);
@@ -84,6 +68,7 @@ class App extends Component {
         {/* {this.props.history.push("/secret/dashboard")} */}
         {this.state.isSignedIn ? (
           <div>
+            <NavBar/>
             <h1>Welcome to Delphe</h1>
             <button onClick={() => firebase.auth().signOut()}>Sign Out!</button>
             <Link to="/secret">
@@ -109,15 +94,7 @@ class App extends Component {
               path="/dashboard"
               render={props => <Dashboard {...props} />}
             /> */}
-            <Route
-              path="/questions/:id/update"
-              render={props => (
-                <QuestionUpdateForm
-                  {...props}
-                  updateQuestion={this.updateQuestion}
-                />
-              )}
-            />
+
             <Route
               path="/users/:id"
               render={props => <UserProfile {...props} />}

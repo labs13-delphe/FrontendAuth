@@ -109,14 +109,14 @@ class Secret extends Component {
         {/* {this.getUserInfo()} */}
 
         {/* Can use until when we get our registration/login totally functioning  */}
-        <button onClick={this.viewAskerDashboard}>
+        {/* <button onClick={this.viewAskerDashboard}>
           {" "}
           Pretend an Asker is Signed In{" "}
         </button>
         <button onClick={this.viewExpertDashboard}>
           {" "}
           Pretend an Expert is Signed In{" "}
-        </button>
+        </button> */}
 
         {//this.state.questions.length
         localStorage.getItem("user_id") ? (
