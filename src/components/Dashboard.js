@@ -1,6 +1,4 @@
 import React from "react";
-// import { Link } from "react-router-dom";
-//**** took care of netlify bugs */
 import axios from "axios";
 
 // Components
@@ -8,6 +6,8 @@ import AskerDashboard from "./AskerDashboard/AskerDashboard";
 import ExpertDashboard from "./ExpertDashboard/ExpertDashboard";
 
 const Dashboard = props => {
+
+  // Post Answer Method for Expert Dashboard
   const postAnswer = answer => {
     axios
       .post("https://delphe-backend.herokuapp.com/api/answers", answer)
@@ -19,6 +19,7 @@ const Dashboard = props => {
       });
   };
 
+  // Conditionally Render AskerDashboard or ExpertDashboard Based on Local Storage Item
   const Component = localStorage.getItem("user_type") ? (
     localStorage.getItem("user_type") === "asker" ? (
       <AskerDashboard />

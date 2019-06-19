@@ -1,17 +1,124 @@
+// Packages
 import React from "react";
 import axios from "axios";
+
+// Material UI
+import {
+  TextField,
+  Typography,
+  Button,
+  Paper,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  OutlinedInput,
+  Select,
+  withStyles
+} from "@material-ui/core";
+
+// Custom Styles
+const styles = theme => ({
+  paper: {
+    margin: theme.spacing(1),
+    display: "flex",
+    justifyContent: "center",
+    maxWidth: "100%",
+    [theme.breakpoints.down("md")]: {
+      width: "100%"
+    }
+  },
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    //background: "orange",
+    width: 680, // maybe use viewport measure?
+    padding: 10
+  },
+  formTitle: {
+    marginLeft: theme.spacing(1),
+
+  },
+  questionTextFields: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+      [theme.breakpoints.down("md")]: {
+      flexDirection: "column"
+    }
+  },
+  titleInput: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+    width: "35%",
+    [theme.breakpoints.down("md")]: {
+      width: "100%"
+    }
+  },
+  questionInput: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+    width: "60%",
+    [theme.breakpoints.down("md")]: {
+      width: "100%"
+    }
+  },
+
+  bottomRow: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+      alignItems: "center"
+    }
+   
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 200,
+    width: "35%",
+    [theme.breakpoints.down("md")]: {
+      width: "60%"
+    }
+  },
+  select: {
+    width: "100%"
+  },
+  button: {
+    margin: theme.spacing(1),
+
+  },
+});
 
 class QuestionForm extends React.Component {
   state = {
     user_id: localStorage.getItem("user_id"),
     title: "",
     question: "",
-    topic: ""
+    topic: "",
+    topicsList: []
   };
 
+  componentDidMount() {
+    // Get Topics List for Topics Dropdown Menu
+    const endpoint = "https://delphe-backend.herokuapp.com/api/topics";
+    axios
+      .get(endpoint)
+      .then(res => {
+        console.log("Topics List:", res.data);
+        this.setState({ topicsList: res.data });
+      })
+      .catch(err => {
+        console.log("there was a problem getting list of topics");
+      });
+  }
+
+
   handleChanges = e => {
-    const { id, value } = e.target;
-    this.setState({ [id]: value });
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   };
 
   submitForm = e => {
@@ -50,7 +157,7 @@ class QuestionForm extends React.Component {
                   title: "",
                   question: "",
                   topic: ""
-              });
+                });
               })
               .catch(err => {
                 console.log("Post QuestionTopic Error", err);
@@ -58,7 +165,7 @@ class QuestionForm extends React.Component {
           })
           .catch(err => {
             console.log("Post Topic Error", err);
-          });    
+          });
       })
       .catch(err => {
         console.log("Post Question Error", err);
@@ -66,37 +173,86 @@ class QuestionForm extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
+    const { title, question, topic, topicsList } = this.state;
+
+    
     return (
       <div>
-        <h3>Ask A Question</h3>
-        <form onSubmit={this.submitForm}>
-          <input
-            id="title"
-            type="text"
-            value={this.state.title}
-            onChange={this.handleChanges}
-            placeholder="Title"
-          />
-          <input
-            id="question"
-            type="text"
-            value={this.state.question}
-            onChange={this.handleChanges}
-            placeholder="What's your question?"
-          />
-          <input
-            id="topic"
-            type="text"
-            value={this.state.topic}
-            onChange={this.handleChanges}
-            placeholder="Topic"
-          />
-
-          <input type="submit" value="submit" />
-        </form>
+        <Paper className={classes.paper}>
+          <form className={classes.form}>
+            <Typography variant="h6" className={classes.formTitle}>Ask a question</Typography>
+            <div className={classes.questionTextFields}>
+            <TextField
+              value={title}
+              name="title"
+              label="Question Title"
+              placeholder="Question Title"
+              multiline
+              className={classes.titleInput}
+              onChange={this.handleChanges}
+              margin="normal"
+              variant="outlined"
+            />
+            <TextField
+              value={question}
+              name="question"
+              label="I want to know..."
+              placeholder="I want to know..."
+              multiline
+              className={classes.questionInput}
+              onChange={this.handleChanges}
+              margin="normal"
+              variant="outlined"
+            />
+            </div>
+            
+            <div className={classes.bottomRow}>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel htmlFor="outlined-age-simple">Choose a topic</InputLabel>
+                <Select
+                  value={topic}
+                  onChange={this.handleChanges}
+                  className={classes.select}
+                  inputProps={{
+                    name: "topic"
+                  }}
+                  input={<OutlinedInput name="topic" id="outlined-age-simple" />}
+                >
+                  {topicsList.map(topic => (
+                    <MenuItem value={topic.topic} key={topic.id}>
+                      {topic.topic}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              
+              {/* Is there  a title, question and topic on state? (Did the user complete the form? If yes, enable the submit button.) */}
+              {title && question && topic ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  onClick={this.submitForm}
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled
+                  className={classes.button}
+                >
+                  Submit
+                </Button>
+              )}
+            </div>
+          </form>
+        </Paper>
       </div>
     );
   }
 }
 
-export default QuestionForm;
+export default withStyles(styles)(QuestionForm);
