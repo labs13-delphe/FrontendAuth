@@ -186,11 +186,11 @@ class AskerDashboard extends React.Component {
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
             
-            <h1>My Questions</h1>
-            <p>
+            <Typography variant="h4">My Questions</Typography>
+            <Typography variant="h5">
               {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
               {this.state.answerCount} Answers Received
-            </p>
+            </Typography>
             <QuestionForm />
             <Paper className={classes.column}>
               <AskerQuestionsList

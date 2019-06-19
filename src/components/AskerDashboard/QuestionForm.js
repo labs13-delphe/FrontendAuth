@@ -5,11 +5,13 @@ import axios from "axios";
 // Material UI
 import {
   TextField,
+  Typography,
   Button,
   Paper,
   MenuItem,
   InputLabel,
   FormControl,
+  OutlinedInput,
   Select,
   withStyles
 } from "@material-ui/core";
@@ -18,7 +20,8 @@ import {
 const styles = theme => ({
   paper: {
     margin: theme.spacing(1),
-
+    display: "flex",
+    justifyContent: "center",
     maxWidth: "100%",
     [theme.breakpoints.down("md")]: {
       width: "100%"
@@ -27,21 +30,29 @@ const styles = theme => ({
   form: {
     display: "flex",
     flexDirection: "column",
+    //background: "orange",
     width: 680, // maybe use viewport measure?
     padding: 10
   },
+  formTitle: {
+    marginLeft: theme.spacing(1),
+
+  },
   questionTextFields: {
     display: "flex",
-    flexWrap: "wrap",
+    justifyContent: "space-between",
+    alignItems: "center",
     width: "100%",
-    justifyContent: "space-between"
+      [theme.breakpoints.down("md")]: {
+      flexDirection: "column"
+    }
   },
   titleInput: {
     margin: theme.spacing(1),
     minWidth: 200,
     width: "35%",
     [theme.breakpoints.down("md")]: {
-      width: 300
+      width: "100%"
     }
   },
   questionInput: {
@@ -49,7 +60,7 @@ const styles = theme => ({
     minWidth: 200,
     width: "60%",
     [theme.breakpoints.down("md")]: {
-      width: 300
+      width: "100%"
     }
   },
 
@@ -57,13 +68,20 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "100%"
-    // add theme.spacing for both elements then match justifyContent to above
+    width: "100%",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
+      alignItems: "center"
+    }
+   
   },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 200,
-    width: "30%",
+    width: "35%",
+    [theme.breakpoints.down("md")]: {
+      width: "60%"
+    }
   },
   select: {
     width: "100%"
@@ -157,10 +175,13 @@ class QuestionForm extends React.Component {
   render() {
     const { classes } = this.props;
     const { title, question, topic, topicsList } = this.state;
+
+    
     return (
       <div>
         <Paper className={classes.paper}>
           <form className={classes.form}>
+            <Typography variant="h6" className={classes.formTitle}>Ask a question</Typography>
             <div className={classes.questionTextFields}>
             <TextField
               value={title}
@@ -187,8 +208,8 @@ class QuestionForm extends React.Component {
             </div>
             
             <div className={classes.bottomRow}>
-              <FormControl className={classes.formControl}>
-                <InputLabel htmlFor="age-simple">Choose a topic</InputLabel>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel htmlFor="outlined-age-simple">Choose a topic</InputLabel>
                 <Select
                   value={topic}
                   onChange={this.handleChanges}
@@ -196,6 +217,7 @@ class QuestionForm extends React.Component {
                   inputProps={{
                     name: "topic"
                   }}
+                  input={<OutlinedInput name="topic" id="outlined-age-simple" />}
                 >
                   {topicsList.map(topic => (
                     <MenuItem value={topic.topic} key={topic.id}>
@@ -204,6 +226,7 @@ class QuestionForm extends React.Component {
                   ))}
                 </Select>
               </FormControl>
+              
               {/* Is there  a title, question and topic on state? (Did the user complete the form? If yes, enable the submit button.) */}
               {title && question && topic ? (
                 <Button
@@ -227,33 +250,6 @@ class QuestionForm extends React.Component {
             </div>
           </form>
         </Paper>
-
-        {/* <h3>Ask A Question</h3>
-        <form onSubmit={this.submitForm}>
-          <input
-            name="title"
-            type="text"
-            value={this.state.title}
-            onChange={this.handleChanges}
-            placeholder="Title"
-          />
-          <input
-            name="question"
-            type="text"
-            value={this.state.question}
-            onChange={this.handleChanges}
-            placeholder="What's your question?"
-          />
-          <input
-            name="topic"
-            type="text"
-            value={this.state.topic}
-            onChange={this.handleChanges}
-            placeholder="Topic"
-          />
-
-          <input type="submit" value="submit" />
-        </form> */}
       </div>
     );
   }

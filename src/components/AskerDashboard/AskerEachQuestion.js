@@ -145,7 +145,7 @@ class AskerEachQuestion extends React.Component {
     axios
       .get(userEndpoint)
       .then(res => {
-        console.log("this user:", res.data);
+        // console.log("this user:", res.data);
         this.setState({ thisUser: res.data });
       })
       .catch(err => {
