@@ -11,7 +11,8 @@ const QuestionsList = props => {
       <h4>
         {props.questions.map(question => {
           return (
-            <Question key={question.id}
+            <Question
+              key={question.id}
               question={question}
               answers={props.answers}
               id={question.id}
@@ -19,6 +20,7 @@ const QuestionsList = props => {
               QA={props.QA}
               editAnswer={props.editAnswer}
               deleteAnswer={props.deleteAnswer}
+              gUser={props.gUser}
             />
           );
         })}
