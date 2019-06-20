@@ -11,7 +11,12 @@ import {
   AppBar,
   Toolbar,
   Typography,
-  Paper
+  Paper,
+  InputLabel,
+  FormControl,
+  OutlinedInput,
+  Select,
+  MenuItem
 } from "@material-ui/core";
 
 const styles = theme => ({
@@ -70,7 +75,7 @@ const styles = theme => ({
     flexDirection: "column"
   },
   select: {
-    width: 200
+    width: "100%"
   },
   spaceBetween: {
     display: "flex",
@@ -79,7 +84,8 @@ const styles = theme => ({
   },
   center: {
     margin: "0 auto"
-  }
+  },
+  appBarSpacer: theme.mixins.toolbar
 });
 
 class UserForm extends React.Component {
@@ -94,6 +100,13 @@ class UserForm extends React.Component {
     image_url: "",
     hourly_rate: ""
   };
+  componentDidMount() {
+    console.log("G User:", this.props.gUser);
+    this.setState({
+      email: this.props.gUser.email,
+      image_url: this.props.gUser.photoURL
+    });
+  }
 
   handleChange = e => {
     this.setState({
@@ -109,7 +122,7 @@ class UserForm extends React.Component {
       last_name: this.state.last_name,
       email: this.state.email,
       username: this.state.username,
-      password: this.props.uniqueIdentifier, // currently commented out so the password field sent is empty
+      password: this.state.password, // AE - was this.props.uniqueIdentifier
       bio: this.state.bio,
       user_type: this.state.user_type,
       image_url: this.state.image_url,
@@ -120,6 +133,7 @@ class UserForm extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const userTypes = ["asker", "expert"];
     console.log("user form props", this.props);
     console.log("user form state", this.state);
     return (
@@ -129,7 +143,7 @@ class UserForm extends React.Component {
           <Toolbar>
             <div className={classes.spaceBetween}>
               <Typography variant="h6" noWrap>
-                Welcome! Create your Profile!
+                Welcome!
               </Typography>
 
               <Button color="inherit" onClick={() => firebase.auth().signOut()}>
@@ -138,11 +152,12 @@ class UserForm extends React.Component {
             </div>
           </Toolbar>
         </AppBar>
+        <div className={classes.appBarSpacer} />
+
         <Paper className={classes.center}>
+          <Typography variant="h4">Complete Your Profile</Typography>
+
           <form onSubmit={this.submitUser} className="user-form">
-          <Typography variant="h4" className={classes.formTitle}>
-          Create Your Profile
-            </Typography>
             <TextField
               label="First Name"
               type="text"
@@ -200,17 +215,6 @@ class UserForm extends React.Component {
               variant="outlined"
             />
             <TextField
-              label="user_type"
-              type="text"
-              name="user_type"
-              value={this.state.user_type}
-              placeholder="user_type"
-              onChange={this.handleChange}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-            <TextField
               label="image_url"
               type="text"
               name="image_url"
@@ -221,17 +225,39 @@ class UserForm extends React.Component {
               margin="normal"
               variant="outlined"
             />
-            <TextField
-              label="hourly_rate"
-              type="int"
-              name="hourly_rate"
-              value={this.state.hourly_rate}
-              placeholder="hourly_rate"
-              onChange={this.handleChange}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
+            <FormControl variant="outlined">
+              <InputLabel htmlFor="outlined-age-simple">User Type</InputLabel>
+              <Select
+                value={this.state.user_type}
+                onChange={this.handleChange}
+                className={classes.textField}
+                inputProps={{
+                  name: "user_type"
+                }}
+                input={
+                  <OutlinedInput name="user_type" id="outlined-age-simple" />
+                }
+              >
+                {userTypes.map(type => (
+                  <MenuItem value={type} key={type}>
+                    {type}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            {this.state.user_type === "expert" ? (
+              <TextField
+                label="hourly_rate"
+                type="int"
+                name="hourly_rate"
+                value={this.state.hourly_rate}
+                placeholder="hourly_rate"
+                onChange={this.handleChange}
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+              />
+            ) : null}
             <Button onClick={this.submitUser}>Submit</Button>
           </form>
         </Paper>

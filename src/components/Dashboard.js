@@ -1,3 +1,4 @@
+// Packages
 import React from "react";
 import axios from "axios";
 
@@ -31,7 +32,7 @@ const Dashboard = props => {
       />
     )
   ) : (
-    <h2>Please register or login to view this page.</h2>
+    <h2>Please register to view this page.</h2>
   );
 
   return <div> {Component}</div>;
