@@ -6,7 +6,6 @@ import AskerDashboard from "./AskerDashboard/AskerDashboard";
 import ExpertDashboard from "./ExpertDashboard/ExpertDashboard";
 
 const Dashboard = props => {
-
   // Post Answer Method for Expert Dashboard
   const postAnswer = answer => {
     axios
@@ -22,12 +21,13 @@ const Dashboard = props => {
   // Conditionally Render AskerDashboard or ExpertDashboard Based on Local Storage Item
   const Component = localStorage.getItem("user_type") ? (
     localStorage.getItem("user_type") === "asker" ? (
-      <AskerDashboard />
+      <AskerDashboard gUser={props.gUser} />
     ) : (
       <ExpertDashboard
         questions={props.questions}
         postAnswer={postAnswer}
         QA={props.QA}
+        gUser={props.gUser}
       />
     )
   ) : (

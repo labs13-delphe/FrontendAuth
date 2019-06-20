@@ -1,8 +1,6 @@
 // Packages
 import React from "react";
 import axios from "axios";
-import firebase from "firebase";
-import { Link } from "react-router-dom";
 
 // Components
 import QuestionForm from "./QuestionForm";
@@ -11,33 +9,21 @@ import AskerQuestionsList from "./AskerQuestionsList";
 
 // Material UI
 import {
-  AppBar,
   CssBaseline,
-  Button,
   Paper,
-  Toolbar,
   Typography
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-
-import MailIcon from "@material-ui/icons/Mail";
-import MenuIcon from "@material-ui/icons/Menu";
-import IconButton from "@material-ui/core/IconButton";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 
 // Custom Styles
 const styles = theme => ({
   root: {
     display: "flex"
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
-  },
-  toolbar: theme.mixins.toolbar,
-
+  title: {
+    ...theme.mixins.toolbar,
+  textAlign: "center"
+},
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -59,14 +45,15 @@ const styles = theme => ({
       width: "100%"
     }
   },
-  column: {
+  Paper: {
     flexGrow: 1,
     padding: theme.spacing(1),
     width: 680,
     display: "flex",
     justifyContent: "center",
     overflowY: "scroll",
-    maxHeight: 860
+    maxHeight: 860,
+    background: "#EBEBEA"
   }
 });
 
@@ -150,54 +137,24 @@ class AskerDashboard extends React.Component {
 
   render() {
     const { container, classes } = this.props,
-      { mobileOpen, userInfo } = this.state;
+      { userInfo } = this.state;
     return (
       <div className={classes.root}>
         <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              edge="start"
-              onClick={this.handleDrawerToggle}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
-            <div className={classes.spaceBetween}>
-              <Typography variant="h6" noWrap>
-                {userInfo.username}'s Dashboard
-              </Typography>
-              <Link to="/community">
-                <Button color="inherit" href="/community">
-                  Community
-                </Button>
-              </Link>
-              <Link to={`/users/${userInfo.id}`}>
-                <Button color="inherit" href={`/users/${userInfo.id}`}>
-                  Profile
-                </Button>
-              </Link>
-
-              <Button color="inherit" onClick={() => firebase.auth().signOut()}>
-                Logout
-              </Button>
-            </div>
-          </Toolbar>
-        </AppBar>
-
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
-            <Typography variant="h4">Your Questions</Typography>
+            <div className={classes.title}>
+              <Typography variant="h4">Your Questions</Typography>
 
-            <Typography variant="h5">
-              {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
-              {this.state.answerCount} Answers Received
-            </Typography>
+              <Typography variant="h5">
+                {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
+                {this.state.answerCount} Answers Received
+              </Typography>
+            </div>
+
             <QuestionForm />
-            <Paper className={classes.column}>
+            <Paper className={classes.Paper}>
               <AskerQuestionsList
                 questions={this.state.questions}
                 deleteQuestion={this.deleteQuestion}

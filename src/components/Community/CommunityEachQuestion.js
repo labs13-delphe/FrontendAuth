@@ -14,11 +14,6 @@ import {
   Avatar,
   IconButton,
   Typography,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  TextField,
   Button,
   List,
   ListItem,
@@ -42,7 +37,10 @@ const styles = theme => ({
     justifyContent: "space-between"
   },
   topicButton: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    '&:hover': {
+      cursor: 'default',
+    }
   },
 
   expand: {

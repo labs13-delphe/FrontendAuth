@@ -33,11 +33,14 @@ import clsx from "clsx";
 const styles = theme => ({
   card: {
     width: "100%",
-    marginBottom: 5,
+    marginBottom: theme.spacing(2),
     padding: theme.spacing(1)
   },
   topicButton: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    '&:hover': {
+      cursor: 'default',
+    }
   },
 
   expand: {
