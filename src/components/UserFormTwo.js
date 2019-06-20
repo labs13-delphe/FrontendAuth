@@ -98,7 +98,7 @@ class UserForm extends React.Component {
     bio: "",
     user_type: "",
     image_url: "",
-    hourly_rate: ""
+    hourly_rate: 0 // keep - 0 is set as default
   };
   componentDidMount() {
     console.log("G User:", this.props.gUser);
