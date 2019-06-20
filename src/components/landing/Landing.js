@@ -3,7 +3,11 @@ import './css/style.css'
 import './css/materialize.css'
 import './css/materialize.min.css'
 // import './js/materialize.js'
-
+import landingimage from './landing-image.png'
+import persona from './persona-photo-1.png'
+import bikes from './section-image-1.png'
+import connect from './section-image-2.png'
+import improve from './section-image-3.png'
 
 export class Landing extends Component {
     render() {
@@ -34,7 +38,7 @@ export class Landing extends Component {
           <button className="get-started rectangle">Get Started</button>
         
       
-      <div className="parallax"><img src="landing-image.png" alt="Unsplashed background img 1"/>
+      <div className="parallax"><img src={landingimage} alt="Unsplashed background img 1"/>
     </div>
     </div>
     </div>
@@ -81,7 +85,7 @@ export class Landing extends Component {
         <div className="section-background-person">
             <p className="center persona-text">“ The expert I spoke with changed the trajectory of my career. “ </p>
   
-      <div className="center"><img src="persona-photo-1.png" alt="person"/>
+      <div className="center"><img src={persona} alt="person"/>
           <p className="center persona-text-name">Charlotte Walters</p>
       <p className="center persona-text">Global Project Consultant</p>        
           </div>
@@ -100,7 +104,7 @@ export class Landing extends Component {
         </p>
         </div>
         {/* /* <-- got rid of class"section-1-body --> */}
-        <div className=""><img src="section-image-1.png" alt="bikes"/></div>
+        <div className=""><img src={bikes} alt="bikes"/></div>
       </div>
       </div>
   
@@ -114,7 +118,7 @@ export class Landing extends Component {
           <p>Leverage agile frameworks to provide a robust synopsis for high level overviews.</p>
           </div>
           {/* <!-- got rid of class"section-1-body --> */}
-          <div className=""><img src="section-image-2.png" alt="connect"/></div>
+          <div className=""><img src={connect} alt="connect"/></div>
         </div>
         </div>
         
@@ -127,7 +131,7 @@ export class Landing extends Component {
             <p>Your guests will come to know you by  your incredible smile, strong work ethic, and identifying tagline.</p>
             </div>
              {/* <!-- got rid of class"section-1-body --> */}
-            <div className=""><img src="section-image-3.png" alt="bikes"/></div>
+            <div className=""><img src={improve} alt="improve"/></div>
       </div>
       </div>
           
