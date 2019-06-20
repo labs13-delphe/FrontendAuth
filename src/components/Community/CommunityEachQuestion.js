@@ -33,7 +33,7 @@ const styles = theme => ({
   cardTitle: {
     display: "flex",
     flexDirection: "row",
-    width: "38%",
+    width: "70%",
     justifyContent: "space-between"
   },
   topicButton: {
