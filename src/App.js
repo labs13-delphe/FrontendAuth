@@ -12,7 +12,7 @@ import Dashboard from "./components/Dashboard.js";
 import QuestionUpdateForm from "./components/AskerDashboard/QuestionUpdateForm.js";
 import UserProfile from "./components/Users/UserProfile";
 import Community from "./components/Community/Community";
-// import Landing from './components/Landing';
+import Landing from './components/landing/Landing'
 
 //material ui
 // import Button from '@material-ui/core/Button';
@@ -83,7 +83,7 @@ class App extends Component {
 
     return (
       <div className="App">
-      {/* <Landing /> */}
+      <Landing />
         {/* {this.props.history.push("/secret/dashboard")} */}
         {this.state.isSignedIn ? (
           <div>

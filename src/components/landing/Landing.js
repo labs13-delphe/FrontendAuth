@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import './css/style.css'
+import './css/materialize.css'
+import './css/materialize.min.css'
+// import './js/materialize.js'
 
 
 export class Landing extends Component {
     render() {
         return (
-            
+            <div>
 <nav className="white" role="navigation">
       <div className="nav-wrapper container">
         <a id="logo-container" href="#" className="brand-logo">Logo</a>
@@ -72,7 +76,7 @@ export class Landing extends Component {
     </div>
     
   
-  /* <!-- USER EXPERIENCE TESTIMONIAL --> */
+  {/* /* <!-- USER EXPERIENCE TESTIMONIAL --> */ }
     <div className="col s12 m4">
         <div className="section-background-person">
             <p className="center persona-text">“ The expert I spoke with changed the trajectory of my career. “ </p>
@@ -85,7 +89,7 @@ export class Landing extends Component {
       </div>
   
   
-    /* <!-- HELP FOR ANY TOPIC --> */
+    {/* <!-- HELP FOR ANY TOPIC --> */}
     <div className="col s12 m4">
     <div className="container section-background-2">
         {/* <!-- got rid of class"section-1-body --> */}
@@ -101,7 +105,7 @@ export class Landing extends Component {
       </div>
   
   
-      /* <!-- CONNECT WITH EXPERTS --> */
+      {/* <!-- CONNECT WITH EXPERTS --> */ }
       <div className="col s12 m4">
       <div className="container section-background-3">
           {/* <!-- got rid of class"section-1-body --> */}
@@ -114,7 +118,7 @@ export class Landing extends Component {
         </div>
         </div>
         
-          /* <!-- IMPROVE YOUR SKILLSET --> */
+          {/*<!-- IMPROVE YOUR SKILLSET --> */}
     <div className="col s12 m4">
         <div className="container section-background-2">
             {/* <!-- got rid of class"section-1-body --> */}
@@ -128,7 +132,7 @@ export class Landing extends Component {
       </div>
           
   
-    /* <!-- <div className="parallax-container valign-wrapper">
+   {/* <!-- <div className="parallax-container valign-wrapper">
       <div className="section no-pad-bot">
         <div className="container">
           <div className="row center">
@@ -137,52 +141,25 @@ export class Landing extends Component {
         </div>
       </div>
       <div className="parallax"><img src="background3.jpg" alt="Unsplashed background img 3"></div>
-    </div> -->
+    </div> --> */}
   
     <footer className="page-footer teal">
       <div className="container center">
         <div className="row">
           <div className="col l6 s12">
             <h5 className="white-text">Create an account today</h5>          
-             */
+            
             <div className="row center">
                 <a href="" id="download-button" className="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
             </div>
   
             <div className="row center" id="delphe">Delphe</div>
-            /* <!-- <p className="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p> -->
-  
-          <!-- </div>
-          <div className="col l3 s12">
-            <h5 className="white-text">Settings</h5>
-            <ul>
-              <li><a className="white-text" href="#!">Link 1</a></li>
-              <li><a className="white-text" href="#!">Link 2</a></li>
-              <li><a className="white-text" href="#!">Link 3</a></li>
-              <li><a className="white-text" href="#!">Link 4</a></li>
-            </ul>
-          </div> -->
-          <!-- <div className="col l3 s12 center">
-            <h5 className="white-text">Connect</h5>
-  
-  
-  
-            <ul>
-              <li><a className="white-text" href="#!">Link 1</a></li>
-              <li><a className="white-text" href="#!">Link 2</a></li>
-              <li><a className="white-text" href="#!">Link 3</a></li>
-              <li><a className="white-text" href="#!">Link 4</a></li>
-            </ul>
           </div>
         </div>
       </div>
-      <div className="footer-copyright">
-        <div className="container">
-       Made by <a className="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a> -->
-        </div>
-      </div> */
-    // </footer> 
-            
+    </footer>
+    </div>
+          
       )
     }
   }
