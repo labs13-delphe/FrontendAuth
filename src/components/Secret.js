@@ -1,14 +1,11 @@
 // Packages
 import React, { Component } from "react";
-//**** took care of netlify bugs */
-// import { Route, Link } from "react-router-dom";
 import axios from "axios";
 
 // Components
 import UserFormTwo from "./UserFormTwo.js";
 import Dashboard from "./Dashboard.js";
 
-//material ui
 
 //rendering all protected components and keeping state here
 
@@ -36,7 +33,6 @@ class Secret extends Component {
 
   //compare that variable to the same variable in user data table
 
-  //
 
   componentDidMount = () => {
     axios
@@ -66,27 +62,8 @@ class Secret extends Component {
       });
   };
 
-  // BUTTONS TO DELETE ONCE LOGIN/REGISTER SETS USER_TYPE ON local storage
-  // Sets user_ids and user_types for asker, expert, and clear items on storage
-  // viewAskerDashboard() {
-  //   localStorage.setItem("user_id", 1);
-  //   localStorage.setItem("user_type", "asker");
-  //   window.location.reload();
-  // }
 
-  // viewExpertDashboard() {
-  //   localStorage.setItem("user_id", 5);
-  //   localStorage.setItem("user_type", "expert");
-  //   window.location.reload();
-  // }
-
-  // clearStorage() {
-  //   localStorage.removeItem("user_id");
-  //   localStorage.removeItem("user_type");
-  //   window.location.reload();
-  // }
-
-// REGISTRATION - POST USER INFORMATION 
+// REGISTRATION AXIOS CALL - POST USER INFORMATION 
 
   postUserInfo = userInfo => {
     axios
@@ -96,12 +73,6 @@ class Secret extends Component {
         localStorage.setItem("user_id", res.data.id)
         localStorage.setItem("user_type", userInfo.user_type)
         window.location.reload();
-  
-        // if (userInfo.user_type === "asker") {
-        //   this.viewAskerDashboard(userInfo.id);
-        // } else {
-        //   this.viewExpertDashboard(userInfo.id);
-        // }
       })
       .catch(error => {
         console.log(error);
@@ -114,20 +85,8 @@ class Secret extends Component {
 
     return (
       <div>
-        {/* added this to have a visual of the user data we can post to and compare to out unique id */}
-        {/* {this.getUserInfo()} */}
 
-        {/* Can use until when we get our registration/login totally functioning  */}
-        {/* <button onClick={this.viewAskerDashboard}>
-          {" "}
-          Pretend an Asker is Signed In{" "}
-        </button>
-        <button onClick={this.viewExpertDashboard}>
-          {" "}
-          Pretend an Expert is Signed In{" "}
-        </button> */}
-
-        {//this.state.questions.length
+        {
         localStorage.getItem("user_id") ? (
           <div>
             {/* <button onClick={this.clearStorage}>Erase User on Storage</button> */}
@@ -139,7 +98,6 @@ class Secret extends Component {
           </div>
         ) : (
           <div>
-            <h4>Please Register To Access Secret</h4>
             <UserFormTwo
               postUserInfo={this.postUserInfo}
               uniqueIdentifier={this.props.uniqueIdentifier}

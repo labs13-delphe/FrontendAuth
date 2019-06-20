@@ -31,7 +31,7 @@ const Dashboard = props => {
       />
     )
   ) : (
-    <h2>Whoops. No User ID on Local Storage.</h2>
+    <h2>Please register or login to view this page.</h2>
   );
 
   return <div> {Component}</div>;

@@ -109,7 +109,7 @@ class UserForm extends React.Component {
       last_name: this.state.last_name,
       email: this.state.email,
       username: this.state.username,
-      password: this.props.uniqueIdentifier,
+      password: this.props.uniqueIdentifier, // currently commented out so the password field sent is empty
       bio: this.state.bio,
       user_type: this.state.user_type,
       image_url: this.state.image_url,
@@ -140,6 +140,9 @@ class UserForm extends React.Component {
         </AppBar>
         <Paper className={classes.center}>
           <form onSubmit={this.submitUser} className="user-form">
+          <Typography variant="h4" className={classes.formTitle}>
+          Create Your Profile
+            </Typography>
             <TextField
               label="First Name"
               type="text"
