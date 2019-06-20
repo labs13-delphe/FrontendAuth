@@ -167,7 +167,7 @@ class CommunityEachQuestion extends React.Component {
           </List>
         </div>
       ) : (
-        <p>No answers yet</p>
+        <span>No answers yet</span>
       );
 
     const answersText =
