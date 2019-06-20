@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard.js";
 import QuestionUpdateForm from "./components/AskerDashboard/QuestionUpdateForm.js";
 import UserProfile from "./components/Users/UserProfile";
 import Community from "./components/Community/Community";
+// import Landing from './components/Landing';
 
 //material ui
 // import Button from '@material-ui/core/Button';
@@ -29,6 +30,7 @@ import Community from "./components/Community/Community";
 // import Link from '@material-ui/core/Link';
 
 import "./App.css";
+
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_DOMAIN
@@ -81,6 +83,7 @@ class App extends Component {
 
     return (
       <div className="App">
+      {/* <Landing /> */}
         {/* {this.props.history.push("/secret/dashboard")} */}
         {this.state.isSignedIn ? (
           <div>
