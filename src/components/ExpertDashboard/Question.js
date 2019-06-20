@@ -111,14 +111,14 @@ class Question extends React.Component {
   }
 
   componentDidMount() {
-    const id = this.props.question.id;
+    const id = this.props.id;
     const endpoint = `https://delphe-backend.herokuapp.com/api/questions/${id}`;
 
     // SETTING QUESTION INFORMATION
     axios
       .get(endpoint)
       .then(res => {
-        // console.log(res.data);
+        console.log(res.data);
         this.setState({
           question: res.data,
           topics: res.data.topics,
