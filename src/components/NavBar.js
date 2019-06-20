@@ -1,39 +1,87 @@
-// import React from 'react';
-// import List from '@material-ui/core/List';
-// import ListItem from '@material-ui/core/ListItem';
-// import ListItemText from '@material-ui/core/ListItemText';
-// import TypoGraphy from '@material-ui/core/Typography'
+// Packages
+import React from "react";
+import axios from "axios";
+import firebase from "firebase";
+import { Link } from "react-router-dom";
+
+// Material UI
+import {
+  AppBar,
+  CssBaseline,
+  Button,
+  Toolbar,
+  Typography
+} from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
 
-// function NavBar(props) {
+// Custom Styles
+const styles = theme => ({
 
-//     return (
-//         <List component="nav">
-//             <ListItem component="div">
-//                 <ListItemText inset>
-//                     <TypoGraphy color="inherit" variant="title">
-//                         Dashboard
-//                </TypoGraphy>
-//                 </ListItemText>
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none"
+    }
+  },
+  spaceBetween: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%"
+  },
+  appBarSpacer: theme.mixins.toolbar,
 
+});
 
-//                 <ListItemText inset>
-//                     <TypoGraphy color="inherit" variant="title">
-//                         Questions
-//                </TypoGraphy>
-//                 </ListItemText>
+class NavBar extends React.Component {
+  state = {
+    user: {}
+  };
+  componentDidMount() {
+    const id = localStorage.getItem("user_id");
+    const endpoint = `https://delphe-backend.herokuapp.com/api/users/${id}`;
 
+    axios
+      .get(endpoint)
+      .then(res => {
+        this.setState({ user: res.data });
+      })
+      .catch(err => {
+        console.log("Can't retrieve user info", err);
+      });
+  }
 
-//                 <ListItemText inset>
-//                     <TypoGraphy color="inherit" variant="title">
-//                         Contact
-//                </TypoGraphy>
-//                 </ListItemText>
-//             </ListItem >
+  render() {
+    const { classes } = this.props,
+    { user } = this.state;
 
-//         </List>
-//     )
-// }
+    return (
+      <div>
+        <CssBaseline />
+        <AppBar position="fixed" className={classes.appBar}>
+          <Toolbar>
+            <div className={classes.spaceBetween}>
+              <Typography variant="h5" noWrap>
+                {user.username}'s Dashboard NavBar
+              </Typography>
+              <Button color="inherit" href="/secret/dashboard">Your Questions</Button>
+                <Button color="inherit" href="/community">
+                  Community
+                </Button>
+                <Button color="inherit" href={`/users/${user.id}`}>
+                  Profile
+                </Button>
+              <Button color="inherit" onClick={() => firebase.auth().signOut()}>
+                Logout
+              </Button>
+            </div>
+          </Toolbar>
+        </AppBar>
+        <div className={classes.appBarSpacer} />
 
+      </div>
+    );
+  }
+}
 
-export default NavBar;
+export default withStyles(styles)(NavBar);

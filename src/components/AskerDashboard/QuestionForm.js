@@ -39,7 +39,7 @@ const styles = theme => ({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       flexDirection: "column"
     }
   },
@@ -47,7 +47,7 @@ const styles = theme => ({
     margin: theme.spacing(1),
     minWidth: 200,
     width: "35%",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       width: "100%"
     }
   },
@@ -55,7 +55,7 @@ const styles = theme => ({
     margin: theme.spacing(1),
     minWidth: 200,
     width: "60%",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       width: "100%"
     }
   },
@@ -65,7 +65,7 @@ const styles = theme => ({
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       flexDirection: "column",
       alignItems: "center"
     }
@@ -74,7 +74,7 @@ const styles = theme => ({
     margin: theme.spacing(1),
     minWidth: 200,
     width: "35%",
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down("xs")]: {
       width: "60%"
     }
   },
