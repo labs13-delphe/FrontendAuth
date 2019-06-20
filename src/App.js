@@ -11,9 +11,11 @@ import Secret from "./components/Secret.js";
 import Dashboard from "./components/Dashboard.js";
 import UserProfile from "./components/Users/UserProfile";
 import Community from "./components/Community/Community";
+import Landing from './components/landing/Landing'
 
 
 import "./App.css";
+
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_DOMAIN
@@ -40,7 +42,7 @@ class App extends Component {
         //uniqueIdentifier: user.email,
         gUser: user
       });
-      //this.props.history.push("/secret/dashboard");
+      // this.props.history.push("/secret/dashboard");
     });
   };
 
@@ -50,9 +52,12 @@ class App extends Component {
 
     return (
       <div className="App">
+       <Route exact path="/"component={Landing}/>
         {this.state.isSignedIn ? (
           <div>
+           
             <NavBar/>
+            
             <Route
               path="/secret"
               render={props => (

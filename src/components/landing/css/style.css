@@ -1,0 +1,256 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+ nav ul a,
+ nav .brand-logo {
+   color: #444;
+ }
+ 
+ p {
+   line-height: 2rem;
+ }
+ 
+ .sidenav-trigger {
+   color: #26a69a;
+ }
+ 
+ .parallax-container {
+   min-height: 380px;
+   line-height: 0;
+   height: auto;
+   color: rgba(255,255,255,.9);
+ }
+   .parallax-container .section {
+     width: 100%;
+   }
+ 
+ @media only screen and (max-width : 992px) {
+   .parallax-container .section {
+     position: absolute;
+     top: 40%;
+   }
+   #index-banner .section {
+     top: 10%;
+   }
+ }
+ 
+ @media only screen and (max-width : 600px) {
+   #index-banner .section {
+     top: 0;
+   }
+ }
+ 
+ .icon-block {
+   padding: 0 15px;
+ }
+ .icon-block .material-icons {
+   font-size: inherit;
+ }
+ 
+ footer.page-footer {
+   margin: 0;
+ }
+ 
+
+ .headerContainer{
+   display: flex;
+   justify-content: space-around;
+ }
+
+ .landingImg{
+   width: 50vh;
+ }
+ /* Kermitt CSS */
+ .landing-content-title {	
+   /* height: 61px;	
+   width: 503px;	 */
+   color: #000000;	
+   font-family: Roboto;	
+   font-size: 30px;	
+   font-weight: 900;	
+   letter-spacing: 0.08px;	
+   line-height: 61px;
+ }
+ 
+ .landing-content-body {	
+   /* height: 122.4px;	
+   width: 540px;	 */
+   color: #000000;	
+   font-family: Roboto;	
+   font-size: 24px;	
+   font-weight: 500;	
+   letter-spacing: -0.16px;	
+   line-height: 40px;
+ }
+ /* get started button
+  */
+ .get-started {
+   display: flex;
+   flex-direction: row;	
+   height: 25px;	
+   width: 99px;	
+   color: #000000;	
+   font-family: Roboto;	
+   font-size: 19.2px;	
+   line-height: 25px;
+ }
+ 
+ .rectangle {	
+   height: 46px;	
+   width: 165px;	
+   background-color: #D8D8D8;	
+   box-shadow: 0 3px 4px 0 
+   rgba(151,151,151,0.67);
+ }
+ .rectangle-learn {	
+   height: 46px;	
+   width: 165px;	
+   border: 2px solid #979797;	
+   box-shadow: 0 3px 4px 0 
+   rgba(151,151,151,0.67);
+ }
+ 
+/* climber feature photos */
+ .climbing-1 {	height: 214px;	width: 200px;}
+ .climbing-2 {	height: 209px;	width: 115px;}
+ .climbing-3 {	height: 200px;	width: 180px;}
+
+.featureContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+ }
+
+ .section-background {	
+   margin-top: 20px;
+   background-color: #F0F0F0;
+ }
+ 
+ /* user experience/testimonial */
+ .advisor-photo {	
+   border: 3px solid #FFFFFF;
+ }
+ 
+ .persona-text {	
+   /* height: 417.6px;	
+   width: 1145px;	 */
+   color: rgba(0,0,0,0.6);	
+   font-family: Roboto;	
+   font-size: 24px;	
+   font-weight: 900;	
+   line-height: 40px;	
+   text-align: center;
+   margin: 0;
+ }
+ 
+ .persona-text-name {	
+   /* height: 417.6px;	
+   width: 1145px;	 */
+   color: rgba(0,0,0,0.6);	
+   font-family: Roboto;	
+   font-size: 20px;	
+   text-align: center;
+   margin: 0;
+ }
+ 
+ .section-background-person {	
+   /* height: 720px;	
+   width: 1440px;	 */
+   padding-top: 20px;
+   background-color:#FFFFFF;
+   color: rgba(255,255,255,.9);
+ }
+ 
+ /* help for any topic */
+ .section-background-2 {	
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   background-color: #FFFFFF;
+   padding-top: 20px;
+ }
+ .section-1-title {	
+   /* height: 58px;	
+   width: 352px;	 */
+   color: #000000;	
+   font-family: Roboto;	
+   font-size: 24px;	
+   font-weight: 500;	
+   letter-spacing: 0.07px;	
+   line-height: 58px;
+ }
+ .section-1-body {
+   color: #000000;	
+   font-family: Roboto;	
+   font-size: 16px;	
+   letter-spacing: -0.16px;	
+   line-height: 40px;
+ }
+ 
+ .textboxTopic {
+ width: 50vh;
+ height: 50vh;
+ }
+
+ .bike-photo{
+   height: 50vh;
+   width: 50vh;
+ }
+ 
+ .section-background-3 {	
+   display: flex;
+   flex-direction: row-reverse;
+   justify-content: center;
+   background-color: #FFFFFF;
+ }
+
+ .textboxConnect {
+  width: 50vh;
+  height: 50vh;
+  }
+ 
+  .connect-photo{
+    height: 50vh;
+    width: 50vh;
+  }
+
+.textboxImprove {
+  width: 50vh;
+  height: 50vh;
+  }
+  
+  .improve-photo{
+    height: 50vh;
+    width: 50vh;
+  }
+
+ 
+ #footerButton {
+   margin: auto;
+ }
+
+ #delpheFooter {	
+   /* height: 44px;	
+   width: 139.39px;	 */
+   color: rgba(0,0,0,0.6);	
+   font-family: Righteous;	
+   font-size: 36px;	
+   line-height: 44px;	
+   margin: auto;
+  padding-bottom: 20px;
+ }
+ 
+ #delphe-header {	
+   /* height: 44px;	
+   width: 139.39px;	 */
+   color: rgba(0,0,0,0.6);	
+   font-family: Righteous;	
+   font-size: 50px;	
+   line-height: 44px;	
+   /* text-align: center; */
+ }
