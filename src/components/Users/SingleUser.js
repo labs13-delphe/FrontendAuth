@@ -43,7 +43,7 @@ const SingleUser = props => {
 
   const profileImage = props.user.image_url
     ? props.user.image_url
-    : "https://image.shutterstock.com/image-photo/portrait-attracive-young-businesswoman-wearing-260nw-1036909795.jpg";
+    : "https://picsum.photos/200/300";
   console.log("single user g user", props.user);
   return (
     <>

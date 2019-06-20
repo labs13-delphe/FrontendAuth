@@ -38,8 +38,8 @@ const styles = theme => ({
   },
   topicButton: {
     margin: theme.spacing(1),
-    '&:hover': {
-      cursor: 'default',
+    "&:hover": {
+      cursor: "default"
     }
   },
 
@@ -55,6 +55,11 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  bigAvatar: {
+    margin: 0,
+    width: 80,
+    height: 80
   },
   dialog: {
     display: "flex",
@@ -227,6 +232,7 @@ class CommunityEachQuestion extends React.Component {
           title={cardTitle}
           subheader={cardSubtitle}
         />
+
         <CardContent>
           <Typography
             variant="h4"

@@ -56,11 +56,6 @@ const styles = theme => ({
   avatar: {
     backgroundColor: red[500]
   },
-  bigAvatar: {
-    margin: 0,
-    width: 80,
-    height: 80
-  },
   dialog: {
     display: "flex",
     flexDirection: "column",
@@ -266,7 +261,6 @@ class AskerEachQuestion extends React.Component {
             thisUser.image_url ? <Avatar
             alt="Remy Sharp"
             src={thisUser.image_url}
-            className={classes.bigAvatar}
           /> :
             <Avatar aria-label="Recipe" className={classes.avatar}>
               {/* Getting Asker's Initials for Avatar */}
