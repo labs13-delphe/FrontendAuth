@@ -41,7 +41,10 @@ const styles = theme => ({
 const SingleUser = props => {
   const { classes } = props;
 
-  console.log("single user g user", props);
+  const profileImage = props.user.image_url
+    ? props.user.image_url
+    : "https://image.shutterstock.com/image-photo/portrait-attracive-young-businesswoman-wearing-260nw-1036909795.jpg";
+  console.log("single user g user", props.user);
   return (
     <>
       <div className={classes.root} />
@@ -58,7 +61,7 @@ const SingleUser = props => {
           </div>
           <Avatar
             alt="Remy Sharp"
-            src="https://image.shutterstock.com/image-photo/portrait-attracive-young-businesswoman-wearing-260nw-1036909795.jpg"
+            src={profileImage}
             className={classes.bigAvatar}
           />
         </div>
