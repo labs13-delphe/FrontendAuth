@@ -247,11 +247,11 @@ class UserForm extends React.Component {
             </FormControl>
             {this.state.user_type === "expert" ? (
               <TextField
-                label="hourly_rate"
+                label="Hourly Rate"
                 type="int"
                 name="hourly_rate"
                 value={this.state.hourly_rate}
-                placeholder="hourly_rate"
+                placeholder="Hourly Rate"
                 onChange={this.handleChange}
                 className={classes.textField}
                 margin="normal"
