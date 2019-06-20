@@ -56,6 +56,15 @@
    margin: 0;
  }
  
+
+ .headerContainer{
+   display: flex;
+   justify-content: space-around;
+ }
+
+ .landingImg{
+   width: 50vh;
+ }
  /* Kermitt CSS */
  .landing-content-title {	
    /* height: 61px;	
@@ -106,18 +115,24 @@
    rgba(151,151,151,0.67);
  }
  
+/* climber feature photos */
+ .climbing-1 {	height: 214px;	width: 200px;}
+ .climbing-2 {	height: 209px;	width: 115px;}
+ .climbing-3 {	height: 200px;	width: 180px;}
+
+.featureContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+ }
+
  .section-background {	
-   /* height: 720px;	
-   width: 1440px;	 */
    margin-top: 20px;
    background-color: #F0F0F0;
  }
  
  /* user experience/testimonial */
  .advisor-photo {	
-   /* box-sizing: border-box;	 */
-   height: 113px;	
-   width: 113px;	
    border: 3px solid #FFFFFF;
  }
  
@@ -155,8 +170,9 @@
  .section-background-2 {	
    display: flex;
    flex-direction: row;
-   justify-content: space-around;
+   justify-content: center;
    background-color: #FFFFFF;
+   padding-top: 20px;
  }
  .section-1-title {	
    /* height: 58px;	
@@ -176,36 +192,57 @@
    line-height: 40px;
  }
  
- /* .bikes{
-   height: 717px;
-   width: 60%;
- } */
+ .textboxTopic {
+ width: 50vh;
+ height: 50vh;
+ }
+
+ .bike-photo{
+   height: 50vh;
+   width: 50vh;
+ }
  
  .section-background-3 {	
    display: flex;
    flex-direction: row-reverse;
-   justify-content: space-around;
+   justify-content: center;
    background-color: #FFFFFF;
  }
+
+ .textboxConnect {
+  width: 50vh;
+  height: 50vh;
+  }
  
- #delphe .row .center{	
-   height: 44px;	
-   width: 139.39px;	
-   color: rgba(0,0,0,0.6);	
-   font-family: Righteous;	
-   font-size: 36px;	
-   line-height: 44px;	
-   /* text-align: center; */
+  .connect-photo{
+    height: 50vh;
+    width: 50vh;
+  }
+
+.textboxImprove {
+  width: 50vh;
+  height: 50vh;
+  }
+  
+  .improve-photo{
+    height: 50vh;
+    width: 50vh;
+  }
+
+ 
+ #footerButton {
+   margin: auto;
  }
- 
- #delphe {	
+
+ #delpheFooter {	
    /* height: 44px;	
    width: 139.39px;	 */
    color: rgba(0,0,0,0.6);	
    font-family: Righteous;	
    font-size: 36px;	
    line-height: 44px;	
-   /* text-align: center; */
+   margin: auto;
+  padding-bottom: 20px;
  }
  
  #delphe-header {	
