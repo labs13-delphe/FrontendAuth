@@ -33,13 +33,13 @@ const styles = theme => ({
   cardTitle: {
     display: "flex",
     flexDirection: "row",
-    width: "38%",
+    width: "100%",
     justifyContent: "space-between"
   },
   topicButton: {
     margin: theme.spacing(1),
-    '&:hover': {
-      cursor: 'default',
+    "&:hover": {
+      cursor: "default"
     }
   },
 
@@ -55,6 +55,11 @@ const styles = theme => ({
   },
   avatar: {
     backgroundColor: red[500]
+  },
+  bigAvatar: {
+    margin: 0,
+    width: 80,
+    height: 80
   },
   dialog: {
     display: "flex",
@@ -167,13 +172,13 @@ class CommunityEachQuestion extends React.Component {
           </List>
         </div>
       ) : (
-        <p>No answers yet</p>
+        <span>No answers yet</span>
       );
 
     const answersText =
       this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
 
-    const cardAsker = this.state.users.map(user => {
+    const cardTitle = this.state.users.map(user => {
       // Get Asker's First, Last, and username
       if (user.id === this.state.question.user_id) {
         return (
@@ -182,10 +187,22 @@ class CommunityEachQuestion extends React.Component {
               {" "}
               {user.first_name} {user.last_name}
             </Typography>{" "}
-            <Typography variant="h6">@{user.username}</Typography>
             <Typography variant="h6">
               <Link to={`/users/${user.id}`}> View Profile</Link>
             </Typography>
+          </div>
+        );
+      } else {
+        return null;
+      }
+    });
+
+    const cardSubtitle = this.state.users.map(user => {
+      // Get Asker's First, Last, and username
+      if (user.id === this.state.question.user_id) {
+        return (
+          <div className={classes.cardSubtitle} key={user.id}>
+            <Typography variant="h6">@{user.username}</Typography>
           </div>
         );
       } else {
@@ -212,9 +229,10 @@ class CommunityEachQuestion extends React.Component {
               })}
             </Avatar>
           }
-          title={cardAsker}
-          subheader="asker"
+          title={cardTitle}
+          subheader={cardSubtitle}
         />
+
         <CardContent>
           <Typography
             variant="h4"

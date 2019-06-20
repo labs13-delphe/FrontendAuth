@@ -78,7 +78,7 @@ class Community extends React.Component {
         <main className={classes.content}>
           <div className={classes.dashboardContent}>
             <Typography variant="h4" className={classes.title}>
-              Community Thread
+              Community Feed
             </Typography>
             <Paper className={classes.paper}>
               <CommunityQuestionList questions={this.state.questions} />

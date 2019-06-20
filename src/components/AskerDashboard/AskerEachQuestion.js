@@ -90,7 +90,8 @@ class AskerEachQuestion extends React.Component {
       thisUser: {
         username: "",
         first_name: "",
-        last_name: ""
+        last_name: "",
+        image_url: "",
       },
       question: {
         user_id: "",
@@ -257,6 +258,10 @@ class AskerEachQuestion extends React.Component {
       <Card className={classes.card}>
         <CardHeader
           avatar={
+            thisUser.image_url ? <Avatar
+            alt="Remy Sharp"
+            src={thisUser.image_url}
+          /> :
             <Avatar aria-label="Recipe" className={classes.avatar}>
               {/* Getting Asker's Initials for Avatar */}
               {thisUser.first_name.substring(0, 1)}

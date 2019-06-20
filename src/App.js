@@ -53,7 +53,6 @@ class App extends Component {
     return (
       <div className="App">
        <Route exact path="/"component={Landing}/>
-        {/* {this.props.history.push("/secret/dashboard")} */}
         {this.state.isSignedIn ? (
           <div>
            

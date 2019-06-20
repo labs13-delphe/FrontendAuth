@@ -65,8 +65,8 @@ class AskerDashboard extends React.Component {
       userInfo: {},
       questions: [],
       answers: [],
-      questionCount: "",
-      answerCount: "",
+      questionCount: 0,
+      answerCount: 0,
       users: [],
       mobileOpen: false
     };
@@ -138,18 +138,25 @@ class AskerDashboard extends React.Component {
   render() {
     const { container, classes } = this.props,
       { userInfo } = this.state;
-    return (
+
+
+      const questionsText =
+      this.state.questionCount === 1 ? <span>Question</span> : <span>Questions</span>;
+
+      const answersText =
+      this.state.answerCount === 1 ? <span>Answer</span> : <span>Answers</span>;    
+      return (
       <div className={classes.root}>
         <CssBaseline />
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
             <div className={classes.title}>
-              <Typography variant="h4">Your Questions</Typography>
+              <Typography variant="h4">Your Feed</Typography>
 
               <Typography variant="h5">
-                {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
-                {this.state.answerCount} Answers Received
+                {this.state.questionCount} {questionsText} Asked &nbsp;|&nbsp;{" "}
+                {this.state.answerCount} {answersText} Received
               </Typography>
             </div>
 
