@@ -120,7 +120,9 @@ class App extends Component {
             />
             <Route
               path="/users/:id"
-              render={props => <UserProfile {...props} />}
+              render={props => (
+                <UserProfile {...props} gUser={this.state.gUser} />
+              )}
             />
             <Route
               path="/community"

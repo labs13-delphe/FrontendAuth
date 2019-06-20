@@ -64,6 +64,7 @@ class ExpertDashboard extends React.Component {
           QA={this.props.QA}
           editAnswer={this.editAnswer}
           deleteAnswer={this.deleteAnswer}
+          gUser={this.props.gUser}
         />
       </div>
     );
