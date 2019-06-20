@@ -65,8 +65,8 @@ class AskerDashboard extends React.Component {
       userInfo: {},
       questions: [],
       answers: [],
-      questionCount: "",
-      answerCount: "",
+      questionCount: 0,
+      answerCount: 0,
       users: [],
       mobileOpen: false
     };
@@ -145,7 +145,7 @@ class AskerDashboard extends React.Component {
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
             <div className={classes.title}>
-              <Typography variant="h4">Your Questions</Typography>
+              <Typography variant="h4">Your Feed</Typography>
 
               <Typography variant="h5">
                 {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
