@@ -1,6 +1,7 @@
 import React from "react";
 
 import QuestionsList from "./QuestionsList";
+import TopicDropdown from "./TopicDropdown"
 import axios from "axios";
 
 // Material UI
@@ -55,16 +56,16 @@ const styles = theme => ({
 
 class ExpertDashboard extends React.Component {
   state = {
-    answers: []
+    questions: []
   };
 
   componentDidMount() {
     axios
-      .get(`https://delphe-backend.herokuapp.com/api/answers`)
+      .get(`https://delphe-backend.herokuapp.com/api/questions/10`)
       .then(res => {
         console.log("expert return data", res);
         this.setState({
-          answers: res.data
+          questions: res.data
         });
       })
       .catch(err => {
@@ -101,6 +102,21 @@ class ExpertDashboard extends React.Component {
       });
   };
 
+  getQuestionsByTopic = topicId => {
+    axios
+    .get(`https://delphe-backend.herokuapp.com/api/questions/topic/${topicId}`)
+    .then(res => {
+      console.log(res);
+      this.setState({
+        questions: res.data
+      })
+
+    })
+    .catch(err => {
+      console.log("there was a problem deleting your answer");
+    });
+  }
+
   render() {
     const { classes } = this.props;
     console.log("expert dash", this.props);
@@ -111,12 +127,13 @@ class ExpertDashboard extends React.Component {
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
             <div className={classes.title}>
-              <Typography variant="h4">Your Questions</Typography>
+              <Typography variant="h4">Your Feed</Typography>
 
               <Typography variant="h5">
                 {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
                 {this.state.answerCount} Answers Received
               </Typography>
+              <TopicDropdown getQuestionsByTopic={this.getQuestionsByTopic}/>
             </div>
             <Paper className={classes.Paper}>
               <QuestionsList
