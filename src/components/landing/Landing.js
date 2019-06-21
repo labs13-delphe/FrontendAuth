@@ -26,24 +26,28 @@ export class Landing extends Component {
         <a href="#" data-target="nav-mobile" className="sidenav-trigger"><i className="material-icons">menu</i></a>
       </div>
     </nav>
-  
+{/*   
     <div className="headerContainer">
       <div className="section no-pad-bot">
-        <div className="container">
-          <br></br>
-          <h1 className="row center teal-text text-lighten-2" id="delphe-header">Delphe</h1>
+        <div className="container"> */}
+        <div className="headerContainer container">
+          <br></br> 
+          <img src={landingimage} className="landingImg" alt="landing hero img"/>
+          <div className="header-CTA">
+          <h1 className="teal-text text-lighten-2" id="delphe-header">Delphe</h1>
           <h2 className='landing-content-title'>Your home for advice</h2>
           <h3 className="landing-content-body">Find answers to your most pressing questions by connecting with a community of experts.</h3>
           
-          <div className="row center">
+          <div className="">
                 <a href="" id="" className="center btn-large waves-effect waves-light teal lighten-1">Get Started</a>
-            </div>
-        {/* <div className="landingImg"><img src={landingimage} alt="landing hero img"/> */}
+            
+        </div>
+      </div>
+       
+  </div>
+    {/* </div>
     </div>
-    </div>
-    </div>
-    {/* </div> */}
-    
+    </div> */}
   
     <div className="section-background container">
       <div className="">
@@ -107,6 +111,7 @@ export class Landing extends Component {
       </div>
     </footer>
     </div>
+    
           
       )
     }

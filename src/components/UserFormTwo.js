@@ -258,7 +258,7 @@ class UserForm extends React.Component {
                 variant="outlined"
               />
             ) : null}
-            <Button onClick={this.submitUser}>Submit</Button>
+            <Button onClick={this.submitUser} id="footerButton" className="btn-large waves-effect waves-light teal lighten-1">Submit</Button>
           </form>
         </Paper>
       </div>

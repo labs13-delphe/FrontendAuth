@@ -56,14 +56,19 @@
    margin: 0;
  }
  
-
- .headerContainer{
-   display: flex;
-   justify-content: space-around;
+ .header-CTA{
+   text-align: left;
+   /* width: 50vh;
+   height: 80vh; */
+   margin: 10px;
+   padding: 0;
+   background-color:#FFFFFF;
  }
 
  .landingImg{
-   width: 50vh;
+  width: 70vh;
+  height: 60vh;
+  background-color:#FFFFFF;
  }
  /* Kermitt CSS */
  .landing-content-title {	
@@ -123,9 +128,16 @@
 .featureContainer{
   display: flex;
   flex-direction: row;
+   /* flex-direction: row-reverse; */
   justify-content: center;
+  padding: 20px;
  }
-
+ .headerContainer{
+  display: flex;  
+  flex-direction: row-reverse;
+  width: 50vh;
+  background-color:#FFFFFF;
+ }
  .section-background {	
    margin-top: 20px;
    background-color: #F0F0F0;
@@ -164,6 +176,7 @@
    padding-top: 20px;
    background-color:#FFFFFF;
    color: rgba(255,255,255,.9);
+   padding: 20px;
  }
  
  /* help for any topic */
@@ -258,4 +271,5 @@
 
  .userContainer{
    display: flex;
- }
+ } 
+ 
