@@ -145,6 +145,12 @@ class UserForm extends React.Component {
     this.props.postUserInfo(userInfo);
   };
 
+  cancelForm = e => {
+    firebase.auth().signOut();
+    localStorage.clear();
+    window.location = "/";
+  };
+
   render() {
     const { classes } = this.props;
     const userTypes = ["asker", "expert"];
@@ -273,6 +279,7 @@ class UserForm extends React.Component {
               />
             ) : null}
             <Button onClick={this.submitUser}>Submit</Button>
+            <Button onClick={this.cancelForm}>Cancel</Button>
           </form>
         </Paper>
       </div>
