@@ -42,13 +42,10 @@ const styles = theme => ({
 const SingleUser = props => {
   const { classes } = props;
 
-  //amarachi's google profile img code
   const profileImage = props.user.image_url
-  ? props.user.image_url
-  : "https://picsum.photos/200/300";
-console.log("single user g user", props.user);
-
-  console.log("single user g user", props);
+    ? props.user.image_url
+    : "https://picsum.photos/200/300";
+  console.log("single user g user", props.user);
   return (
     <div className="container userContainer ">
       <div className="jumbotron box-shadow">

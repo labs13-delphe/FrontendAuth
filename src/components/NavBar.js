@@ -62,11 +62,11 @@ class NavBar extends React.Component {
           <Toolbar>
             <div className={classes.spaceBetween}>
               <Typography variant="h5" noWrap>
-                {user.username}'s Dashboard NavBar
+                {user.username}'s Dashboard
               </Typography>
-              <Button color="inherit" href="/secret/dashboard">Your Questions</Button>
+              <Button color="inherit" href="/secret/dashboard">Your Feed</Button>
                 <Button color="inherit" href="/community">
-                  Community
+                  Community Feed
                 </Button>
                 <Button color="inherit" href={`/users/${user.id}`}>
                   Profile

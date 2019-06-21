@@ -18,20 +18,7 @@ class Secret extends Component {
     QA: []
   };
 
-  postUserInfo = userInfo => {
-    axios
-      .post("https://delphe-backend.herokuapp.com/api/users", userInfo)
-      .then(res => {
-        if (userInfo.user_type === "asker") {
-          this.viewAskerDashboard();
-        } else {
-          this.viewExpertDashboard();
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
+
 
   //getting all users info in order to compare the incoming information from auth object.
   getUserInfo = () => {
@@ -81,23 +68,45 @@ class Secret extends Component {
 
   // BUTTONS TO DELETE ONCE LOGIN/REGISTER SETS USER_TYPE ON local storage
   // Sets user_ids and user_types for asker, expert, and clear items on storage
-  viewAskerDashboard() {
-    localStorage.setItem("user_id", 1);
-    localStorage.setItem("user_type", "asker");
-    window.location.reload();
-  }
+  // viewAskerDashboard() {
+  //   localStorage.setItem("user_id", 1);
+  //   localStorage.setItem("user_type", "asker");
+  //   window.location.reload();
+  // }
 
-  viewExpertDashboard() {
-    localStorage.setItem("user_id", 5);
-    localStorage.setItem("user_type", "expert");
-    window.location.reload();
-  }
+  // viewExpertDashboard() {
+  //   localStorage.setItem("user_id", 5);
+  //   localStorage.setItem("user_type", "expert");
+  //   window.location.reload();
+  // }
 
-  clearStorage() {
-    localStorage.removeItem("user_id");
-    localStorage.removeItem("user_type");
-    window.location.reload();
-  }
+  // clearStorage() {
+  //   localStorage.removeItem("user_id");
+  //   localStorage.removeItem("user_type");
+  //   window.location.reload();
+  // }
+
+// REGISTRATION - POST USER INFORMATION 
+
+  postUserInfo = userInfo => {
+    axios
+      .post("https://delphe-backend.herokuapp.com/api/users", userInfo)
+      .then(res => {
+        console.log("successful registration!", res.data)
+        localStorage.setItem("user_id", res.data.id)
+        localStorage.setItem("user_type", userInfo.user_type)
+        window.location.reload();
+  
+        // if (userInfo.user_type === "asker") {
+        //   this.viewAskerDashboard(userInfo.id);
+        // } else {
+        //   this.viewExpertDashboard(userInfo.id);
+        // }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   render() {
     console.log("secret props", this.props);
@@ -130,10 +139,10 @@ class Secret extends Component {
           </div>
         ) : (
           <div>
-            <h4>Please Register To Access Secret</h4>
             <UserFormTwo
               postUserInfo={this.postUserInfo}
               uniqueIdentifier={this.props.uniqueIdentifier}
+              gUser={this.props.gUser}
             />
           </div>
         )}
