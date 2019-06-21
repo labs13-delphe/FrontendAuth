@@ -216,18 +216,24 @@ class Question extends React.Component {
   submitAnswer = e => {
     e.preventDefault();
     let answer = {
-      question_id: this.props.id,
+      question_id: this.state.question_id,
       user_id: localStorage.getItem("user_id"),
       answer: this.state.answer
     };
     this.props.postAnswer(answer);
+    this.setState({
+      dialogOpen: false
+    })
   };
 
   // ========= UPDATE ANSWER
   // Toggle isEditing
   handleEdit = (e, answer_id) => {
     e.preventDefault();
-    this.setState({ isEditing: true });
+    this.setState({ 
+      isEditing: true,
+      dialogOpen: true
+     });
 
     this.getUsersAnswer(answer_id);
   };
@@ -302,6 +308,96 @@ class Question extends React.Component {
                         }
                       })}
                     </strong>
+                    <IconButton aria-label="Settings" onClick={(e) => this.handleEdit(e, answer.id)}>
+                    <Edit  />
+                  </IconButton>
+                  <IconButton aria-label="Settings" onClick={(e) => this.deleteAnswer(e, answer.id)}>
+                    <Delete />
+                  </IconButton>
+                  {/* FOR UPDATE POP UP */}
+                  <Dialog
+                      open={dialogOpen}
+                      onClose={this.handleClose}
+                      className={classes.dialog}
+                      aria-labelledby="form-dialog-title"
+                    >
+                      <DialogTitle id="form-dialog-title">
+                        Edit Your Question
+                      </DialogTitle>
+                      <DialogContent className="form">
+                        <Typography> Title: {question.title}</Typography>
+                        <Typography> Question: {question.question}</Typography>
+
+                        {/* <TextField
+                          value={question.title}
+                          name="title"
+                          label="Title"
+                          placeholder="Question title..."
+                          multiline
+                          className={classes.textField}
+                          onChange={this.handleChanges}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                        <TextField
+                          value={question.question}
+                          name="question"
+                          label="Question"
+                          placeholder="I want to know..."
+                          multiline
+                          className={classes.textField}
+                          onChange={this.handleChanges}
+                          margin="normal"
+                          variant="outlined"
+                        /> */}
+
+                      <TextField
+                          value={this.state.singleAnswer.answer}
+                          name="answer"
+                          label="Edit Your Answer"
+                          placeholder=""
+                          multiline
+                          className={classes.textField}
+                          onChange={this.handleEditChange}
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </DialogContent>
+                      <DialogActions className="formButtons">
+                        <Button
+                          onClick={this.handleClose}
+                          variant="contained"
+                          color="primary"
+                          className={classes.button}
+                        >
+                          Cancel
+                        </Button>
+              
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.button}
+                            onClick={this.submitEdit}
+                          >
+                            Submit
+                          </Button>
+                      
+                      </DialogActions>
+                    </Dialog>
+                    {/* <button
+                      onClick={e => {
+                        this.handleEdit(e, answer.id);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={e => {
+                        this.deleteAnswer(e, answer.id);
+                      }}
+                    >
+                      Delete
+                    </button> */}
                   </ListItem>
                 </div>
               );
@@ -364,76 +460,77 @@ class Question extends React.Component {
           }
           action={
             <>
-              <IconButton aria-label="Settings" onClick={this.handleClickOpen}>
-                <Edit  />
+            
+              {/* <IconButton aria-label="Settings" onClick={this.handleClickOpen}>
+               <Edit  />
               </IconButton>
-              <IconButton aria-label="Settings" onClick={this.deleteButton}>
-                <Delete />
-              </IconButton>
-              {/* FOR UPDATE POP UP */}
-              <Dialog
+               <IconButton aria-label="Settings" onClick={this.deleteButton}>
+                 <Delete />
+               </IconButton>
+               
+               <Dialog
                 open={dialogOpen}
-                onClose={this.handleClose}
-                className={classes.dialog}
-                aria-labelledby="form-dialog-title"
-              >
-                <DialogTitle id="form-dialog-title">
-                  Edit Your Question
-                </DialogTitle>
-                <DialogContent className="form">
-                  <TextField
-                    value={question.title}
-                    name="title"
-                    label="Title"
-                    placeholder="Question title..."
-                    multiline
-                    className={classes.textField}
-                    onChange={this.handleChanges}
-                    margin="normal"
-                    variant="outlined"
-                  />
-                  <TextField
+                 onClose={this.handleClose}
+                 className={classes.dialog}
+                 aria-labelledby="form-dialog-title"
+               >
+                 <DialogTitle id="form-dialog-title">
+                   Edit Your Question
+                 </DialogTitle>
+                 <DialogContent className="form">
+                   <TextField
+                     value={question.title}
+                     name="title"
+                     label="Title"
+                     placeholder="Question title..."
+                     multiline
+                     className={classes.textField}
+                     onChange={this.handleChanges}
+                     margin="normal"
+                     variant="outlined"
+                   />
+                   <TextField
                     value={question.question}
-                    name="question"
+                     name="question"
                     label="Question"
-                    placeholder="I want to know..."
-                    multiline
-                    className={classes.textField}
-                    onChange={this.handleChanges}
-                    margin="normal"
-                    variant="outlined"
-                  />
-                </DialogContent>
-                <DialogActions className="formButtons">
-                  <Button
+                     placeholder="I want to know..."
+                     multiline
+                     className={classes.textField}
+                     onChange={this.handleChanges}
+                     margin="normal"
+                     variant="outlined"
+                   />
+                 </DialogContent>
+                 <DialogActions className="formButtons">
+                   <Button
                     onClick={this.handleClose}
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                  >
-                    Cancel
-                  </Button>
-                  {question.title && question.question ? (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      className={classes.button}
-                      onClick={this.submitForm}
+                     variant="contained"
+                     color="primary"
+                     className={classes.button}
+                   >
+                     Cancel
+                   </Button>
+                   {question.title && question.question ? (
+                     <Button
+                       variant="contained"
+                       color="primary"
+                       className={classes.button}
+                       onClick={this.submitForm}
                     >
                       Submit
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      disabled
-                      className={classes.button}
-                    >
-                      Submit
-                    </Button>
-                  )}
-                </DialogActions>
-              </Dialog>
+                     </Button>
+                 ) : (
+                     <Button
+                       variant="contained"
+                       color="primary"
+                       disabled
+                       className={classes.button}
+                     >
+                       Submit
+                     </Button>
+                   )}
+                 </DialogActions>
+               </Dialog>  */}
             </>
           }
           title={askerInfo.username}
@@ -469,6 +566,8 @@ class Question extends React.Component {
           </div>
         </CardContent>
         <Divider />
+
+              
         <div>
           {this.state.isEditing ? (
             <form onSubmit={this.submitEdit}>
