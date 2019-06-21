@@ -133,7 +133,7 @@ class AskerDashboard extends React.Component {
 
   render() {
     const { classes } = this.props,
-    { userInfo } = this.state;
+      { userInfo } = this.state;
 
     const questionsText =
       this.state.questionCount === 1 ? (
@@ -144,6 +144,17 @@ class AskerDashboard extends React.Component {
 
     const answersText =
       this.state.answerCount === 1 ? <span>Answer</span> : <span>Answers</span>;
+
+    const questionListSection =
+      this.state.questionCount === 0 ? (
+        <Typography variant="h5">Ask a Question to Get Start!</Typography>
+      ) : (
+        <AskerQuestionsList
+          questions={this.state.questions}
+          deleteQuestion={this.deleteQuestion}
+          updateQuestion={this.updateQuestion}
+        />
+      );
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -160,13 +171,7 @@ class AskerDashboard extends React.Component {
             </div>
 
             <QuestionForm />
-            <Paper className={classes.Paper}>
-              <AskerQuestionsList
-                questions={this.state.questions}
-                deleteQuestion={this.deleteQuestion}
-                updateQuestion={this.updateQuestion}
-              />
-            </Paper>
+            <Paper className={classes.Paper}>{questionListSection}</Paper>
           </div>
         </main>
       </div>
