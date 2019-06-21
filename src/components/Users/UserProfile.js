@@ -91,10 +91,10 @@ class UserProfile extends React.Component {
             <div className="conditional-buttons">
               {this.state.user.id ===
               Number(localStorage.getItem("user_id")) ? (
-                <div>
-                  <button onClick={this.deleteButton}> Delete Account</button>{" "}
-                  <button onClick={this.toggleEdit}>Edit Profile</button>
-                  <button onClick={this.goBack}>Go Back</button>
+                <div className="jumbotron conBtn">
+                  <button onClick={this.deleteButton} id="footerButton" className="btn-large waves-effect waves-light teal lighten-1"> Delete Account</button>{" "}
+                  <button onClick={this.toggleEdit} id="footerButton" className="btn-large waves-effect waves-light teal lighten-1">Edit Profile</button>{" "}
+                  <button onClick={this.goBack} id="footerButton" className="btn-large waves-effect waves-light teal lighten-1">Go Back</button>
                 </div>
               ) : (
                 <div>

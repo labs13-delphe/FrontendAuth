@@ -42,7 +42,6 @@ class App extends Component {
         //uniqueIdentifier: user.email,
         gUser: user
       });
-      // this.props.history.push("/secret/dashboard");
     });
   };
 
@@ -52,6 +51,7 @@ class App extends Component {
 
     return (
       <div className="App">
+
        <Route exact path="/"component={Landing}/>
         {/* {this.props.history.push("/secret/dashboard")} */}
         {this.state.isSignedIn ? (
