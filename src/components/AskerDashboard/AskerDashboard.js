@@ -50,6 +50,9 @@ const styles = theme => ({
     overflowY: "scroll",
     maxHeight: 860,
     background: "#EBEBEA"
+  },
+  noQuestions: {
+    textAlign: "center"
   }
 });
 
@@ -147,7 +150,13 @@ class AskerDashboard extends React.Component {
 
     const questionListSection =
       this.state.questionCount === 0 ? (
-        <Typography variant="h5">Ask a Question to Get Start!</Typography>
+        <div className={classes.noQuestions}>
+          <Typography variant="h5">Ask a Question to Get Started!</Typography>
+          <Typography variant="h6">
+            “The smart ones ask when they don’t know, and sometimes when they
+            do.” <br></br>- Malcolm Forbes
+          </Typography>
+        </div>
       ) : (
         <AskerQuestionsList
           questions={this.state.questions}
