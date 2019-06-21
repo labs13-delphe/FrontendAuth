@@ -569,20 +569,6 @@ class Question extends React.Component {
 
               
         <div>
-          {this.state.isEditing ? (
-            <form onSubmit={this.submitEdit}>
-              <input
-                label="singleAnswer"
-                type="text"
-                name="answer"
-                value={this.state.singleAnswer.answer}
-                placeholder="answer"
-                onChange={this.handleEditChange}
-                className="answer-input"
-              />
-              <button onClick={this.submitEdit}>Save Edit</button>
-            </form>
-          ) : (
             <form onSubmit={this.submitAnswer}>
               <input
                 label="answer"
@@ -595,8 +581,8 @@ class Question extends React.Component {
               />
               <button onClick={this.submitAnswer}>Submit</button>
             </form>
-          )}
         </div>
+        
         <CardActions>
           <Typography>View Answers: ({answerCount}) </Typography>
           <IconButton
