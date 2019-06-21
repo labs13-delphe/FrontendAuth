@@ -1,5 +1,6 @@
 import React from "react";
 import firebase from "firebase";
+import axios from "axios";
 
 import "./UserFormCss.css";
 
@@ -92,19 +93,32 @@ class UserForm extends React.Component {
   state = {
     first_name: "",
     last_name: "",
-    email: "",
+    email: this.props.gUser.email,
     username: "",
     password: "",
     bio: "",
     user_type: "",
-    image_url: "",
-    hourly_rate: 0 // keep - 0 is set as default
+    image_url: this.props.gUser.photoURL,
+    hourly_rate: 0 // keep - 0 is set as default (so asker doesn't have to fill it out)
   };
   componentDidMount() {
     console.log("G User:", this.props.gUser);
     this.setState({
       email: this.props.gUser.email,
       image_url: this.props.gUser.photoURL
+    });
+
+    axios
+    .post("http://localhost:5000/api/auth/login", this.state)
+    .then(res => {
+      console.log("login success!!!", res.data);
+      localStorage.setItem("user_type", res.data.user.user_type);
+      localStorage.setItem("user_id", res.data.user.id);
+      window.location = "/secret/dashboard";
+    })
+    .catch(err => {
+      console.log("FORM 2 STATE:", this.state);
+      console.log("WAIT! Looks like you have to fill out a user profile");
     });
   }
 
@@ -267,7 +281,3 @@ class UserForm extends React.Component {
 }
 
 export default withStyles(styles)(UserForm);
-
-///firstname, lastname, email, username, password
-
-//bio, img url, user_type, hourly_rate

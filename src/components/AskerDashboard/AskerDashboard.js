@@ -132,8 +132,8 @@ class AskerDashboard extends React.Component {
   };
 
   render() {
-    const { classes } = this.prop;
-    //{ userInfo } = this.state;
+    const { classes } = this.props,
+    { userInfo } = this.state;
 
     const questionsText =
       this.state.questionCount === 1 ? (

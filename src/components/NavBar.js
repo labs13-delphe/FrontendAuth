@@ -13,10 +13,8 @@ import {
 } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
-
 // Custom Styles
 const styles = theme => ({
-
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
@@ -28,15 +26,14 @@ const styles = theme => ({
     justifyContent: "space-between",
     width: "100%"
   },
-  appBarSpacer: theme.mixins.toolbar,
-
+  appBarSpacer: theme.mixins.toolbar
 });
 
 class NavBar extends React.Component {
   state = {
     user: {}
   };
-  componentDidMount() {
+  componentWillMount() {
     const id = localStorage.getItem("user_id");
     const endpoint = `https://delphe-backend.herokuapp.com/api/users/${id}`;
 
@@ -50,9 +47,15 @@ class NavBar extends React.Component {
       });
   }
 
+  logout = e => {
+    firebase.auth().signOut();
+    localStorage.clear();
+    window.location = "/";
+  };
+
   render() {
     const { classes } = this.props,
-    { user } = this.state;
+      { user } = this.state;
 
     return (
       <div>
@@ -63,21 +66,22 @@ class NavBar extends React.Component {
               <Typography variant="h5" noWrap>
                 {user.username}'s Dashboard
               </Typography>
-              <Button color="inherit" href="/secret/dashboard">Your Feed</Button>
-                <Button color="inherit" href="/community">
-                  Community Feed
-                </Button>
-                <Button color="inherit" href={`/users/${user.id}`}>
-                  Profile
-                </Button>
-              <Button color="inherit" onClick={() => firebase.auth().signOut().then(window.location = '/')}>
+              <Button color="inherit" href="/secret/dashboard">
+                Your Feed
+              </Button>
+              <Button color="inherit" href="/community">
+                Community Feed
+              </Button>
+              <Button color="inherit" href={`/users/${user.id}`}>
+                Profile
+              </Button>
+              <Button color="inherit" onClick={this.logout}>
                 Logout
               </Button>
             </div>
           </Toolbar>
         </AppBar>
         <div className={classes.appBarSpacer} />
-
       </div>
     );
   }

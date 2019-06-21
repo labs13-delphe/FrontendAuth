@@ -1,6 +1,8 @@
 // Packages
 import React from "react";
 import axios from "axios";
+import firebase from "firebase";
+
 import { makeStyles } from "@material-ui/core/styles";
 
 import {
@@ -53,7 +55,9 @@ class UserProfile extends React.Component {
       .delete(`/users/${id}`)
       .then(res => {
         console.log(res.data);
-        window.location.reload();
+        firebase.auth().signOut();
+        localStorage.clear();
+        window.location = "/";
       })
       .catch(err => {
         console.log(err);

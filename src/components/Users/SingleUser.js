@@ -41,9 +41,9 @@ const styles = theme => ({
 const SingleUser = props => {
   const { classes } = props;
 
-  const profileImage = props.user.image_url
-    ? props.user.image_url
-    : "https://picsum.photos/200/300";
+  const profileImage = props.user.image_url === null
+    ? "https://picsum.photos/200/300"
+    : props.user.image_url;
   console.log("single user g user", props.user);
   return (
     <>
