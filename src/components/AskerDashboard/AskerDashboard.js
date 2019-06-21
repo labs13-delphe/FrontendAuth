@@ -8,11 +8,7 @@ import AskerQuestionsList from "./AskerQuestionsList";
 // import StripeBtn from "../stripe/StripeBtn"; // giving an error for some reason
 
 // Material UI
-import {
-  CssBaseline,
-  Paper,
-  Typography
-} from "@material-ui/core";
+import { CssBaseline, Paper, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Custom Styles
@@ -22,8 +18,8 @@ const styles = theme => ({
   },
   title: {
     ...theme.mixins.toolbar,
-  textAlign: "center"
-},
+    textAlign: "center"
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -136,16 +132,19 @@ class AskerDashboard extends React.Component {
   };
 
   render() {
-    const { container, classes } = this.props,
-      { userInfo } = this.state;
+    const { classes } = this.prop;
+    //{ userInfo } = this.state;
 
+    const questionsText =
+      this.state.questionCount === 1 ? (
+        <span>Question</span>
+      ) : (
+        <span>Questions</span>
+      );
 
-      const questionsText =
-      this.state.questionCount === 1 ? <span>Question</span> : <span>Questions</span>;
-
-      const answersText =
-      this.state.answerCount === 1 ? <span>Answer</span> : <span>Answers</span>;    
-      return (
+    const answersText =
+      this.state.answerCount === 1 ? <span>Answer</span> : <span>Answers</span>;
+    return (
       <div className={classes.root}>
         <CssBaseline />
         <main className={classes.content}>
