@@ -1,6 +1,7 @@
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.css';
 
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import {
   TextField,
   Button,
@@ -46,36 +47,38 @@ const SingleUser = props => {
     : props.user.image_url;
   console.log("single user g user", props.user);
   return (
-    <>
-      <div className={classes.root} />
-      <Paper className={classes.setCardWidth}>
+    <div className="container userContainer ">
+      <div className="jumbotron box-shadow">
         <div className={classes.flex}>
-          <div>
-            <Typography variant="h6">
+          <div className="userHeader">
+            <Typography variant="h4" id="delphe-header" className="teal-text text-lighten-2">
               {props.user.first_name} {props.user.last_name}
             </Typography>
 
-            <h4>
-              @{props.user.username}, {props.user.user_type}
+            <h4 className="persona-text-name">
+              @{props.user.username} | {props.user.user_type}
             </h4>
           </div>
-          <Avatar
+          
+          <img
             alt="Remy Sharp"
             src={profileImage}
-            className={classes.bigAvatar}
+            className="profile-photo"
           />
+         
         </div>
-        <Typography variant="h6" className={classes.textPad}>
-          Bio: {props.user.bio}
-        </Typography>
-        <Typography variant="h6">Email: {props.user.email}</Typography>
+        <div className="persona-text-name bio-text">
+          <strong>Bio  </strong>{props.user.bio}
+        </div><br/>
+        <Typography variant="h12" className="persona-text-name"><strong>Email  </strong>{props.user.email}</Typography>
         {props.user.user_type === "expert" ? (
-          <Typography variant="h6">
-            Hourly Rate: {props.user.hourly_rate}
+          <Typography variant="h8">
+            <strong>Hourly Rate  </strong>{props.user.hourly_rate}
           </Typography>
         ) : null}
-      </Paper>
-    </>
+    </div>
+    </div>
+
   );
 };
 

@@ -11,9 +11,8 @@ const QuestionsList = props => {
           return (
             <Question
               key={question.id}
-              question={question}
-              answers={props.answers}
-              id={question.id}
+              // question={question}
+              id={question.question_id}
               postAnswer={props.postAnswer}
               QA={props.QA}
               editAnswer={props.editAnswer}

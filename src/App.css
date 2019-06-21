@@ -3,6 +3,49 @@
   /* margin: 0 auto; */
 }
 
+.userContainer{
+  display: flex;
+  padding: 0px;
+  justify-content: space-around;
+  justify-content: center;
+}
+
+.userHeader{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-content: center;
+  
+}
+
+.box-shadow{
+ box-shadow: 1px 0px 1px 2px;
+ color: #edf0f1;
+}
+
+.jumbotron{
+  background-color:white;
+}
+
+.profile-photo{
+  border-radius: 50%;
+  width: 25vh;
+  height: 25vh;
+}
+
+.bio-text{
+  text-align: left;
+  padding-top: 20px;
+}
+
+.conBtn {
+text-align: center;
+padding: 0;
+
+}
+
+
+
 
 
 
