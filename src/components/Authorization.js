@@ -4,13 +4,7 @@ import firebase from "firebase";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 // Materiall UI
-import {
-  withStyles,
-  CssBaseline,
-  Typography,
-  Paper,
-  Grid
-} from "@material-ui/core";
+import { withStyles, CssBaseline, Typography, Paper } from "@material-ui/core";
 
 // NOTE: isSignedIn and gUser on App.js state is also being set through this file
 
@@ -19,10 +13,10 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     //alignItems: "center",
-    position: 'absolute', 
-        left: '50%', 
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
     padding: theme.spacing(3)
   },
   centerText: {
@@ -75,17 +69,15 @@ class Authorization extends Component {
       <div>
         <CssBaseline />
         <Paper className={classes.center}>
-<Typography variant="h4">Let's Create an Account</Typography>
+          <Typography variant="h4">Let's Create an Account</Typography>
           <StyledFirebaseAuth
             uiConfig={this.uiConfig}
             firebaseAuth={firebase.auth()}
           />
-          <a href="/" className={classes.centerText}>Changed my mind. Take me back, please.</a>
-</Paper>
-
-        {/* <Grid container justify="center">
-          
-        </Grid> */}
+          <a href="/" className={classes.centerText}>
+            Changed my mind. Take me back, please.
+          </a>
+        </Paper>
       </div>
     );
   }
