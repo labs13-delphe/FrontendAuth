@@ -104,7 +104,7 @@ class UserProfile extends React.Component {
             </>
           ) : null}
 
-          <button>Save Edit</button>
+          <button id="footerButton" className="btn-large waves-effect waves-light teal lighten-1">Save Edit</button>
         </form>
       </>
     );
