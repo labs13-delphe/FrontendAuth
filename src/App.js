@@ -57,9 +57,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <button onClick={this.goToAuthorization}>Go To Authorization</button>
+        {/* <button onClick={this.goToAuthorization}>Go To Authorization</button> */}
        <Route exact path="/"component={Landing}/>
-       <Route path="/authorization"component={Authorization}/>
+       <Route path="/authorization"component={Authorization}/> 
 
         {this.state.isSignedIn ? (
           <div>
