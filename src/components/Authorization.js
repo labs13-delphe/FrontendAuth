@@ -24,6 +24,9 @@ const styles = theme => ({
         top: '50%',
         transform: 'translate(-50%, -50%)',
     padding: theme.spacing(3)
+  },
+  centerText: {
+    textAlign: "center"
   }
 });
 
@@ -77,6 +80,7 @@ class Authorization extends Component {
             uiConfig={this.uiConfig}
             firebaseAuth={firebase.auth()}
           />
+          <a href="/" className={classes.centerText}>Changed my mind. Take me back, please.</a>
 </Paper>
 
         {/* <Grid container justify="center">
