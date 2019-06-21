@@ -88,7 +88,13 @@ class Question extends React.Component {
       thisUser: {
         username: "",
         first_name: "",
-        last_name: ""
+        last_name: "",
+        user_type: ""
+      },
+      askerInfo: {
+        first_name: "",
+        last_name: "",
+        username: ""
       },
       question: {},
       topics: [],
@@ -123,7 +129,27 @@ class Question extends React.Component {
           question: res.data,
           topics: res.data.topics,
           answers: res.data.answers,
+          askerId: res.data.user_id,
           answerCount: res.data.answers.length
+        });
+
+        // GET Asker Info (to get usernames)
+      
+        axios
+        .get(`https://delphe-backend.herokuapp.com/api/users/${this.state.askerId}`)
+        .then(res => {
+          console.log("Asker user info", res.data)
+          this.setState({ 
+            askerInfo: {
+              first_name: res.data.first_name,
+              last_name: res.data.last_name,
+              username: res.data.username,
+              user_type: res.data.user_type
+            }
+          });
+        })
+        .catch(err => {
+          console.log("Can't retrieve all users", err);
         });
       })
       .catch(err => {
@@ -140,6 +166,8 @@ class Question extends React.Component {
       .catch(err => {
         console.log("Can't retrieve all users", err);
       });
+
+
 
     // GET THIS EXPERT INFO
     const asker_id = localStorage.getItem("user_id");
@@ -246,7 +274,7 @@ class Question extends React.Component {
     });
 
   render() {
-    const { answers, users, thisUser, answerCount, question, topics, dialogOpen, expanded } = this.state,
+    const { answers, users, thisUser, answerCount, question, topics, dialogOpen, expanded, askerInfo } = this.state,
           { classes } = this.props
     // console.log("question props", this.props);
     // console.log("question state", this.state);
@@ -324,6 +352,7 @@ class Question extends React.Component {
       ); */}
       const answersText = this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
     return (
+      <>
       <Card className={classes.card}>
         <CardHeader
           avatar={
@@ -407,8 +436,8 @@ class Question extends React.Component {
               </Dialog>
             </>
           }
-          title={thisUser.username}
-          subheader={thisUser.user_type}
+          title={askerInfo.username}
+          subheader={askerInfo.user_type}
         />
         <CardContent>
           <Typography
@@ -440,6 +469,35 @@ class Question extends React.Component {
           </div>
         </CardContent>
         <Divider />
+        <div>
+          {this.state.isEditing ? (
+            <form onSubmit={this.submitEdit}>
+              <input
+                label="singleAnswer"
+                type="text"
+                name="answer"
+                value={this.state.singleAnswer.answer}
+                placeholder="answer"
+                onChange={this.handleEditChange}
+                className="answer-input"
+              />
+              <button onClick={this.submitEdit}>Save Edit</button>
+            </form>
+          ) : (
+            <form onSubmit={this.submitAnswer}>
+              <input
+                label="answer"
+                type="text"
+                name="answer"
+                value={this.state.answer}
+                placeholder="answer"
+                onChange={this.handleChange}
+                className="answer-input"
+              />
+              <button onClick={this.submitAnswer}>Submit</button>
+            </form>
+          )}
+        </div>
         <CardActions>
           <Typography>View Answers: ({answerCount}) </Typography>
           <IconButton
@@ -457,6 +515,77 @@ class Question extends React.Component {
           <Typography paragraph>{answersDiv}</Typography>
         </Collapse>
       </Card>
+        {/* <div >
+        <div className="question-div">
+        
+            {this.state.users.map(user => {
+              if (user.id === this.state.question.user_id) {
+                return (
+                  <div className="user-info-div"  key={user.id}>
+                    <p>
+                      {user.first_name} {user.last_name} @{user.username}
+                      <Link to={`/users/${user.id}`}>View Profile</Link>
+                    </p>
+                  </div>
+                );
+              } else {
+                return null;
+              }
+            })}
+          
+          <p >
+            {/* <Link to={`/questions/${this.state.question.id}/update`}>
+              <i className="fas fa-pen" />
+            </Link>
+            <i onClick={this.deleteButton} className="fas fa-trash" />
+            &nbsp;|&nbsp; */}
+            {/* <strong>{this.state.question.title}: </strong>
+            {this.state.question.question} <br /> {this.state.answerCount}{" "}
+            {answersText}
+          </p>
+        </div>
+
+        <div className="topics-div">
+          <p >
+            <strong>Topic: </strong>
+            {this.state.topics.map(topic => (
+              <span key={topic.id}>{topic.topic}, </span>
+            ))}
+          </p>
+        </div>
+        {answersDiv}
+
+        <div>
+          {this.state.isEditing ? (
+            <form onSubmit={this.submitEdit}>
+              <input
+                label="singleAnswer"
+                type="text"
+                name="answer"
+                value={this.state.singleAnswer.answer}
+                placeholder="answer"
+                onChange={this.handleEditChange}
+                className="answer-input"
+              />
+              <button onClick={this.submitEdit}>Save Edit</button>
+            </form>
+          ) : (
+            <form onSubmit={this.submitAnswer}>
+              <input
+                label="answer"
+                type="text"
+                name="answer"
+                value={this.state.answer}
+                placeholder="answer"
+                onChange={this.handleChange}
+                className="answer-input"
+              />
+              <button onClick={this.submitAnswer}>Submit</button>
+            </form>
+          )}
+        </div>
+      </div> */}
+      </>
     );
     //   <div style={bordered}>
     //     <div className="question-div">
