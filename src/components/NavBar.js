@@ -71,7 +71,7 @@ class NavBar extends React.Component {
                 <Button color="inherit" href={`/users/${user.id}`}>
                   Profile
                 </Button>
-              <Button color="inherit" onClick={() => firebase.auth().signOut()}>
+              <Button color="inherit" onClick={() => firebase.auth().signOut().then(window.location = '/')}>
                 Logout
               </Button>
             </div>
