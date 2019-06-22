@@ -386,6 +386,17 @@ class Question extends React.Component {
           }
           action={
             <>
+            {users.map(user => {
+              if (user.id === question.user_id) {
+                return (
+                  <Typography variant="h6">
+                    <Link to={`/users/${user.id}`}> View Profile</Link>
+                  </Typography>
+                );
+              } else {
+                return null;
+              }
+            })}
             
              </>
           }
