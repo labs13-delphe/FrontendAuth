@@ -32,25 +32,22 @@ export class Landing extends Component {
         <div className="container"> */}
         <div className="headerContainer container">
           <br></br> 
-          <img src={landingimage} className="landingImg" alt="landing hero img"/>
+          
           <div className="header-CTA">
           <h1 className="teal-text text-lighten-2" id="delphe-header">Delphe</h1>
           <h2 className='landing-content-title'>Your home for advice</h2>
           <h3 className="landing-content-body">Find answers to your most pressing questions by connecting with a community of experts.</h3>
-          
-          <div className="">
-                <a href="" id="" className="center btn-large waves-effect waves-light teal lighten-1">Get Started</a>
-            
-        </div>
-      </div>
+          <a href="" id="" className="center btn-large waves-effect waves-light teal lighten-1">Get Started</a></div>
+        
+            <div className="landingImgContainer">
+            <img src={landingimage} className="landingImg" alt="landing hero img"/>
+            </div>
+
+      </div> 
        
-  </div>
-    {/* </div>
-    </div>
-    </div> */}
   
-    <div className="section-background container">
-      <div className="">
+    <div className="section-background row center container">
+      <div className="row">
         {/* <!--   Icon Section   --> */}
         <div className="featureContainer">
           <div className="col s12 m4">
@@ -70,7 +67,7 @@ export class Landing extends Component {
               </div>
             </div>
 
-          <div className="col s12 m4">
+          <div className="col s12 m4 ">
             <div className="icon-block">
               <h2 className="center brown-text"><img className="climbing-3" src={climbing3} alt="climber feature pic"/></h2>
               <h5 className="center">Improve your skillset</h5>

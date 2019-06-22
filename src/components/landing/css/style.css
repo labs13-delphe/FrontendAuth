@@ -55,19 +55,26 @@
  footer.page-footer {
    margin: 0;
  }
- 
+
+.headerContainer{
+  display: flex;  
+  justify-content: right;
+  background-color:#FFFFFF;
+  width: 50%;
+padding-bottom: 20px;
+ }
+
  .header-CTA{
-   text-align: left;
-   /* width: 50vh;
-   height: 80vh; */
-   margin: 10px;
-   padding: 0;
+   /* width: 50vh;*/ 
+   height: 20%;
    background-color:#FFFFFF;
+ 
  }
 
  .landingImg{
   width: 70vh;
   height: 60vh;
+  margin: auto;
   background-color:#FFFFFF;
  }
  /* Kermitt CSS */
@@ -132,12 +139,7 @@
   justify-content: center;
   padding: 20px;
  }
- .headerContainer{
-  display: flex;  
-  flex-direction: row-reverse;
-  width: 50vh;
-  background-color:#FFFFFF;
- }
+
  .section-background {	
    margin-top: 20px;
    background-color: #F0F0F0;
