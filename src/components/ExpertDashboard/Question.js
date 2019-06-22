@@ -63,11 +63,11 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    background: "orange"
+    // alignItems: "center",
+    // width: "100%",
+    // background: "orange"
   },
-  textField: {
+  answertextField: {
     width: "90%",
     margin: theme.spacing(1)
   },
@@ -77,7 +77,11 @@ const styles = theme => ({
     justifyContent: "space-evenly"
   },
   button: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    width: 125
+  },
+  answerInput: {
+    width: '100%'
   }
 });
 
@@ -280,7 +284,7 @@ class Question extends React.Component {
     });
 
   render() {
-    const { answers, users, thisUser, answerCount, question, topics, dialogOpen, expanded, askerInfo } = this.state,
+    const { answers, users, thisUser, answerCount, question, topics, dialogOpen, expanded, askerInfo, answer } = this.state,
           { classes } = this.props
   
     const answersDiv =
@@ -420,8 +424,8 @@ class Question extends React.Component {
         <Divider />
 
               
-        <div>
-            <form onSubmit={this.submitAnswer}>
+        {/* <div> */}
+            {/* <form onSubmit={this.submitAnswer}>
               <input
                 label="answer"
                 type="text"
@@ -432,8 +436,43 @@ class Question extends React.Component {
                 className="answer-input"
               />
               <button onClick={this.submitAnswer}>Submit</button>
+            </form> */}
+
+            <form className={classes.form} onSubmit={this.submitAnswer}>
+              <div className={classes.anserTextfield}>
+                <TextField
+                  value={answer}
+                  name="answer"
+                  label="answer"
+                  placeholder="Answer this question..."
+                  multiline
+                  className={classes.answerInput}
+                  onChange={this.handleChange}
+                  margin="normal"
+                  variant="standard"
+                />
+              </div>
+
+              {answer ? (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  onClick={this.submitAnswer}
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  disabled
+                  className={classes.button}
+                >
+                  Submit
+                </Button>
+              )}
             </form>
-        </div>
         
         <CardActions>
           <Typography>View Answers: ({answerCount}) </Typography>
