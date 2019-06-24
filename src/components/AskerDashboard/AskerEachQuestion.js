@@ -35,7 +35,10 @@ const styles = theme => ({
     width: "75%",
     //width: 660, // probably shouldn't be hard-coded
     marginBottom: theme.spacing(3),
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
+    [theme.breakpoints.down("xs")]: {
+      width: "100%"
+    }
   },
   topicButton: {
     margin: theme.spacing(1),

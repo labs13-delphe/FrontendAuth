@@ -15,7 +15,12 @@ const styles = theme => ({
     display: "flex",
     width: "100%"
   },
-  title: theme.mixins.toolbar,
+  title: {
+    //...theme.mixins.toolbar,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2),
+
+  },
 
   content: {
     flexGrow: 1,

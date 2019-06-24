@@ -18,7 +18,9 @@ const styles = theme => ({
     display: "flex"
   },
   title: {
-    ...theme.mixins.toolbar,
+    //...theme.mixins.toolbar,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2),
     display: "flex",
     alignItems: "flex-end",
     justifyContent: "space-between",
@@ -26,7 +28,8 @@ const styles = theme => ({
     [theme.breakpoints.down("xs")]: {
       flexDirection: "column",
       alignItems: "flex-start",
-      justifyContent: "center"
+      justifyContent: "center",
+      width: "100%"
     }
   },
   content: {

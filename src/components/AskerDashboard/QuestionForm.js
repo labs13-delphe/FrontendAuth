@@ -28,6 +28,12 @@ const styles = theme => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(3),
     width: "75%",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+      alignItems: "flex-start",
+      justifyContent: "center",
+      width: "100%"
+    }
     //background: "pink"
   },
   formTitle: {
