@@ -55,15 +55,27 @@
  footer.page-footer {
    margin: 0;
  }
- 
 
- .headerContainer{
-   display: flex;
-   justify-content: space-around;
+.headerContainer{
+  display: flex;  
+  justify-content: right;
+  background-color:#FFFFFF;
+  width: 50%;
+padding-bottom: 20px;
+ }
+
+ .header-CTA{
+   /* width: 50vh;*/ 
+   height: 20%;
+   background-color:#FFFFFF;
+ 
  }
 
  .landingImg{
-   width: 50vh;
+  width: 70vh;
+  height: 60vh;
+  margin: auto;
+  background-color:#FFFFFF;
  }
  /* Kermitt CSS */
  .landing-content-title {	
@@ -123,7 +135,9 @@
 .featureContainer{
   display: flex;
   flex-direction: row;
+   /* flex-direction: row-reverse; */
   justify-content: center;
+  padding: 20px;
  }
 
  .section-background {	
@@ -164,6 +178,7 @@
    padding-top: 20px;
    background-color:#FFFFFF;
    color: rgba(255,255,255,.9);
+   padding: 20px;
  }
  
  /* help for any topic */
@@ -258,4 +273,5 @@
 
  .userContainer{
    display: flex;
- }
+ } 
+ 

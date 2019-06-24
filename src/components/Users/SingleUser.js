@@ -70,10 +70,10 @@ const SingleUser = props => {
         <div className="persona-text-name bio-text">
           <strong>Bio  </strong>{props.user.bio}
         </div><br/>
-        <Typography variant="h12" className="persona-text-name"><strong>Email  </strong>{props.user.email}</Typography>
+        <Typography variant="h12" className="persona-text-name"><strong>Email  </strong>{props.user.email}</Typography> <br/>
         {props.user.user_type === "expert" ? (
-          <Typography variant="h8">
-            <strong>Hourly Rate  </strong>{props.user.hourly_rate}
+          <Typography variant="h12" className="persona-text-name">
+          <strong>Hourly Rate  $</strong>{props.user.hourly_rate}
           </Typography>
         ) : null}
     </div>

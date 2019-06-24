@@ -26,27 +26,27 @@ export class Landing extends Component {
         <a href="#" data-target="nav-mobile" className="sidenav-trigger"><i className="material-icons">menu</i></a>
       </div>
     </nav>
-  
+{/*   
     <div className="headerContainer">
       <div className="section no-pad-bot">
-        <div className="container">
-          <br></br>
-          <h1 className="row center teal-text text-lighten-2" id="delphe-header">Delphe</h1>
+        <div className="container"> */}
+        <div className="headerContainer container">
+          <br></br> 
+          
+          <div className="header-CTA">
+          <h1 className="teal-text text-lighten-2" id="delphe-header">Delphe</h1>
           <h2 className='landing-content-title'>Your home for advice</h2>
           <h3 className="landing-content-body">Find answers to your most pressing questions by connecting with a community of experts.</h3>
           
           <div className="row center">
                 <a href="/authorization" id="" className="center btn-large waves-effect waves-light teal lighten-1">Get Started</a>
             </div>
-        {/* <div className="landingImg"><img src={landingimage} alt="landing hero img"/> */}
-    </div>
-    </div>
-    </div>
-    {/* </div> */}
-    
+        </div>
+      </div> 
+       
   
-    <div className="section-background container">
-      <div className="">
+    <div className="section-background row center container">
+      <div className="row">
         {/* <!--   Icon Section   --> */}
         <div className="featureContainer">
           <div className="col s12 m4">
@@ -66,7 +66,7 @@ export class Landing extends Component {
               </div>
             </div>
 
-          <div className="col s12 m4">
+          <div className="col s12 m4 ">
             <div className="icon-block">
               <h2 className="center brown-text"><img className="climbing-3" src={climbing3} alt="climber feature pic"/></h2>
               <h5 className="center">Improve your skillset</h5>
@@ -107,7 +107,7 @@ export class Landing extends Component {
       </div>
     </footer>
     </div>
-          
+    
       )
     }
   }
