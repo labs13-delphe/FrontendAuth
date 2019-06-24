@@ -8,11 +8,7 @@ import AskerQuestionsList from "./AskerQuestionsList";
 // import StripeBtn from "../stripe/StripeBtn"; // giving an error for some reason
 
 // Material UI
-import {
-  CssBaseline,
-  Paper,
-  Typography
-} from "@material-ui/core";
+import { CssBaseline, Paper, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Custom Styles
@@ -22,8 +18,8 @@ const styles = theme => ({
   },
   title: {
     ...theme.mixins.toolbar,
-  textAlign: "center"
-},
+    textAlign: "center"
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -54,6 +50,9 @@ const styles = theme => ({
     overflowY: "scroll",
     maxHeight: 860,
     background: "#EBEBEA"
+  },
+  noQuestions: {
+    textAlign: "center"
   }
 });
 
@@ -136,16 +135,36 @@ class AskerDashboard extends React.Component {
   };
 
   render() {
-    const { container, classes } = this.props,
+    const { classes } = this.props,
       { userInfo } = this.state;
 
+    const questionsText =
+      this.state.questionCount === 1 ? (
+        <span>Question</span>
+      ) : (
+        <span>Questions</span>
+      );
 
-      const questionsText =
-      this.state.questionCount === 1 ? <span>Question</span> : <span>Questions</span>;
+    const answersText =
+      this.state.answerCount === 1 ? <span>Answer</span> : <span>Answers</span>;
 
-      const answersText =
-      this.state.answerCount === 1 ? <span>Answer</span> : <span>Answers</span>;    
-      return (
+    const questionListSection =
+      this.state.questionCount === 0 ? (
+        <div className={classes.noQuestions}>
+          <Typography variant="h5">Ask a Question to Get Started!</Typography>
+          <Typography variant="h6">
+            “The smart ones ask when they don’t know, and sometimes when they
+            do.” <br></br>- Malcolm Forbes
+          </Typography>
+        </div>
+      ) : (
+        <AskerQuestionsList
+          questions={this.state.questions}
+          deleteQuestion={this.deleteQuestion}
+          updateQuestion={this.updateQuestion}
+        />
+      );
+    return (
       <div className={classes.root}>
         <CssBaseline />
         <main className={classes.content}>
@@ -161,13 +180,7 @@ class AskerDashboard extends React.Component {
             </div>
 
             <QuestionForm />
-            <Paper className={classes.Paper}>
-              <AskerQuestionsList
-                questions={this.state.questions}
-                deleteQuestion={this.deleteQuestion}
-                updateQuestion={this.updateQuestion}
-              />
-            </Paper>
+            <Paper className={classes.Paper}>{questionListSection}</Paper>
           </div>
         </main>
       </div>

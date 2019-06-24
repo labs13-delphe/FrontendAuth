@@ -63,6 +63,12 @@ class UserProfile extends React.Component {
     this.setState({ isEditing: false });
   };
 
+  // Cancel/Go Back To Previous Page Button
+  goBack = e => {
+    e.preventDefault();
+    window.history.go(-1);
+  };
+
   render() {
     return (
       <>
@@ -103,9 +109,9 @@ class UserProfile extends React.Component {
               />{" "}
             </>
           ) : null}
-
-          <button>Save Edit</button>
         </form>
+        <button onClick={this.submitForm}>Save Edit</button>
+        <button onClick={this.goBack}>Cancel</button>
       </>
     );
   }

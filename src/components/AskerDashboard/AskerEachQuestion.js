@@ -32,7 +32,8 @@ import clsx from "clsx";
 // Custom Styles
 const styles = theme => ({
   card: {
-    width: "100%",
+    //width: "100%",
+    width: 660, // probably shouldn't be hard-coded
     marginBottom: theme.spacing(2),
     padding: theme.spacing(1)
   },
@@ -219,9 +220,6 @@ class AskerEachQuestion extends React.Component {
     const answersDiv =
       this.state.answerCount > 0 ? (
         <div className="answers-div">
-          {/* <Typography>
-            <strong>Expert Answers </strong>
-          </Typography> */}
           <List>
             {answers.map(answer => {
               return (

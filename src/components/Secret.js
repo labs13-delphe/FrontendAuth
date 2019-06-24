@@ -1,16 +1,12 @@
 // Packages
 import React, { Component } from "react";
-//**** took care of netlify bugs */
-// import { Route, Link } from "react-router-dom";
 import axios from "axios";
 
 // Components
 import UserFormTwo from "./UserFormTwo.js";
 import Dashboard from "./Dashboard.js";
 
-//material ui
-
-//rendering all protected components and keeping state here
+// Rendering all protected components
 
 class Secret extends Component {
   state = {
@@ -18,9 +14,7 @@ class Secret extends Component {
     QA: []
   };
 
-
-
-  //getting all users info in order to compare the incoming information from auth object.
+  // Getting all users info in order to compare the incoming information from auth object. -- NOT SETTING ANY STATE WITH THIS CALL -- CAN DELETE
   getUserInfo = () => {
     axios
       .get("https://delphe-backend.herokuapp.com/api/users")
@@ -32,13 +26,8 @@ class Secret extends Component {
       });
   };
 
-  //create a variable with the user email from the auth object
-
-  //compare that variable to the same variable in user data table
-
-  //
-
   componentDidMount = () => {
+    // AE - I don't think QA is being used anywhere
     axios
       .get(
         `https://delphe-backend.herokuapp.com/api/questions/${localStorage.getItem(
@@ -53,55 +42,28 @@ class Secret extends Component {
         console.log(error);
       });
 
+    // THIS STATE QUESTIONS BEING PASSED TO EXPERTDASHBOARD
     axios
       .get("https://delphe-backend.herokuapp.com/api/questions")
       .then(res => {
         this.setState({ questions: res.data }, () => {
           console.log(this.state);
         });
-        // console.log(res.data);
       })
       .catch(error => {
         console.log(error);
       });
   };
 
-  // BUTTONS TO DELETE ONCE LOGIN/REGISTER SETS USER_TYPE ON local storage
-  // Sets user_ids and user_types for asker, expert, and clear items on storage
-  // viewAskerDashboard() {
-  //   localStorage.setItem("user_id", 1);
-  //   localStorage.setItem("user_type", "asker");
-  //   window.location.reload();
-  // }
-
-  // viewExpertDashboard() {
-  //   localStorage.setItem("user_id", 5);
-  //   localStorage.setItem("user_type", "expert");
-  //   window.location.reload();
-  // }
-
-  // clearStorage() {
-  //   localStorage.removeItem("user_id");
-  //   localStorage.removeItem("user_type");
-  //   window.location.reload();
-  // }
-
-// REGISTRATION - POST USER INFORMATION 
-
+  // REGISTRATION - POST USER INFORMATION  - SHOULD MOVE TO USERFORMTWO.JS
   postUserInfo = userInfo => {
     axios
       .post("https://delphe-backend.herokuapp.com/api/users", userInfo)
       .then(res => {
-        console.log("successful registration!", res.data)
-        localStorage.setItem("user_id", res.data.id)
-        localStorage.setItem("user_type", userInfo.user_type)
+        console.log("successful registration!", res.data);
+        localStorage.setItem("user_id", res.data.id);
+        localStorage.setItem("user_type", userInfo.user_type);
         window.location.reload();
-  
-        // if (userInfo.user_type === "asker") {
-        //   this.viewAskerDashboard(userInfo.id);
-        // } else {
-        //   this.viewExpertDashboard(userInfo.id);
-        // }
       })
       .catch(error => {
         console.log(error);
@@ -117,23 +79,11 @@ class Secret extends Component {
         {/* added this to have a visual of the user data we can post to and compare to out unique id */}
         {/* {this.getUserInfo()} */}
 
-        {/* Can use until when we get our registration/login totally functioning  */}
-        {/* <button onClick={this.viewAskerDashboard}>
-          {" "}
-          Pretend an Asker is Signed In{" "}
-        </button>
-        <button onClick={this.viewExpertDashboard}>
-          {" "}
-          Pretend an Expert is Signed In{" "}
-        </button> */}
-
-        {//this.state.questions.length
-        localStorage.getItem("user_id") ? (
+        {localStorage.getItem("user_id") ? (
           <div>
-            {/* <button onClick={this.clearStorage}>Erase User on Storage</button> */}
             <Dashboard
               questions={this.state.questions}
-              QA={this.state.QA}
+              QA={this.state.QA} // AE - I don't think this is used
               gUser={this.props.gUser}
             />
           </div>
@@ -141,7 +91,6 @@ class Secret extends Component {
           <div>
             <UserFormTwo
               postUserInfo={this.postUserInfo}
-              uniqueIdentifier={this.props.uniqueIdentifier}
               gUser={this.props.gUser}
             />
           </div>

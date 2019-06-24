@@ -36,7 +36,7 @@ export class Landing extends Component {
           <h3 className="landing-content-body">Find answers to your most pressing questions by connecting with a community of experts.</h3>
           
           <div className="row center">
-                <a href="" id="" className="center btn-large waves-effect waves-light teal lighten-1">Get Started</a>
+                <a href="/authorization" id="" className="center btn-large waves-effect waves-light teal lighten-1">Get Started</a>
             </div>
         {/* <div className="landingImg"><img src={landingimage} alt="landing hero img"/> */}
     </div>
@@ -98,7 +98,7 @@ export class Landing extends Component {
             <h5 className="white-text">Create an account today</h5>          
             
             <div className="row center">
-                <a href="" id="footerButton" className="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
+                <a href="/authorization" id="footerButton" className="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
             </div>
   
             <div className="" id="delpheFooter">Delphe</div>

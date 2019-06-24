@@ -1,5 +1,6 @@
 import React from "react";
 import firebase from "firebase";
+import axios from "axios";
 
 import "./UserFormCss.css";
 
@@ -85,20 +86,32 @@ const styles = theme => ({
   center: {
     margin: "0 auto"
   },
-  appBarSpacer: theme.mixins.toolbar
+  appBarSpacer: theme.mixins.toolbar,
+
+  loadingText: {
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)",
+    padding: theme.spacing(3)
+  },
+  centerText: {
+    textAlign: "center"
+  }
 });
 
 class UserForm extends React.Component {
   state = {
     first_name: "",
     last_name: "",
-    email: "",
+    email: this.props.gUser.email,
     username: "",
     password: "",
     bio: "",
     user_type: "",
-    image_url: "",
-    hourly_rate: 0 // keep - 0 is set as default
+    image_url: this.props.gUser.photoURL,
+    hourly_rate: 0, // keep - 0 is set as default (so asker doesn't have to fill it out)
+    loggingInUser: true
   };
   componentDidMount() {
     console.log("G User:", this.props.gUser);
@@ -106,6 +119,20 @@ class UserForm extends React.Component {
       email: this.props.gUser.email,
       image_url: this.props.gUser.photoURL
     });
+
+    axios
+      .post("https://delphe-backend.herokuapp.com/api/auth/login", this.state)
+      .then(res => {
+        console.log("login success!!!", res.data);
+        localStorage.setItem("user_type", res.data.user.user_type);
+        localStorage.setItem("user_id", res.data.user.id);
+        window.location = "/secret/dashboard";
+      })
+      .catch(err => {
+        this.setState({ loggingInUser: false });
+        console.log("FORM 2 STATE:", this.state);
+        console.log("WAIT! Looks like you have to fill out a user profile");
+      });
   }
 
   handleChange = e => {
@@ -129,6 +156,12 @@ class UserForm extends React.Component {
       hourly_rate: this.state.hourly_rate
     };
     this.props.postUserInfo(userInfo);
+  };
+
+  cancelForm = e => {
+    firebase.auth().signOut();
+    localStorage.clear();
+    window.location = "/";
   };
 
   render() {
@@ -155,111 +188,125 @@ class UserForm extends React.Component {
         <div className={classes.appBarSpacer} />
 
         <Paper className={classes.center}>
-          <Typography variant="h4">Complete Your Profile</Typography>
+          {this.state.loggingInUser === true ? (
+            <Typography variant="h4" className={classes.loadingText}>
+              Logging you in...
+            </Typography>
+          ) : (
+            <>
+              {" "}
+              <Typography variant="h4">Complete Your Profile</Typography>
+              <form onSubmit={this.submitUser} className="user-form">
+                <TextField
+                  label="First Name"
+                  type="text"
+                  name="first_name"
+                  value={this.state.first_name}
+                  placeholder="First Name"
+                  onChange={this.handleChange}
+                  className={classes.textField}
+                  margin="normal"
+                  variant="outlined"
+                />
+                <TextField
+                  label="Last Name"
+                  type="text"
+                  name="last_name"
+                  value={this.state.last_name}
+                  placeholder="Last Name"
+                  onChange={this.handleChange}
+                  className={classes.textField}
+                  margin="normal"
+                  variant="outlined"
+                />
 
-          <form onSubmit={this.submitUser} className="user-form">
-            <TextField
-              label="First Name"
-              type="text"
-              name="first_name"
-              value={this.state.first_name}
-              placeholder="First Name"
-              onChange={this.handleChange}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-            <TextField
-              label="Last Name"
-              type="text"
-              name="last_name"
-              value={this.state.last_name}
-              placeholder="Last Name"
-              onChange={this.handleChange}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-
-            <TextField
-              label="Email"
-              type="email"
-              name="email"
-              value={this.state.email}
-              placeholder="Email"
-              onChange={this.handleChange}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-            <TextField
-              label="Username"
-              type="text"
-              name="username"
-              value={this.state.username}
-              placeholder="Username"
-              onChange={this.handleChange}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-            <TextField
-              label="Bio"
-              type="text"
-              name="bio"
-              value={this.state.bio}
-              placeholder="bio"
-              onChange={this.handleChange}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-            <TextField
-              label="image_url"
-              type="text"
-              name="image_url"
-              value={this.state.image_url}
-              placeholder="image_url"
-              onChange={this.handleChange}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-            <FormControl variant="outlined">
-              <InputLabel htmlFor="outlined-age-simple">User Type</InputLabel>
-              <Select
-                value={this.state.user_type}
-                onChange={this.handleChange}
-                className={classes.textField}
-                inputProps={{
-                  name: "user_type"
-                }}
-                input={
-                  <OutlinedInput name="user_type" id="outlined-age-simple" />
-                }
-              >
-                {userTypes.map(type => (
-                  <MenuItem value={type} key={type}>
-                    {type}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            {this.state.user_type === "expert" ? (
-              <TextField
-                label="Hourly Rate"
-                type="int"
-                name="hourly_rate"
-                value={this.state.hourly_rate}
-                placeholder="Hourly Rate"
-                onChange={this.handleChange}
-                className={classes.textField}
-                margin="normal"
-                variant="outlined"
-              />
-            ) : null}
-            <Button onClick={this.submitUser}>Submit</Button>
-          </form>
+                <TextField
+                  label="Email"
+                  type="email"
+                  name="email"
+                  value={this.state.email}
+                  placeholder="Email"
+                  onChange={this.handleChange}
+                  className={classes.textField}
+                  margin="normal"
+                  variant="outlined"
+                />
+                <TextField
+                  label="Username"
+                  type="text"
+                  name="username"
+                  value={this.state.username}
+                  placeholder="Username"
+                  onChange={this.handleChange}
+                  className={classes.textField}
+                  margin="normal"
+                  variant="outlined"
+                />
+                <TextField
+                  label="Bio"
+                  type="text"
+                  name="bio"
+                  value={this.state.bio}
+                  placeholder="bio"
+                  onChange={this.handleChange}
+                  className={classes.textField}
+                  margin="normal"
+                  variant="outlined"
+                />
+                <TextField
+                  label="image_url"
+                  type="text"
+                  name="image_url"
+                  value={this.state.image_url}
+                  placeholder="image_url"
+                  onChange={this.handleChange}
+                  className={classes.textField}
+                  margin="normal"
+                  variant="outlined"
+                />
+                <FormControl variant="outlined">
+                  <InputLabel htmlFor="outlined-age-simple">
+                    User Type
+                  </InputLabel>
+                  <Select
+                    value={this.state.user_type}
+                    onChange={this.handleChange}
+                    className={classes.textField}
+                    inputProps={{
+                      name: "user_type"
+                    }}
+                    input={
+                      <OutlinedInput
+                        name="user_type"
+                        id="outlined-age-simple"
+                      />
+                    }
+                  >
+                    {userTypes.map(type => (
+                      <MenuItem value={type} key={type}>
+                        {type}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+                {this.state.user_type === "expert" ? (
+                  <TextField
+                    label="Hourly Rate"
+                    type="int"
+                    name="hourly_rate"
+                    value={this.state.hourly_rate}
+                    placeholder="Hourly Rate"
+                    onChange={this.handleChange}
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                  />
+                ) : null}
+                <Button onClick={this.submitUser}>Submit</Button>
+                <Button onClick={this.cancelForm}>Cancel</Button>
+              </form>
+            </>
+          )}
         </Paper>
       </div>
     );
@@ -267,7 +314,3 @@ class UserForm extends React.Component {
 }
 
 export default withStyles(styles)(UserForm);
-
-///firstname, lastname, email, username, password
-
-//bio, img url, user_type, hourly_rate

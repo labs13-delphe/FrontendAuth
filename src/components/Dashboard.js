@@ -7,7 +7,7 @@ import AskerDashboard from "./AskerDashboard/AskerDashboard";
 import ExpertDashboard from "./ExpertDashboard/ExpertDashboard";
 
 const Dashboard = props => {
-  // Post Answer Method for Expert Dashboard
+  // Post Answer Method for Expert Dashboard -- should move to ExpertDashboard.js
   const postAnswer = answer => {
     axios
       .post("https://delphe-backend.herokuapp.com/api/answers", answer)
