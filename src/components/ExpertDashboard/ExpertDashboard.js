@@ -1,15 +1,11 @@
 import React from "react";
 
 import QuestionsList from "./QuestionsList";
-import TopicDropdown from "./TopicDropdown"
+import TopicDropdown from "./TopicDropdown";
 import axios from "axios";
 
 // Material UI
-import {
-  CssBaseline,
-  Paper,
-  Typography
-} from "@material-ui/core";
+import { CssBaseline, Paper, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Custom Styles
@@ -19,8 +15,8 @@ const styles = theme => ({
   },
   title: {
     ...theme.mixins.toolbar,
-  textAlign: "center"
-},
+    textAlign: "center"
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -104,23 +100,24 @@ class ExpertDashboard extends React.Component {
 
   getQuestionsByTopic = topicId => {
     axios
-    .get(`https://delphe-backend.herokuapp.com/api/questions/topic/${topicId}`)
-    .then(res => {
-      console.log(res);
-      this.setState({
-        questions: res.data
+      .get(
+        `https://delphe-backend.herokuapp.com/api/questions/topic/${topicId}`
+      )
+      .then(res => {
+        console.log(res);
+        this.setState({
+          questions: res.data
+        });
       })
-
-    })
-    .catch(err => {
-      console.log("there was a problem deleting your answer");
-    });
-  }
+      .catch(err => {
+        console.log("there was a problem deleting your answer");
+      });
+  };
 
   render() {
     const { classes } = this.props,
-          { questions } =this.state
-    console.log("expert dash questions by topic", this.state.questions)
+      { questions } = this.state;
+    console.log("expert dash questions by topic", this.state.questions);
     // console.log("expert dash", this.props);
     return (
       <div className={classes.root}>
@@ -131,22 +128,24 @@ class ExpertDashboard extends React.Component {
             <div className={classes.title}>
               <Typography variant="h4">Your Feed</Typography>
 
-              <Typography variant="h5">
+              {/* <Typography variant="h5">
                 {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
                 {this.state.answerCount} Answers Received
-              </Typography>
-              <TopicDropdown getQuestionsByTopic={this.getQuestionsByTopic}/>
+              </Typography> */}
+              <Paper>
+                <TopicDropdown getQuestionsByTopic={this.getQuestionsByTopic} />
+              </Paper>
             </div>
-            <Paper className={classes.Paper}>
-              <QuestionsList
-                questions={questions}
-                postAnswer={this.props.postAnswer}
-                // QA={this.props.QA}
-                editAnswer={this.editAnswer}
-                deleteAnswer={this.deleteAnswer}
-                gUser={this.props.gUser}
-              />
-            </Paper>
+            {/* <Paper className={classes.Paper}> */}
+            <QuestionsList
+              questions={questions}
+              postAnswer={this.props.postAnswer}
+              // QA={this.props.QA}
+              editAnswer={this.editAnswer}
+              deleteAnswer={this.deleteAnswer}
+              gUser={this.props.gUser}
+            />
+            {/* </Paper> */}
           </div>
         </main>
       </div>
