@@ -61,7 +61,7 @@ class App extends Component {
        <Route exact path="/"component={Landing}/>
        <Route path="/authorization"component={Authorization}/> 
 
-        {localStorage.getItem("user_id") ? (
+        {this.state.isSignedIn ? (
           <div>
            
             <NavBar/>

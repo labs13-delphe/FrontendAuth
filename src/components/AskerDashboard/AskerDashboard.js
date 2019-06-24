@@ -14,11 +14,20 @@ import { withStyles } from "@material-ui/core/styles";
 // Custom Styles
 const styles = theme => ({
   root: {
+    width: "100%",
     display: "flex"
   },
   title: {
     ...theme.mixins.toolbar,
-    textAlign: "center"
+    display: "flex",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    width: "75%",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+      alignItems: "flex-start",
+      justifyContent: "center"
+    }
   },
   content: {
     flexGrow: 1,
@@ -36,21 +45,21 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    maxWidth: 680,
+    width: "100%",
     [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
   },
-  Paper: {
-    flexGrow: 1,
-    padding: theme.spacing(1),
-    width: 680,
-    display: "flex",
-    justifyContent: "center",
-    overflowY: "scroll",
-    maxHeight: 860,
-    background: "#EBEBEA"
-  },
+  // Paper: {
+  //   flexGrow: 1,
+  //   padding: theme.spacing(1),
+  //   width: "100%",
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   //overflowY: "scroll",
+  //   //maxHeight: 860,
+  //   background: "#EBEBEA"
+  // },
   noQuestions: {
     textAlign: "center"
   }
@@ -152,7 +161,7 @@ class AskerDashboard extends React.Component {
       this.state.questionCount === 0 ? (
         <div className={classes.noQuestions}>
           <Typography variant="h5">Ask a Question to Get Started!</Typography>
-          <Typography variant="h6">
+          <Typography variant="body1">
             “The smart ones ask when they don’t know, and sometimes when they
             do.” <br></br>- Malcolm Forbes
           </Typography>
@@ -173,14 +182,14 @@ class AskerDashboard extends React.Component {
             <div className={classes.title}>
               <Typography variant="h4">Your Feed</Typography>
 
-              <Typography variant="h5">
+              <Typography variant="h6">
                 {this.state.questionCount} {questionsText} Asked &nbsp;|&nbsp;{" "}
                 {this.state.answerCount} {answersText} Received
               </Typography>
             </div>
 
             <QuestionForm />
-            <Paper className={classes.Paper}>{questionListSection}</Paper>
+            {questionListSection}
           </div>
         </main>
       </div>

@@ -32,9 +32,9 @@ import clsx from "clsx";
 // Custom Styles
 const styles = theme => ({
   card: {
-    //width: "100%",
-    width: 660, // probably shouldn't be hard-coded
-    marginBottom: theme.spacing(2),
+    width: "75%",
+    //width: 660, // probably shouldn't be hard-coded
+    marginBottom: theme.spacing(3),
     padding: theme.spacing(1)
   },
   topicButton: {
