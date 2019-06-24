@@ -17,9 +17,10 @@ const styles = theme => ({
   },
   title: {
     //...theme.mixins.toolbar,
-    marginTop: theme.spacing(1),
+    //marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
-
+    textAlign: "left",
+    width: "75%",
   },
 
   content: {
@@ -38,21 +39,8 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    maxWidth: 680,
-    [theme.breakpoints.down("sm")]: {
-      width: "100%"
-    }
+    width: "100%",
   },
-  paper: {
-    flexGrow: 1,
-    padding: theme.spacing(1),
-    width: 680,
-    display: "flex",
-    justifyContent: "center",
-    overflowY: "scroll",
-    maxHeight: 860,
-    background: "#EBEBEA"
-  }
 });
 
 class Community extends React.Component {
@@ -85,9 +73,7 @@ class Community extends React.Component {
             <Typography variant="h4" className={classes.title}>
               Community Feed
             </Typography>
-            <Paper className={classes.paper}>
               <CommunityQuestionList questions={this.state.questions} />
-            </Paper>
           </div>
         </main>
       </div>

@@ -19,7 +19,7 @@ const styles = theme => ({
   },
   title: {
     //...theme.mixins.toolbar,
-    marginTop: theme.spacing(1),
+    //marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
     display: "flex",
     alignItems: "flex-end",
@@ -49,20 +49,7 @@ const styles = theme => ({
     alignItems: "center",
     flexDirection: "column",
     width: "100%",
-    [theme.breakpoints.down("sm")]: {
-      width: "100%"
-    }
   },
-  // Paper: {
-  //   flexGrow: 1,
-  //   padding: theme.spacing(1),
-  //   width: "100%",
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   //overflowY: "scroll",
-  //   //maxHeight: 860,
-  //   background: "#EBEBEA"
-  // },
   noQuestions: {
     textAlign: "center"
   }

@@ -26,8 +26,8 @@ import clsx from "clsx";
 // Custom Styles
 const styles = theme => ({
   card: {
-    width: "100%",
-    marginBottom: theme.spacing(2),
+    width: "75%",
+    marginBottom: theme.spacing(3),
     padding: theme.spacing(1)
   },
   cardTitle: {

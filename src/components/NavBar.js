@@ -24,8 +24,10 @@ const styles = theme => ({
     marginLeft: theme.spacing(1),
     //textDecoration: "none",
     textTransform: "none",
+    color: "#D0D8FF",
     '&:hover': {
       color: 'white',
+      background: "none"
     },
   },
   appBarSpacer: theme.mixins.toolbar

@@ -25,7 +25,7 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing(1),
-    marginTop: theme.spacing(1),
+    //marginTop: theme.spacing(1),
     marginBottom: theme.spacing(3),
     width: "75%",
     [theme.breakpoints.down("xs")]: {
