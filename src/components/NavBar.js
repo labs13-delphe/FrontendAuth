@@ -15,16 +15,18 @@ import { withStyles } from "@material-ui/core/styles";
 
 // Custom Styles
 const styles = theme => ({
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up("sm")]: {
-      display: "none"
-    }
-  },
   spaceBetween: {
     display: "flex",
     justifyContent: "space-between",
     width: "100%"
+  },
+  Button: {
+    marginLeft: theme.spacing(1),
+    //textDecoration: "none",
+    textTransform: "none",
+    '&:hover': {
+      color: 'white',
+    },
   },
   appBarSpacer: theme.mixins.toolbar
 });
@@ -64,20 +66,23 @@ class NavBar extends React.Component {
           <Toolbar>
             <div className={classes.spaceBetween}>
               <Typography variant="h5" noWrap>
-                {user.username}'s Dashboard
+                Dashboard
               </Typography>
-              <Button color="inherit" href="/secret/dashboard">
+              <div className={classes.navButtons}>
+              <Button color="inherit" href="/secret/dashboard" className={classes.Button}>
                 Your Feed
               </Button>
-              <Button color="inherit" href="/community">
+              <Button color="inherit" href="/community" className={classes.Button}>
                 Community Feed
               </Button>
-              <Button color="inherit" href={`/users/${user.id}`}>
+              <Button color="inherit" href={`/users/${user.id}`} className={classes.Button}>
                 Profile
               </Button>
-              <Button color="inherit" onClick={this.logout}>
+              <Button color="inherit" onClick={this.logout} className={classes.Button}>
                 Logout
               </Button>
+              </div>
+              
             </div>
           </Toolbar>
         </AppBar>
