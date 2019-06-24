@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
 import axios from "axios";
 import firebase from "firebase";
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+// import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"; // now on Authorization.js
 
 // Components
 import NavBar from "./components/NavBar.js";
@@ -11,48 +11,56 @@ import Secret from "./components/Secret.js";
 import Dashboard from "./components/Dashboard.js";
 import UserProfile from "./components/Users/UserProfile";
 import Community from "./components/Community/Community";
-import Landing from './components/landing/Landing'
+import Landing from './components/landing/Landing';
+import Authorization from "./components/Authorization";
 
 
 import "./App.css";
 
-firebase.initializeApp({
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_DOMAIN
-});
+// NOW ON AUTHORIZATION.JS
+// firebase.initializeApp({
+//   apiKey: process.env.REACT_APP_API_KEY,
+//   authDomain: process.env.REACT_APP_DOMAIN
+// });
 
 class App extends Component {
-  state = { isSignedIn: false, uniqueIdentifier: "", gUser: {} };
+  state = { isSignedIn: false, uniqueIdentifier: "", gUser: {} }; // still need this here
 
-  uiConfig = {
-    signInFlow: "popup",
-    signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.EmailAuthProvider.PROVIDER_ID
-    ],
-    callbacks: {
-      signInSuccessWithAuthResult: () => false
-    }
-  };
+  // NOW ON AUTHORIZATION.JS
+  // uiConfig = {
+  //   signInFlow: "popup",
+  //   signInOptions: [
+  //     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  //     firebase.auth.EmailAuthProvider.PROVIDER_ID
+  //   ],
+  //   callbacks: {
+  //     signInSuccessWithAuthResult: () => false
+  //   }
+  // };
 
   componentDidMount = () => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({
         isSignedIn: !!user,
-        //uniqueIdentifier: user.email,
         gUser: user
       });
     });
   };
 
+  goToAuthorization = e => {
+    e.preventDefault();
+    this.props.history.push("/authorization")
+  }
 
   render() {
     console.log("app state", this.state);
 
     return (
       <div className="App">
-
+        {/* <button onClick={this.goToAuthorization}>Go To Authorization</button> */}
        <Route exact path="/"component={Landing}/>
+       <Route path="/authorization"component={Authorization}/> 
+
         {this.state.isSignedIn ? (
           <div>
            
@@ -85,10 +93,12 @@ class App extends Component {
             />
           </div>
         ) : (
-          <StyledFirebaseAuth
-            uiConfig={this.uiConfig}
-            firebaseAuth={firebase.auth()}
-          />
+          null
+          // NOW ON AUTHORIZATION.JS
+          // <StyledFirebaseAuth
+          //   uiConfig={this.uiConfig}
+          //   firebaseAuth={firebase.auth()}
+          // />
         )}
       </div>
     );

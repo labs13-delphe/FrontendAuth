@@ -15,6 +15,7 @@
   flex-direction: column;
   justify-content: space-between;
   justify-content: center;
+  width: 70%;
   
 }
 
@@ -31,6 +32,7 @@
   border-radius: 50%;
   width: 25vh;
   height: 25vh;
+  padding: 20px;
 }
 
 .bio-text{

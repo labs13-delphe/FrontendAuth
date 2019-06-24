@@ -37,12 +37,11 @@ export class Landing extends Component {
           <h1 className="teal-text text-lighten-2" id="delphe-header">Delphe</h1>
           <h2 className='landing-content-title'>Your home for advice</h2>
           <h3 className="landing-content-body">Find answers to your most pressing questions by connecting with a community of experts.</h3>
-          <a href="" id="" className="center btn-large waves-effect waves-light teal lighten-1">Get Started</a></div>
-        
-            <div className="landingImgContainer">
-            <img src={landingimage} className="landingImg" alt="landing hero img"/>
+          
+          <div className="row center">
+                <a href="/authorization" id="" className="center btn-large waves-effect waves-light teal lighten-1">Get Started</a>
             </div>
-
+        </div>
       </div> 
        
   
@@ -99,7 +98,7 @@ export class Landing extends Component {
             <h5 className="white-text">Create an account today</h5>          
             
             <div className="row center">
-                <a href="" id="footerButton" className="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
+                <a href="/authorization" id="footerButton" className="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
             </div>
   
             <div className="" id="delpheFooter">Delphe</div>
@@ -109,7 +108,6 @@ export class Landing extends Component {
     </footer>
     </div>
     
-          
       )
     }
   }
