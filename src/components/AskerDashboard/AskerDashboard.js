@@ -25,12 +25,14 @@ const styles = theme => ({
     alignItems: "flex-end",
     justifyContent: "space-between",
     width: "75%",
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       alignItems: "flex-start",
       justifyContent: "center",
+    },
+    [theme.breakpoints.down("xs")]: {
       width: "100%"
-    }
+    },
   },
   content: {
     flexGrow: 1,

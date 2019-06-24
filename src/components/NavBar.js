@@ -2,6 +2,7 @@
 import React from "react";
 import axios from "axios";
 import firebase from "firebase";
+import { NavLink } from "react-router-dom";
 
 // Material UI
 import {
@@ -20,15 +21,36 @@ const styles = theme => ({
     justifyContent: "space-between",
     width: "100%"
   },
+  dashboardText: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none"
+    }
+  },
   Button: {
     marginLeft: theme.spacing(1),
     //textDecoration: "none",
     textTransform: "none",
     color: "#D0D8FF",
-    '&:hover': {
-      color: 'white',
+    "&:hover": {
+      color: "white",
+      textDecoration: "underline",
       background: "none"
     },
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: theme.spacing(0)
+    }
+  },
+  activeButton: {
+    color: "white",
+    textDecoration: "underline"
+    //background: "green",
+  },
+  navButtons: {
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      display: "flex",
+      justifyContent: "space-between"
+    }
   },
   appBarSpacer: theme.mixins.toolbar
 });
@@ -67,24 +89,57 @@ class NavBar extends React.Component {
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             <div className={classes.spaceBetween}>
-              <Typography variant="h5" noWrap>
+              <Typography variant="h5" noWrap className={classes.dashboardText}>
                 Dashboard
               </Typography>
               <div className={classes.navButtons}>
-              <Button color="inherit" href="/secret/dashboard" className={classes.Button}>
-                Your Feed
-              </Button>
-              <Button color="inherit" href="/community" className={classes.Button}>
-                Community Feed
-              </Button>
-              <Button color="inherit" href={`/users/${user.id}`} className={classes.Button}>
-                Profile
-              </Button>
-              <Button color="inherit" onClick={this.logout} className={classes.Button}>
-                Logout
-              </Button>
+                <Button
+                  color="inherit"
+                  href="/secret/dashboard"
+                  className={classes.Button}
+                >
+                  <NavLink
+                    to="/secret/dashboard"
+                    className={classes.Button}
+                    activeClassName={classes.activeButton}
+                  >
+                    Your Feed
+                  </NavLink>
+                </Button>
+                <Button
+                  color="inherit"
+                  href="/community"
+                  className={classes.Button}
+                >
+                  <NavLink
+                    to="/community"
+                    className={classes.Button}
+                    activeClassName={classes.activeButton}
+                  >
+                    Community Feed
+                  </NavLink>
+                </Button>
+                <Button
+                  color="inherit"
+                  href={`/users/${user.id}`}
+                  className={classes.Button}
+                >
+                  <NavLink
+                    to={`/users/${user.id}`}
+                    className={classes.Button}
+                    activeClassName={classes.activeButton}
+                  >
+                    Profile
+                  </NavLink>
+                </Button>
+                <Button
+                  color="inherit"
+                  onClick={this.logout}
+                  className={classes.Button}
+                >
+                  Logout
+                </Button>
               </div>
-              
             </div>
           </Toolbar>
         </AppBar>

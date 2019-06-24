@@ -50,7 +50,7 @@ const styles = theme => ({
   },
   titleInput: {
     margin: theme.spacing(1),
-    minWidth: 200,
+    //minWidth: 200,
     width: "35%",
     [theme.breakpoints.down("xs")]: {
       width: "100%",
@@ -59,7 +59,7 @@ const styles = theme => ({
   },
   questionInput: {
     margin: theme.spacing(1),
-    minWidth: 200,
+    //minWidth: 200,
     width: "60%",
     [theme.breakpoints.down("xs")]: {
       width: "100%"
