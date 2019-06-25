@@ -92,6 +92,15 @@ const styles = theme => ({
   },
   noAnswers: {
     marginLeft: theme.spacing(1)
+  },
+  hoverGrey: {
+    "&:hover": {
+      background: "#e0e0e0",
+      cursor: "pointer"
+    },
+  },
+  buttonBlue: {
+    color: "#3f51b5"
   }
 });
 
@@ -164,7 +173,7 @@ class CommunityEachQuestion extends React.Component {
                       {users.map(user => {
                         if (user.id === answer.user_id) {
                           return (
-                            <Link to={`/users/${user.id}`} key={user.id}>
+                            <Link to={`/users/${user.id}`} key={user.id} className={classes.buttonBlue}>
                               {user.username}
                             </Link>
                           );
@@ -197,7 +206,7 @@ class CommunityEachQuestion extends React.Component {
               {user.first_name} {user.last_name}
             </Typography>{" "}
             <Typography variant="h6">
-              <Link to={`/users/${user.id}`}> View Profile</Link>
+              <Link to={`/users/${user.id}`} className={classes.buttonBlue}> View Profile</Link>
             </Typography>
           </div>
         );
@@ -272,7 +281,7 @@ class CommunityEachQuestion extends React.Component {
           </div>
         </CardContent>
         <Divider />
-        <CardActions>
+        <CardActions onClick={this.handleExpandClick} className={classes.hoverGrey}>
           <Typography>View Answers: ({answerCount}) </Typography>
           <IconButton
             className={clsx(classes.expand, {

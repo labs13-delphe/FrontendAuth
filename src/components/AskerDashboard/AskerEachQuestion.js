@@ -91,6 +91,15 @@ const styles = theme => ({
   },
   noAnswers: {
     marginLeft: theme.spacing(1)
+  },
+  hoverGrey: {
+    "&:hover": {
+      background: "#e0e0e0",
+      cursor: "pointer"
+    },
+  },
+  buttonBlue: {
+    color: "#3f51b5"
   }
 });
 
@@ -241,7 +250,7 @@ class AskerEachQuestion extends React.Component {
                       {users.map(user => {
                         if (user.id === answer.user_id) {
                           return (
-                            <Link to={`/users/${user.id}`} key={user.id}>
+                            <Link to={`/users/${user.id}`} key={user.id} className={classes.buttonBlue}>
                               {user.username}
                             </Link>
                           );
@@ -384,7 +393,7 @@ class AskerEachQuestion extends React.Component {
           </div>
         </CardContent>
         <Divider />
-        <CardActions>
+        <CardActions onClick={this.handleExpandClick} className={classes.hoverGrey}>
           <Typography>View Answers: ({answerCount}) </Typography>
           <IconButton
             className={clsx(classes.expand, {
