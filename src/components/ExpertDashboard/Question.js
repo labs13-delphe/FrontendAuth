@@ -36,8 +36,8 @@ const styles = theme => ({
   },
   topicButton: {
     margin: theme.spacing(1),
-    '&:hover': {
-      cursor: 'default',
+    "&:hover": {
+      cursor: "default"
     }
   },
 
@@ -62,7 +62,7 @@ const styles = theme => ({
   form: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "center"
     // alignItems: "center",
     // width: "100%",
     // background: "orange"
@@ -81,7 +81,7 @@ const styles = theme => ({
     width: 125
   },
   answerInput: {
-    width: '100%'
+    width: "100%"
   }
 });
 
@@ -138,23 +138,27 @@ class Question extends React.Component {
         });
 
         // GET Asker Info (to get usernames)
-      
+
         axios
-        .get(`https://delphe-backend.herokuapp.com/api/users/${this.state.askerId}`)
-        .then(res => {
-          console.log("Asker user info", res.data)
-          this.setState({ 
-            askerInfo: {
-              first_name: res.data.first_name,
-              last_name: res.data.last_name,
-              username: res.data.username,
-              user_type: res.data.user_type
-            }
+          .get(
+            `https://delphe-backend.herokuapp.com/api/users/${
+              this.state.askerId
+            }`
+          )
+          .then(res => {
+            console.log("Asker user info", res.data);
+            this.setState({
+              askerInfo: {
+                first_name: res.data.first_name,
+                last_name: res.data.last_name,
+                username: res.data.username,
+                user_type: res.data.user_type
+              }
+            });
+          })
+          .catch(err => {
+            console.log("Can't retrieve all users", err);
           });
-        })
-        .catch(err => {
-          console.log("Can't retrieve all users", err);
-        });
       })
       .catch(err => {
         console.log(err);
@@ -171,8 +175,6 @@ class Question extends React.Component {
         console.log("Can't retrieve all users", err);
       });
 
-
-
     // GET THIS EXPERT INFO
     const asker_id = localStorage.getItem("user_id");
     const userEndpoint = `https://delphe-backend.herokuapp.com/api/users/${asker_id}`;
@@ -186,8 +188,6 @@ class Question extends React.Component {
         console.log("can't get this asker's info.");
       });
   }
-
-  
 
   // ========= GET EXPERT ANSWERS
   getUsersAnswer = answer_id => {
@@ -227,17 +227,17 @@ class Question extends React.Component {
     this.props.postAnswer(answer);
     this.setState({
       dialogOpen: false
-    })
+    });
   };
 
   // ========= UPDATE ANSWER
   // Toggle isEditing
   handleEdit = (e, answer_id) => {
     e.preventDefault();
-    this.setState({ 
+    this.setState({
       isEditing: true,
       dialogOpen: true
-     });
+    });
 
     this.getUsersAnswer(answer_id);
   };
@@ -284,9 +284,20 @@ class Question extends React.Component {
     });
 
   render() {
-    const { answers, users, thisUser, answerCount, question, topics, dialogOpen, expanded, askerInfo, answer } = this.state,
-          { classes } = this.props
-  
+    const {
+        answers,
+        users,
+        thisUser,
+        answerCount,
+        question,
+        topics,
+        dialogOpen,
+        expanded,
+        askerInfo,
+        answer
+      } = this.state,
+      { classes } = this.props;
+
     const answersDiv =
       this.state.answerCount > 0 ? (
         <div className="answers-div">
@@ -295,7 +306,7 @@ class Question extends React.Component {
               return (
                 <div key={answer.id}>
                   <Divider />
-                  <ListItem >
+                  <ListItem>
                     "{answer.answer}" -{" "}
                     <strong>
                       {users.map(user => {
@@ -310,14 +321,20 @@ class Question extends React.Component {
                         }
                       })}
                     </strong>
-                    <IconButton aria-label="Settings" onClick={(e) => this.handleEdit(e, answer.id)}>
-                    <Edit  />
-                  </IconButton>
-                  <IconButton aria-label="Settings" onClick={(e) => this.deleteAnswer(e, answer.id)}>
-                    <Delete />
-                  </IconButton>
-                  {/* FOR UPDATE POP UP */}
-                  <Dialog
+                    <IconButton
+                      aria-label="Settings"
+                      onClick={e => this.handleEdit(e, answer.id)}
+                    >
+                      <Edit />
+                    </IconButton>
+                    <IconButton
+                      aria-label="Settings"
+                      onClick={e => this.deleteAnswer(e, answer.id)}
+                    >
+                      <Delete />
+                    </IconButton>
+                    {/* FOR UPDATE POP UP */}
+                    <Dialog
                       open={dialogOpen}
                       onClose={this.handleClose}
                       className={classes.dialog}
@@ -329,7 +346,7 @@ class Question extends React.Component {
                       <DialogContent className="form">
                         <Typography> Title: {question.title}</Typography>
                         <Typography> Question: {question.question}</Typography>
-                      <TextField
+                        <TextField
                           value={this.state.singleAnswer.answer}
                           name="answer"
                           label="Edit Your Answer"
@@ -350,16 +367,15 @@ class Question extends React.Component {
                         >
                           Cancel
                         </Button>
-              
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            className={classes.button}
-                            onClick={this.submitEdit}
-                          >
-                            Submit
-                          </Button>
-                      
+
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className={classes.button}
+                          onClick={this.submitEdit}
+                        >
+                          Submit
+                        </Button>
                       </DialogActions>
                     </Dialog>
                   </ListItem>
@@ -371,72 +387,71 @@ class Question extends React.Component {
       ) : (
         <p>No answers yet</p>
       );
-          
-      const answersText = this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
+
+    const answersText =
+      this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
     return (
       <>
-      <Card className={classes.card}>
-        <CardHeader
-          avatar={
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              {/* Getting Asker's Initials for Avatar */}
-              {thisUser.first_name.substring(0, 1)}
-              {thisUser.last_name.substring(0, 1)}
-            </Avatar>
-          }
-          action={
-            <>
-            {users.map(user => {
-              if (user.id === question.user_id) {
-                return (
-                  <Typography variant="h6">
-                    <Link to={`/users/${user.id}`}> View Profile</Link>
-                  </Typography>
-                );
-              } else {
-                return null;
-              }
-            })}
-            
-             </>
-          }
-          title={askerInfo.username}
-          subheader={askerInfo.user_type}
-        />
-        <CardContent>
-          <Typography
-            variant="h4"
-            color="textSecondary"
-            component="p"
-            gutterBottom
-          >
-            {question.title}
-          </Typography>
-          <Typography variant="h5" color="textSecondary" component="p">
-            {question.question}
-          </Typography>
-          <Typography variant="h6" color="textSecondary" component="p">
-            {answerCount} {answersText}
-          </Typography>
-          <div className="topics-div">
-            {topics.map(topic => (
-              <Button
-                variant="contained"
-                size="small"
-                color="primary"
-                className={classes.topicButton}
-                key={topic.id}
-              >
-                {topic.topic}
-              </Button>
-            ))}
-          </div>
-        </CardContent>
-        <Divider />
+        <Card className={classes.card}>
+          <CardHeader
+            avatar={
+              <Avatar aria-label="Recipe" className={classes.avatar}>
+                {/* Getting Asker's Initials for Avatar */}
+                {thisUser.first_name.substring(0, 1)}
+                {thisUser.last_name.substring(0, 1)}
+              </Avatar>
+            }
+            action={
+              <>
+                {users.map(user => {
+                  if (user.id === question.user_id) {
+                    return (
+                      <Typography variant="h6">
+                        <Link to={`/users/${user.id}`}> View Profile</Link>
+                      </Typography>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+              </>
+            }
+            title={askerInfo.username}
+            subheader={askerInfo.user_type}
+          />
+          <CardContent>
+            <Typography
+              variant="h4"
+              color="textSecondary"
+              component="p"
+              gutterBottom
+            >
+              {question.title}
+            </Typography>
+            <Typography variant="h5" color="textSecondary" component="p">
+              {question.question}
+            </Typography>
+            <Typography variant="h6" color="textSecondary" component="p">
+              {answerCount} {answersText}
+            </Typography>
+            <div className="topics-div">
+              {topics.map(topic => (
+                <Button
+                  variant="contained"
+                  size="small"
+                  color="primary"
+                  className={classes.topicButton}
+                  key={topic.id}
+                >
+                  {topic.topic}
+                </Button>
+              ))}
+            </div>
+          </CardContent>
+          <Divider />
 
-              
-        {/* <div> */}
-            {/* <form onSubmit={this.submitAnswer}>
+          {/* <div> */}
+          {/* <form onSubmit={this.submitAnswer}>
               <input
                 label="answer"
                 type="text"
@@ -444,65 +459,64 @@ class Question extends React.Component {
                 value={this.state.answer}
                 placeholder="answer"
                 onChange={this.handleChange}
-                className="answer-input"
+                className={classes.textField}
               />
               <button onClick={this.submitAnswer}>Submit</button>
             </form> */}
 
-            <form className={classes.form} onSubmit={this.submitAnswer}>
-              <div className={classes.anserTextfield}>
-                <TextField
-                  value={answer}
-                  name="answer"
-                  label="answer"
-                  placeholder="Answer this question..."
-                  multiline
-                  className={classes.answerInput}
-                  onChange={this.handleChange}
-                  margin="normal"
-                  variant="standard"
-                />
-              </div>
+          <form className={classes.form} onSubmit={this.submitAnswer}>
+            <div className={classes.anserTextfield}>
+              <TextField
+                value={answer}
+                name="answer"
+                label="answer"
+                placeholder="Answer this question..."
+                multiline
+                className={classes.answerInput}
+                onChange={this.handleChange}
+                margin="normal"
+                variant="standard"
+              />
+            </div>
 
-              {answer ? (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  onClick={this.submitAnswer}
-                >
-                  Submit
-                </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  disabled
-                  className={classes.button}
-                >
-                  Submit
-                </Button>
-              )}
-            </form>
-        
-        <CardActions>
-          <Typography>View Answers: ({answerCount}) </Typography>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded
-            })}
-            onClick={this.handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="Show more"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <Typography paragraph>{answersDiv}</Typography>
-        </Collapse>
-      </Card>
-        
+            {answer ? (
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={this.submitAnswer}
+              >
+                Submit
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                disabled
+                className={classes.button}
+              >
+                Submit
+              </Button>
+            )}
+          </form>
+
+          <CardActions>
+            <Typography>View Answers: ({answerCount}) </Typography>
+            <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanded
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="Show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+          </CardActions>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <Typography paragraph>{answersDiv}</Typography>
+          </Collapse>
+        </Card>
       </>
     );
   }
