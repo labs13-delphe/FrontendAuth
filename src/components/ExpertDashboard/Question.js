@@ -82,6 +82,9 @@ const styles = theme => ({
   },
   answerInput: {
     width: "100%"
+  },
+  viewProfile: {
+    color: "#4051B5"
   }
 });
 
@@ -406,7 +409,13 @@ class Question extends React.Component {
                 if (user.id === question.user_id) {
                   return (
                     <Typography variant="h6">
-                      <Link to={`/users/${user.id}`}> View Profile</Link>
+                      <Link
+                        to={`/users/${user.id}`}
+                        className={classes.viewProfile}
+                      >
+                        {" "}
+                        View Profile
+                      </Link>
                     </Typography>
                   );
                 } else {
