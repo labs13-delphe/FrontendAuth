@@ -21,7 +21,7 @@ const styles = theme => ({
   fullWidth: {
     width: "100%",
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   paper: {
     padding: theme.spacing(1),
@@ -45,7 +45,7 @@ const styles = theme => ({
     alignItems: "center",
     width: "100%",
     [theme.breakpoints.down("xs")]: {
-      flexDirection: "column",
+      flexDirection: "column"
     }
   },
   titleInput: {
@@ -53,7 +53,7 @@ const styles = theme => ({
     //minWidth: 200,
     width: "35%",
     [theme.breakpoints.down("xs")]: {
-      width: "100%",
+      width: "100%"
       //height: 100
     }
   },
