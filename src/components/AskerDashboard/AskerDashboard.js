@@ -152,11 +152,11 @@ class AskerDashboard extends React.Component {
     const questionListSection =
       this.state.questionCount === 0 ? (
         <div className={classes.noQuestions}>
-          <Typography variant="h5">Ask a Question to Get Started!</Typography>
-          <Typography variant="body1">
+          <Typography variant="h6">Ask a Question to Get Started!</Typography>
+          {/* <Typography variant="body1">
             “The smart ones ask when they don’t know, and sometimes when they
             do.” <br></br>- Malcolm Forbes
-          </Typography>
+          </Typography> */}
         </div>
       ) : (
         <AskerQuestionsList
