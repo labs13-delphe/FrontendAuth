@@ -17,8 +17,8 @@ import { withStyles } from "@material-ui/core/styles";
 // Custom Styles
 const styles = theme => ({
   toolBar: {
-display: "flex",
-justifyContent: "center"
+    display: "flex",
+    justifyContent: "center"
   },
   spaceBetween: {
     display: "flex",
@@ -34,7 +34,7 @@ justifyContent: "center"
     }
   },
   Button: {
-    marginLeft: theme.spacing(1),
+    marginLeft: theme.spacing(3),
     textTransform: "none", // So font is now sentence case
     color: "#D0D8FF",
     "&:hover": {
@@ -98,45 +98,29 @@ class NavBar extends React.Component {
                 Dashboard
               </Typography>
               <div className={classes.navButtons}>
-                <Button
-                  color="inherit"
-                  href="/secret/dashboard"
+                <NavLink
+                  to="/secret/dashboard"
                   className={classes.Button}
+                  activeClassName={classes.activeButton}
                 >
-                  <NavLink
-                    to="/secret/dashboard"
-                    className={classes.Button}
-                    activeClassName={classes.activeButton}
-                  >
-                    Your Feed
-                  </NavLink>
-                </Button>
-                <Button
-                  color="inherit"
-                  href="/community"
+                  Your Feed
+                </NavLink>
+
+                <NavLink
+                  to="/community"
                   className={classes.Button}
+                  activeClassName={classes.activeButton}
                 >
-                  <NavLink
-                    to="/community"
-                    className={classes.Button}
-                    activeClassName={classes.activeButton}
-                  >
-                    Community Feed
-                  </NavLink>
-                </Button>
-                <Button
-                  color="inherit"
-                  href={`/users/${user.id}`}
+                  Community Feed
+                </NavLink>
+
+                <NavLink
+                  to={`/users/${user.id}`}
                   className={classes.Button}
+                  activeClassName={classes.activeButton}
                 >
-                  <NavLink
-                    to={`/users/${user.id}`}
-                    className={classes.Button}
-                    activeClassName={classes.activeButton}
-                  >
-                    Profile
-                  </NavLink>
-                </Button>
+                  Profile
+                </NavLink>
                 <Button
                   color="inherit"
                   onClick={this.logout}
