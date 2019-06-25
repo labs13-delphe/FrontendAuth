@@ -26,8 +26,8 @@ import clsx from "clsx";
 // Custom Styles
 const styles = theme => ({
   card: {
-    width: "100%",
-    marginBottom: theme.spacing(2),
+    width: "75%",
+    marginBottom: theme.spacing(3),
     padding: theme.spacing(1)
   },
   cardTitle: {
@@ -38,6 +38,7 @@ const styles = theme => ({
   },
   topicButton: {
     margin: theme.spacing(1),
+    marginLeft: theme.spacing(0),
     "&:hover": {
       cursor: "default"
     }
@@ -85,6 +86,12 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing(1)
+  },
+  answersDiv: {
+    textAlign: "left"
+  },
+  noAnswers: {
+    marginLeft: theme.spacing(1)
   }
 });
 
@@ -144,13 +151,14 @@ class CommunityEachQuestion extends React.Component {
     // condition: Render Answers Div if question has answers (answerCount > 0)
     const answersDiv =
       this.state.answerCount > 0 ? (
-        <div className="answers-div">
+        <div className="answersDiv">
           <List>
             {answers.map(answer => {
               return (
                 <div key={answer.id}>
                   <Divider />
                   <ListItem>
+                    <p>
                     "{answer.answer}" -{" "}
                     <strong>
                       {users.map(user => {
@@ -165,6 +173,7 @@ class CommunityEachQuestion extends React.Component {
                         }
                       })}
                     </strong>
+                    </p>
                   </ListItem>
                 </div>
               );
@@ -172,7 +181,7 @@ class CommunityEachQuestion extends React.Component {
           </List>
         </div>
       ) : (
-        <span>No answers yet</span>
+        <span className={classes.noAnswers}>No answers yet</span>
       );
 
     const answersText =

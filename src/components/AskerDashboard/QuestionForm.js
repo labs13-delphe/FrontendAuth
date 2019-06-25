@@ -18,18 +18,23 @@ import {
 
 // Custom Styles
 const styles = theme => ({
-  paper: {
-    margin: theme.spacing(1),
+  fullWidth: {
+    width: "100%",
     display: "flex",
     justifyContent: "center",
-    maxWidth: "100%",
   },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    //background: "orange",
-    width: 680, // maybe use viewport measure?
-    padding: 10
+  paper: {
+    padding: theme.spacing(1),
+    //marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(3),
+    width: "75%",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+      alignItems: "flex-start",
+      justifyContent: "center",
+      width: "100%"
+    }
+    //background: "pink"
   },
   formTitle: {
     marginLeft: theme.spacing(1)
@@ -40,20 +45,21 @@ const styles = theme => ({
     alignItems: "center",
     width: "100%",
     [theme.breakpoints.down("xs")]: {
-      flexDirection: "column"
+      flexDirection: "column",
     }
   },
   titleInput: {
     margin: theme.spacing(1),
-    minWidth: 200,
+    //minWidth: 200,
     width: "35%",
     [theme.breakpoints.down("xs")]: {
-      width: "100%"
+      width: "100%",
+      //height: 100
     }
   },
   questionInput: {
     margin: theme.spacing(1),
-    minWidth: 200,
+    //minWidth: 200,
     width: "60%",
     [theme.breakpoints.down("xs")]: {
       width: "100%"
@@ -75,7 +81,7 @@ const styles = theme => ({
     minWidth: 200,
     width: "35%",
     [theme.breakpoints.down("xs")]: {
-      width: "60%"
+      width: "100%"
     }
   },
   select: {
@@ -170,9 +176,9 @@ class QuestionForm extends React.Component {
     const { title, question, topic, topicsList } = this.state;
 
     return (
-      <div>
+      <div className={classes.fullWidth}>
         <Paper className={classes.paper}>
-          <form className={classes.form}>
+          <form>
             <Typography variant="h6" className={classes.formTitle}>
               Ask a question
             </Typography>

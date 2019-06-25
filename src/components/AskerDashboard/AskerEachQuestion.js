@@ -32,13 +32,17 @@ import clsx from "clsx";
 // Custom Styles
 const styles = theme => ({
   card: {
-    //width: "100%",
-    width: 660, // probably shouldn't be hard-coded
-    marginBottom: theme.spacing(2),
-    padding: theme.spacing(1)
+    width: "75%",
+    //width: 660, // probably shouldn't be hard-coded
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(1),
+    [theme.breakpoints.down("xs")]: {
+      width: "100%"
+    }
   },
   topicButton: {
     margin: theme.spacing(1),
+    marginLeft: theme.spacing(0),
     '&:hover': {
       cursor: 'default',
     }
@@ -81,6 +85,12 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing(1)
+  },
+  answersDiv: {
+    textAlign: "left"
+  },
+  noAnswers: {
+    marginLeft: theme.spacing(1)
   }
 });
 
@@ -219,14 +229,14 @@ class AskerEachQuestion extends React.Component {
     // condition: Render Answers Div if question has answers (answerCount > 0)
     const answersDiv =
       this.state.answerCount > 0 ? (
-        <div className="answers-div">
+        <div className="answersDiv">
           <List>
             {answers.map(answer => {
               return (
                 <div key={answer.id}>
                   <Divider />
                   <ListItem >
-                    "{answer.answer}" -{" "}
+                    <p>"{answer.answer}" -{" "}
                     <strong>
                       {users.map(user => {
                         if (user.id === answer.user_id) {
@@ -240,6 +250,7 @@ class AskerEachQuestion extends React.Component {
                         }
                       })}
                     </strong>
+                    </p>
                   </ListItem>
                 </div>
               );
@@ -247,7 +258,7 @@ class AskerEachQuestion extends React.Component {
           </List>
         </div>
       ) : (
-        <p>No answers yet</p>
+        <p className={classes.noAnswers}>No answers yet</p>
       );
 
     const answersText =
