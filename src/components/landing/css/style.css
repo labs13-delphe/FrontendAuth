@@ -271,6 +271,15 @@ padding-bottom: 20px;
    /* text-align: center; */
  }
 
+ #delphe-userType{
+  color: rgba(0,0,0,0.6);	
+  font-family: Righteous;	
+  font-size: 30px;	
+  line-height: 44px;
+  display: flex;
+  text-align: left;	
+}
+
  .userContainer{
    display: flex;
  } 

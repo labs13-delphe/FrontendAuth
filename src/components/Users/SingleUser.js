@@ -55,7 +55,7 @@ const SingleUser = props => {
               {props.user.first_name} {props.user.last_name}
             </Typography>
 
-            <h4 className="persona-text-name">
+            <h4 className="persona-text-name" id="delphe-userType">
               @{props.user.username} | {props.user.user_type}
             </h4>
           </div>
