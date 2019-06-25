@@ -6,7 +6,7 @@ import axios from "axios";
 import CommunityQuestionList from "./CommunityQuestionsList";
 
 // Material UI
-import { CssBaseline, Paper, Typography } from "@material-ui/core";
+import { CssBaseline, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Custom Styles

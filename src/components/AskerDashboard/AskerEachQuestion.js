@@ -33,7 +33,6 @@ import clsx from "clsx";
 const styles = theme => ({
   card: {
     width: "75%",
-    //width: 660, // probably shouldn't be hard-coded
     marginBottom: theme.spacing(3),
     padding: theme.spacing(1),
     [theme.breakpoints.down("xs")]: {
@@ -45,7 +44,16 @@ const styles = theme => ({
     marginLeft: theme.spacing(0),
     '&:hover': {
       cursor: 'default',
-    }
+    },
+    '&:focus': {
+      backgroundColor: '#3f51b5', // removes the default teal background
+    },
+    // '&:visited': {
+    //   backgroundColor: '#3f51b5',
+    // },
+    // '&:active': {
+    //   backgroundColor: '#3f51b5',
+    // }
   },
 
   expand: {
@@ -53,10 +61,18 @@ const styles = theme => ({
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
-    })
+    }),
+  
   },
   expandOpen: {
-    transform: "rotate(180deg)"
+    transform: "rotate(180deg)",  
+  },
+  // Not targeting the teal background yet
+  expandMoreIcon: {
+  //   backgroundColor: "none",
+  //   "&:hover": {
+  //     backgroundColor: "#e0e0e0"
+  //   },
   },
   avatar: {
     backgroundColor: red[500]
@@ -403,7 +419,7 @@ class AskerEachQuestion extends React.Component {
             aria-expanded={expanded}
             aria-label="Show more"
           >
-            <ExpandMoreIcon />
+            <ExpandMoreIcon className={classes.expandMoreIcon}/>
           </IconButton>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
