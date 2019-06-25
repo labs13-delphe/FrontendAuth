@@ -147,7 +147,7 @@ class UserProfile extends React.Component {
               {this.state.user.id ===
               Number(localStorage.getItem("user_id")) ? (
                 <div className="jumbotron conBtn">
-                
+
                 {/* button with material ui */}
                   <Button 
                   onClick={this.deleteButton} 
@@ -177,18 +177,25 @@ class UserProfile extends React.Component {
 
                 </div>
               ) : (
-                <div>
-                  <Button variant="contained"
-                          color="primary"
-                          className={classes.button}>Send Message</Button>
+                // commented out until message function works
+                <div className="jumbotron conBtn">
+                  {/* <Button 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}>
+                  Send Message
+                  </Button>
+                  {" "} */}
+
                   <Button
-                          onClick={this.goBack}
-                          variant="contained"
-                          color="primary"
-                          className={classes.button}
-                        >
-                          Go Back
-                        </Button>
+                  onClick={this.goBack}
+                  variant="contained"
+                  color="primary"
+                  className={classes.button} 
+                  id="goBack-Button">
+                  Go Back
+                 </Button>
+
                 </div>
               )}
             </div>

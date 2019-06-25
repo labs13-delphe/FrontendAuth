@@ -283,4 +283,8 @@ padding-bottom: 20px;
  .userContainer{
    display: flex;
  } 
+
+ #goBack-Button{
+   text-align: center;
+ }
  
