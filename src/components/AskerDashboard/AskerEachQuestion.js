@@ -39,6 +39,11 @@ const styles = theme => ({
       width: "100%"
     }
   },
+  iconButton: {
+    '&:focus': {
+      backgroundColor: 'white', // removes the default teal background
+    },
+  },
   topicButton: {
     margin: theme.spacing(1),
     marginLeft: theme.spacing(0),
@@ -48,31 +53,29 @@ const styles = theme => ({
     '&:focus': {
       backgroundColor: '#3f51b5', // removes the default teal background
     },
-    // '&:visited': {
-    //   backgroundColor: '#3f51b5',
-    // },
-    // '&:active': {
-    //   backgroundColor: '#3f51b5',
-    // }
   },
-
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     }),
+    '&:focus': {
+      backgroundColor: 'white', // to remove teal
+    },
+    '&:hover': {
+      backgroundColor: '#e0e0e0', // to match grey in CardAction div
+    },
   
   },
   expandOpen: {
     transform: "rotate(180deg)",  
-  },
-  // Not targeting the teal background yet
-  expandMoreIcon: {
-  //   backgroundColor: "none",
-  //   "&:hover": {
-  //     backgroundColor: "#e0e0e0"
-  //   },
+    '&:focus': {
+      backgroundColor: '#e0e0e0', // removes the default teal background
+    },
+    '&:hover': {
+      backgroundColor: '#e0e0e0', // to match grey in CardAction div
+    },
   },
   avatar: {
     backgroundColor: red[500]
@@ -304,10 +307,10 @@ class AskerEachQuestion extends React.Component {
           }
           action={
             <>
-              <IconButton aria-label="Settings" onClick={this.handleClickOpen}>
+              <IconButton aria-label="Settings" onClick={this.handleClickOpen} className={classes.iconButton}>
                 <Edit  />
               </IconButton>
-              <IconButton aria-label="Settings" onClick={this.deleteButton}>
+              <IconButton aria-label="Settings" onClick={this.deleteButton} className={classes.iconButton}>
                 <Delete />
               </IconButton>
               {/* FOR UPDATE POP UP */}
@@ -419,7 +422,7 @@ class AskerEachQuestion extends React.Component {
             aria-expanded={expanded}
             aria-label="Show more"
           >
-            <ExpandMoreIcon className={classes.expandMoreIcon}/>
+            <ExpandMoreIcon/>
           </IconButton>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>

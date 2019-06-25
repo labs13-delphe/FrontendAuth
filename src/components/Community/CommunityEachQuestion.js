@@ -46,16 +46,28 @@ const styles = theme => ({
       backgroundColor: '#3f51b5', // removes the default teal background
     },
   },
-
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
-    })
+    }),
+    '&:focus': {
+      backgroundColor: 'white', // to remove teal
+    },
+    '&:hover': {
+      backgroundColor: '#e0e0e0', // to match grey in CardAction div
+    },
+  
   },
   expandOpen: {
-    transform: "rotate(180deg)"
+    transform: "rotate(180deg)",  
+    '&:focus': {
+      backgroundColor: '#e0e0e0', // removes the default teal background
+    },
+    '&:hover': {
+      backgroundColor: '#e0e0e0', // to match grey in CardAction div
+    },
   },
   avatar: {
     backgroundColor: red[500]
