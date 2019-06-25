@@ -14,8 +14,13 @@ const styles = theme => ({
     display: "flex"
   },
   title: {
-    ...theme.mixins.toolbar,
-    textAlign: "center"
+    // ...theme.mixins.toolbar,
+    //textAlign: "center"
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "75%",
+    marginBottom: theme.spacing(3)
   },
   content: {
     flexGrow: 1,
@@ -33,20 +38,21 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    maxWidth: 680,
-    [theme.breakpoints.down("sm")]: {
-      width: "100%"
-    }
+    // maxWidth: 680,
+    //[theme.breakpoints.down("sm")]: {
+    width: "100%"
+    //}
   },
   Paper: {
     flexGrow: 1,
     padding: theme.spacing(1),
-    width: 680,
+    //width: 680,
     display: "flex",
     justifyContent: "center",
     overflowY: "scroll",
     maxHeight: 860,
-    background: "#EBEBEA"
+    background: "#EBEBEA",
+    width: "100%"
   }
 });
 
@@ -121,7 +127,7 @@ class ExpertDashboard extends React.Component {
     // console.log("expert dash", this.props);
     return (
       <div className={classes.root}>
-        <CssBaseline />
+        {/* <CssBaseline /> */}
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <div className={classes.dashboardContent}>
@@ -132,19 +138,25 @@ class ExpertDashboard extends React.Component {
                 {this.state.questionCount} Questions Asked &nbsp;|&nbsp;{" "}
                 {this.state.answerCount} Answers Received
               </Typography> */}
-              <Paper>
+              <Paper className={classes.paper}>
                 <TopicDropdown getQuestionsByTopic={this.getQuestionsByTopic} />
               </Paper>
             </div>
             {/* <Paper className={classes.Paper}> */}
-            <QuestionsList
-              questions={questions}
-              postAnswer={this.props.postAnswer}
-              // QA={this.props.QA}
-              editAnswer={this.editAnswer}
-              deleteAnswer={this.deleteAnswer}
-              gUser={this.props.gUser}
-            />
+            {this.state.questions.length === 0 ? (
+              <Typography variant="h6">
+                Select a topic to start answering questions!
+              </Typography>
+            ) : (
+              <QuestionsList
+                questions={questions}
+                postAnswer={this.props.postAnswer}
+                // QA={this.props.QA}
+                editAnswer={this.editAnswer}
+                deleteAnswer={this.deleteAnswer}
+                gUser={this.props.gUser}
+              />
+            )}
             {/* </Paper> */}
           </div>
         </main>

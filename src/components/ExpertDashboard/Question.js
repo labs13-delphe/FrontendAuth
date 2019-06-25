@@ -30,7 +30,7 @@ import clsx from "clsx";
 
 const styles = theme => ({
   card: {
-    width: "100%",
+    width: "75%",
     marginBottom: theme.spacing(2),
     padding: theme.spacing(1)
   },
@@ -82,6 +82,9 @@ const styles = theme => ({
   },
   answerInput: {
     width: "100%"
+  },
+  viewProfile: {
+    color: "#4051B5"
   }
 });
 
@@ -391,67 +394,72 @@ class Question extends React.Component {
     const answersText =
       this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
     return (
-      <>
-        <Card className={classes.card}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="Recipe" className={classes.avatar}>
-                {/* Getting Asker's Initials for Avatar */}
-                {thisUser.first_name.substring(0, 1)}
-                {thisUser.last_name.substring(0, 1)}
-              </Avatar>
-            }
-            action={
-              <>
-                {users.map(user => {
-                  if (user.id === question.user_id) {
-                    return (
-                      <Typography variant="h6">
-                        <Link to={`/users/${user.id}`}> View Profile</Link>
-                      </Typography>
-                    );
-                  } else {
-                    return null;
-                  }
-                })}
-              </>
-            }
-            title={askerInfo.username}
-            subheader={askerInfo.user_type}
-          />
-          <CardContent>
-            <Typography
-              variant="h4"
-              color="textSecondary"
-              component="p"
-              gutterBottom
-            >
-              {question.title}
-            </Typography>
-            <Typography variant="h5" color="textSecondary" component="p">
-              {question.question}
-            </Typography>
-            <Typography variant="h6" color="textSecondary" component="p">
-              {answerCount} {answersText}
-            </Typography>
-            <div className="topics-div">
-              {topics.map(topic => (
-                <Button
-                  variant="contained"
-                  size="small"
-                  color="primary"
-                  className={classes.topicButton}
-                  key={topic.id}
-                >
-                  {topic.topic}
-                </Button>
-              ))}
-            </div>
-          </CardContent>
-          <Divider />
+      <Card className={classes.card}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="Recipe" className={classes.avatar}>
+              {/* Getting Asker's Initials for Avatar */}
+              {thisUser.first_name.substring(0, 1)}
+              {thisUser.last_name.substring(0, 1)}
+            </Avatar>
+          }
+          action={
+            <>
+              {users.map(user => {
+                if (user.id === question.user_id) {
+                  return (
+                    <Typography variant="h6">
+                      <Link
+                        to={`/users/${user.id}`}
+                        className={classes.viewProfile}
+                      >
+                        {" "}
+                        View Profile
+                      </Link>
+                    </Typography>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+            </>
+          }
+          title={askerInfo.username}
+          subheader={askerInfo.user_type}
+        />
+        <CardContent>
+          <Typography
+            variant="h4"
+            color="textSecondary"
+            component="p"
+            gutterBottom
+          >
+            {question.title}
+          </Typography>
+          <Typography variant="h5" color="textSecondary" component="p">
+            {question.question}
+          </Typography>
+          <Typography variant="h6" color="textSecondary" component="p">
+            {answerCount} {answersText}
+          </Typography>
+          <div className="topics-div">
+            {topics.map(topic => (
+              <Button
+                variant="contained"
+                size="small"
+                color="primary"
+                className={classes.topicButton}
+                key={topic.id}
+              >
+                {topic.topic}
+              </Button>
+            ))}
+          </div>
+        </CardContent>
+        <Divider />
 
-          {/* <div> */}
-          {/* <form onSubmit={this.submitAnswer}>
+        {/* <div> */}
+        {/* <form onSubmit={this.submitAnswer}>
               <input
                 label="answer"
                 type="text"
@@ -464,60 +472,59 @@ class Question extends React.Component {
               <button onClick={this.submitAnswer}>Submit</button>
             </form> */}
 
-          <form className={classes.form} onSubmit={this.submitAnswer}>
-            <div className={classes.anserTextfield}>
-              <TextField
-                value={answer}
-                name="answer"
-                label="answer"
-                placeholder="Answer this question..."
-                multiline
-                className={classes.answerInput}
-                onChange={this.handleChange}
-                margin="normal"
-                variant="standard"
-              />
-            </div>
+        <form className={classes.form} onSubmit={this.submitAnswer}>
+          <div className={classes.anserTextfield}>
+            <TextField
+              value={answer}
+              name="answer"
+              label="answer"
+              placeholder="Answer this question..."
+              multiline
+              className={classes.answerInput}
+              onChange={this.handleChange}
+              margin="normal"
+              variant="standard"
+            />
+          </div>
 
-            {answer ? (
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                onClick={this.submitAnswer}
-              >
-                Submit
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                disabled
-                className={classes.button}
-              >
-                Submit
-              </Button>
-            )}
-          </form>
-
-          <CardActions>
-            <Typography>View Answers: ({answerCount}) </Typography>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded
-              })}
-              onClick={this.handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="Show more"
+          {answer ? (
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={this.submitAnswer}
             >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <Typography paragraph>{answersDiv}</Typography>
-          </Collapse>
-        </Card>
-      </>
+              Submit
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              disabled
+              className={classes.button}
+            >
+              Submit
+            </Button>
+          )}
+        </form>
+
+        <CardActions>
+          <Typography>View Answers: ({answerCount}) </Typography>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded
+            })}
+            onClick={this.handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="Show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <Typography paragraph>{answersDiv}</Typography>
+        </Collapse>
+      </Card>
     );
   }
 }

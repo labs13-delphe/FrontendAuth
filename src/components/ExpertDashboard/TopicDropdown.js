@@ -27,8 +27,11 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     //background: "orange",
-    width: 680, // maybe use viewport measure?
-    padding: 10
+    //width: 680, // maybe use viewport measure?,
+    //backgroundColor: "pink",
+    width: 400,
+    padding: 10,
+    marginBottom: theme.spacing(3)
   },
   formTitle: {
     marginLeft: theme.spacing(1)
@@ -72,16 +75,21 @@ const styles = theme => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 200,
-    width: "35%",
-    [theme.breakpoints.down("xs")]: {
-      width: "60%"
-    }
+    // width: "35%",
+    // [theme.breakpoints.down("xs")]: {
+    //   width: "60%"
+    // }
+    //backgroundColor: "green",
+    width: "75%"
   },
   select: {
     width: "100%"
   },
   button: {
     margin: theme.spacing(1)
+  },
+  fullWidth: {
+    width: "100%"
   }
 });
 
@@ -126,26 +134,30 @@ class TopicDropdown extends React.Component {
       { classes } = this.props;
     console.log(topicsList);
     return (
-      <form className={classes.form}>
-        <FormControl /*variant="outlined"*/ className={classes.formControl}>
-          <InputLabel htmlFor="outlined-age-simple">Choose a topic</InputLabel>
-          <Select
-            value={topic}
-            onChange={this.handleChanges}
-            className={classes.select}
-            inputProps={{
-              name: "topic"
-            }}
-            input={<OutlinedInput name="topic" id="outlined-age-simple" />}
-          >
-            {topicsList.map(topic => (
-              <MenuItem value={topic.topic} key={topic.id}>
-                {topic.topic}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </form>
+      <div className={classes.fullWidth}>
+        <form className={classes.form}>
+          <FormControl /*variant="outlined"*/ className={classes.formControl}>
+            <InputLabel htmlFor="outlined-age-simple">
+              Choose a topic
+            </InputLabel>
+            <Select
+              value={topic}
+              onChange={this.handleChanges}
+              className={classes.select}
+              inputProps={{
+                name: "topic"
+              }}
+              input={<OutlinedInput name="topic" id="outlined-age-simple" />}
+            >
+              {topicsList.map(topic => (
+                <MenuItem value={topic.topic} key={topic.id}>
+                  {topic.topic}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </form>
+      </div>
     );
   }
 }
