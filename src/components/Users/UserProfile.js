@@ -136,7 +136,7 @@ class UserProfile extends React.Component {
     window.history.go(-1);
   };
 
-  render(props) {
+  render() {
     const { classes } = this.props;
     return (
       <>
@@ -147,22 +147,40 @@ class UserProfile extends React.Component {
               {this.state.user.id ===
               Number(localStorage.getItem("user_id")) ? (
                 <div className="jumbotron conBtn">
+                
                 {/* button with material ui */}
-                  <Button onClick={this.deleteButton} variant="contained"
-                          color="primary"
-                          className={classes.button}> Delete Account</Button>{" "}
+                  <Button 
+                  onClick={this.deleteButton} 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}> 
+                  Delete Account
+                  </Button>
+                  {" "}
 
-                  <Button onClick={this.toggleEdit} variant="contained"
-                          color="primary"
-                          className={classes.button}>Edit Profile</Button>{" "}
+                  <Button 
+                  onClick={this.toggleEdit} 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}>
+                  Edit Profile
+                  </Button>
+                  {" "}
 
-                  <Button onClick={this.goBack} variant="contained"
-                          color="primary"
-                          className={classes.button}>Go Back</Button>
+                  <Button 
+                  onClick={this.goBack} 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}>
+                  Go Back
+                  </Button>
+
                 </div>
               ) : (
                 <div>
-                  <button>Send Message</button>
+                  <Button variant="contained"
+                          color="primary"
+                          className={classes.button}>Send Message</Button>
                   <Button
                           onClick={this.goBack}
                           variant="contained"
