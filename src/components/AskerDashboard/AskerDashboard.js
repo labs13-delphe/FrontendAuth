@@ -8,7 +8,7 @@ import AskerQuestionsList from "./AskerQuestionsList";
 // import StripeBtn from "../stripe/StripeBtn"; // giving an error for some reason
 
 // Material UI
-import { CssBaseline, Paper, Typography } from "@material-ui/core";
+import { CssBaseline, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Custom Styles
@@ -136,8 +136,7 @@ class AskerDashboard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props,
-      { userInfo } = this.state;
+    const { classes } = this.props;
 
     const questionsText =
       this.state.questionCount === 1 ? (
