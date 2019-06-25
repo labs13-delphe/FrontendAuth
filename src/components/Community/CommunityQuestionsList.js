@@ -8,9 +8,9 @@ import CommunityEachQuestion from "./CommunityEachQuestion";
 const fullWidth = {
   width: "100%",
   display: "flex",
-  "flex-direction": "column",
-  "justify-content": "center",
-  "align-items": "center"
+  "flexDirection": "column",
+  "justifyContent": "center",
+  "alignItems": "center"
 };
 
 const CommunityQuestionsList = props => {
