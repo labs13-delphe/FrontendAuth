@@ -415,7 +415,7 @@ class AskerEachQuestion extends React.Component {
                 variant="contained"
                 size="small"
                 color="primary"
-                disableRipple="true"
+                disableRipple={true}
                 className={classes.topicButton}
                 key={topic.id}
               >
