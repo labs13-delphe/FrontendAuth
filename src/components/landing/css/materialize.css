@@ -986,6 +986,10 @@
 .teal-text {
   color: #009688 !important;
 }
+/* user profile name text */
+.teal-text2 {
+  color: black !important;
+}
 
 .teal.lighten-5 {
   background-color: #e0f2f1 !important;
