@@ -42,9 +42,9 @@ const styles = theme => ({
     "&:hover": {
       cursor: "default"
     },
-    '&:focus': {
-      backgroundColor: '#3f51b5', // removes the default teal background
-    },
+    "&:focus": {
+      backgroundColor: "#3f51b5" // removes the default teal background
+    }
   },
   expand: {
     transform: "rotate(0deg)",
@@ -52,22 +52,21 @@ const styles = theme => ({
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     }),
-    '&:focus': {
-      backgroundColor: 'white', // to remove teal
+    "&:focus": {
+      backgroundColor: "white" // to remove teal
     },
-    '&:hover': {
-      backgroundColor: '#e0e0e0', // to match grey in CardAction div
-    },
-  
+    "&:hover": {
+      backgroundColor: "#e0e0e0" // to match grey in CardAction div
+    }
   },
   expandOpen: {
-    transform: "rotate(180deg)",  
-    '&:focus': {
-      backgroundColor: '#e0e0e0', // removes the default teal background
+    transform: "rotate(180deg)",
+    "&:focus": {
+      backgroundColor: "#e0e0e0" // removes the default teal background
     },
-    '&:hover': {
-      backgroundColor: '#e0e0e0', // to match grey in CardAction div
-    },
+    "&:hover": {
+      backgroundColor: "#e0e0e0" // to match grey in CardAction div
+    }
   },
   avatar: {
     backgroundColor: red[500]
@@ -112,7 +111,7 @@ const styles = theme => ({
     "&:hover": {
       background: "#e0e0e0",
       cursor: "pointer"
-    },
+    }
   },
   buttonBlue: {
     color: "#3f51b5"
@@ -183,20 +182,24 @@ class CommunityEachQuestion extends React.Component {
                   <Divider />
                   <ListItem>
                     <p>
-                    "{answer.answer}" -{" "}
-                    <strong>
-                      {users.map(user => {
-                        if (user.id === answer.user_id) {
-                          return (
-                            <Link to={`/users/${user.id}`} key={user.id} className={classes.buttonBlue}>
-                              {user.username}
-                            </Link>
-                          );
-                        } else {
-                          return null;
-                        }
-                      })}
-                    </strong>
+                      "{answer.answer}" -{" "}
+                      <strong>
+                        {users.map(user => {
+                          if (user.id === answer.user_id) {
+                            return (
+                              <Link
+                                to={`/users/${user.id}`}
+                                key={user.id}
+                                className={classes.buttonBlue}
+                              >
+                                {user.username}
+                              </Link>
+                            );
+                          } else {
+                            return null;
+                          }
+                        })}
+                      </strong>
                     </p>
                   </ListItem>
                 </div>
@@ -221,7 +224,10 @@ class CommunityEachQuestion extends React.Component {
               {user.first_name} {user.last_name}
             </Typography>{" "}
             <Typography variant="h6">
-              <Link to={`/users/${user.id}`} className={classes.buttonBlue}> View Profile</Link>
+              <Link to={`/users/${user.id}`} className={classes.buttonBlue}>
+                {" "}
+                View Profile
+              </Link>
             </Typography>
           </div>
         );
@@ -296,7 +302,10 @@ class CommunityEachQuestion extends React.Component {
           </div>
         </CardContent>
         <Divider />
-        <CardActions onClick={this.handleExpandClick} className={classes.hoverGrey}>
+        <CardActions
+          onClick={this.handleExpandClick}
+          className={classes.hoverGrey}
+        >
           <Typography>View Answers: ({answerCount}) </Typography>
           <IconButton
             className={clsx(classes.expand, {

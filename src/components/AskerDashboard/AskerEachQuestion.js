@@ -40,19 +40,19 @@ const styles = theme => ({
     }
   },
   iconButton: {
-    '&:focus': {
-      backgroundColor: 'white', // removes the default teal background
-    },
+    "&:focus": {
+      backgroundColor: "white" // removes the default teal background
+    }
   },
   topicButton: {
     margin: theme.spacing(1),
     marginLeft: theme.spacing(0),
-    '&:hover': {
-      cursor: 'default',
+    "&:hover": {
+      cursor: "default"
     },
-    '&:focus': {
-      backgroundColor: '#3f51b5', // removes the default teal background
-    },
+    "&:focus": {
+      backgroundColor: "#3f51b5" // removes the default teal background
+    }
   },
   expand: {
     transform: "rotate(0deg)",
@@ -60,22 +60,21 @@ const styles = theme => ({
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     }),
-    '&:focus': {
-      backgroundColor: 'white', // to remove teal
+    "&:focus": {
+      backgroundColor: "white" // to remove teal
     },
-    '&:hover': {
-      backgroundColor: '#e0e0e0', // to match grey in CardAction div
-    },
-  
+    "&:hover": {
+      backgroundColor: "#e0e0e0" // to match grey in CardAction div
+    }
   },
   expandOpen: {
-    transform: "rotate(180deg)",  
-    '&:focus': {
-      backgroundColor: '#e0e0e0', // removes the default teal background
+    transform: "rotate(180deg)",
+    "&:focus": {
+      backgroundColor: "#e0e0e0" // removes the default teal background
     },
-    '&:hover': {
-      backgroundColor: '#e0e0e0', // to match grey in CardAction div
-    },
+    "&:hover": {
+      backgroundColor: "#e0e0e0" // to match grey in CardAction div
+    }
   },
   avatar: {
     backgroundColor: red[500]
@@ -115,7 +114,7 @@ const styles = theme => ({
     "&:hover": {
       background: "#e0e0e0",
       cursor: "pointer"
-    },
+    }
   },
   buttonBlue: {
     color: "#3f51b5"
@@ -130,7 +129,7 @@ class AskerEachQuestion extends React.Component {
         username: "",
         first_name: "",
         last_name: "",
-        image_url: "",
+        image_url: ""
       },
       question: {
         user_id: "",
@@ -263,21 +262,26 @@ class AskerEachQuestion extends React.Component {
               return (
                 <div key={answer.id}>
                   <Divider />
-                  <ListItem >
-                    <p>"{answer.answer}" -{" "}
-                    <strong>
-                      {users.map(user => {
-                        if (user.id === answer.user_id) {
-                          return (
-                            <Link to={`/users/${user.id}`} key={user.id} className={classes.buttonBlue}>
-                              {user.username}
-                            </Link>
-                          );
-                        } else {
-                          return null;
-                        }
-                      })}
-                    </strong>
+                  <ListItem>
+                    <p>
+                      "{answer.answer}" -{" "}
+                      <strong>
+                        {users.map(user => {
+                          if (user.id === answer.user_id) {
+                            return (
+                              <Link
+                                to={`/users/${user.id}`}
+                                key={user.id}
+                                className={classes.buttonBlue}
+                              >
+                                {user.username}
+                              </Link>
+                            );
+                          } else {
+                            return null;
+                          }
+                        })}
+                      </strong>
                     </p>
                   </ListItem>
                 </div>
@@ -295,22 +299,30 @@ class AskerEachQuestion extends React.Component {
       <Card className={classes.card}>
         <CardHeader
           avatar={
-            thisUser.image_url ? <Avatar
-            alt="Remy Sharp"
-            src={thisUser.image_url}
-          /> :
-            <Avatar aria-label="Recipe" className={classes.avatar}>
-              {/* Getting Asker's Initials for Avatar */}
-              {thisUser.first_name.substring(0, 1)}
-              {thisUser.last_name.substring(0, 1)}
-            </Avatar>
+            thisUser.image_url ? (
+              <Avatar alt="Remy Sharp" src={thisUser.image_url} />
+            ) : (
+              <Avatar aria-label="Recipe" className={classes.avatar}>
+                {/* Getting Asker's Initials for Avatar */}
+                {thisUser.first_name.substring(0, 1)}
+                {thisUser.last_name.substring(0, 1)}
+              </Avatar>
+            )
           }
           action={
             <>
-              <IconButton aria-label="Settings" onClick={this.handleClickOpen} className={classes.iconButton}>
-                <Edit  />
+              <IconButton
+                aria-label="Settings"
+                onClick={this.handleClickOpen}
+                className={classes.iconButton}
+              >
+                <Edit />
               </IconButton>
-              <IconButton aria-label="Settings" onClick={this.deleteButton} className={classes.iconButton}>
+              <IconButton
+                aria-label="Settings"
+                onClick={this.deleteButton}
+                className={classes.iconButton}
+              >
                 <Delete />
               </IconButton>
               {/* FOR UPDATE POP UP */}
@@ -412,7 +424,10 @@ class AskerEachQuestion extends React.Component {
           </div>
         </CardContent>
         <Divider />
-        <CardActions onClick={this.handleExpandClick} className={classes.hoverGrey}>
+        <CardActions
+          onClick={this.handleExpandClick}
+          className={classes.hoverGrey}
+        >
           <Typography>View Answers: ({answerCount}) </Typography>
           <IconButton
             className={clsx(classes.expand, {
@@ -422,7 +437,7 @@ class AskerEachQuestion extends React.Component {
             aria-expanded={expanded}
             aria-label="Show more"
           >
-            <ExpandMoreIcon/>
+            <ExpandMoreIcon />
           </IconButton>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>

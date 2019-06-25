@@ -28,11 +28,11 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       alignItems: "flex-start",
-      justifyContent: "center",
+      justifyContent: "center"
     },
     [theme.breakpoints.down("xs")]: {
       width: "100%"
-    },
+    }
   },
   content: {
     flexGrow: 1,
@@ -50,7 +50,7 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    width: "100%",
+    width: "100%"
   },
   noQuestions: {
     textAlign: "center"

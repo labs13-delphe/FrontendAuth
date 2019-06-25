@@ -20,7 +20,7 @@ const styles = theme => ({
     //marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
     textAlign: "left",
-    width: "75%",
+    width: "75%"
   },
 
   content: {
@@ -39,8 +39,8 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    width: "100%",
-  },
+    width: "100%"
+  }
 });
 
 class Community extends React.Component {
@@ -73,7 +73,7 @@ class Community extends React.Component {
             <Typography variant="h4" className={classes.title}>
               Community Feed
             </Typography>
-              <CommunityQuestionList questions={this.state.questions} />
+            <CommunityQuestionList questions={this.state.questions} />
           </div>
         </main>
       </div>

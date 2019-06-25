@@ -8,10 +8,10 @@ import CommunityEachQuestion from "./CommunityEachQuestion";
 const fullWidth = {
   width: "100%",
   display: "flex",
-  "flex-direction":  "column",
+  "flex-direction": "column",
   "justify-content": "center",
   "align-items": "center"
-}
+};
 
 const CommunityQuestionsList = props => {
   return (

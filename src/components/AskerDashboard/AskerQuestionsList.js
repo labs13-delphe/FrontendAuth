@@ -8,10 +8,10 @@ import AskerEachQuestion from "./AskerEachQuestion.js";
 const fullWidth = {
   width: "100%",
   display: "flex",
-  "flex-direction":  "column",
+  "flex-direction": "column",
   "justify-content": "center",
   "align-items": "center"
-}
+};
 const AskerQuestionsList = props => {
   return (
     <div style={fullWidth}>
