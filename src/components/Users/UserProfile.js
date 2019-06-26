@@ -143,7 +143,7 @@ class UserProfile extends React.Component {
         {this.state.isEditing === false ? (
           <div>
             <SingleUser user={this.state.user} />
-            <div className="conditional-buttons">
+            <div className="conditional-buttons userContainer">
               {this.state.user.id ===
               Number(localStorage.getItem("user_id")) ? (
                 <div className="jumbotron conBtn">
@@ -196,9 +196,9 @@ class UserProfile extends React.Component {
                   Go Back
                  </Button>
 
-                </div>
+                </div> 
               )}
-            </div>
+           </div>
           </div>
         ) : (
           <UpdateProfile />

@@ -5,7 +5,8 @@
 
 .userContainer{
   display: flex;
-  padding: 0px;
+  /* padding fills profile container  */
+  /* padding: 0px; */
   justify-content: space-around;
   justify-content: center;
 }
