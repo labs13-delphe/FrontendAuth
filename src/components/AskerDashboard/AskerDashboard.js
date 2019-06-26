@@ -34,6 +34,11 @@ const styles = theme => ({
       width: "100%"
     }
   },
+  dataCount: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.2rem"
+    }
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
@@ -173,7 +178,7 @@ class AskerDashboard extends React.Component {
             <div className={classes.title}>
               <Typography variant="h4">Your Feed</Typography>
 
-              <Typography variant="h6">
+              <Typography variant="h6" className={classes.dataCount}>
                 {this.state.questionCount} {questionsText} Asked &nbsp;|&nbsp;{" "}
                 {this.state.answerCount} {answersText} Received
               </Typography>

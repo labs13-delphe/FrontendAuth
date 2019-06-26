@@ -51,6 +51,8 @@ const styles = theme => ({
     textDecoration: "underline"
   },
   navButtons: {
+    display: "flex",
+    alignItems: "center",
     [theme.breakpoints.down("xs")]: {
       width: "100%",
       display: "flex",

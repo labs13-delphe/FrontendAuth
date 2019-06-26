@@ -1,143 +1,146 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
+# Delphe
 
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
+You can find the deployed project at [Delphe App](https://flamboyant-blackwell-be93e6.netlify.com).
 
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
+## Contributors
 
-# API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+|                                       [Josh Akeman](https://github.com/joshakeman)                                        |                                       [Kermitt Davis](https://kermittdavis.com)                                        |                                       [Amarachi Ejiawoko](https://github.com/AmarachiOE)                                        |                                       [Chad Kidd](https://github.com/Chad-Kidd)                                        |                                       [Lydia Thornton](https://github.com/Lydster)                                        |
+| :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
+|                      [<img src="https://avatars2.githubusercontent.com/u/18644403?s=400&v=4" width = "200" />](https://github.com/joshakeman)                       |                      [<img src="https://media.licdn.com/dms/image/C5603AQHjaCiEEWY1kw/profile-displayphoto-shrink_800_800/0?e=1567036800&v=beta&t=ePpQRtGnX6EonJD6QMS-zhDhgKRWzBVvgVKn0GnONLc" width = "200" />](https://kermittdavis.com)                       |                      [<img src="https://avatars0.githubusercontent.com/u/36435705?s=460&v=4" width = "200" />](https://github.com/AmarachiOE)                       |                      [<img src="https://avatars3.githubusercontent.com/u/47532308?s=460&v=4" width = "200" />](https://github.com/Chad-Kidd)                       |                      [<img src="https://avatars2.githubusercontent.com/u/34220889?s=460&v=4" width = "200" />](https://github.com/Lydster)                       |
+|                 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/joshakeman)                 |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/honda0306)             |           [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/AmarachiOE)            |          [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Chad-Kidd)           |            [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Lydster)             |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/joshakeman/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/kermitt/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://linkedin.com/in/amarachiejiawoko) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/lydia-thornton/) |
 
-## 1️⃣ Getting started
-
-To get the server running locally:
-
-🚫 adjust these scripts to match your project
-
-- Clone this repo
-- **yarn install** to install all required dependencies
-- **yarn server** to start the local server
-- **yarn test** to start server using testing environment
-
-### Backend framework goes here
-
-🚫 Why did you choose this framework?
-
--    Point One
--    Point Two
--    Point Three
--    Point Four
-
-## 2️⃣ Endpoints
-
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
-
-#### Organization Routes
-
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
-
-#### User Routes
-
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
-
-# Data Model
-
-🚫This is just an example. Replace this with your data model
-
-#### 2️⃣ ORGANIZATIONS
-
----
-
-```
-{
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
-}
-```
-
-#### USERS
-
----
-
-```
-{
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
-}
-```
-
-## 2️⃣ Actions
-
-🚫 This is an example, replace this with the actions that pertain to your backend
-
-`getOrgs()` -> Returns all organizations
-
-`getOrg(orgId)` -> Returns a single organization by ID
-
-`addOrg(org)` -> Returns the created org
-
-`updateOrg(orgId)` -> Update an organization by ID
-
-`deleteOrg(orgId)` -> Delete an organization by ID
 <br>
 <br>
-<br>
-`getUsers(orgId)` -> if no param all users
 
-`getUser(userId)` -> Returns a single user by user ID
+<!-- 🚫 4️⃣ Optional examples of using images with links for your tech stack, make sure to change these to fit your project -->
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
+![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
+![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
+![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](nhttps://flamboyant-blackwell-be93e6.netlify.com)
+![Material UI](https://img.shields.io/badge/UI%20Framework-Material%20UI-blue.svg)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+<!-- 
+🚫 more info on using badges [here](https://github.com/badges/shields) -->
 
-`updateUser(userId, changes object)` -> Updates a single user by ID.
+## Project Overview
 
-`deleteUser(userId)` -> deletes everything dependent on the user
+- [Trello Board](https://trello.com/b/Te0Wlxw8/labs-13-niyon)
 
-## 3️⃣ Environment Variables
+- [Product Canvas](https://docs.google.com/document/d/1U-0IHm3Xjr8xTkZNnBmfoYik_bXY3XcOJLp_oQKKrcE/edit?usp=sharing)
 
-In order for the app to function correctly, the user must set up their own environment variables.
+- [UX Design files](https://projects.invisionapp.com/d/main/default/#/console/17742672/367880901/preview) 
 
-create a .env file that includes the following:
 
-🚫 These are just examples, replace them with the specifics for your app
-    
-    *  STAGING_DB - optional development db for using functionality not available in SQLite
-    *  NODE_ENV - set to "development" until ready for "production"
-    *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
-    *  SENDGRID_API_KEY - this is generated in your Sendgrid account
-    *  stripe_secret - this is generated in the Stripe dashboard
-    
-## Contributing
+Advice: we all need it in all domains of life and we all give it. But sometimes, maybe most times – at a crossroad, or dilemma, or embarrassing life situation, or when we’re stuck – we need a REAL person to talk to. And after all that we learn through our experiences, we become experts in a few areas and get to help others.
+
+Delphe creates room for an online global community just for you to connect with, and only one ask away! You can sign up to be an asker or an expert, and beginning getting the answers you need or answer questions by topics you know well! 
+
+_"Creating a community for knowledge seekers to connect with experts in a variety of fields."_
+
+
+### Key Features
+
+-    Post Questions
+-    Edit Questions
+-    Delete Questions
+-    Post Answers
+-    Edit Answers
+-    Delete Answers
+-    Find Questions by Topic
+-    View a Community Thread of Questions
+-    View Your Profile and Other Users
+
+## Tech Stack
+
+### Front end built using:
+
+#### React JS
+
+
+-    Allows application creating using multiple reusable components to cater to multiple users 
+-    Improves efficiency and scalability of application
+
+#### Material UI
+-    Provided a solid design framework for application
+-    Provided reusable and customizable components
+
+
+#### Front end deployed to Netlify
+
+#### [Back end](https://github.com/labs13-delphe/backend) deployed to Heroku and built using:
+
+#### Node JS + Express
+
+-    Node JS allows developers to write javascript-like code and build RESTful APIs
+-    Express is a framework that allows developers to build APIs in smaller units (modular)
+
+
+# APIs -UPDATE
+
+## Firebase
+
+🚫Replace text below with a description of the API
+
+Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+
+## Stripe
+
+🚫Replace text below with a description of the API
+
+This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
+
+## Websocket
+
+🚫Replace text below with a description of the API
+
+You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
+
+
+# 3️⃣ Environment Variables -UPDATE
+
+In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
+
+
+    *  REACT_APP_API_KEY - this is your Google API key, which can be generated in the Google Cloud Console
+
+    *  REACT_APP_DOMAIN - when you set up your Firebase project, this information will be in the dashboard
+
+    *  REACT_APP_backendURL - optional for your local development 
+
+# 5️⃣ Content Licenses -UPDATE
+
+🚫For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
+
+| Image Filename | Source / Creator | License                                                                      |
+| -------------- | ---------------- | ---------------------------------------------------------------------------- |
+| doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
+| rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
+
+# Testing
+
+The [@testing-library/react](https://testing-library.com/docs/react-testing-library/api) package was used to perform unit tests to ensure specifics for the user interface.
+
+# Installation Instructions
+
+To get the project running locally:
+
+ - Clone this repository.
+ - CD into the folder where you downloaded the repository.
+ - Run `yarn` or `npm i` to download all dependencies.
+ - Type `yarn test` or `npm test` to run the tests. The test script is already configured. 
+
+
+# Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 
-Please note we have a [code of conduct](./code_of_conduct.md). Please follow it in all your interactions with the project.
+Please note we have a [code of conduct](./CODE_OF_CONDUCT.md). Please follow it in all your interactions with the project.
 
-### Issue/Bug Request
-
+## Issue/Bug Request
+   
  **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
  - Check first to see if your issue has already been reported.
  - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
@@ -168,5 +171,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Backend Documentation](https://github.com/labs13-delphe/backend/blob/master/README.md) for details on the backend of our project.
