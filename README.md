@@ -74,8 +74,10 @@ _"Creating a community for knowledge seekers to connect with experts in a variet
 
 #### Node JS + Express
 
--    Node JS allows developers to write javascript-like code and build RESTful APIs
--    Express is a framework that allows developers to build APIs in smaller units (modular)
+-   allows us to build a relational database using knex and sqlite.
+-   allows us to create out own middleware wherever neccessary.
+-   allows for easy integration with our React app.
+-   allows us to create modular, RESTful APIs to call on from our React app.
 
 
 # APIs -UPDATE
