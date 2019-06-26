@@ -75,34 +75,52 @@ class ExpertDashboard extends React.Component {
     //   });
   }
 
+  // componentWillUpdate(newProps, newState) {
+  //   console.log("newProps", newProps);
+  //   console.log("newState", newState);
+  // }
+  // getDerivedStateFromProps(nextProps) {
+  //   if (this.props !== nextProps) {
+  //     this.setState({ state: this.state });
+  //   }
+  // }
+
+  // someMethod() {
+  //   // Force a render with a simulated state change
+  //   this.setState({ state: this.state });
+  // }
+
   // Edit Answer Axios Call
-  editAnswer = answer => {
-    axios
-      .put(
-        `https://delphe-backend.herokuapp.com/api/answers/${answer.id}`,
-        answer
-      )
-      .then(res => {
-        console.log("successfully edited");
-        window.location.reload();
-      })
-      .catch(error => {
-        console.log("there was a problem editing your answer");
-      });
-  };
+  // editAnswer = answer => {
+  //   console.log(answer);
+  //   axios
+  //     .put(
+  //       `http://localhost:5000/api/answers/${answer.id}`,
+  //       //`https://delphe-backend.herokuapp.com/api/answers/${answer.id}`,
+  //       answer
+  //     )
+  //     .then(res => {
+  //       console.log(res.data);
+  //       //window.location.reload();
+  //     })
+  //     .catch(error => {
+  //       console.log("there was a problem editing your answer");
+  //     });
+  // };
 
   // Delete Answer Axios Call
-  deleteAnswer = id => {
-    axios
-      .delete(`https://delphe-backend.herokuapp.com/api/answers/${id}`)
-      .then(res => {
-        console.log("successfully deleted");
-        window.location.reload();
-      })
-      .catch(err => {
-        console.log("there was a problem deleting your answer");
-      });
-  };
+  // deleteAnswer = id => {
+  //   axios
+  //     .delete(`https://delphe-backend.herokuapp.com/api/answers/${id}`)
+  //     .then(res => {
+  //       console.log("successfully deleted");
+  //       // window.location.reload();
+
+  //     })
+  //     .catch(err => {
+  //       console.log("there was a problem deleting your answer");
+  //     });
+  // };
 
   getQuestionsByTopic = topicId => {
     axios
@@ -153,7 +171,7 @@ class ExpertDashboard extends React.Component {
                 postAnswer={this.props.postAnswer}
                 // QA={this.props.QA}
                 editAnswer={this.editAnswer}
-                deleteAnswer={this.deleteAnswer}
+                //deleteAnswer={this.deleteAnswer}
                 gUser={this.props.gUser}
               />
             )}

@@ -257,16 +257,16 @@ class Question extends React.Component {
 
   submitEdit = e => {
     e.preventDefault();
-    this.props.editAnswer(this.state.singleAnswer);
+    this.editAnswer(this.state.singleAnswer);
   };
 
   // ========= DELETE ANSWER
-  deleteAnswer = (e, answer_id) => {
-    e.preventDefault();
-    if (window.confirm("Are you sure you want to delete this answer?")) {
-      this.props.deleteAnswer(answer_id);
-    }
-  };
+  // deleteAnswer = (e, answer_id) => {
+  //   e.preventDefault();
+  //   if (window.confirm("Are you sure you want to delete this answer?")) {
+  //     this.props.deleteAnswer(answer_id);
+  //   }
+  // };
 
   // Material UI Methods
 
@@ -285,6 +285,46 @@ class Question extends React.Component {
     this.setState({
       dialogOpen: false
     });
+
+  deleteAnswer = (e, id) => {
+    e.preventDefault();
+    axios
+      .delete(`https://delphe-backend.herokuapp.com/api/answers/${id}`)
+      .then(res => {
+        //console.log("delete answer", res.data);
+        this.setState({
+          answers: this.state.answers.filter(a => {
+            return a.id !== id;
+          })
+        });
+      })
+      .catch(err => {
+        console.log("there was a problem deleting your answer");
+      });
+  };
+
+  editAnswer = answer => {
+    console.log(answer);
+    axios
+      .put(
+        //`http://localhost:5000/api/answers/${answer.id}`,
+        `https://delphe-backend.herokuapp.com/api/answers/${answer.id}`,
+        answer
+      )
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          answers: res.data.answers.filter(a => {
+            return a.question_id === answer.question_id;
+          }),
+          dialogOpen: false
+        });
+        //window.location.reload();
+      })
+      .catch(error => {
+        console.log("there was a problem editing your answer");
+      });
+  };
 
   render() {
     const {
@@ -522,7 +562,9 @@ class Question extends React.Component {
           </IconButton>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <Typography paragraph>{answersDiv}</Typography>
+          <div>
+            <Typography paragraph>{answersDiv}</Typography>
+          </div>
         </Collapse>
       </Card>
     );
