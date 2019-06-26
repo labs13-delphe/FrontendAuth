@@ -391,7 +391,7 @@ class AskerEachQuestion extends React.Component {
               </Dialog>
             </>
           }
-          title={thisUser.username}
+          title={`@${thisUser.username}`}
           subheader={thisUser.user_type}
         />
         <CardContent>
