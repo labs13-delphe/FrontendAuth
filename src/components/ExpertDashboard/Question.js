@@ -227,7 +227,7 @@ class Question extends React.Component {
       user_id: localStorage.getItem("user_id"),
       answer: this.state.answer
     };
-    this.props.postAnswer(answer);
+    this.postAnswer(answer);
     this.setState({
       dialogOpen: false
     });
@@ -307,7 +307,6 @@ class Question extends React.Component {
     console.log(answer);
     axios
       .put(
-        //`http://localhost:5000/api/answers/${answer.id}`,
         `https://delphe-backend.herokuapp.com/api/answers/${answer.id}`,
         answer
       )
@@ -323,6 +322,24 @@ class Question extends React.Component {
       })
       .catch(error => {
         console.log("there was a problem editing your answer");
+      });
+  };
+
+  postAnswer = answer => {
+    axios
+
+      .post("https://delphe-backend.herokuapp.com/api/answers", answer)
+      .then(res => {
+        console.log("success");
+        this.setState({
+          answer: "",
+          answers: res.data.answers.filter(a => {
+            return a.question_id === answer.question_id;
+          })
+        });
+      })
+      .catch(error => {
+        console.log("There was a problem posting your answer");
       });
   };
 

@@ -7,17 +7,17 @@ import AskerDashboard from "./AskerDashboard/AskerDashboard";
 import ExpertDashboard from "./ExpertDashboard/ExpertDashboard";
 
 const Dashboard = props => {
-  // Post Answer Method for Expert Dashboard -- should move to ExpertDashboard.js
-  const postAnswer = answer => {
-    axios
-      .post("https://delphe-backend.herokuapp.com/api/answers", answer)
-      .then(res => {
-        console.log("success");
-      })
-      .catch(error => {
-        console.log("There was a problem posting your answer");
-      });
-  };
+  //Post Answer Method for Expert Dashboard -- should move to ExpertDashboard.js
+  // const postAnswer = answer => {
+  //   axios
+  //     .post("https://delphe-backend.herokuapp.com/api/answers", answer)
+  //     .then(res => {
+  //       console.log("success");
+  //     })
+  //     .catch(error => {
+  //       console.log("There was a problem posting your answer");
+  //     });
+  // };
 
   // Conditionally Render AskerDashboard or ExpertDashboard Based on Local Storage Item
   const Component = localStorage.getItem("user_type") ? (
@@ -26,7 +26,7 @@ const Dashboard = props => {
     ) : (
       <ExpertDashboard
         questions={props.questions}
-        postAnswer={postAnswer}
+        //postAnswer={postAnswer}
         QA={props.QA}
         gUser={props.gUser}
       />

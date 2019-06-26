@@ -61,67 +61,6 @@ class ExpertDashboard extends React.Component {
     questions: []
   };
 
-  componentDidMount() {
-    // axios
-    //   .get(`https://delphe-backend.herokuapp.com/api/questions/10`)
-    //   .then(res => {
-    //     console.log("expert return data", res);
-    //     this.setState({
-    //       questions: res.data
-    //     });
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-  }
-
-  // componentWillUpdate(newProps, newState) {
-  //   console.log("newProps", newProps);
-  //   console.log("newState", newState);
-  // }
-  // getDerivedStateFromProps(nextProps) {
-  //   if (this.props !== nextProps) {
-  //     this.setState({ state: this.state });
-  //   }
-  // }
-
-  // someMethod() {
-  //   // Force a render with a simulated state change
-  //   this.setState({ state: this.state });
-  // }
-
-  // Edit Answer Axios Call
-  // editAnswer = answer => {
-  //   console.log(answer);
-  //   axios
-  //     .put(
-  //       `http://localhost:5000/api/answers/${answer.id}`,
-  //       //`https://delphe-backend.herokuapp.com/api/answers/${answer.id}`,
-  //       answer
-  //     )
-  //     .then(res => {
-  //       console.log(res.data);
-  //       //window.location.reload();
-  //     })
-  //     .catch(error => {
-  //       console.log("there was a problem editing your answer");
-  //     });
-  // };
-
-  // Delete Answer Axios Call
-  // deleteAnswer = id => {
-  //   axios
-  //     .delete(`https://delphe-backend.herokuapp.com/api/answers/${id}`)
-  //     .then(res => {
-  //       console.log("successfully deleted");
-  //       // window.location.reload();
-
-  //     })
-  //     .catch(err => {
-  //       console.log("there was a problem deleting your answer");
-  //     });
-  // };
-
   getQuestionsByTopic = topicId => {
     axios
       .get(
@@ -168,10 +107,8 @@ class ExpertDashboard extends React.Component {
             ) : (
               <QuestionsList
                 questions={questions}
-                postAnswer={this.props.postAnswer}
-                // QA={this.props.QA}
-                editAnswer={this.editAnswer}
-                //deleteAnswer={this.deleteAnswer}
+                //editAnswer={this.editAnswer}
+
                 gUser={this.props.gUser}
               />
             )}
@@ -179,19 +116,6 @@ class ExpertDashboard extends React.Component {
           </div>
         </main>
       </div>
-
-      // <div>
-      // //   <h2>Expert dash</h2>
-      //   <QuestionsList
-      //     questions={this.props.questions}
-      //     answers={this.state.answers}
-      //     postAnswer={this.props.postAnswer}
-      //     QA={this.props.QA}
-      //     editAnswer={this.editAnswer}
-      //     deleteAnswer={this.deleteAnswer}
-      //     gUser={this.props.gUser}
-      //   />
-      // </div>
     );
   }
 }
