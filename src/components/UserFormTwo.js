@@ -301,7 +301,8 @@ class UserForm extends React.Component {
                     margin="normal"
                     variant="outlined"
                   />
-                ) : null}
+                ) 
+                : null}
                 <Button onClick={this.submitUser}>Submit</Button>
                 <Button onClick={this.cancelForm}>Cancel</Button>
               </form>

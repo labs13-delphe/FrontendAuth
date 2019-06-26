@@ -136,44 +136,69 @@ class UserProfile extends React.Component {
     window.history.go(-1);
   };
 
-  render(props) {
+  render() {
     const { classes } = this.props;
     return (
       <>
         {this.state.isEditing === false ? (
           <div>
             <SingleUser user={this.state.user} />
-            <div className="conditional-buttons">
+            <div className="conditional-buttons userContainer">
               {this.state.user.id ===
               Number(localStorage.getItem("user_id")) ? (
                 <div className="jumbotron conBtn">
+
                 {/* button with material ui */}
-                  <Button onClick={this.deleteButton} variant="contained"
-                          color="primary"
-                          className={classes.button}> Delete Account</Button>{" "}
+                  <Button 
+                  onClick={this.deleteButton} 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}> 
+                  Delete Account
+                  </Button>
+                  {" "}
 
-                  <Button onClick={this.toggleEdit} variant="contained"
-                          color="primary"
-                          className={classes.button}>Edit Profile</Button>{" "}
+                  <Button 
+                  onClick={this.toggleEdit} 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}>
+                  Edit Profile
+                  </Button>
+                  {" "}
 
-                  <Button onClick={this.goBack} variant="contained"
-                          color="primary"
-                          className={classes.button}>Go Back</Button>
+                  <Button 
+                  onClick={this.goBack} 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}>
+                  Go Back
+                  </Button>
+
                 </div>
               ) : (
-                <div>
-                  <button>Send Message</button>
+                // commented out until message function works
+                <div className="jumbotron conBtn">
+                  {/* <Button 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}>
+                  Send Message
+                  </Button>
+                  {" "} */}
+
                   <Button
-                          onClick={this.goBack}
-                          variant="contained"
-                          color="primary"
-                          className={classes.button}
-                        >
-                          Go Back
-                        </Button>
-                </div>
+                  onClick={this.goBack}
+                  variant="contained"
+                  color="primary"
+                  className={classes.button} 
+                  id="goBack-Button">
+                  Go Back
+                 </Button>
+
+                </div> 
               )}
-            </div>
+           </div>
           </div>
         ) : (
           <UpdateProfile />
