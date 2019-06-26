@@ -326,6 +326,18 @@ class Question extends React.Component {
       });
   };
 
+  // postAnswer = answer => {
+  //   axios
+  //     .post("https://delphe-backend.herokuapp.com/api/answers", answer)
+  //     .then(res => {
+  //       window.locations.reload();
+  //       console.log("success");
+  //     })
+  //     .catch(error => {
+  //       console.log("There was a problem posting your answer");
+  //     });
+  // };
+
   render() {
     const {
         answers,
