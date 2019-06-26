@@ -34,7 +34,15 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "row",
     width: "100%",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  cardTitleMobile: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1rem",
+      display: "flex",
+      alignItems: "center",
+    }
   },
   topicButton: {
     margin: theme.spacing(1),
@@ -219,12 +227,12 @@ class CommunityEachQuestion extends React.Component {
       if (user.id === this.state.question.user_id) {
         return (
           <div className={classes.cardTitle} key={user.id}>
-            <Typography variant="h5">
+            <Typography variant="h5" className={classes.cardTitleMobile}>
               {" "}
               {user.first_name} {user.last_name}
             </Typography>{" "}
             <Typography variant="h6">
-              <Link to={`/users/${user.id}`} className={classes.buttonBlue}>
+              <Link to={`/users/${user.id}`} className={`${classes.buttonBlue} ${classes.cardTitleMobile}`}>
                 {" "}
                 View Profile
               </Link>
@@ -241,7 +249,7 @@ class CommunityEachQuestion extends React.Component {
       if (user.id === this.state.question.user_id) {
         return (
           <div className={classes.cardSubtitle} key={user.id}>
-            <Typography variant="h6">@{user.username}</Typography>
+            <Typography variant="h6" className={classes.cardTitleMobile}>@{user.username}</Typography>
           </div>
         );
       } else {
