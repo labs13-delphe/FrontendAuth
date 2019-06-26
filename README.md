@@ -1,16 +1,9 @@
-<!-- 🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline, feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 5️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements. -->
-
 # Delphe
 
 You can find the deployed project at [Delphe App](https://flamboyant-blackwell-be93e6.netlify.com).
 
 ## Contributors
 
-🚫Add contributor info below, make sure add images and edit the social links for each member. Add to or delete these place-holders as needed
 
 |                                       [Josh Akeman](https://github.com/joshakeman)                                        |                                       [Kermitt Davis](https://kermittdavis.com)                                        |                                       [Amarachi Ejiawoko](https://github.com/AmarachiOE)                                        |                                       [Chad Kidd](https://github.com/Chad-Kidd)                                        |                                       [Lydia Thornton](https://github.com/Lydster)                                        |
 | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
@@ -45,7 +38,7 @@ Advice: we all need it in all domains of life and we all give it. But sometimes,
 
 Delphe creates room for an online global community just for you to connect with, and only one ask away! You can sign up to be an asker or an expert, and beginning getting the answers you need or answer questions by topics you know well! 
 
-Try it out! And leave no one behind, because a more connected world should never feel lonely for anyone.
+_"Creating a community for knowledge seekers to connect with experts in a variety of fields."_
 
 
 ### Key Features
@@ -58,84 +51,66 @@ Try it out! And leave no one behind, because a more connected world should never
 -    Delete Answers
 -    Find Questions by Topic
 -    View a Community Thread of Questions
+-    View Your Profile and Other Users
 
-## 1️⃣ Tech Stack
+## Tech Stack
 
 ### Front end built using:
 
-#### _Front end framework goes here_
+#### React JS
 
-🚫 Why did you choose this framework?
 
--    point one
--    point two
--    point three
--    point four
+-    Allows application creating using multiple reusable components to cater to multiple users 
+-    Improves efficiency and scalability of application
 
-🚫List the rest of the front end features and libraries in the same format as the framework above.
+#### Material UI
+-    Provided a solid design framework for application
+-    Provided reusable and customizable components
 
-#### Front end deployed to `🚫insert service here`
 
-#### [Back end](🚫link to back end repo here) built using:
+#### Front end deployed to Netlify
 
-#### 🚫 back end framework goes here
+#### [Back end](https://github.com/labs13-delphe/backend) deployed to Heroku and built using:
 
--    point one
--    point two
--    point three
+#### Node JS + Express
 
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
+-    Node JS allows developers to write javascript-like code and build RESTful APIs
+-    Express is a framework that allows developers to build APIs in smaller units (modular)
 
-# APIs
 
-## 2️⃣ Authentication API here
+# APIs -UPDATE
+
+## Firebase
 
 🚫Replace text below with a description of the API
 
 Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
 
-## 2️⃣ Payment API here
+## Stripe
 
 🚫Replace text below with a description of the API
 
 This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
 
-## 3️⃣ Misc API here
+## Websocket
 
 🚫Replace text below with a description of the API
 
 You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
 
-## 3️⃣ Misc API here
 
-🚫Replace text below with a description of the API
-
-When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
-
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
-
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
-
-# 3️⃣ Environment Variables
+# 3️⃣ Environment Variables -UPDATE
 
 In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
 
-🚫These are just examples, replace them with the specifics for your app
 
-    *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
-    *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
-    *  REACT_APP_databaseURL - in the Firebase dashboard
-    *  REACT_APP_projectID - in the Firebase dashboard
-    *  REACT_APP_storageBucket - in the Firebase dashboard
-    *  REACT_APP_messagingSenderId - in the Firebase dashboard
-    *  REACT_APP_stripe_API - this is your public Stripe API key, generated in the Stripe dashboard
-    *  REACT_APP_backendURL - optional for your local development server
-    *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
-    *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
+    *  REACT_APP_API_KEY - this is your Google API key, which can be generated in the Google Cloud Console
 
-# 5️⃣ Content Licenses
+    *  REACT_APP_DOMAIN - when you set up your Firebase project, this information will be in the dashboard
+
+    *  REACT_APP_backendURL - optional for your local development 
+
+# 5️⃣ Content Licenses -UPDATE
 
 🚫For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
 
@@ -144,22 +119,19 @@ In order for the app to function correctly, the user must set up their own envir
 | doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
 | rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
 
-# 4️⃣ Testing
+# Testing
 
-🚫Document what you used for testing and why
+The [@testing-library/react](https://testing-library.com/docs/react-testing-library/api) package was used to perform unit tests to ensure specifics for the user interface.
 
-# 4️⃣ Installation Instructions
+# Installation Instructions
 
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
+To get the project running locally:
 
-## Other Scripts
+ - Clone this repository.
+ - CD into the folder where you downloaded the repository.
+ - Run `yarn` or `npm i` to download all dependencies.
+ - Type `yarn test` or `npm test` to run the tests. The test script is already configured. 
 
-🚫replace these examples with your own
-
-    * typecheck - runs the TypeScript compiler
-    * build - creates a build of the application
-    * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
 
 # Contributing
 
@@ -199,4 +171,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Backend Documentation](🚫_link to your backend readme here_) for details on the backend of our project.
+See [Backend Documentation](https://github.com/labs13-delphe/backend/blob/master/README.md) for details on the backend of our project.
