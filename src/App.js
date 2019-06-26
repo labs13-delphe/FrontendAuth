@@ -1,14 +1,12 @@
 // Packages
 import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";
-import axios from "axios";
+import { Route } from "react-router-dom";
 import firebase from "firebase";
 // import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"; // now on Authorization.js
 
 // Components
 import NavBar from "./components/NavBar.js";
 import Secret from "./components/Secret.js";
-import Dashboard from "./components/Dashboard.js";
 import UserProfile from "./components/Users/UserProfile";
 import Community from "./components/Community/Community";
 import Landing from './components/landing/Landing';
@@ -47,17 +45,11 @@ class App extends Component {
     });
   };
 
-  goToAuthorization = e => {
-    e.preventDefault();
-    this.props.history.push("/authorization")
-  }
-
   render() {
     console.log("app state", this.state);
 
     return (
       <div className="App">
-        {/* <button onClick={this.goToAuthorization}>Go To Authorization</button> */}
        <Route exact path="/"component={Landing}/>
        <Route path="/authorization"component={Authorization}/> 
 
@@ -65,7 +57,6 @@ class App extends Component {
           <div>
            
             <NavBar/>
-            
             <Route
               path="/secret"
               render={props => (
@@ -75,12 +66,6 @@ class App extends Component {
                 />
               )}
             />
-            {/* 
-            <Route
-              path="/dashboard"
-              render={props => <Dashboard {...props} />}
-            /> */}
-
             <Route
               path="/users/:id"
               render={props => (

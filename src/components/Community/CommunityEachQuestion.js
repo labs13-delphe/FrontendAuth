@@ -34,25 +34,47 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "row",
     width: "100%",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  cardTitleMobile: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1rem",
+      display: "flex",
+      alignItems: "center",
+    }
   },
   topicButton: {
     margin: theme.spacing(1),
     marginLeft: theme.spacing(0),
     "&:hover": {
       cursor: "default"
+    },
+    "&:focus": {
+      backgroundColor: "#3f51b5" // removes the default teal background
     }
   },
-
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
-    })
+    }),
+    "&:focus": {
+      backgroundColor: "white" // to remove teal
+    },
+    "&:hover": {
+      backgroundColor: "#e0e0e0" // to match grey in CardAction div
+    }
   },
   expandOpen: {
-    transform: "rotate(180deg)"
+    transform: "rotate(180deg)",
+    "&:focus": {
+      backgroundColor: "#e0e0e0" // removes the default teal background
+    },
+    "&:hover": {
+      backgroundColor: "#e0e0e0" // to match grey in CardAction div
+    }
   },
   avatar: {
     backgroundColor: red[500]
@@ -92,6 +114,15 @@ const styles = theme => ({
   },
   noAnswers: {
     marginLeft: theme.spacing(1)
+  },
+  hoverGrey: {
+    "&:hover": {
+      background: "#e0e0e0",
+      cursor: "pointer"
+    }
+  },
+  buttonBlue: {
+    color: "#3f51b5"
   }
 });
 
@@ -159,20 +190,24 @@ class CommunityEachQuestion extends React.Component {
                   <Divider />
                   <ListItem>
                     <p>
-                    "{answer.answer}" -{" "}
-                    <strong>
-                      {users.map(user => {
-                        if (user.id === answer.user_id) {
-                          return (
-                            <Link to={`/users/${user.id}`} key={user.id}>
-                              {user.username}
-                            </Link>
-                          );
-                        } else {
-                          return null;
-                        }
-                      })}
-                    </strong>
+                      "{answer.answer}" -{" "}
+                      <strong>
+                        {users.map(user => {
+                          if (user.id === answer.user_id) {
+                            return (
+                              <Link
+                                to={`/users/${user.id}`}
+                                key={user.id}
+                                className={classes.buttonBlue}
+                              >
+                                {user.username}
+                              </Link>
+                            );
+                          } else {
+                            return null;
+                          }
+                        })}
+                      </strong>
                     </p>
                   </ListItem>
                 </div>
@@ -192,12 +227,15 @@ class CommunityEachQuestion extends React.Component {
       if (user.id === this.state.question.user_id) {
         return (
           <div className={classes.cardTitle} key={user.id}>
-            <Typography variant="h5">
+            <Typography variant="h5" className={classes.cardTitleMobile}>
               {" "}
               {user.first_name} {user.last_name}
             </Typography>{" "}
             <Typography variant="h6">
-              <Link to={`/users/${user.id}`}> View Profile</Link>
+              <Link to={`/users/${user.id}`} className={`${classes.buttonBlue} ${classes.cardTitleMobile}`}>
+                {" "}
+                View Profile
+              </Link>
             </Typography>
           </div>
         );
@@ -211,7 +249,7 @@ class CommunityEachQuestion extends React.Component {
       if (user.id === this.state.question.user_id) {
         return (
           <div className={classes.cardSubtitle} key={user.id}>
-            <Typography variant="h6">@{user.username}</Typography>
+            <Typography variant="h6" className={classes.cardTitleMobile}>@{user.username}</Typography>
           </div>
         );
       } else {
@@ -263,6 +301,7 @@ class CommunityEachQuestion extends React.Component {
                 variant="contained"
                 size="small"
                 color="primary"
+                disableRipple={true}
                 className={classes.topicButton}
                 key={topic.id}
               >
@@ -272,7 +311,10 @@ class CommunityEachQuestion extends React.Component {
           </div>
         </CardContent>
         <Divider />
-        <CardActions>
+        <CardActions
+          onClick={this.handleExpandClick}
+          className={classes.hoverGrey}
+        >
           <Typography>View Answers: ({answerCount}) </Typography>
           <IconButton
             className={clsx(classes.expand, {

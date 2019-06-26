@@ -2,8 +2,73 @@
 import React from "react";
 import axios from "axios";
 
+import { withStyles} from "@material-ui/core/styles";
+
+import {
+  TextField,
+  Button,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  Paper,
+  Avatar
+} from "@material-ui/core";
+
 axios.defaults.baseURL =
   process.env.API_URL || "https://delphe-backend.herokuapp.com/api";
+
+
+  const styles = theme => ({
+    card: {
+      width: "100%",
+      marginBottom: theme.spacing(2),
+      padding: theme.spacing(1)
+    },
+    topicButton: {
+      margin: theme.spacing(1),
+      '&:hover': {
+        cursor: 'default',
+      }
+    },
+  
+    expand: {
+      transform: "rotate(0deg)",
+      marginLeft: "auto",
+      transition: theme.transitions.create("transform", {
+        duration: theme.transitions.duration.shortest
+      })
+    },
+    expandOpen: {
+      transform: "rotate(180deg)"
+    },
+
+    dialog: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    },
+    form: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      background: "orange"
+    },
+    textField: {
+      width: "90%",
+      margin: theme.spacing(1)
+    },
+    formButtons: {
+      display: "flex",
+      width: "100%",
+      justifyContent: "space-evenly"
+    },
+    button: {
+      margin: theme.spacing(1)
+    }
+  });
 
 class UserProfile extends React.Component {
   state = {
@@ -70,10 +135,15 @@ class UserProfile extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <>
-        <form onSubmit={this.submitForm}>
+<div class="container">
+  <form onSubmit={this.submitForm}>
+    <div class="row">
+      <div class="col-25">
+        
           <p>First Name</p>
+          </div>
           <input
             id="first_name"
             type="text"
@@ -81,6 +151,7 @@ class UserProfile extends React.Component {
             onChange={this.handleChanges}
             placeholder="First Name"
           />
+
           <p>Last Name</p>
           <input
             id="last_name"
@@ -89,6 +160,7 @@ class UserProfile extends React.Component {
             onChange={this.handleChanges}
             placeholder="First Name"
           />
+
           <p>Short Bio</p>
           <input
             id="bio"
@@ -97,6 +169,7 @@ class UserProfile extends React.Component {
             onChange={this.handleChanges}
             placeholder="Short Bio"
           />
+
           {this.state.user.user_type === "expert" ? (
             <>
               <p>Hourly Rate</p>
@@ -109,12 +182,31 @@ class UserProfile extends React.Component {
               />{" "}
             </>
           ) : null}
-        </form>
-        <button onClick={this.submitForm}>Save Edit</button>
-        <button onClick={this.goBack}>Cancel</button>
-      </>
+      
+            <Button
+              onClick={this.submitForm}
+              variant="contained"
+              color="primary"
+              className={classes.button} 
+              id="goBack-Button">
+              Save Edit
+              </Button>
+
+                    
+            <Button
+              onClick={this.goBack}
+              variant="contained"
+              color="primary"
+              className={classes.button} 
+              id="goBack-Button">
+              Cancel
+              </Button>
+              
+         </div>   
+      </form>
+    </div>  
     );
   }
 }
 
-export default UserProfile;
+export default withStyles(styles)(UserProfile);

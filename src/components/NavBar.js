@@ -16,10 +16,17 @@ import { withStyles } from "@material-ui/core/styles";
 
 // Custom Styles
 const styles = theme => ({
+  toolBar: {
+    display: "flex",
+    justifyContent: "center"
+  },
   spaceBetween: {
     display: "flex",
     justifyContent: "space-between",
-    width: "100%"
+    width: "90%",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
   },
   dashboardText: {
     [theme.breakpoints.down("xs")]: {
@@ -27,9 +34,8 @@ const styles = theme => ({
     }
   },
   Button: {
-    marginLeft: theme.spacing(1),
-    //textDecoration: "none",
-    textTransform: "none",
+    marginLeft: theme.spacing(3),
+    textTransform: "none", // So font is now sentence case
     color: "#D0D8FF",
     "&:hover": {
       color: "white",
@@ -43,9 +49,10 @@ const styles = theme => ({
   activeButton: {
     color: "white",
     textDecoration: "underline"
-    //background: "green",
   },
   navButtons: {
+    display: "flex",
+    alignItems: "center",
     [theme.breakpoints.down("xs")]: {
       width: "100%",
       display: "flex",
@@ -86,52 +93,36 @@ class NavBar extends React.Component {
     return (
       <div>
         <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
+        <AppBar position="fixed">
+          <Toolbar className={classes.toolBar}>
             <div className={classes.spaceBetween}>
               <Typography variant="h5" noWrap className={classes.dashboardText}>
                 Dashboard
               </Typography>
               <div className={classes.navButtons}>
-                <Button
-                  color="inherit"
-                  href="/secret/dashboard"
+                <NavLink
+                  to="/secret/dashboard"
                   className={classes.Button}
+                  activeClassName={classes.activeButton}
                 >
-                  <NavLink
-                    to="/secret/dashboard"
-                    className={classes.Button}
-                    activeClassName={classes.activeButton}
-                  >
-                    Your Feed
-                  </NavLink>
-                </Button>
-                <Button
-                  color="inherit"
-                  href="/community"
+                  Your Feed
+                </NavLink>
+
+                <NavLink
+                  to="/community"
                   className={classes.Button}
+                  activeClassName={classes.activeButton}
                 >
-                  <NavLink
-                    to="/community"
-                    className={classes.Button}
-                    activeClassName={classes.activeButton}
-                  >
-                    Community Feed
-                  </NavLink>
-                </Button>
-                <Button
-                  color="inherit"
-                  href={`/users/${user.id}`}
+                  Community Feed
+                </NavLink>
+
+                <NavLink
+                  to={`/users/${user.id}`}
                   className={classes.Button}
+                  activeClassName={classes.activeButton}
                 >
-                  <NavLink
-                    to={`/users/${user.id}`}
-                    className={classes.Button}
-                    activeClassName={classes.activeButton}
-                  >
-                    Profile
-                  </NavLink>
-                </Button>
+                  Profile
+                </NavLink>
                 <Button
                   color="inherit"
                   onClick={this.logout}

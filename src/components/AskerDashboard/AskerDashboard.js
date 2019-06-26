@@ -8,7 +8,7 @@ import AskerQuestionsList from "./AskerQuestionsList";
 // import StripeBtn from "../stripe/StripeBtn"; // giving an error for some reason
 
 // Material UI
-import { CssBaseline, Paper, Typography } from "@material-ui/core";
+import { CssBaseline, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Custom Styles
@@ -28,11 +28,16 @@ const styles = theme => ({
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       alignItems: "flex-start",
-      justifyContent: "center",
+      justifyContent: "center"
     },
     [theme.breakpoints.down("xs")]: {
       width: "100%"
-    },
+    }
+  },
+  dataCount: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.2rem"
+    }
   },
   content: {
     flexGrow: 1,
@@ -50,7 +55,7 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    width: "100%",
+    width: "100%"
   },
   noQuestions: {
     textAlign: "center"
@@ -136,8 +141,7 @@ class AskerDashboard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props,
-      { userInfo } = this.state;
+    const { classes } = this.props;
 
     const questionsText =
       this.state.questionCount === 1 ? (
@@ -174,7 +178,7 @@ class AskerDashboard extends React.Component {
             <div className={classes.title}>
               <Typography variant="h4">Your Feed</Typography>
 
-              <Typography variant="h6">
+              <Typography variant="h6" className={classes.dataCount}>
                 {this.state.questionCount} {questionsText} Asked &nbsp;|&nbsp;{" "}
                 {this.state.answerCount} {answersText} Received
               </Typography>

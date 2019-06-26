@@ -3,12 +3,11 @@ import React from "react";
 import axios from "axios";
 import firebase from "firebase";
 
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles} from "@material-ui/core/styles";
 
 import {
   TextField,
   Button,
-  withStyles,
   CssBaseline,
   AppBar,
   Toolbar,
@@ -23,6 +22,57 @@ import UpdateProfile from "./UpdateProfile";
 
 axios.defaults.baseURL =
   process.env.API_URL || "https://delphe-backend.herokuapp.com/api";
+
+  const styles = theme => ({
+    card: {
+      width: "100%",
+      marginBottom: theme.spacing(2),
+      padding: theme.spacing(1)
+    },
+    topicButton: {
+      margin: theme.spacing(1),
+      '&:hover': {
+        cursor: 'default',
+      }
+    },
+  
+    expand: {
+      transform: "rotate(0deg)",
+      marginLeft: "auto",
+      transition: theme.transitions.create("transform", {
+        duration: theme.transitions.duration.shortest
+      })
+    },
+    expandOpen: {
+      transform: "rotate(180deg)"
+    },
+
+    dialog: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center"
+    },
+    form: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+      width: "100%",
+      background: "orange"
+    },
+    textField: {
+      width: "90%",
+      margin: theme.spacing(1)
+    },
+    formButtons: {
+      display: "flex",
+      width: "100%",
+      justifyContent: "space-evenly"
+    },
+    button: {
+      margin: theme.spacing(1)
+    }
+  });
 
 class UserProfile extends React.Component {
   state = {
@@ -87,26 +137,68 @@ class UserProfile extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <>
         {this.state.isEditing === false ? (
           <div>
             <SingleUser user={this.state.user} />
-            <div className="conditional-buttons">
+            <div className="conditional-buttons userContainer">
               {this.state.user.id ===
               Number(localStorage.getItem("user_id")) ? (
                 <div className="jumbotron conBtn">
-                  <button onClick={this.deleteButton} id="footerButton" className="btn-large waves-effect waves-light teal lighten-1"> Delete Account</button>{" "}
-                  <button onClick={this.toggleEdit} id="footerButton" className="btn-large waves-effect waves-light teal lighten-1">Edit Profile</button>{" "}
-                  <button onClick={this.goBack} id="footerButton" className="btn-large waves-effect waves-light teal lighten-1">Go Back</button>
+
+                {/* button with material ui */}
+                  <Button 
+                  onClick={this.deleteButton} 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}> 
+                  Delete Account
+                  </Button>
+                  {" "}
+
+                  <Button 
+                  onClick={this.toggleEdit} 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}>
+                  Edit Profile
+                  </Button>
+                  {" "}
+
+                  <Button 
+                  onClick={this.goBack} 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}>
+                  Go Back
+                  </Button>
+
                 </div>
               ) : (
-                <div>
-                  <button>Send Message</button>
-                  <button onClick={this.goBack}>Go Back</button>
-                </div>
+                // commented out until message function works
+                <div className="jumbotron conBtn">
+                  {/* <Button 
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}>
+                  Send Message
+                  </Button>
+                  {" "} */}
+
+                  <Button
+                  onClick={this.goBack}
+                  variant="contained"
+                  color="primary"
+                  className={classes.button} 
+                  id="goBack-Button">
+                  Go Back
+                 </Button>
+
+                </div> 
               )}
-            </div>
+           </div>
           </div>
         ) : (
           <UpdateProfile />
@@ -116,4 +208,4 @@ class UserProfile extends React.Component {
   }
 }
 
-export default UserProfile;
+export default withStyles(styles)(UserProfile);
