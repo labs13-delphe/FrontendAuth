@@ -30,14 +30,14 @@ import clsx from "clsx";
 
 const styles = theme => ({
   card: {
-    width: "100%",
+    width: "75%",
     marginBottom: theme.spacing(2),
     padding: theme.spacing(1)
   },
   topicButton: {
     margin: theme.spacing(1),
-    '&:hover': {
-      cursor: 'default',
+    "&:hover": {
+      cursor: "default"
     }
   },
 
@@ -62,12 +62,12 @@ const styles = theme => ({
   form: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    background: "orange"
+    justifyContent: "center"
+    // alignItems: "center",
+    // width: "100%",
+    // background: "orange"
   },
-  textField: {
+  answertextField: {
     width: "90%",
     margin: theme.spacing(1)
   },
@@ -77,7 +77,14 @@ const styles = theme => ({
     justifyContent: "space-evenly"
   },
   button: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
+    width: 125
+  },
+  answerInput: {
+    width: "100%"
+  },
+  viewProfile: {
+    color: "#4051B5"
   }
 });
 
@@ -134,23 +141,27 @@ class Question extends React.Component {
         });
 
         // GET Asker Info (to get usernames)
-      
+
         axios
-        .get(`https://delphe-backend.herokuapp.com/api/users/${this.state.askerId}`)
-        .then(res => {
-          console.log("Asker user info", res.data)
-          this.setState({ 
-            askerInfo: {
-              first_name: res.data.first_name,
-              last_name: res.data.last_name,
-              username: res.data.username,
-              user_type: res.data.user_type
-            }
+          .get(
+            `https://delphe-backend.herokuapp.com/api/users/${
+              this.state.askerId
+            }`
+          )
+          .then(res => {
+            console.log("Asker user info", res.data);
+            this.setState({
+              askerInfo: {
+                first_name: res.data.first_name,
+                last_name: res.data.last_name,
+                username: res.data.username,
+                user_type: res.data.user_type
+              }
+            });
+          })
+          .catch(err => {
+            console.log("Can't retrieve all users", err);
           });
-        })
-        .catch(err => {
-          console.log("Can't retrieve all users", err);
-        });
       })
       .catch(err => {
         console.log(err);
@@ -167,8 +178,6 @@ class Question extends React.Component {
         console.log("Can't retrieve all users", err);
       });
 
-
-
     // GET THIS EXPERT INFO
     const asker_id = localStorage.getItem("user_id");
     const userEndpoint = `https://delphe-backend.herokuapp.com/api/users/${asker_id}`;
@@ -182,8 +191,6 @@ class Question extends React.Component {
         console.log("can't get this asker's info.");
       });
   }
-
-  
 
   // ========= GET EXPERT ANSWERS
   getUsersAnswer = answer_id => {
@@ -220,20 +227,20 @@ class Question extends React.Component {
       user_id: localStorage.getItem("user_id"),
       answer: this.state.answer
     };
-    this.props.postAnswer(answer);
+    this.postAnswer(answer);
     this.setState({
       dialogOpen: false
-    })
+    });
   };
 
   // ========= UPDATE ANSWER
   // Toggle isEditing
   handleEdit = (e, answer_id) => {
     e.preventDefault();
-    this.setState({ 
+    this.setState({
       isEditing: true,
       dialogOpen: true
-     });
+    });
 
     this.getUsersAnswer(answer_id);
   };
@@ -250,16 +257,16 @@ class Question extends React.Component {
 
   submitEdit = e => {
     e.preventDefault();
-    this.props.editAnswer(this.state.singleAnswer);
+    this.editAnswer(this.state.singleAnswer);
   };
 
   // ========= DELETE ANSWER
-  deleteAnswer = (e, answer_id) => {
-    e.preventDefault();
-    if (window.confirm("Are you sure you want to delete this answer?")) {
-      this.props.deleteAnswer(answer_id);
-    }
-  };
+  // deleteAnswer = (e, answer_id) => {
+  //   e.preventDefault();
+  //   if (window.confirm("Are you sure you want to delete this answer?")) {
+  //     this.props.deleteAnswer(answer_id);
+  //   }
+  // };
 
   // Material UI Methods
 
@@ -279,12 +286,78 @@ class Question extends React.Component {
       dialogOpen: false
     });
 
+  deleteAnswer = (e, id) => {
+    e.preventDefault();
+    axios
+      .delete(`https://delphe-backend.herokuapp.com/api/answers/${id}`)
+      .then(res => {
+        //console.log("delete answer", res.data);
+        this.setState({
+          answers: this.state.answers.filter(a => {
+            return a.id !== id;
+          })
+        });
+      })
+      .catch(err => {
+        console.log("there was a problem deleting your answer");
+      });
+  };
+
+  editAnswer = answer => {
+    console.log(answer);
+    axios
+      .put(
+        `https://delphe-backend.herokuapp.com/api/answers/${answer.id}`,
+        answer
+      )
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          answers: res.data.answers.filter(a => {
+            return a.question_id === answer.question_id;
+          }),
+          dialogOpen: false
+        });
+        //window.location.reload();
+      })
+      .catch(error => {
+        console.log("there was a problem editing your answer");
+      });
+  };
+
+  postAnswer = answer => {
+    axios
+
+      .post("https://delphe-backend.herokuapp.com/api/answers", answer)
+      .then(res => {
+        console.log("success");
+        this.setState({
+          answer: "",
+          answers: res.data.answers.filter(a => {
+            return a.question_id === answer.question_id;
+          })
+        });
+      })
+      .catch(error => {
+        console.log("There was a problem posting your answer");
+      });
+  };
+
   render() {
-    const { answers, users, thisUser, answerCount, question, topics, dialogOpen, expanded, askerInfo } = this.state,
-          { classes } = this.props
-    // console.log("question props", this.props);
-    // console.log("question state", this.state);
-    // condition: Render Answers Div if question has answers (answerCount > 0)
+    const {
+        answers,
+        users,
+        thisUser,
+        answerCount,
+        question,
+        topics,
+        dialogOpen,
+        expanded,
+        askerInfo,
+        answer
+      } = this.state,
+      { classes } = this.props;
+
     const answersDiv =
       this.state.answerCount > 0 ? (
         <div className="answers-div">
@@ -293,7 +366,7 @@ class Question extends React.Component {
               return (
                 <div key={answer.id}>
                   <Divider />
-                  <ListItem >
+                  <ListItem>
                     "{answer.answer}" -{" "}
                     <strong>
                       {users.map(user => {
@@ -308,14 +381,20 @@ class Question extends React.Component {
                         }
                       })}
                     </strong>
-                    <IconButton aria-label="Settings" onClick={(e) => this.handleEdit(e, answer.id)}>
-                    <Edit  />
-                  </IconButton>
-                  <IconButton aria-label="Settings" onClick={(e) => this.deleteAnswer(e, answer.id)}>
-                    <Delete />
-                  </IconButton>
-                  {/* FOR UPDATE POP UP */}
-                  <Dialog
+                    <IconButton
+                      aria-label="Settings"
+                      onClick={e => this.handleEdit(e, answer.id)}
+                    >
+                      <Edit />
+                    </IconButton>
+                    <IconButton
+                      aria-label="Settings"
+                      onClick={e => this.deleteAnswer(e, answer.id)}
+                    >
+                      <Delete />
+                    </IconButton>
+                    {/* FOR UPDATE POP UP */}
+                    <Dialog
                       open={dialogOpen}
                       onClose={this.handleClose}
                       className={classes.dialog}
@@ -327,31 +406,7 @@ class Question extends React.Component {
                       <DialogContent className="form">
                         <Typography> Title: {question.title}</Typography>
                         <Typography> Question: {question.question}</Typography>
-
-                        {/* <TextField
-                          value={question.title}
-                          name="title"
-                          label="Title"
-                          placeholder="Question title..."
-                          multiline
-                          className={classes.textField}
-                          onChange={this.handleChanges}
-                          margin="normal"
-                          variant="outlined"
-                        />
                         <TextField
-                          value={question.question}
-                          name="question"
-                          label="Question"
-                          placeholder="I want to know..."
-                          multiline
-                          className={classes.textField}
-                          onChange={this.handleChanges}
-                          margin="normal"
-                          variant="outlined"
-                        /> */}
-
-                      <TextField
                           value={this.state.singleAnswer.answer}
                           name="answer"
                           label="Edit Your Answer"
@@ -372,32 +427,17 @@ class Question extends React.Component {
                         >
                           Cancel
                         </Button>
-              
-                          <Button
-                            variant="contained"
-                            color="primary"
-                            className={classes.button}
-                            onClick={this.submitEdit}
-                          >
-                            Submit
-                          </Button>
-                      
+
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          className={classes.button}
+                          onClick={this.submitEdit}
+                        >
+                          Submit
+                        </Button>
                       </DialogActions>
                     </Dialog>
-                    {/* <button
-                      onClick={e => {
-                        this.handleEdit(e, answer.id);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      onClick={e => {
-                        this.deleteAnswer(e, answer.id);
-                      }}
-                    >
-                      Delete
-                    </button> */}
                   </ListItem>
                 </div>
               );
@@ -407,48 +447,10 @@ class Question extends React.Component {
       ) : (
         <p>No answers yet</p>
       );
-          {/* <p style={generalAlign}>
-            <strong>Answers: </strong>
-          </p>
-          {this.state.answers.map(answer => {
-            return (
-              <p style={answerStyle} key={answer.id}>
-                <button
-                  onClick={e => {
-                    this.handleEdit(e, answer.id);
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={e => {
-                    this.deleteAnswer(e, answer.id);
-                  }}
-                >
-                  Delete
-                </button>
-                "{answer.answer}" -{" "}
-                <strong style={expertName}>
-                  {this.state.users.map(user => {
-                    if (user.id === answer.user_id) {
-                      return (
-                        <Link to={`/users/${user.id}`} key={user.id}>{user.username}</Link>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-                </strong>
-              </p>
-            );
-          })}
-        </div>
-      ) : (
-        <p>No answers yet</p>
-      ); */}
-      const answersText = this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
+
+    const answersText =
+      this.state.answerCount === 1 ? <span>answer</span> : <span>answers</span>;
     return (
-      <>
       <Card className={classes.card}>
         <CardHeader
           avatar={
@@ -460,77 +462,23 @@ class Question extends React.Component {
           }
           action={
             <>
-            
-              {/* <IconButton aria-label="Settings" onClick={this.handleClickOpen}>
-               <Edit  />
-              </IconButton>
-               <IconButton aria-label="Settings" onClick={this.deleteButton}>
-                 <Delete />
-               </IconButton>
-               
-               <Dialog
-                open={dialogOpen}
-                 onClose={this.handleClose}
-                 className={classes.dialog}
-                 aria-labelledby="form-dialog-title"
-               >
-                 <DialogTitle id="form-dialog-title">
-                   Edit Your Question
-                 </DialogTitle>
-                 <DialogContent className="form">
-                   <TextField
-                     value={question.title}
-                     name="title"
-                     label="Title"
-                     placeholder="Question title..."
-                     multiline
-                     className={classes.textField}
-                     onChange={this.handleChanges}
-                     margin="normal"
-                     variant="outlined"
-                   />
-                   <TextField
-                    value={question.question}
-                     name="question"
-                    label="Question"
-                     placeholder="I want to know..."
-                     multiline
-                     className={classes.textField}
-                     onChange={this.handleChanges}
-                     margin="normal"
-                     variant="outlined"
-                   />
-                 </DialogContent>
-                 <DialogActions className="formButtons">
-                   <Button
-                    onClick={this.handleClose}
-                     variant="contained"
-                     color="primary"
-                     className={classes.button}
-                   >
-                     Cancel
-                   </Button>
-                   {question.title && question.question ? (
-                     <Button
-                       variant="contained"
-                       color="primary"
-                       className={classes.button}
-                       onClick={this.submitForm}
-                    >
-                      Submit
-                     </Button>
-                 ) : (
-                     <Button
-                       variant="contained"
-                       color="primary"
-                       disabled
-                       className={classes.button}
-                     >
-                       Submit
-                     </Button>
-                   )}
-                 </DialogActions>
-               </Dialog>  */}
+              {users.map(user => {
+                if (user.id === question.user_id) {
+                  return (
+                    <Typography variant="h6">
+                      <Link
+                        to={`/users/${user.id}`}
+                        className={classes.viewProfile}
+                      >
+                        {" "}
+                        View Profile
+                      </Link>
+                    </Typography>
+                  );
+                } else {
+                  return null;
+                }
+              })}
             </>
           }
           title={askerInfo.username}
@@ -567,9 +515,8 @@ class Question extends React.Component {
         </CardContent>
         <Divider />
 
-              
-        <div>
-            <form onSubmit={this.submitAnswer}>
+        {/* <div> */}
+        {/* <form onSubmit={this.submitAnswer}>
               <input
                 label="answer"
                 type="text"
@@ -577,12 +524,47 @@ class Question extends React.Component {
                 value={this.state.answer}
                 placeholder="answer"
                 onChange={this.handleChange}
-                className="answer-input"
+                className={classes.textField}
               />
               <button onClick={this.submitAnswer}>Submit</button>
-            </form>
-        </div>
-        
+            </form> */}
+
+        <form className={classes.form} onSubmit={this.submitAnswer}>
+          <div className={classes.anserTextfield}>
+            <TextField
+              value={answer}
+              name="answer"
+              label="answer"
+              placeholder="Answer this question..."
+              multiline
+              className={classes.answerInput}
+              onChange={this.handleChange}
+              margin="normal"
+              variant="standard"
+            />
+          </div>
+
+          {answer ? (
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={this.submitAnswer}
+            >
+              Submit
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              disabled
+              className={classes.button}
+            >
+              Submit
+            </Button>
+          )}
+        </form>
+
         <CardActions>
           <Typography>View Answers: ({answerCount}) </Typography>
           <IconButton
@@ -597,152 +579,12 @@ class Question extends React.Component {
           </IconButton>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <Typography paragraph>{answersDiv}</Typography>
+          <div>
+            <Typography paragraph>{answersDiv}</Typography>
+          </div>
         </Collapse>
       </Card>
-        {/* <div >
-        <div className="question-div">
-        
-            {this.state.users.map(user => {
-              if (user.id === this.state.question.user_id) {
-                return (
-                  <div className="user-info-div"  key={user.id}>
-                    <p>
-                      {user.first_name} {user.last_name} @{user.username}
-                      <Link to={`/users/${user.id}`}>View Profile</Link>
-                    </p>
-                  </div>
-                );
-              } else {
-                return null;
-              }
-            })}
-          
-          <p >
-            {/* <Link to={`/questions/${this.state.question.id}/update`}>
-              <i className="fas fa-pen" />
-            </Link>
-            <i onClick={this.deleteButton} className="fas fa-trash" />
-            &nbsp;|&nbsp; */}
-            {/* <strong>{this.state.question.title}: </strong>
-            {this.state.question.question} <br /> {this.state.answerCount}{" "}
-            {answersText}
-          </p>
-        </div>
-
-        <div className="topics-div">
-          <p >
-            <strong>Topic: </strong>
-            {this.state.topics.map(topic => (
-              <span key={topic.id}>{topic.topic}, </span>
-            ))}
-          </p>
-        </div>
-        {answersDiv}
-
-        <div>
-          {this.state.isEditing ? (
-            <form onSubmit={this.submitEdit}>
-              <input
-                label="singleAnswer"
-                type="text"
-                name="answer"
-                value={this.state.singleAnswer.answer}
-                placeholder="answer"
-                onChange={this.handleEditChange}
-                className="answer-input"
-              />
-              <button onClick={this.submitEdit}>Save Edit</button>
-            </form>
-          ) : (
-            <form onSubmit={this.submitAnswer}>
-              <input
-                label="answer"
-                type="text"
-                name="answer"
-                value={this.state.answer}
-                placeholder="answer"
-                onChange={this.handleChange}
-                className="answer-input"
-              />
-              <button onClick={this.submitAnswer}>Submit</button>
-            </form>
-          )}
-        </div>
-      </div> */}
-      </>
     );
-    //   <div style={bordered}>
-    //     <div className="question-div">
-        
-    //         {this.state.users.map(user => {
-    //           if (user.id === this.state.question.user_id) {
-    //             return (
-    //               <div className="user-info-div" style={generalAlign} key={user.id}>
-    //                 <p>
-    //                   {user.first_name} {user.last_name} @{user.username}
-    //                   <Link to={`/users/${user.id}`}>View Profile</Link>
-    //                 </p>
-    //               </div>
-    //             );
-    //           } else {
-    //             return null;
-    //           }
-    //         })}
-          
-    //       <p style={generalAlign}>
-    //         {/* <Link to={`/questions/${this.state.question.id}/update`}>
-    //           <i className="fas fa-pen" />
-    //         </Link>
-    //         <i onClick={this.deleteButton} className="fas fa-trash" />
-    //         &nbsp;|&nbsp; */}
-    //         <strong>{this.state.question.title}: </strong>
-    //         {this.state.question.question} <br /> {this.state.answerCount}{" "}
-    //         {answersText}
-    //       </p>
-    //     </div>
-
-    //     <div className="topics-div">
-    //       <p style={generalAlign}>
-    //         <strong>Topic: </strong>
-    //         {this.state.topics.map(topic => (
-    //           <span key={topic.id}>{topic.topic}, </span>
-    //         ))}
-    //       </p>
-    //     </div>
-    //     {answersDiv}
-
-    //     <div>
-    //       {this.state.isEditing ? (
-    //         <form onSubmit={this.submitEdit}>
-    //           <input
-    //             label="singleAnswer"
-    //             type="text"
-    //             name="answer"
-    //             value={this.state.singleAnswer.answer}
-    //             placeholder="answer"
-    //             onChange={this.handleEditChange}
-    //             className="answer-input"
-    //           />
-    //           <button onClick={this.submitEdit}>Save Edit</button>
-    //         </form>
-    //       ) : (
-    //         <form onSubmit={this.submitAnswer}>
-    //           <input
-    //             label="answer"
-    //             type="text"
-    //             name="answer"
-    //             value={this.state.answer}
-    //             placeholder="answer"
-    //             onChange={this.handleChange}
-    //             className="answer-input"
-    //           />
-    //           <button onClick={this.submitAnswer}>Submit</button>
-    //         </form>
-    //       )}
-    //     </div>
-    //   </div>
-    // );
   }
 }
 

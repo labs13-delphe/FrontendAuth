@@ -6,7 +6,7 @@ import axios from "axios";
 import CommunityQuestionList from "./CommunityQuestionsList";
 
 // Material UI
-import { CssBaseline, Paper, Typography } from "@material-ui/core";
+import { CssBaseline, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Custom Styles
@@ -15,7 +15,13 @@ const styles = theme => ({
     display: "flex",
     width: "100%"
   },
-  title: theme.mixins.toolbar,
+  title: {
+    //...theme.mixins.toolbar,
+    //marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2),
+    textAlign: "left",
+    width: "75%"
+  },
 
   content: {
     flexGrow: 1,
@@ -33,20 +39,7 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    maxWidth: 680,
-    [theme.breakpoints.down("sm")]: {
-      width: "100%"
-    }
-  },
-  paper: {
-    flexGrow: 1,
-    padding: theme.spacing(1),
-    width: 680,
-    display: "flex",
-    justifyContent: "center",
-    overflowY: "scroll",
-    maxHeight: 860,
-    background: "#EBEBEA"
+    width: "100%"
   }
 });
 
@@ -80,9 +73,7 @@ class Community extends React.Component {
             <Typography variant="h4" className={classes.title}>
               Community Feed
             </Typography>
-            <Paper className={classes.paper}>
-              <CommunityQuestionList questions={this.state.questions} />
-            </Paper>
+            <CommunityQuestionList questions={this.state.questions} />
           </div>
         </main>
       </div>

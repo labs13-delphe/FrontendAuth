@@ -8,17 +8,36 @@ import AskerQuestionsList from "./AskerQuestionsList";
 // import StripeBtn from "../stripe/StripeBtn"; // giving an error for some reason
 
 // Material UI
-import { CssBaseline, Paper, Typography } from "@material-ui/core";
+import { CssBaseline, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 // Custom Styles
 const styles = theme => ({
   root: {
+    width: "100%",
     display: "flex"
   },
   title: {
-    ...theme.mixins.toolbar,
-    textAlign: "center"
+    //...theme.mixins.toolbar,
+    //marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2),
+    display: "flex",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
+    width: "75%",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      alignItems: "flex-start",
+      justifyContent: "center"
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: "100%"
+    }
+  },
+  dataCount: {
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "1.2rem"
+    }
   },
   content: {
     flexGrow: 1,
@@ -36,20 +55,7 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    maxWidth: 680,
-    [theme.breakpoints.down("sm")]: {
-      width: "100%"
-    }
-  },
-  Paper: {
-    flexGrow: 1,
-    padding: theme.spacing(1),
-    width: 680,
-    display: "flex",
-    justifyContent: "center",
-    overflowY: "scroll",
-    maxHeight: 860,
-    background: "#EBEBEA"
+    width: "100%"
   },
   noQuestions: {
     textAlign: "center"
@@ -135,8 +141,7 @@ class AskerDashboard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props,
-      { userInfo } = this.state;
+    const { classes } = this.props;
 
     const questionsText =
       this.state.questionCount === 1 ? (
@@ -151,11 +156,11 @@ class AskerDashboard extends React.Component {
     const questionListSection =
       this.state.questionCount === 0 ? (
         <div className={classes.noQuestions}>
-          <Typography variant="h5">Ask a Question to Get Started!</Typography>
-          <Typography variant="h6">
+          <Typography variant="h6">Ask a Question to Get Started!</Typography>
+          {/* <Typography variant="body1">
             “The smart ones ask when they don’t know, and sometimes when they
             do.” <br></br>- Malcolm Forbes
-          </Typography>
+          </Typography> */}
         </div>
       ) : (
         <AskerQuestionsList
@@ -173,14 +178,14 @@ class AskerDashboard extends React.Component {
             <div className={classes.title}>
               <Typography variant="h4">Your Feed</Typography>
 
-              <Typography variant="h5">
+              <Typography variant="h6" className={classes.dataCount}>
                 {this.state.questionCount} {questionsText} Asked &nbsp;|&nbsp;{" "}
                 {this.state.answerCount} {answersText} Received
               </Typography>
             </div>
 
             <QuestionForm />
-            <Paper className={classes.Paper}>{questionListSection}</Paper>
+            {questionListSection}
           </div>
         </main>
       </div>
