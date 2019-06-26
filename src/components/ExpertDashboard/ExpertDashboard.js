@@ -168,7 +168,7 @@ class ExpertDashboard extends React.Component {
             ) : (
               <QuestionsList
                 questions={questions}
-                postAnswer={this.props.postAnswer}
+                //postAnswer={this.props.postAnswer}
                 // QA={this.props.QA}
                 editAnswer={this.editAnswer}
                 //deleteAnswer={this.deleteAnswer}
