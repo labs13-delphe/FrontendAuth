@@ -20,10 +20,7 @@ const QuestionsList = props => {
             key={question.id}
             // question={question}
             id={question.question_id}
-            //postAnswer={props.postAnswer}
             QA={props.QA}
-            editAnswer={props.editAnswer}
-            //deleteAnswer={props.deleteAnswer}
             gUser={props.gUser}
           />
         );

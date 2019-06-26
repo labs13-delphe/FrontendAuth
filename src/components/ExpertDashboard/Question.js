@@ -307,7 +307,6 @@ class Question extends React.Component {
     console.log(answer);
     axios
       .put(
-        //`http://localhost:5000/api/answers/${answer.id}`,
         `https://delphe-backend.herokuapp.com/api/answers/${answer.id}`,
         answer
       )
@@ -328,7 +327,7 @@ class Question extends React.Component {
 
   postAnswer = answer => {
     axios
-      //.post("http://localhost:5000/api/answers", answer)
+
       .post("https://delphe-backend.herokuapp.com/api/answers", answer)
       .then(res => {
         console.log("success");
