@@ -137,7 +137,7 @@ class UserProfile extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-<div class="container">
+<div class="updateProfile-container container">
   <form onSubmit={this.submitForm}>
     <div class="row">
       <div class="col-25">
