@@ -180,7 +180,7 @@ class QuestionForm extends React.Component {
         <Paper className={classes.paper}>
           <form>
             <Typography variant="h6" className={classes.formTitle}>
-              Ask a question
+              Ask a Question
             </Typography>
             <div className={classes.questionTextFields}>
               <TextField
