@@ -28,7 +28,10 @@ const styles = theme => ({
   card: {
     width: "75%",
     marginBottom: theme.spacing(3),
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
   },
   cardTitle: {
     display: "flex",

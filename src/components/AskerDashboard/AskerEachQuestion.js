@@ -35,7 +35,7 @@ const styles = theme => ({
     width: "75%",
     marginBottom: theme.spacing(3),
     padding: theme.spacing(1),
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
   },
