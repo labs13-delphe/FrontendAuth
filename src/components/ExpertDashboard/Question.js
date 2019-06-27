@@ -60,7 +60,13 @@ const styles = theme => ({
     }
   },
   expandOpen: {
-    transform: "rotate(180deg)"
+    transform: "rotate(180deg)",
+    "&:focus": {
+      backgroundColor: "#e0e0e0" // removes the default teal background
+    },
+    "&:hover": {
+      backgroundColor: "#e0e0e0" // to match grey in CardAction div
+    }
   },
   avatar: {
     backgroundColor: red[500]
@@ -303,6 +309,12 @@ class Question extends React.Component {
 
   subAnswerCount = () => {
     this.setState({ answerCount: this.state.answerCount - 1 });
+  };
+
+  sortAnswers = answers => {
+    answers.sort(function(a, b) {
+      return a.id - b.id;
+    });
   };
 
   deleteAnswer = (e, id) => {
