@@ -67,13 +67,13 @@ const SingleUser = props => {
           />
          
         </div>
-       <div>
+       <div clasName="profileText">
         <div className="persona-text-name bio-text">
           <strong>Bio  </strong>{props.user.bio}
         </div><br/>
-        <Typography variant="h12" className="persona-text-name"><strong>Email  </strong>{props.user.email}</Typography> <br/>
+        <Typography variant="h12" className="persona-text-name emailText"><strong>Email  </strong>{props.user.email}</Typography> <br/>
         {props.user.user_type === "expert" ? (
-          <Typography variant="h12" className="persona-text-name">
+          <Typography variant="h12" className="persona-text-name hourlyText">
           <strong>Hourly Rate  $</strong>{props.user.hourly_rate}
           </Typography>
         ) : null}

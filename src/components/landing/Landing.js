@@ -45,7 +45,7 @@ export class Landing extends Component {
       </div> 
        
   
-    <div className="section-background row center container">
+    <div className="section-background row center">
       <div className="row">
         {/* <!--   Icon Section   --> */}
         <div className="featureContainer">

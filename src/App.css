@@ -54,7 +54,16 @@
   img.profile-photo {
    margin: auto;
   }
+.bio-text {
+  font-size: 25px;
+}
+.emailText{
+  font-size: 25px;
+}
 
+.hourlyText {
+  font-size: 25px;
+}
 }
 
 .profile-photo{
