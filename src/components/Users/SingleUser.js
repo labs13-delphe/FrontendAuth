@@ -47,7 +47,7 @@ const SingleUser = props => {
     : props.user.image_url;
   console.log("single user g user", props.user);
   return (
-    <div className="container userContainer ">
+    <div className="container userContainer">
       <div className="jumbotron box-shadow">
         <div className={classes.flex}>
           <div className="userHeader">
@@ -67,6 +67,7 @@ const SingleUser = props => {
           />
          
         </div>
+       <div>
         <div className="persona-text-name bio-text">
           <strong>Bio  </strong>{props.user.bio}
         </div><br/>
@@ -76,6 +77,7 @@ const SingleUser = props => {
           <strong>Hourly Rate  $</strong>{props.user.hourly_rate}
           </Typography>
         ) : null}
+        </div>
     </div>
     </div>
 
