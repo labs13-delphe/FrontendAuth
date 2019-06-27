@@ -30,7 +30,7 @@ const styles = theme => ({
       alignItems: "flex-start",
       justifyContent: "center"
     },
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
   },

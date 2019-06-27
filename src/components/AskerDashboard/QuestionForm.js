@@ -28,7 +28,7 @@ const styles = theme => ({
     //marginTop: theme.spacing(1),
     marginBottom: theme.spacing(3),
     width: "75%",
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       flexDirection: "column",
       alignItems: "flex-start",
       justifyContent: "center",
@@ -180,7 +180,7 @@ class QuestionForm extends React.Component {
         <Paper className={classes.paper}>
           <form>
             <Typography variant="h6" className={classes.formTitle}>
-              Ask a question
+              Ask a Question
             </Typography>
             <div className={classes.questionTextFields}>
               <TextField

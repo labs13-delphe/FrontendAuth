@@ -35,7 +35,7 @@ const styles = theme => ({
     width: "75%",
     marginBottom: theme.spacing(3),
     padding: theme.spacing(1),
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down("sm")]: {
       width: "100%"
     }
   },
@@ -48,7 +48,8 @@ const styles = theme => ({
     margin: theme.spacing(1),
     marginLeft: theme.spacing(0),
     "&:hover": {
-      cursor: "default"
+      cursor: "default",
+      backgroundColor: "#3f51b5"
     },
     "&:focus": {
       backgroundColor: "#3f51b5" // removes the default teal background

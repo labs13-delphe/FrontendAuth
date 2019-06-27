@@ -20,7 +20,15 @@ const styles = theme => ({
     //marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
     textAlign: "left",
-    width: "75%"
+    width: "75%",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      alignItems: "flex-start",
+      justifyContent: "center"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
   },
 
   content: {
