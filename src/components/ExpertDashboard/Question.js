@@ -36,8 +36,13 @@ const styles = theme => ({
   },
   topicButton: {
     margin: theme.spacing(1),
+    marginLeft: theme.spacing(0),
     "&:hover": {
-      cursor: "default"
+      cursor: "default",
+      backgroundColor: "#3f51b5"
+    },
+    "&:focus": {
+      backgroundColor: "#3f51b5" // removes the default teal background
     }
   },
 
@@ -46,10 +51,22 @@ const styles = theme => ({
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
-    })
+    }),
+    "&:focus": {
+      backgroundColor: "white" // to remove teal
+    },
+    "&:hover": {
+      backgroundColor: "#e0e0e0" // to match grey in CardAction div
+    }
   },
   expandOpen: {
-    transform: "rotate(180deg)"
+    transform: "rotate(180deg)",
+    "&:focus": {
+      backgroundColor: "#e0e0e0" // removes the default teal background
+    },
+    "&:hover": {
+      backgroundColor: "#e0e0e0" // to match grey in CardAction div
+    }
   },
   avatar: {
     backgroundColor: red[500]
@@ -286,6 +303,20 @@ class Question extends React.Component {
       dialogOpen: false
     });
 
+  addAnswerCount = () => {
+    this.setState({ answerCount: this.state.answerCount + 1 });
+  };
+
+  subAnswerCount = () => {
+    this.setState({ answerCount: this.state.answerCount - 1 });
+  };
+
+  sortAnswers = answers => {
+    answers.sort(function(a, b) {
+      return a.id - b.id;
+    });
+  };
+
   deleteAnswer = (e, id) => {
     e.preventDefault();
     axios
@@ -297,6 +328,7 @@ class Question extends React.Component {
             return a.id !== id;
           })
         });
+        this.subAnswerCount();
       })
       .catch(err => {
         console.log("there was a problem deleting your answer");
@@ -327,7 +359,6 @@ class Question extends React.Component {
 
   postAnswer = answer => {
     axios
-
       .post("https://delphe-backend.herokuapp.com/api/answers", answer)
       .then(res => {
         console.log("success");
@@ -337,6 +368,7 @@ class Question extends React.Component {
             return a.question_id === answer.question_id;
           })
         });
+        this.addAnswerCount();
       })
       .catch(error => {
         console.log("There was a problem posting your answer");
