@@ -48,7 +48,8 @@ const styles = theme => ({
     margin: theme.spacing(1),
     marginLeft: theme.spacing(0),
     "&:hover": {
-      cursor: "default"
+      cursor: "default",
+      backgroundColor: "#3f51b5"
     },
     "&:focus": {
       backgroundColor: "#3f51b5" // removes the default teal background
