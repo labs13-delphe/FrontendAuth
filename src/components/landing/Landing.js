@@ -12,7 +12,7 @@ import climbing3 from './climbing-3.png'
 export class Landing extends Component {
     render() {
         return (
-            <div>
+            <div className="section">
 {/*   
     <div className="headerContainer">
       <div className="section no-pad-bot">
