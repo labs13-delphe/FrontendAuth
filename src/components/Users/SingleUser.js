@@ -47,7 +47,7 @@ const SingleUser = props => {
     : props.user.image_url;
   console.log("single user g user", props.user);
   return (
-    <div className="container userContainer ">
+    <div className="container userContainer">
       <div className="jumbotron box-shadow">
         <div className={classes.flex}>
           <div className="userHeader">
@@ -67,15 +67,17 @@ const SingleUser = props => {
           />
          
         </div>
+       <div clasName="profileText">
         <div className="persona-text-name bio-text">
           <strong>Bio  </strong>{props.user.bio}
         </div><br/>
-        <Typography variant="h12" className="persona-text-name"><strong>Email  </strong>{props.user.email}</Typography> <br/>
+        <Typography variant="h12" className="persona-text-name emailText"><strong>Email  </strong>{props.user.email}</Typography> <br/>
         {props.user.user_type === "expert" ? (
-          <Typography variant="h12" className="persona-text-name">
+          <Typography variant="h12" className="persona-text-name hourlyText">
           <strong>Hourly Rate  $</strong>{props.user.hourly_rate}
           </Typography>
         ) : null}
+        </div>
     </div>
     </div>
 
