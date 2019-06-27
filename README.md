@@ -84,22 +84,19 @@ _"Creating a community for knowledge seekers to connect with experts in a variet
 
 ## Firebase
 
-🚫Replace text below with a description of the API
-
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+Firebase supports authentication using passwords, phone numbers, popular federated identity providers like Google, Facebook and Twitter, and more. For the purposes of our app we limited the types of authenitcation to google and email. We then used part of the google object returned after authenitcation to connect our node.js users table to our authentication for a clean user flow throughout the app. We build out our own backend because Firebase does not support SQL relational databases. 
 
 ## Stripe
 
-🚫Replace text below with a description of the API
+Stripe is a system that enables a developer to implement a complicated and secure payment infastructure in their app. We strategically integrated stripe into our app for use on a future messenger and zoom integration release of the Delphe product. It would allow experts to request payment for consultation given.
 
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
+## Websocket (Future Release)
 
-## Websocket
+Websocket is a computer communications protocol that allows for duplex communcation channels over a single TCP connection. 
 
-🚫Replace text below with a description of the API
+## Zoom (Future Release)
 
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
-
+Zoom would allow us to inegrate video conferencing calls into our app for face-to-face consultations between novices and experts for a fee collected through Stripe. 
 
 # 3️⃣ Environment Variables -UPDATE
 
