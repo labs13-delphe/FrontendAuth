@@ -52,13 +52,14 @@ _"Creating a community for knowledge seekers to connect with experts in a variet
 -    Find Questions by Topic
 -    View a Community Thread of Questions
 -    View Your Profile and Other Users
+-    Edit Profile
+-    Delete Profile
 
 ## Tech Stack
 
 ### Front end built using:
 
 #### React JS
-
 
 -    Allows application creating using multiple reusable components to cater to multiple users 
 -    Improves efficiency and scalability of application
@@ -67,8 +68,13 @@ _"Creating a community for knowledge seekers to connect with experts in a variet
 -    Provided a solid design framework for application
 -    Provided reusable and customizable components
 
+#### Materialize
+-    Responsive front-end framework based on Material Design
+-    Provided classic principles of successful design along with innovation and technology
+-    Provided reusable and responsive design components
 
 #### Front end deployed to Netlify
+https://flamboyant-blackwell-be93e6.netlify.com/
 
 #### [Back end](https://github.com/labs13-delphe/backend) deployed to Heroku and built using:
 
@@ -86,13 +92,13 @@ _"Creating a community for knowledge seekers to connect with experts in a variet
 
 🚫Replace text below with a description of the API
 
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
+Firebase is an API that lets developers easily sync and store data in realtime. Firebase Simple Login is an additional service that allows developers to authenticate users using only client-side code. Enable authentication via a number of third-party providers, anonymous login, or email / password authentication without having to manually store authentication credentials or run a server.
 
 ## Stripe
 
 🚫Replace text below with a description of the API
 
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
+Stripe is a service that allows users to accept payments online, specifically developers. The Stripe API is organized around REST. Our API has predictable resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes, authentication, and verbs. 
 
 ## Websocket
 
